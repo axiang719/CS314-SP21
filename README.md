@@ -1,1 +1,7 @@
-# Initial base
+# T13 - The Epic Gamers
+
+![The Epic Gamers](https://media.sproutsocial.com/uploads/2020/08/Social-for-Gamers.svg)
+
+Last Name | First Name | CSU eName | GitHub Username | CSU Email Address
+--------- | ---------- | --------- | --------------- | -----------------
+Young     | Michael    | coyote38  | coyote38        | coyote38@rams.colostate.edu
