@@ -1,4 +1,4 @@
-# T13 - Team Name Goes Here
+# T13 - The Epic Gamers
 
 Team Image Goes Here
 
