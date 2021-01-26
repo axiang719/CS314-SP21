@@ -8,3 +8,4 @@ Young     | Michael    | coyote38  | coyote38        | coyote38@rams.colostate.e
 Groeling  | Andie      | seinfeld  | quercusfelis    | seinfeld@rams.colostate.edu
 Minning   | Chad       | chadmin   | chadminn        | chadmin@rams.colostate.edu
 Seefried  | Ethan      | eseefrie  | eseefried       | eseefrie@rams.colostate.edu
+Xiang     | Anthony    | axiang    | axiang719       | axiang@rams.colostate.edu
