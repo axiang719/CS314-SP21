@@ -106,6 +106,63 @@ Often there are several related classes but we've listed only one to simplify th
 
 
 # Sprint 1
+
+### Architecture
+
+The Base architecture is a JavaScript single page web application in an HTML5 browser that uses RESTful APIs to access Micro-services provided by a Java server running on Linux.
+The client consists of a minimal index.html file that loads and executes the bundled JavaScript application.
+The client and server files are bundled into a single JAR file for execution on the Linux server at a specified port.
+The browser fetches the client files from the server on the specified port.
+
+![overview](images/BaseArchitecture.png)
+
+#### Clicking on the map places a marker.
+Whenever a user clicks on the map, the client should display a marker with latitude and longitude at that location.
+We only maintain a single marker at this point displaying the most recently clicked location.
+
+#### Clicking on the team name should tell me more about the team.
+Whenever a user clicks the team name in the header, a collapsible section should appear under the header with information about the team.
+The collapsible map should disappear so only the about or map are displayed.
+A close button / icon in the top right corner of the about will close the about and return the map to display.
+A simple toggle in state should be able to control this rendering.
+The about page should contain the team name as a heading, but be otherwise blank in base. 
+
+#### Clicking on the URL in the footer should let me change the server.
+Whenever a user clicks on the URL a popup should open showing the team name, the URL in an input text box, and a Cancel button.
+When the user modifies the URL, a Test button should appear and the server name should disappear.
+When the Test button is clicked, it will attempt to connect to the server.
+If not successful, nothing changes and the user may continue to make URL changes or click the Cancel button to return to the original sever (it shouldn't change).
+If successful, the new server name should appear and a Save button should replace the Test button.
+When the user clicks the Save button, the server connection should change and the popup closes, revealing the new servername and URL in the footer.
+
+
+
+
+### User Interface
+
+![base]
+
+### Component Hierarchy
+The component hierarchy for the base application depicted below shows the our top level App component with four children components.
+* App renders the major components on the screen.
+* Header renders an icon and a team name in the top banner.
+* Footer renders the current server connection in the bottom footer.
+* Atlas renders a map.
+* About renders information about the team.
+
+### Class Diagram
+The class diagram for the base application depicted below shows the basic structure of the web server application.
+
+![class diagram]
+
+The classes in blue represent the classes specific to this application.  
+* WebApplication processes command line parameters and creates MicroServer.
+* MicroServer start a web server on the given port, configures the server for security, static files, and APIs for different types of requests, and processes the requests as they arrive.
+* JSONValidator verifies a request is properly formatted before attempting to process it using JSON Schemas.
+* ConfigRequest is a specific request that allows the server to respond with its configuration to allow interoperability between clients and servers. 
+* RequestHeader defines the basic components of all requests.
+
+
 # Sprint 2
 # Sprint 3
 # Sprint 4 
