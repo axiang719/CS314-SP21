@@ -119,8 +119,10 @@ The ability to remove individual entries from the list of clicked locations, as 
 
 ![sprint 1 component hierarchy](images/Sprint1Components.png)
 
-### Class
+### Classes
+For this sprint, our team will not be making any changes to the class structure.
 
+![class diagram](images/BaseClassDiagram.png)
 
 
 # Sprint 2
