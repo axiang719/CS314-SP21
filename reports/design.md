@@ -110,10 +110,12 @@ Often there are several related classes but we've listed only one to simplify th
 ### User Interface
 Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
 
-### Component
+### Component Hierarchy
 Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
 The Epic Gamer Team will implement a feature that will allow the user to see each of their map clicks with most recent of the clicks being at the top.
 The ability to remove individual entries from the list of clicked locations, as well as the ability to clear the entire list will also be implemented.
+
+![sprint 1 component hierarchy](images/Sprint1Components.png)
 
 ### Class
 
