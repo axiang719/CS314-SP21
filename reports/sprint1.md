@@ -7,7 +7,7 @@
 ### *Create a trip*
 
 ## Scrum Master
-### *firstname lastname*
+### *Anthony Xiang*
 
 ## Definition of Done
 
