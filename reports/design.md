@@ -108,6 +108,7 @@ Often there are several related classes but we've listed only one to simplify th
 # Sprint 1
 
 ### User Interface
+Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage.
 
 ### Component
 
