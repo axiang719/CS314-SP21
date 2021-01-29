@@ -108,9 +108,10 @@ Often there are several related classes but we've listed only one to simplify th
 # Sprint 1
 
 ### User Interface
-Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage.
+Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
 
 ### Component
+Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
 
 ### Class
 
