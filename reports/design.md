@@ -112,7 +112,8 @@ Our team name and number will be added to the top of the user interface, weburl,
 
 ### Component
 Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
-The Epic Gamer Team will implement a feature that will allow the user to see each of their map clicks with most recent of the clicks being at the top. 
+The Epic Gamer Team will implement a feature that will allow the user to see each of their map clicks with most recent of the clicks being at the top.
+The ability to remove individual entries from the list of clicked locations, as well as the ability to clear the entire list will also be implemented.
 
 ### Class
 
