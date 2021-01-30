@@ -4,7 +4,7 @@
 ### *The Product Goal is an easy-to-use mobile trip planning application that satisfies a global audience.*
 
 ## Sprint Goal
-### *Create a trip*
+### *Add team information to the user interface. Implement functionality for click list and the buttons to remove them.*
 
 ## Scrum Master
 ### *Anthony Xiang*
