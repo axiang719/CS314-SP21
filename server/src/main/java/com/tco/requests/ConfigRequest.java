@@ -13,7 +13,7 @@ public class ConfigRequest extends RequestHeader {
 
     @Override
     public void buildResponse() {
-        serverName = "t99 team name";
+        serverName = "t13 The Epic Gamers";
         features = new ArrayList<String>();
         features.add("config");
         log.trace("buildResponse -> {}", this);
