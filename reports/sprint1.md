@@ -1,4 +1,4 @@
-# Sprint # - *your team number* - *your team name*
+# Sprint # - *t13* - *The Epic Gamers*
 
 ## Product Goal
 ### *The Product Goal is an easy-to-use mobile trip planning application that satisfies a global audience.*
@@ -26,7 +26,7 @@
 
 ## Planned Epics
 
-(Write paragraphs, not bullets. Remove this text.)
+For epic 1 will focus on team identification, we will be updating or team identification in the browser, The Epic Gamers will split up tasks, Chad will be setiing up the team name on the server, Andie will set the team name in browser tab, Michael will set the teamname in the client application. After finishing up epic 1, the team will move on to epic 2 which is the about section, were we will be adding a team image and mission statement, each team member will also add their biography and an image of themselves. All styles and format will stay consistant throughout the team. after completing each task we will reveiw each others work to make sure that everything is correct. For epic 3, the team will be working on the trip part, we will be implementing a feature that will save and show the users click on the map with the most recent click on top of the list. The tasks for this epic will be slit up evenly and split up based on team members skills.
 
 ## Metrics
 
