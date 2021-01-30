@@ -39,8 +39,9 @@ For epic 1 will focus on team identification, we will be updating or team identi
 
 ## Scrums
 
-| Date      | Tasks closed  | Tasks in progress | Impediments |
-| 1/29/2021 |      2        |         1         | none        |
+| Date | Tasks closed | Tasks in progress | Impediments |
+| :--- | :--- | :--- | :--- |
+| 1/29/2021 | 2 | 1 | none |
 
 
 ## Review
