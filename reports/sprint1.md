@@ -32,9 +32,9 @@ For epic 1 will focus on team identification, we will be updating or team identi
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *count* | *count* |
-| Tasks |  *count*   | *count* | 
-| Story Points |  *count*  | *count* | 
+| Epics |  3  |  0  |
+| Tasks |  11   |  1  | 
+| Story Points |  16  |  1 |  
 
 
 ## Scrums
