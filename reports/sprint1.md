@@ -42,9 +42,9 @@ Epic 3 will introduce a new trip feature. This will include a list of places tha
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics |  3  |  0  |
-| Tasks |  11   |  1  | 
-| Story Points |  16  |  1 |  
+| Epics |  3  |  1  | 
+| Tasks |  12   |  3  | 
+| Story Points |  17  |  3 |  
 
 
 ## Scrums
@@ -52,6 +52,7 @@ Epic 3 will introduce a new trip feature. This will include a list of places tha
 | Date | Tasks closed | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 1/29/2021 | 2 | 1 | none |
+| 2/01/2021 | 3 | 5 | none |
 
 
 ## Review
