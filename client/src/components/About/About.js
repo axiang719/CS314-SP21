@@ -13,12 +13,21 @@ export default class About extends Component {
                     <Col>
                         <h2>{CLIENT_TEAM_NAME}</h2>
                     </Col>
+
                     <Col xs="auto">
                         <Button color="primary" onClick={this.props.closePage} xs={1}>
                             Close
                         </Button>
                     </Col>
                 </Row>
+
+                <Row>
+                    <img src = "https://media.sproutsocial.com/uploads/2020/08/Social-for-Gamers.svg"
+                    className = "Team Image"
+                    alt = "..."
+                    ></img>
+                </Row>
+            
             </Container>
         );
     }
