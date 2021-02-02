@@ -23,9 +23,9 @@ export default class About extends Component {
 
                 <Row>
                     <img src = "https://media.sproutsocial.com/uploads/2020/08/Social-for-Gamers.svg"
-                    className = "Team Image"
-                    alt = "..."
-                    ></img>
+                         className = "Team Image"
+                         alt = "...">
+                    </img>
                 </Row>
             
             </Container>
