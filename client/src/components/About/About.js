@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { UncontrolledCollapse,Card, CardBody, Container, Row, Col, Button } from 'reactstrap';
 
-import {Container, Row, Col, Button} from 'reactstrap';
-
-import {CLIENT_TEAM_NAME} from "../../utils/constants";
+import { CLIENT_TEAM_NAME } from "../../utils/constants";
 
 export default class About extends Component {
+
 
     render() {
         return (
@@ -12,10 +12,23 @@ export default class About extends Component {
                 <Row>
                     <Col>
                         <h2>{CLIENT_TEAM_NAME}</h2>
+                        <Button color="primary" id="toggler" size="sm">Misson Statement</Button>
+                        <UncontrolledCollapse toggler="#toggler">
+                            <Card>
+                                <CardBody>
+                                The Epic Gamers are committed making a quality product that is user friendly. 
+                                Our purpose is to create clean and reactive solutions tailored to our customer's 
+                                needs through effective communication and cutting-edge web design. 
+                                Our goal is to create innovative solution to everyday problems.
+                                We guarantee our customers will enjoy our well crafted product. 
+                                </CardBody>
+                            </Card>
+                        </UncontrolledCollapse>
+                        <p>testing to make sure button is dynamic</p>
                     </Col>
                     <Col xs="auto">
                         <Button color="primary" onClick={this.props.closePage} xs={1}>
-                            Close
+                            close
                         </Button>
                     </Col>
                 </Row>
