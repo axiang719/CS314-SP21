@@ -24,7 +24,6 @@ export default class About extends Component {
                                 </CardBody>
                             </Card>
                         </UncontrolledCollapse>
-                        <p>testing to make sure button is dynamic</p>
                     </Col>
                     <Col xs="auto">
                         <Button color="primary" onClick={this.props.closePage} xs={1}>
