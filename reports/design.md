@@ -126,7 +126,7 @@ Our team image, mission statement, and images and biographies for each team memb
 The Epic Gamer Team will implement a feature that will allow the user to see each of their map clicks with most recent of the clicks being at the top.
 The ability to remove individual entries from the list of clicked locations, as well as the ability to clear the entire list will also be implemented.
 
-![sprint 1 component hierarchy](images/Sprint1Components.png)
+![sprint 1 component hierarchy](images/Sp1ComponentDiagram.png)
 
 ### Classes
 For this sprint, our team will not be making any changes to the class structure.
