@@ -119,7 +119,7 @@ Our team name and number will be added to the top of the user interface, website
 
 The "About" section will be updated to include the team's mission statement and team image. The mission statement will be accessible by clicking on the "Mission Statement" button. The bottom of the page will contain team member cards wich will include the names of each team member, along with a personal photo and biography. The biographies will be accessible by clicking on the cards.
 
-![about interations diagram](images/aboutInteraction.png)
+![about interations diagram](images/AboutInteraction.png)
 
 ### Component Hierarchy
 Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
