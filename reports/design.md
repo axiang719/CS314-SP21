@@ -99,7 +99,7 @@ The classes in blue represent the classes specific to this application.
 
 The classes in orange represent the external libraries used by the application.
 Often there are several related classes but we've listed only one to simplify the diagram.
-* GSON converts a JSON string into a Java object instance.
+* GSON converts a JSOgit N string into a Java object instance.
 * Spark provides the necessary web support for our MicroServer.
 * JSON provides libraries to manipulate JSON objects using the JSON Schema libraries.
 * Logger provides a centralized logging facility used in all of the application classes.
@@ -111,6 +111,10 @@ Often there are several related classes but we've listed only one to simplify th
 Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
 
 ![base](images/BaseUserInterface.png)
+
+An "About" page will be added which will include the team's mission statement and team image. The bottom of the page will contain team member cards wich will include the names of each team member, along with a personal photo and biography. The biography will be accessible by clicking on the card.
+
+![about interations diagram](images/aboutInteraction.png)
 
 ### Component Hierarchy
 Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
