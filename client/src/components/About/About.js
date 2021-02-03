@@ -37,7 +37,7 @@ export default class About extends Component {
         {
             name: "Michael Young",
             bio: "Hello, my name is Michael Young. I'm a junior majoring in Computer Science at CSU. In my free time I like playing video games, watching cartoons, drawing, and photographing animals. My dream job is to work in game development.",
-            imagePath: "/src/static/images/imageName.jpg",
+            imagePath: "/src/static/images/MichaelCat.jpg",
             cardNum: 5
         }];
 
