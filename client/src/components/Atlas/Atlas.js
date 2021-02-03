@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row, Button } from 'reactstrap';
 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
@@ -40,8 +40,16 @@ export default class Atlas extends Component {
                             {this.renderLeafletMap()}
                         </Col>
                     </Row>
+                    <br></br>
+                   
+                    <Col xs="auto">
+                        <Button color="primary" size = "lg" onClick={this.state.listOfClicks = [] } xs={1}>
+                            Clear List
+                        </Button>
+                    </Col>
                 </Container>
               </div>
+              
               );
           }
 
@@ -63,6 +71,8 @@ export default class Atlas extends Component {
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
             </Map>
+            
+           
         );
     }
 
