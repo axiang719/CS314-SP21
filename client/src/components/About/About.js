@@ -10,21 +10,26 @@ import {CLIENT_TEAM_NAME} from "../../utils/constants";
 
 export default class About extends Component {
     render() {
-    const people = [{name: "Andie Groeling",
+    const people = [{name: "AndieGroeling",
                      bio: "I am a 3rd year Computer Engineering and Computer Science double major who enjoys vintage computers, baking, and Linux.",
-                     imagePath: "/src/static/images/bio-picture-andie.png"},
-                    {name: "abc d",
+                     imagePath: "/src/static/images/bio-picture-andie.png",
+                     cardNum: 1},
+                    {name: "abc",
                      bio: "placeholder bio",
-                     imagePath: "../src/static/images/imageName.jpg"},
-                    {name: "abc d",
+                     imagePath: "../src/static/images/imageName.jpg",
+                     cardNum: 2},
+                    {name: "abcd",
                      bio: "placeholder bio",
-                     imagePath: "../src/static/images/imageName.jpg"},
-                    {name: "abc d",
+                     imagePath: "../src/static/images/imageName.jpg",
+                     cardNum: 3},
+                    {name: "abcde",
                      bio: "placeholder bio",
-                     imagePath: "../src/static/images/imageName.jpg"},
-                    {name: "abc d",
+                     imagePath: "../src/static/images/imageName.jpg",
+                     cardNum: 4},
+                    {name: "abcdef",
                      bio: "placeholder bio",
-                     imagePath: "../src/static/images/imageName.jpg"}];
+                     imagePath: "../src/static/images/imageName.jpg",
+                     cardNum: 5}];
 
         return (
             <Container>
@@ -64,9 +69,14 @@ export default class About extends Component {
                         <Card>
                             <CardHeader tag="h4">{person.name}</CardHeader>
                             <CardBody>
-                                <img width="100%" src={person.imagePath} alt={person.name} />
-                                <CardText>{person.bio}</CardText>
+                                <CardImg width="100%" src={person.imagePath} alt={person.name} />
                             </CardBody>
+                            <CardFooter>
+                                <Button color="primary" size="sm" id={"toggler" + person.cardNum}>About Me</Button>
+                                <UncontrolledCollapse toggler={"#toggler" + person.cardNum}>
+                                    <CardText>{person.bio}</CardText>
+                                </UncontrolledCollapse>
+                            </CardFooter>
                         </Card>
                     </Col>
                     ))}
