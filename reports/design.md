@@ -99,7 +99,7 @@ The classes in blue represent the classes specific to this application.
 
 The classes in orange represent the external libraries used by the application.
 Often there are several related classes but we've listed only one to simplify the diagram.
-* GSON converts a JSON string into a Java object instance.
+* GSON converts a JSOgit N string into a Java object instance.
 * Spark provides the necessary web support for our MicroServer.
 * JSON provides libraries to manipulate JSON objects using the JSON Schema libraries.
 * Logger provides a centralized logging facility used in all of the application classes.
@@ -108,16 +108,25 @@ Often there are several related classes but we've listed only one to simplify th
 # Sprint 1
 
 ### User Interface
-Our team name and number will be added to the top of the user interface, weburl, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
 
-![base](images/BaseUserInterface.png)
+#### Main Section
+
+Our team name and number will be added to the top of the user interface, website tab, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
+
+![base](images/StartUI.png)
+
+#### About Section
+
+The "About" section will be updated to include the team's mission statement and team image. The mission statement will be accessible by clicking on the "Mission Statement" button. The bottom of the page will contain team member cards wich will include the names of each team member, along with a personal photo and biography. The biographies will be accessible by clicking on the cards.
+
+![about interations diagram](images/AboutInteraction.png)
 
 ### Component Hierarchy
 Our team image, mission statement, and images and biographies for each team member will be added to the webpage.
 The Epic Gamer Team will implement a feature that will allow the user to see each of their map clicks with most recent of the clicks being at the top.
 The ability to remove individual entries from the list of clicked locations, as well as the ability to clear the entire list will also be implemented.
 
-![sprint 1 component hierarchy](images/Sprint1Components.png)
+![sprint 1 component hierarchy](images/Sp1ComponentDiagram.png)
 
 ### Classes
 For this sprint, our team will not be making any changes to the class structure.
