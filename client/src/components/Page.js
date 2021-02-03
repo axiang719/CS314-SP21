@@ -6,6 +6,7 @@ import Header from "./Margins/Header";
 import Footer from "./Margins/Footer";
 import About from "./About/About";
 import Atlas from "./Atlas/Atlas";
+import TripList from "./Atlas/TripList";
 
 import {LOG} from "../utils/constants";
 import * as configSchema from "../../schemas/ConfigResponse";
@@ -60,6 +61,7 @@ export default class Page extends Component {
 		return (
 			<Collapse isOpen={!this.state.showAbout}>
 				<Atlas showMessage={this.props.showMessage}/>
+                <TripList/>
 			</Collapse>
 		);
 	}
