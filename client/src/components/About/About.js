@@ -23,21 +23,21 @@ export default class About extends Component {
             cardNum: 2
         },
         {
-            name: "abc d",
-            bio: "placeholder bio",
-            imagePath: "../src/static/images/imageName.jpg",
+            name: "Ethan Seefried",
+            bio: "I'm Ethan Seefried, a student veteran who is a junior in Applied Physics with a minor in Computer Science. I enjoy playing video games in my free time, playing almost evry any sport and spending time with my family. My goal in life is to one day code on a space related project.",
+            imagePath: "/src/static/images/EthanPanda.jpg",
             cardNum: 3
         },
         {
             name: "abc d",
             bio: "placeholder bio",
-            imagePath: "../src/static/images/imageName.jpg",
+            imagePath: "/src/static/images/imageName.jpg",
             cardNum: 4
         },
         {
             name: "abc d",
             bio: "placeholder bio",
-            imagePath: "../src/static/images/imageName.jpg",
+            imagePath: "/src/static/images/imageName.jpg",
             cardNum: 5
         }];
 
