@@ -109,13 +109,13 @@ Often there are several related classes but we've listed only one to simplify th
 
 ### User Interface
 
-##### Main Section
+#### Main Section
 
 Our team name and number will be added to the top of the user interface, website tab, header and footer of the webpage. A progressive disclosure will be added to convey extra information about the team.
 
 ![base](images/StartUI.png)
 
-##### About Section
+#### About Section
 
 The "About" section will be updated to include the team's mission statement and team image. The mission statement will be accessible by clicking on the "Mission Statement" button. The bottom of the page will contain team member cards wich will include the names of each team member, along with a personal photo and biography. The biographies will be accessible by clicking on the cards.
 
