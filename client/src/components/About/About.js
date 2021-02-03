@@ -29,9 +29,9 @@ export default class About extends Component {
             cardNum: 3
         },
         {
-            name: "abc d",
-            bio: "placeholder bio",
-            imagePath: "/src/static/images/imageName.jpg",
+            name: "Anthony Xiang",
+            bio: "Hi my name is Anthony, I'm a senior majoring in Applied Computing Technology and getting my minor in business administration. I Love to do anything outdoor related and I also have a deep passion about learning how technology works ",
+            imagePath: "/src/static/images/Anthonylama.jpg",
             cardNum: 4
         },
         {
