@@ -10,9 +10,9 @@ import {CLIENT_TEAM_NAME} from "../../utils/constants";
 
 export default class About extends Component {
     render() {
-    const people = [{name: "abc d",
-                     bio: "placeholder bio",
-                     imagePath: "../src/static/images/imageName.jpg"},
+    const people = [{name: "Andie Groeling",
+                     bio: "I am a 3rd year Computer Engineering and Computer Science double major who enjoys vintage computers, baking, and Linux.",
+                     imagePath: "/src/static/images/bio-picture-andie.png"},
                     {name: "abc d",
                      bio: "placeholder bio",
                      imagePath: "../src/static/images/imageName.jpg"},
