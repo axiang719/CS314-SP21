@@ -68,7 +68,7 @@ In Epic three the team worked on the functionality of the map. We implemented a 
 
 #### Epics not completed 
 ##### Epic Four 
-Epic four "Place details" was not finished, but was not planned. This epic has only two associated tasks, one of which uses reverse geocoding to convert latitude and longitude to a text description. Additionally to this, a second task will show additional information about each marker, as well as additional information in the history of clicks. T
+Epic four "Place details" was not finished, but was not planned. This epic has only two associated tasks, one of which uses reverse geocoding to convert latitude and longitude to a text description. Additionally to this, a second task will show additional information about each marker, as well as additional information in the history of clicks. 
 
 ##### Epic Five
 Epic five "Maps" was not finished, but was not planned. This epic will allow users to have a multitude of new features such as choosing new map backgrounds and saving the map for future sessions. Another new feature will be an added icon on the map that will allow users to select from the list of maps.
@@ -76,6 +76,7 @@ Epic five "Maps" was not finished, but was not planned. This epic will allow use
 ## Retrospective
 
 #### Things that went well
+Our team did a good job at planning ahead and getting done with our tasks in a timely manner. We were able to achieve our Epic goals by the time that they were due. We were able to meet at least every other day and stay on the same page as one another. The work was evenly distrubuted between teamates with each of the original tasks for each epics being designated to a different person. The team got along well and enjoyed working alongside each other to complete the sprint.
 
 #### Things that we need to improve
 
