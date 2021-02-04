@@ -53,6 +53,7 @@ export default class Atlas extends Component {
                                 <th>#</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
+                                <th></th>
                             </tr>
                         </thead>
                         {this.renderList()}
@@ -71,15 +72,29 @@ export default class Atlas extends Component {
                         <td>{index+1}</td>
                         <td>{place.lat}</td>
                         <td>{place.lng}</td>
+                        <td>
+                            <Button color="primary" size="md" onClick={this.removePlace.bind(this, index)} xs={1}>
+                                Remove
+                            </Button>
+                        </td>
                     </tr>
                 ))} 
             </tbody>
         );
     }
 
-
     clearList() {
         this.setState({ listOfClicks: [] });
+    }
+
+    removePlace(index) {
+        let newList = [];
+        for(let i = 0; i < this.state.listOfClicks.length; i++)
+        {
+            if(i != index)
+                newList.push(this.state.listOfClicks[i]);
+        }
+        this.setState({ listOfClicks : newList });
     }
 
     renderLeafletMap() {
