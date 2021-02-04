@@ -67,7 +67,11 @@ In Epic two the team added their mission statement to the website. The team also
 In Epic three the team worked on the functionality of the map. We implemented a function which will allow the user to form a list just by taping or clicking on the map. The user could also clear the list with a simple push of a button. While working on implementing the function we struggled with making the table design with react work properly on the website. After many hours of brainstorming and working together we were able to complete the functionality and design of the website ahead of schedule.
 
 #### Epics not completed 
+##### Epic Four 
+Epic four "Place details" was not finished, but was not planned. This epic has only two associated tasks, one of which uses reverse geocoding to convert latitude and longitude to a text description. Additionally to this, a second task will show additional information about each marker, as well as additional information in the history of clicks. T
 
+##### Epic Five
+Epic five "Maps" was not finished, but was not planned. This epic will allow users to have a multitude of new features such as choosing new map backgrounds and saving the map for future sessions. Another new feature will be an added icon on the map that will allow users to select from the list of maps.
 
 ## Retrospective
 
