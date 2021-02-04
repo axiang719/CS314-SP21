@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button } from 'reactstrap';
+import { Col, Container, Row, Button, Table } from 'reactstrap';
 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
@@ -23,6 +23,7 @@ export default class Atlas extends Component {
         super(props);
 
         this.setMarker = this.setMarker.bind(this);
+        this.clearList = this.clearList.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -41,19 +42,45 @@ export default class Atlas extends Component {
                         </Col>
                     </Row>
                     <br></br>
-                   
                     <Col xs="auto">
-                        <Button color="primary" size = "lg" onClick={this.state.listOfClicks = [] } xs={1}>
+                        <Button color="primary" size = "lg" onClick={this.clearList} xs={1}>
                             Clear List
                         </Button>
                     </Col>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                            </tr>
+                        </thead>
+                        {this.renderList()}
+                    </Table>
                 </Container>
               </div>
               
               );
           }
 
+    renderList() {
+        return (
+            <tbody>
+                {this.state.listOfClicks.map((place, index) => (
+                    <tr> 
+                        <td>{index}</td>
+                        <td>{place.lat}</td>
+                        <td>{place.lng}</td>
+                    </tr>
+                ))} 
+            </tbody>
+        );
+    }
 
+
+    clearList() {
+        this.setState({ listOfClicks: [] });
+    }
 
     renderLeafletMap() {
         return (
@@ -77,9 +104,8 @@ export default class Atlas extends Component {
     }
 
     setMarker(mapClickInfo) {
-        this.setState({ markerPosition: mapClickInfo.latlng });
-        this.state.listOfClicks.push(mapClickInfo.latlng);
-
+        this.state.listOfClicks.unshift(mapClickInfo.latlng);
+        this.setState({ markerPosition: mapClickInfo.latlng});
     }
 
     getMarker() {
