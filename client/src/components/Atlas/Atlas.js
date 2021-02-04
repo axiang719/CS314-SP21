@@ -23,6 +23,7 @@ export default class Atlas extends Component {
         super(props);
 
         this.setMarker = this.setMarker.bind(this);
+        this.clearList = this.clearList.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -42,7 +43,7 @@ export default class Atlas extends Component {
                     </Row>
                     <br></br>
                     <Col xs="auto">
-                        <Button color="primary" size = "lg" onClick={this.state.listOfClicks=[]} xs={1}>
+                        <Button color="primary" size = "lg" onClick={this.clearList} xs={1}>
                             Clear List
                         </Button>
                     </Col>
@@ -77,6 +78,9 @@ export default class Atlas extends Component {
     }
 
 
+    clearList() {
+        this.setState({ listOfClicks: [] });
+    }
 
     renderLeafletMap() {
         return (
@@ -101,7 +105,7 @@ export default class Atlas extends Component {
 
     setMarker(mapClickInfo) {
         this.state.listOfClicks.unshift(mapClickInfo.latlng);
-        this.setState({ markerPosition: mapClickInfo.latlng });
+        this.setState({ markerPosition: mapClickInfo.latlng});
     }
 
     getMarker() {
