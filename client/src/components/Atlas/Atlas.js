@@ -47,7 +47,7 @@ export default class Atlas extends Component {
                             Clear List
                         </Button>
                     </Col>
-                    <Table>
+                    <Table hover bordered small>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -68,7 +68,7 @@ export default class Atlas extends Component {
             <tbody>
                 {this.state.listOfClicks.map((place, index) => (
                     <tr> 
-                        <td>{index}</td>
+                        <td>{index+1}</td>
                         <td>{place.lat}</td>
                         <td>{place.lng}</td>
                     </tr>
