@@ -42,9 +42,9 @@ Epic 3 will introduce a new trip feature. This will include a list of places tha
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics |  3  |  1  | 
-| Tasks |  12   |  3  | 
-| Story Points |  17  |  3 |  
+| Epics |  3  |  3  | 
+| Tasks |  12  |  14 |
+| Story Points |  22 | 24 |  
 
 
 ## Scrums
@@ -53,11 +53,18 @@ Epic 3 will introduce a new trip feature. This will include a list of places tha
 | :--- | :--- | :--- | :--- |
 | 1/29/2021 | 2 | 1 | none |
 | 2/01/2021 | 3 | 5 | none |
+| 2/04/2021 | 3 | 2 | none |
 
 
 ## Review
 
 #### Epics completed  
+##### Epic One 
+In Epic one The Epic Gamers finished putting infomation about the team to the website. We finished the Epic with no problems, the team was able to work as a cohesive unit and complete the assignment in a timely manner. We were also able to decide on a team name after a few minutes of disscusion.
+##### Epic Two
+In Epic two the team added their mission statement to the website. The team also added infomation about themselves in the form of cards to the website. We added React functionality to the design of the cards and the mission statement button. The functionality included using the components; collapse, card, and button. 
+##### Epic Three
+In Epic three the team worked on the functionality of the map. We implemented a function which will allow the user to form a list just by taping or clicking on the map. The user could also clear the list with a simple push of a button. While working on implementing the function we struggled with making the table design with react work properly on the website. After many hours of brainstorming and working together we were able to complete the functionality and design of the website ahead of schedule.
 
 #### Epics not completed 
 
