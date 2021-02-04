@@ -42,7 +42,7 @@ export default class Atlas extends Component {
                         </Col>
                     </Row>
                     <br></br>
-                    <Col xs="auto">
+                    <Col xs={{ size: 3, offset: 9 }}>
                         <Button color="primary" size = "lg" onClick={this.clearList} xs={1}>
                             Clear List
                         </Button>
