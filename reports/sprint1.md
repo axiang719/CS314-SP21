@@ -82,3 +82,4 @@ Our team did a good job at planning ahead and getting done with our tasks in a t
 Time management could be improved to complete more epics during a single sprint. Estimation of task lengths was often quite inaccurate, making it difficult to distribute work. Also, our team does not have much JavaScript experience overall, which has presented a significant slowdown in completing what should have been much shorter tasks. Time management could also stand to be improved by the team being more proactive about knocking out tasks, though work was relatively efficient considering this was our first ever sprint.
 
 #### One thing we will change next time
+We will break tasks that require more effort into smaller sub-tasks and divide them amongst the team members. This will help us knock out the bigger tasks more efficiently and ensure that the work is evenly distributed between all team members.
