@@ -50,7 +50,6 @@ export default class Atlas extends Component {
                     <Table hover bordered small>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                                 <th></th>
@@ -69,12 +68,11 @@ export default class Atlas extends Component {
             <tbody>
                 {this.state.listOfClicks.map((place, index) => (
                     <tr> 
-                        <td>{index+1}</td>
-                        <td>{place.lat}</td>
-                        <td>{place.lng}</td>
+                        <td>{place.lat.toFixed(6)}</td>
+                        <td>{place.lng.toFixed(6)}</td>
                         <td>
-                            <Button color="primary" size="md" onClick={this.removePlace.bind(this, index)} xs={1}>
-                                Remove
+                            <Button color="primary" size="sm" onClick={this.removePlace.bind(this, index)} xs={1}>
+                                X
                             </Button>
                         </td>
                     </tr>
