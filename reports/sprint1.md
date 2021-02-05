@@ -78,5 +78,6 @@ Epic five "Maps" was not finished, but was not planned. This epic will allow use
 #### Things that went well
 
 #### Things that we need to improve
+Time management could be improved to complete more epics during a single sprint. Estimation of task lengths was often quite inaccurate, making it difficult to distribute work. Also, our team does not have much JavaScript experience overall, which has presented a significant slowdown in completing what should have been much shorter tasks. Time management could also stand to be improved by the team being more proactive about knocking out tasks, though work was relatively efficient considering this was our first ever sprint.
 
 #### One thing we will change next time
