@@ -79,5 +79,6 @@ Epic five "Maps" was not finished, but was not planned. This epic will allow use
 Our team did a good job at planning ahead and getting done with our tasks in a timely manner. We were able to achieve our Epic goals by the time that they were due. We were able to meet at least every other day and stay on the same page as one another. The work was evenly distrubuted between teamates with each of the original tasks for each epics being designated to a different person. The team got along well and enjoyed working alongside each other to complete the sprint.
 
 #### Things that we need to improve
+Time management could be improved to complete more epics during a single sprint. Estimation of task lengths was often quite inaccurate, making it difficult to distribute work. Also, our team does not have much JavaScript experience overall, which has presented a significant slowdown in completing what should have been much shorter tasks. Time management could also stand to be improved by the team being more proactive about knocking out tasks, though work was relatively efficient considering this was our first ever sprint.
 
 #### One thing we will change next time
