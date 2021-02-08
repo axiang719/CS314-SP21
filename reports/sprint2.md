@@ -1,10 +1,10 @@
-# Sprint 2 - *your team number* - *your team name*
+# Sprint 2 - *t13* - *The Epic Gamers*
 
 ## Goal
 ### *More ways to add places to the trip.*
 
-## Sprint Leader: 
-### *firstname lastname*
+## Scrum Master: 
+### *Ethan Seefried*
 
 ## Definition of Done
 
