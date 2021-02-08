@@ -41,6 +41,9 @@ Epic 2 will focus on allowing users to find their current location on the map. W
 ### Epic 4
 Create a search feature for locations that allow locations to be searched in several ways, presented to the user as a list where searched locations can then be selected to be added to either or both the map and trip list.
 
+## Epic 5
+Implement a feature that will convet the lat and long to textual description, then add the textual description to the marker and the history. We will th fix the table to accomidate the new texts.
+
 ## Metrics
 
 | Statistic | # Planned | # Completed |
