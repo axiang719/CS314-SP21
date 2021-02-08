@@ -35,6 +35,8 @@
 
 ## Planned Epics
 
+### Epic 4
+Create a search feature for locations that allow locations to be searched in several ways, presented to the user as a list where searched locations can then be selected to be added to either or both the map and trip list.
 
 ## Metrics
 
