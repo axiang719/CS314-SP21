@@ -38,10 +38,13 @@
 ### Epic 2
 Epic 2 will focus on allowing users to find their current location on the map. We will move the map to the user's current location upon starting the application, and we will add a button that will return the user to that location at any time.
 
+### Epic 3
+Users will be allowed to enter latitude and longitude in a variety of formats, which will be optained through different tools. Data on latitude and longitude will be validated and the map will automatically move the marker to the position entered. After entering latitude and longitude, the history of places will be updated. On the map, users will see both the map and marker showing additional place details. 
+
 ### Epic 4
 Create a search feature for locations that allow locations to be searched in several ways, presented to the user as a list where searched locations can then be selected to be added to either or both the map and trip list.
 
-## Epic 5
+### Epic 5
 Implement a feature that will convet the lat & long to a textual description, then we will add the textual description to the marker and history. We will then fix the table to accomidate the new format.
 
 ## Metrics
