@@ -35,6 +35,9 @@
 
 ## Planned Epics
 
+### Epic 2
+
+Epic 2 will focus on allowing users to find their current location on the map. We will move the map to the user's current location upon starting the application, and we will add a button that will return the user to that location at any time.
 
 ## Metrics
 
