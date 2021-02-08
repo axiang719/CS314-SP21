@@ -35,6 +35,9 @@
 
 ## Planned Epics
 
+### Epic 1
+Epic 1 will focus on implementing server functionality to support the "find" protocol object which will request details on geographic locations. This will involve creating an endpoint that the "api/find" requests are sent to. The requests will specify details on what locations are being searched for and will respond with a json object that consists of a list of matched locations along with the details of each. 
+
 ### Epic 2
 Epic 2 will focus on allowing users to find their current location on the map. We will move the map to the user's current location upon starting the application, and we will add a button that will return the user to that location at any time.
 
