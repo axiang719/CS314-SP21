@@ -36,8 +36,10 @@
 ## Planned Epics
 
 ### Epic 2
-
 Epic 2 will focus on allowing users to find their current location on the map. We will move the map to the user's current location upon starting the application, and we will add a button that will return the user to that location at any time.
+
+### Epic 4
+Create a search feature for locations that allow locations to be searched in several ways, presented to the user as a list where searched locations can then be selected to be added to either or both the map and trip list.
 
 ## Metrics
 
