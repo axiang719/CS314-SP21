@@ -54,9 +54,11 @@ Implement a feature that will convet the lat & long to a textual description, th
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *count* | *count* |
-| Tasks |  *count*   | *count* | 
-| Story Points |  *sum*  | *sum* | 
+| Epics | 5 | 0 |
+| Tasks |  26  | 4 | 
+| Story Points |  19  | 0 | 
+
+Based on previous results we should be able to complete all 5 epics planned. In sprint 1 we planned for 3 epics and finished well ahead of time, with our product functioning well. We had no bugs on release, with everything working as intended.
 
 
 ## Scrums
