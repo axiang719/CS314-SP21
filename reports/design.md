@@ -135,6 +135,9 @@ For this sprint, our team will not be making any changes to the class structure.
 
 
 # Sprint 2
+For Sprint 2, no changes will be made to the class structure. 
+
+![class diagram](images/BaseClassDiagram.png)
 # Sprint 3
 # Sprint 4 
 # Sprint 5
