@@ -136,6 +136,14 @@ For this sprint, our team will not be making any changes to the class structure.
 
 # Sprint 2
 
+### User Interface
+
+#### Main section
+Our team will be adding a button to the main page to return the user to their current postion. We will aslo be adding a search bar to allow users to search for places in several ways. We will also be fixing our our table to accommodate the textual representation of lat and long. the marker will also be updated to show textual form of lat and long
+
+![sprint 2 user interface](images/UIdesign.png)
+
+
 ### Component Hierarchy
 This sprint will focus on adding search functionality to the Atlas component. This will include a component that seraches locations by name and type, returning a list of matching results that can be selected from. We will also build a component that allows the user to search for a specific location by latitude and longitude which will update the atlas component and the list of clicks component with the matching location.
 
