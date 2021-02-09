@@ -42,7 +42,7 @@ Epic 1 will focus on implementing server functionality to support the "find" pro
 Epic 2 will focus on allowing users to find their current location on the map. We will move the map to the user's current location upon starting the application, and we will add a button that will return the user to that location at any time.
 
 ### Epic 3
-Users will be allowed to enter latitude and longitude in a variety of formats, which will be optained through different tools. Data on latitude and longitude will be validated and the map will automatically move the marker to the position entered. After entering latitude and longitude, the history of places will be updated. On the map, users will see both the map and marker showing additional place details. 
+Users will be allowed to enter latitude and longitude in a variety of formats, which will be obtained through different tools. Data on latitude and longitude will be validated and the map will automatically move the marker to the position entered. After entering latitude and longitude, the history of places will be updated. On the map, users will see both the map and marker showing additional place details. 
 
 ### Epic 4
 Create a search feature for locations that allow locations to be searched in several ways, presented to the user as a list where searched locations can then be selected to be added to either or both the map and trip list.
@@ -63,7 +63,7 @@ Implement a feature that will convet the lat & long to a textual description, th
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* |  | 
+| 2/08/2021 | 3 | 23 | none | 
 
 
 ## Review
