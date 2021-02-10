@@ -26,7 +26,7 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
-            listOfClicks: [],
+            listOfClicks: []
         };
     
     }
