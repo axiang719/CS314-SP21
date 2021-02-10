@@ -13,7 +13,6 @@ public class FindRequest extends RequestHeader {
   private ArrayList<String> place;
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
 
-  private final static String DB_URL = "";
 
   @Override
   public void buildResponse() {
@@ -23,15 +22,16 @@ public class FindRequest extends RequestHeader {
       log.trace("buildResponse -> {}", this);
   }
 
-  public void setUrl(){
+  public String setUrl() {
 
+    private static String DB_URL = "";
     String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
 
     if(useTunnel != null && useTunnel.equals("true")) {
-      DB_URL= "jdbc:mariadb://127.0.0.1:56013/cs314";
+      return DB_URL= "jdbc:mariadb://127.0.0.1:56013/cs314";
     }
     else {
-      DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
+      return DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
     }
   }
   /* The following methods exist only for testing purposes and are not used
