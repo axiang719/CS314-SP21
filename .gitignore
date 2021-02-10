@@ -3,7 +3,8 @@
 # Idea Files
 
 .idea/
-
+#ignore vscode file
+.vscode/
 # Coverage Files, Bundled Files, Dependencies
 
 client/dist/
