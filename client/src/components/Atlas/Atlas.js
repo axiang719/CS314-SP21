@@ -5,7 +5,6 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 import 'leaflet/dist/leaflet.css';
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -21,15 +20,15 @@ export default class Atlas extends Component {
     constructor(props) {
 
         super(props);
-
+        
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
-
+        
         this.state = {
             markerPosition: null,
             listOfClicks: []
         };
-
+    
     }
 
     render() {
@@ -43,7 +42,7 @@ export default class Atlas extends Component {
                     </Row>
                     <br></br>
                     <Col xs={{ size: 3, offset: 9 }}>
-                        <Button color="primary" size = "lg" onClick={this.clearList} xs={1}>
+                        <Button color="primary" size="lg" onClick={this.clearList} xs={1}>
                             Clear List
                         </Button>
                     </Col>
@@ -58,16 +57,16 @@ export default class Atlas extends Component {
                         {this.renderList()}
                     </Table>
                 </Container>
-              </div>
-              
-              );
-          }
+            </div>
+
+        );
+    }
 
     renderList() {
         return (
             <tbody>
                 {this.state.listOfClicks.map((place, index) => (
-                    <tr> 
+                    <tr>
                         <td>{place.lat.toFixed(6)}</td>
                         <td>{place.lng.toFixed(6)}</td>
                         <td>
@@ -76,7 +75,7 @@ export default class Atlas extends Component {
                             </Button>
                         </td>
                     </tr>
-                ))} 
+                ))}
             </tbody>
         );
     }
@@ -87,12 +86,11 @@ export default class Atlas extends Component {
 
     removePlace(index) {
         let newList = [];
-        for(let i = 0; i < this.state.listOfClicks.length; i++)
-        {
-            if(i != index)
+        for (let i = 0; i < this.state.listOfClicks.length; i++) {
+            if (i != index)
                 newList.push(this.state.listOfClicks[i]);
         }
-        this.setState({ listOfClicks : newList });
+        this.setState({ listOfClicks: newList });
     }
 
     renderLeafletMap() {
@@ -111,14 +109,12 @@ export default class Atlas extends Component {
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
             </Map>
-            
-           
         );
     }
 
     setMarker(mapClickInfo) {
         this.state.listOfClicks.unshift(mapClickInfo.latlng);
-        this.setState({ markerPosition: mapClickInfo.latlng});
+        this.setState({ markerPosition: mapClickInfo.latlng });
     }
 
     getMarker() {
@@ -141,6 +137,14 @@ export default class Atlas extends Component {
 
     getLatLngText(latLng) {
         return latLng.lat.toFixed(6) + ', ' + latLng.lng.toFixed(6);
+    }
+
+    processConfigResponse(FindResponse) {
+        if (!isJsonResponseValid(FindResponse, FindSchema)) {
+            this.processServerConfigError("Configuration Response Not Valid. Check The Server.");
+        } else {
+            this.processServerConfigSuccess(FindResponse);
+        }
     }
 }
 

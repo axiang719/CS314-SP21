@@ -3,8 +3,8 @@ package com.tco.server;
 import com.tco.misc.BadRequestException;
 import com.tco.misc.JSONValidator;
 import com.tco.requests.ConfigRequest;
+import com.tco.requests.FindRequest;
 import com.tco.requests.RequestHeader;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -28,6 +28,7 @@ class MicroServer {
     MicroServer(int serverPort) {
         configureServer(serverPort);
         processRestfulAPIrequests();
+        
     }
 
     /* Configure MicroServices Here. */
@@ -36,7 +37,11 @@ class MicroServer {
         path("/api", () -> {
             before("/*", (req, res) -> logRequest(req));
             post("/config", (req, res) -> processHttpRequest(req, res, ConfigRequest.class));
+            post("/find", (req, res)-> processHttpRequest(req, res,FindRequest.class));
         });
+        
+      
+        
     }
 
     /* You shouldn't need to change what is found below. */
