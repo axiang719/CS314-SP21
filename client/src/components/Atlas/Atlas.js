@@ -5,8 +5,6 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import { getOriginalServerPort, isJsonResponseValid, sendServerRequest } from "../utils/restfulAPI";
-import * as FindSchema from "../../schemas/FindResponse";
 import 'leaflet/dist/leaflet.css';
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -22,18 +20,15 @@ export default class Atlas extends Component {
     constructor(props) {
 
         super(props);
-
+        
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
         
-
         this.state = {
             markerPosition: null,
             listOfClicks: [],
-            
         };
-
-
+    
     }
 
     render() {
@@ -114,7 +109,7 @@ export default class Atlas extends Component {
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
             </Map>
-            );
+        );
     }
 
     setMarker(mapClickInfo) {
@@ -143,7 +138,7 @@ export default class Atlas extends Component {
     getLatLngText(latLng) {
         return latLng.lat.toFixed(6) + ', ' + latLng.lng.toFixed(6);
     }
-    
+
     processConfigResponse(FindResponse) {
         if (!isJsonResponseValid(FindResponse, FindSchema)) {
             this.processServerConfigError("Configuration Response Not Valid. Check The Server.");
