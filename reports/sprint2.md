@@ -66,6 +66,7 @@ Based on previous results we should be able to complete all 5 epics planned. In 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 2/08/2021 | 3 | 23 | none | 
+| 2/10/2021 | 1 | 23 | none |
 
 
 ## Review
