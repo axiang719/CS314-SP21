@@ -19,4 +19,11 @@ public class FindRequest extends RequestHeader {
       place.add("find");
       log.trace("buildResponse -> {}", this);
   }
+
+  /* The following methods exist only for testing purposes and are not used
+  during normal execution, including the constructor. */
+
+  public FindRequest() {
+    this.requestType = "find";
+  }
 }

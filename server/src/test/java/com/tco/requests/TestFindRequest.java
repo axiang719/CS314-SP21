@@ -7,13 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestConfigRequest {
+public class TestFindRequest {
 
-    private ConfigRequest conf;
+    private FindRequest conf;
 
     @BeforeEach
     public void createConfigurationForTestCases() {
-        conf = new ConfigRequest();
+        conf = new FindRequest();
         conf.buildResponse();
     }
 
