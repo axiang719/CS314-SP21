@@ -39,16 +39,17 @@ public class FindRequest extends RequestHeader {
     }
   }
 
-  public String generateQuery(String type = "", String where = "") {
-    String query = "SELECT world.name, world.latitude, world.longitude, " 
+  public String generateQuery(String type, String where) {
+    String query = "SET @phrase='%" + where + "%';"
+                   + "SELECT world.name, world.latitude, world.longitude, " 
                    + "world.id, world.altitude, world.municipality, "
-                   + "world.type, world.region, world.country, world.url "
-                   + "FROM world WHERE world.name LIKE '%" + match + "%' "
-                   + "AND world.type LIKE '%" + type + "%' AND world.country, 
-                   + "world.municipality, world.region, world.continent LIKE "
-                   + "'%" + where + "%' ORDER BY world.name ASC "
+                   + "world.type, world.iso_region, world.iso_country, "
+                   + "world.url FROM world WHERE world.name LIKE '%" + match
+                   + "%' AND world.type LIKE '%" + type + "%' AND "
+                   + "world.iso_country LIKE @phrase OR world.municipality "
+                   + "LIKE @phrase OR world.iso_region LIKE @phrase OR "
+                   + "world.continent LIKE @phrase ORDER BY world.name ASC "
                    + "Limit " + Integer.toString(limit) + ";";
-    //Query should have 5 parts: requestType, match, type, where, & limit
     return query;
   }
 
@@ -57,6 +58,12 @@ public class FindRequest extends RequestHeader {
 
   public FindRequest() {
     this.requestType = "find";
+  }
+  
+  public String testQuery() {
+    this.match = "Epps Airpark";
+    this.limit = 5;
+    return generateQuery("small_airport","US");
   }
 
 }
