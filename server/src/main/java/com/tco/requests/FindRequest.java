@@ -59,6 +59,7 @@ public class FindRequest extends RequestHeader {
 
   public FindRequest() {
     this.requestType = "find";
+    setUrl();
   }
 
 }
