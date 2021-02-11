@@ -18,6 +18,8 @@ public class FindRequest extends RequestHeader {
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
   private transient String DB_URL;
 
+  private final static String DB_USER = "cs314-db";
+  private final static String DB_PASSWORD = "eiK5liet1uej";
 
   @Override
   public void buildResponse() {
@@ -37,6 +39,16 @@ public class FindRequest extends RequestHeader {
     else {
       DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
     }
+  }
+
+  public ResultSet queryDB(String query) {
+      try {
+              Connnection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+              Statement statement = connection.createStatement();
+              return statement.executeQuery(query);
+      } catch(Exception e) {
+          System.err.println("Exception: " + e.getMessage());
+      }
   }
 
   /* The following methods exist only for testing purposes and are not used
