@@ -40,27 +40,47 @@ public class FindRequest extends RequestHeader {
       DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
     }
   }
-
+  
+  public String generateQuery(String type, String where) {
+    String query = "SET @phrase='%" + where + "%';"
+                   + "SELECT world.name, world.latitude, world.longitude, " 
+                   + "world.id, world.altitude, world.municipality, "
+                   + "world.type, world.iso_region, world.iso_country, "
+                   + "world.url FROM world WHERE world.name LIKE '%" + match
+                   + "%' AND world.type LIKE '%" + type + "%' AND "
+                   + "world.iso_country LIKE @phrase OR world.municipality "
+                   + "LIKE @phrase OR world.iso_region LIKE @phrase OR "
+                   + "world.continent LIKE @phrase ORDER BY world.name ASC "
+                   + "Limit " + Integer.toString(limit) + ";";
+    return query;
+  }
+  
   public ResultSet queryDB(String query) {
-      ResultSet result = null;
+    ResultSet result = null;
       try (
         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         Statement statement = connection.createStatement();
       ) {
         result = statement.executeQuery(query);
       } catch(SQLException e) {
-          System.err.println("SQLException: " + e.getMessage());
+        System.err.println("SQLException: " + e.getMessage());
       }
-
-      return result;
-  }
-
+    
+    return result;
+ }
+  
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 
   public FindRequest() {
     this.requestType = "find";
     setUrl();
+  }
+  
+  public String testQuery() {
+    this.match = "Epps Airpark";
+    this.limit = 5;
+    return generateQuery("small_airport","US");
   }
 
 }
