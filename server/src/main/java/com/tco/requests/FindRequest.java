@@ -42,13 +42,16 @@ public class FindRequest extends RequestHeader {
   }
 
   public ResultSet queryDB(String query) {
+      ResultSet result = null;
       try {
-              Connnection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+              Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
               Statement statement = connection.createStatement();
-              return statement.executeQuery(query);
+              result = statement.executeQuery(query);
       } catch(Exception e) {
           System.err.println("Exception: " + e.getMessage());
       }
+
+      return result;
   }
 
   /* The following methods exist only for testing purposes and are not used
