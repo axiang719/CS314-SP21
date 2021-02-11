@@ -39,11 +39,31 @@ public class FindRequest extends RequestHeader {
     }
   }
 
+  public String generateQuery(String type, String where) {
+    String query = "SET @phrase='%" + where + "%';"
+                   + "SELECT world.name, world.latitude, world.longitude, " 
+                   + "world.id, world.altitude, world.municipality, "
+                   + "world.type, world.iso_region, world.iso_country, "
+                   + "world.url FROM world WHERE world.name LIKE '%" + match
+                   + "%' AND world.type LIKE '%" + type + "%' AND "
+                   + "world.iso_country LIKE @phrase OR world.municipality "
+                   + "LIKE @phrase OR world.iso_region LIKE @phrase OR "
+                   + "world.continent LIKE @phrase ORDER BY world.name ASC "
+                   + "Limit " + Integer.toString(limit) + ";";
+    return query;
+  }
+
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 
   public FindRequest() {
     this.requestType = "find";
+  }
+  
+  public String testQuery() {
+    this.match = "Epps Airpark";
+    this.limit = 5;
+    return generateQuery("small_airport","US");
   }
 
 }
