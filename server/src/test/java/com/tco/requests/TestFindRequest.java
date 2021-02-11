@@ -12,18 +12,18 @@ import java.sql.SQLException;
 
 public class TestFindRequest {
 
-    private FindRequest conf;
+    private FindRequest find;
 
     @BeforeEach
     public void createConfigurationForTestCases() {
-        conf = new FindRequest();
-        conf.buildResponse();
+        find = new FindRequest();
+        find.buildResponse();
     }
 
     @Test
     @DisplayName("Request type is \"find\"")
     public void testType() {
-        String type = conf.getRequestType();
+        String type = find.getRequestType();
         assertEquals("find", type);
     }
 
@@ -31,7 +31,7 @@ public class TestFindRequest {
     @DisplayName("DB Connection")
     public void testQueryDB() {
         String query = "SELECT * FROM continent LIMIT 1";
-        ResultSet result = conf.queryDB(query);
+        ResultSet result = find.queryDB(query);
         String resultString = "";
         try {
             result.first();
