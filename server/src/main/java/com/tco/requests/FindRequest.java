@@ -16,7 +16,7 @@ public class FindRequest extends RequestHeader {
   private Integer found;
   private ArrayList<String> place;
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
-  private String transient DB_URL = "";
+  private transient String DB_URL;
 
 
   @Override
