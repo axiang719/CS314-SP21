@@ -33,9 +33,13 @@ public class TestFindRequest {
         String query = "SELECT * FROM continent LIMIT 1";
         ResultSet result = find.queryDB(query);
         String resultString = "";
+
         try {
             result.first();
             resultString = result.getString("name");
+
+            result.close();
+            assert(result.isClosed());
         } catch(SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }

@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 
 
 public class FindRequest extends RequestHeader {
@@ -43,12 +43,13 @@ public class FindRequest extends RequestHeader {
 
   public ResultSet queryDB(String query) {
       ResultSet result = null;
-      try {
-              Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-              Statement statement = connection.createStatement();
-              result = statement.executeQuery(query);
-      } catch(Exception e) {
-          System.err.println("Exception: " + e.getMessage());
+      try (
+        Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        Statement statement = connection.createStatement();
+      ) {
+        result = statement.executeQuery(query);
+      } catch(SQLException e) {
+          System.err.println("SQLException: " + e.getMessage());
       }
 
       return result;
