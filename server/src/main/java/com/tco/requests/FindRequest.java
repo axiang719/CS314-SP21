@@ -39,19 +39,16 @@ public class FindRequest extends RequestHeader {
     }
   }
 
-  public String generateQuery() {
-    String query = "something";
+  public String generateQuery(String type = "", String where = "") {
+    String query = "SELECT world.name, world.latitude, world.longitude, " 
+                   + "world.id, world.altitude, world.municipality, "
+                   + "world.type, world.region, world.country, world.url "
+                   + "FROM world WHERE world.name LIKE '%" + match + "%' "
+                   + "AND world.type LIKE '%" + type + "%' AND world.country, 
+                   + "world.municipality, world.region, world.continent LIKE "
+                   + "'%" + where + "%' ORDER BY world.name ASC "
+                   + "Limit " + Integer.toString(limit) + ";";
     //Query should have 5 parts: requestType, match, type, where, & limit
-    //Query might just be one long string containing all the useful info
-    //Query is probably not the same thing as the JSON passed to the server
-    //Are the parts of the query (limit, etc) passed as parameters?
-    //Should the query be returned by the method once I'm done with it?
-    //What the hell is place? Does it have anything to do with Query? It
-    //	does have find in it, does that mean anything?
-    //I am so confused and overwhelmed and I'm genuinely trying my best to
-    //understand all this but it's just so much, I hope I can actually 
-    //accomplish this before 3, I don't want to let my team down.
-    //At least I understand this way better than I did 20 minutes ago.
     return query;
   }
 
