@@ -30,7 +30,7 @@ public class TestFindRequest {
     @Test
     @DisplayName("Testing query")
     public void testQuery() {
-      String query = conf.testQuery();
+      String query = find.testQuery();
       assertEquals("SET @phrase='%US%';"
                    + "SELECT world.name, world.latitude, world.longitude, "
                    + "world.id, world.altitude, world.municipality, "
