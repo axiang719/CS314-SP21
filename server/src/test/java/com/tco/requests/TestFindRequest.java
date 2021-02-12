@@ -7,27 +7,30 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class TestFindRequest {
 
-    private FindRequest conf;
+    private FindRequest find;
 
     @BeforeEach
     public void createConfigurationForTestCases() {
-        conf = new FindRequest();
-        conf.buildResponse();
+        find = new FindRequest();
+        find.buildResponse();
     }
 
     @Test
     @DisplayName("Request type is \"find\"")
     public void testType() {
-        String type = conf.getRequestType();
+        String type = find.getRequestType();
         assertEquals("find", type);
     }
-
+  
     @Test
     @DisplayName("Testing query")
     public void testQuery() {
-      String query = conf.testQuery();
+      String query = find.testQuery();
       assertEquals("SET @phrase='%US%';"
                    + "SELECT world.name, world.latitude, world.longitude, "
                    + "world.id, world.altitude, world.municipality, "
@@ -38,6 +41,24 @@ public class TestFindRequest {
                    + "world.iso_region LIKE @phrase OR world.continent LIKE "
                    + "@phrase ORDER BY world.name ASC "
                    + "Limit 5;", query);
+    }
+  
+    @Test
+    @DisplayName("DB Connection")
+    public void testQueryDB() {
+        String query = "SELECT * FROM continent LIMIT 1";
+        ResultSet result = find.queryDB(query);
+        String resultString = "";
 
+        try {
+            result.first();
+            resultString = result.getString("name");
+
+            result.close();
+            assert(result.isClosed());
+        } catch(SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        assertEquals("Africa", resultString);
     }
 }

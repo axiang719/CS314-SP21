@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 
 
 public class FindRequest extends RequestHeader {
@@ -18,6 +18,8 @@ public class FindRequest extends RequestHeader {
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
   private transient String DB_URL;
 
+  private final static String DB_USER = "cs314-db";
+  private final static String DB_PASSWORD = "eiK5liet1uej";
 
   @Override
   public void buildResponse() {
@@ -38,7 +40,7 @@ public class FindRequest extends RequestHeader {
       DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
     }
   }
-
+  
   public String generateQuery(String type, String where) {
     String query = "SET @phrase='%" + where + "%';"
                    + "SELECT world.name, world.latitude, world.longitude, " 
@@ -52,12 +54,27 @@ public class FindRequest extends RequestHeader {
                    + "Limit " + Integer.toString(limit) + ";";
     return query;
   }
-
+  
+  public ResultSet queryDB(String query) {
+    ResultSet result = null;
+      try (
+        Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        Statement statement = connection.createStatement();
+      ) {
+        result = statement.executeQuery(query);
+      } catch(SQLException e) {
+        System.err.println("SQLException: " + e.getMessage());
+      }
+    
+    return result;
+ }
+  
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 
   public FindRequest() {
     this.requestType = "find";
+    setUrl();
   }
   
   public String testQuery() {
