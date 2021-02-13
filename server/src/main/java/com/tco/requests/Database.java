@@ -50,7 +50,7 @@ public class Database {
         while(result.next()){
             tempPlaces.add(new HashMap<String,String>());
           
-            for(int i=0; i < columns; i++){
+            for(int i=1; i < columns; i++){
               
                 String key = meta.getColumnName(i);
                 String value = result.getString(i);

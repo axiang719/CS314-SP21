@@ -52,6 +52,7 @@ public class TestDatabase {
         try 
            
          {
+             
             //System.exit(0);
             ResultSet result = Database.queryDB(query);
             place = Database.process(result);
@@ -62,7 +63,7 @@ public class TestDatabase {
             System.err.println("SQLException: " + e.getMessage());
         }
     
-        //assertEquals(place.get(0).get("name"),"Africa");
-        //assertEquals(place.get(0).get("index"),"400001");
+        assertEquals(place.get(0).get("name"),"Africa");
+        assertEquals(place.get(0).get("index"),"400001");
     }
 }
