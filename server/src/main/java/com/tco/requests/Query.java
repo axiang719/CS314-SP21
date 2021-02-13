@@ -4,7 +4,6 @@ public class Query {
     private String resultQuery;
     private String match;
     private Integer limit;
-    private String type;
 
     public Query(String match) {
         this.match = match;
@@ -12,12 +11,8 @@ public class Query {
 
     public String getDataQuery() {
         generateStartDataSql();
-        generateTypeSql();
-
-        if (limit != null) {
-            resultQuery += " Limit " + Integer.toString(limit);
-        }
-
+        generateMatchSql();
+        generateLimitSql();
         return resultQuery + ";";
     }
 
@@ -26,23 +21,25 @@ public class Query {
                     + "world.id, world.altitude, world.municipality, "
                     + "world.type, world.iso_region, world.iso_country, "
                     + "world.home_link FROM world";
+        
+        if (!match.equals("")) {
+            resultQuery += " WHERE";
+        }     
+    }
 
-        if (match != null && !match.equals("")) {
-            resultQuery += " WHERE world.name LIKE '%" + match + "%'";
+    private void generateMatchSql() {
+        if (!match.equals("")) {
+            resultQuery += " world.name LIKE '%" + match + "%'";
         }
     }
 
-    private void generateTypeSql() {
-        if (type != null && !type.equals("")) {
-            resultQuery += " AND world.type LIKE '%" + type + "%'";
+    private void generateLimitSql() {
+        if (limit != null) {
+            resultQuery += " Limit " + Integer.toString(limit);
         }
     }
 
     public void setLimit(Integer limit) {
         this.limit = limit;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

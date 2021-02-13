@@ -16,32 +16,31 @@ public class TestQuery {
         testQuery = "SELECT world.name, world.latitude, world.longitude, "
         + "world.id, world.altitude, world.municipality, "
         + "world.type, world.iso_region, world.iso_country, world.home_link "
-        + "FROM world WHERE world.name LIKE '%Epps Airpark%'";
+        + "FROM world";
     }
-    
+
     @Test
     @DisplayName("Testing basic query")
     public void testBasicQuery() {
-        Query sql = new Query("Epps Airpark");
+        Query sql = new Query("");
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + ";", resultQuery);
+    }
+    
+    @Test
+    @DisplayName("Testing match query")
+    public void testMatchQuery() {
+        Query sql = new Query("Epps Airpark");
+        String resultQuery = sql.getDataQuery();
+        assertEquals(testQuery + " WHERE world.name LIKE '%Epps Airpark%';", resultQuery);
     }
 
     @Test
     @DisplayName("Testing query with limit")
     public void testLimitQuery() {
-        Query sql = new Query("Epps Airpark");
+        Query sql = new Query("");
         sql.setLimit(5);
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + " Limit 5;", resultQuery);
-    }
-
-    @Test
-    @DisplayName("Testing query with type")
-    public void testTypeQuery() {
-        Query sql = new Query("Epps Airpark");
-        sql.setType("small_airport");
-        String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " AND world.type LIKE '%small_airport%';", resultQuery);
     }
 }
