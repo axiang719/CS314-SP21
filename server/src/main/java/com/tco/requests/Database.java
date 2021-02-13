@@ -10,17 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Database {
-
-    public void setUrl() {
-
-    String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
-
-    if(useTunnel != null && useTunnel.equals("true")) {
-      DB_URL= "jdbc:mariadb://127.0.0.1:56013/cs314";
+    static String setUrl() {
+        String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
+        if(useTunnel != null && useTunnel.equals("true")) {
+            return "jdbc:mariadb://127.0.0.1:56013/cs314";
+        }
+        else {
+            return "jdbc:mariadb://faure.cs.colostate.edu/cs314";
+        }   
     }
-    else {
-      DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
-    }
-  }
-
 }

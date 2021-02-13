@@ -29,18 +29,6 @@ public class FindRequest extends RequestHeader {
       log.trace("buildResponse -> {}", this);
   }
 
-  public void setUrl() {
-
-    String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
-
-    if(useTunnel != null && useTunnel.equals("true")) {
-      DB_URL= "jdbc:mariadb://127.0.0.1:56013/cs314";
-    }
-    else {
-      DB_URL = "jdbc:mariadb://faure.cs.colostate.edu/cs314";
-    }
-  }
-  
   public String generateQuery(String type, String where) {
     String query = "SET @phrase='%" + where + "%';"
                    + "SELECT world.name, world.latitude, world.longitude, " 
@@ -74,7 +62,7 @@ public class FindRequest extends RequestHeader {
 
   public FindRequest() {
     this.requestType = "find";
-    setUrl();
+
   }
   
   public String testQuery() {
