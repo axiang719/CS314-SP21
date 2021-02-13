@@ -42,23 +42,4 @@ public class TestFindRequest {
                    + "@phrase ORDER BY world.name ASC "
                    + "Limit 5;", query);
     }
-  
-    // @Test
-    // @DisplayName("DB Connection")
-    // public void testQueryDB() {
-    //     String query = "SELECT * FROM continent LIMIT 1";
-    //     ResultSet result = find.queryDB(query);
-    //     String resultString = "";
-
-    //     try {
-    //         result.first();
-    //         resultString = result.getString("name");
-
-    //         result.close();
-    //         assert(result.isClosed());
-    //     } catch(SQLException e) {
-    //         System.err.println("SQLException: " + e.getMessage());
-    //     }
-    //     assertEquals("Africa", resultString);
-    // }
 }
