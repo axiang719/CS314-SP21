@@ -43,20 +43,6 @@ public class FindRequest extends RequestHeader {
     return query;
   }
   
-  public ResultSet queryDB(String query) {
-    ResultSet result = null;
-      try (
-        Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        Statement statement = connection.createStatement();
-      ) {
-        result = statement.executeQuery(query);
-      } catch(SQLException e) {
-        System.err.println("SQLException: " + e.getMessage());
-      }
-    
-    return result;
-  }
-  
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 

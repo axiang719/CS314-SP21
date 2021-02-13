@@ -7,6 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class TestDatabase {
 
     @Test
@@ -17,22 +20,22 @@ public class TestDatabase {
         assertTrue(test);
     }
 
-    // @Test
-    // @DisplayName("DB Connection")
-    // public void testQueryDB() {
-    //     String query = "SELECT * FROM continent LIMIT 1";
-    //     ResultSet result = find.queryDB(query);
-    //     String resultString = "";
+    @Test
+    @DisplayName("DB Connection")
+    public void testQueryDB() {
+        String query = "SELECT * FROM continent LIMIT 1";
+        ResultSet result = Database.queryDB(query);
+        String resultString = "";
 
-    //     try {
-    //         result.first();
-    //         resultString = result.getString("name");
+        try {
+            result.first();
+            resultString = result.getString("name");
 
-    //         result.close();
-    //         assert(result.isClosed());
-    //     } catch(SQLException e) {
-    //         System.err.println("SQLException: " + e.getMessage());
-    //     }
-    //     assertEquals("Africa", resultString);
-    // }
+            result.close();
+            assert(result.isClosed());
+        } catch(SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        assertEquals("Africa", resultString);
+    }
 }

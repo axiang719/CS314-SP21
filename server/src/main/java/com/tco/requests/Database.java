@@ -14,10 +14,6 @@ public class Database {
     private final static String DB_USER = "cs314-db";
     private final static String DB_PASSWORD = "eiK5liet1uej";
     private static String DB_URL;
-
-    public static void getPlaces(String match, String limit) {
-        DB_URL = setUrl();
-    }
     
     static String setUrl() {
         String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
@@ -30,6 +26,7 @@ public class Database {
     }
 
     static ResultSet queryDB(String query) {
+        DB_URL = setUrl();
         ResultSet result = null;
         try (
             Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
