@@ -55,7 +55,7 @@ public class FindRequest extends RequestHeader {
       }
     
     return result;
- }
+  }
   
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */

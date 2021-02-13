@@ -16,4 +16,23 @@ public class TestDatabase {
         boolean test = ((url == "jdbc:mariadb://127.0.0.1:56013/cs314") || (url == "jdbc:mariadb://faure.cs.colostate.edu/cs314"));
         assertTrue(test);
     }
+
+    // @Test
+    // @DisplayName("DB Connection")
+    // public void testQueryDB() {
+    //     String query = "SELECT * FROM continent LIMIT 1";
+    //     ResultSet result = find.queryDB(query);
+    //     String resultString = "";
+
+    //     try {
+    //         result.first();
+    //         resultString = result.getString("name");
+
+    //         result.close();
+    //         assert(result.isClosed());
+    //     } catch(SQLException e) {
+    //         System.err.println("SQLException: " + e.getMessage());
+    //     }
+    //     assertEquals("Africa", resultString);
+    // }
 }
