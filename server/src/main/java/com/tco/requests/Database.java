@@ -49,14 +49,11 @@ public class Database {
         ArrayList<HashMap<String,String>> tempPlaces = new ArrayList<HashMap<String, String>>();
         while(result.next()){
             tempPlaces.add(new HashMap<String,String>());
-          
             for(int i=1; i < columns; i++){
-              
                 String key = meta.getColumnName(i);
                 String value = result.getString(i);
                 tempPlaces.get(index).put(key,value);
-                
-            }
+                }
             index++;
          }
         return tempPlaces;

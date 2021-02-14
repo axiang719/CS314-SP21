@@ -49,20 +49,13 @@ public class TestDatabase {
         ArrayList<HashMap<String,String>> place = null;
         String query = "SELECT * FROM continent LIMIT 1";
         
-        try 
-           
-         {
-             
-            //System.exit(0);
+        try {
             ResultSet result = Database.queryDB(query);
             place = Database.process(result);
             result.close();
-            
-        
         } catch(SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
-    
         assertEquals(place.get(0).get("name"),"Africa");
         assertEquals(place.get(0).get("index"),"400001");
     }
