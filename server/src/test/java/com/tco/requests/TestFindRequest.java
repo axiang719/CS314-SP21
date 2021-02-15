@@ -17,7 +17,6 @@ public class TestFindRequest {
     @BeforeEach
     public void createConfigurationForTestCases() {
         find = new FindRequest();
-        find.buildResponse();
     }
 
     @Test

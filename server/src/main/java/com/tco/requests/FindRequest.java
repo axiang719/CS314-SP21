@@ -19,7 +19,7 @@ public class FindRequest extends RequestHeader {
       populatePlaces();
   }
 
-  public void populatePlaces() {
+  private void populatePlaces() {
       Query query = new Query(match);
       query.setLimit(limit);
       String dataQuery = query.getDataQuery();
