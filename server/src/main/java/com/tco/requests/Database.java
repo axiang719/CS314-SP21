@@ -18,7 +18,7 @@ public class Database {
     private final static String DB_PASSWORD = "eiK5liet1uej";
     private static String DB_URL;
     
-    static String setUrl() {
+    private static String setUrl() {
         String useTunnel = System.getenv("CS314_USE_DATABASE_TUNNEL");
         if(useTunnel != null && useTunnel.equals("true")) {
             return "jdbc:mariadb://127.0.0.1:56013/cs314";
@@ -28,35 +28,34 @@ public class Database {
         }   
     }
 
-    static ResultSet queryDB(String query) {
+    static ArrayList<HashMap<String, String>> queryDB(String query) {
         DB_URL = setUrl();
-        ResultSet result = null;
         try (
             Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             Statement statement = connection.createStatement();
+            Result result = statement.executeQuery(query);
         ) {
-            result = statement.executeQuery(query);
+            return process(result);
         } catch(SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
-        return result;
     }
 
-    static ArrayList<HashMap<String, String>> process(ResultSet result) throws SQLException{
-        int index=0;
-        ResultSetMetaData meta =  result.getMetaData();
+    private static ArrayList<HashMap<String, String>> process(ResultSet result) throws SQLException{
+        ArrayList<HashMap<String,String>> places = new ArrayList<HashMap<String, String>>();
+
+        ResultSetMetaData meta = result.getMetaData();
         int columns = meta.getColumnCount();
-        ArrayList<HashMap<String,String>> tempPlaces = new ArrayList<HashMap<String, String>>();
+        static int index = 0;
         while(result.next()){
-            tempPlaces.add(new HashMap<String,String>());
+            places.add(new HashMap<String,String>());
             for(int i=1; i < columns; i++){
                 String key = meta.getColumnName(i);
                 String value = result.getString(i);
-                tempPlaces.get(index).put(key,value);
-                }
+                places.get(index).put(key,value);
+            }
             index++;
          }
-        return tempPlaces;
+        return places;
     }
-
 }
