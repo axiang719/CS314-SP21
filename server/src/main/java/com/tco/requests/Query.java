@@ -34,7 +34,7 @@ public class Query {
     }
 
     private void generateLimitSql() {
-        if (limit != null) {
+        if (limit != 0) {
             resultQuery += " Limit " + Integer.toString(limit);
         }
     }
