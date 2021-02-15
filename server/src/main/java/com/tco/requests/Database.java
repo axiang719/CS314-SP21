@@ -33,12 +33,14 @@ public class Database {
         try (
             Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             Statement statement = connection.createStatement();
-            Result result = statement.executeQuery(query);
+            ResultSet result = statement.executeQuery(query);
         ) {
             return process(result);
         } catch(SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
+
+        return null;
     }
 
     private static ArrayList<HashMap<String, String>> process(ResultSet result) throws SQLException{
@@ -46,7 +48,7 @@ public class Database {
 
         ResultSetMetaData meta = result.getMetaData();
         int columns = meta.getColumnCount();
-        static int index = 0;
+        int index = 0;
         while(result.next()){
             places.add(new HashMap<String,String>());
             for(int i=1; i < columns; i++){

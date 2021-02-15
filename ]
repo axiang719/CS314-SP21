@@ -1,6 +1,5 @@
 package com.tco.requests;
 
-import com.tco.requests.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ public class FindRequest extends RequestHeader {
   }
 
   public void populatePlaces() {
-      Query query = new Query(match);
+      Query query = new query(match);
       query.setLimit(limit);
       String dataQuery = query.getDataQuery();
       places = Database.queryDB(dataQuery);
