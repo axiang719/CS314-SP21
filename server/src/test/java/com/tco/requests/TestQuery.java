@@ -49,6 +49,6 @@ public class TestQuery {
     public void testCountQuery() {
         Query sql = new Query("");
         String resultQuery = sql.getCountQuery();
-        assertEquals("SELECT Count(*) AS row_count FROM world;", resultQuery);
+        assertEquals("SELECT Count(*) AS row_count FROM world ORDER BY RAND();", resultQuery);
     }
 }

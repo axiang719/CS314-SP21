@@ -21,7 +21,7 @@ public class TestConfigRequest {
     @DisplayName("Request type is \"config\"")
     public void testType() {
         String type = conf.getRequestType();
-        assertEquals("config", type);
+        assertEquals("config", type);     //what does this change?
     }
 
     @Test
