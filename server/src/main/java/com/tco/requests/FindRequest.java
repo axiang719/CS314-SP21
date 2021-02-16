@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FindRequest extends RequestHeader {
+  Private String requestType;
   private String match;
   private Integer limit;
   private Integer found;

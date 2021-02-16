@@ -16,6 +16,7 @@ public class ConfigRequest extends RequestHeader {
         serverName = "t13 The Epic Gamers";
         features = new ArrayList<String>();
         features.add("config");
+        features.add("find");
         log.trace("buildResponse -> {}", this);
     }
 
