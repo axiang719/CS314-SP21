@@ -24,7 +24,7 @@ public class TestQuery {
     public void testBasicQuery() {
         Query sql = new Query("");
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + ";", resultQuery);
+        assertEquals(testQuery + " ORDER BY RAND();", resultQuery);
     }
     
     @Test
@@ -41,7 +41,7 @@ public class TestQuery {
         Query sql = new Query("");
         sql.setLimit(5);
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " Limit 5;", resultQuery);
+        assertEquals(testQuery + " ORDER BY RAND() Limit 5;", resultQuery);
     }
 
     @Test
@@ -49,6 +49,6 @@ public class TestQuery {
     public void testCountQuery() {
         Query sql = new Query("");
         String resultQuery = sql.getCountQuery();
-        assertEquals("SELECT Count(*) AS row_count FROM world;", resultQuery);
+        assertEquals("SELECT Count(*) AS row_count FROM world ORDER BY RAND();", resultQuery);
     }
 }
