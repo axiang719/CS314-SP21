@@ -41,17 +41,17 @@ export default class Atlas extends Component {
                         </Col>
                     </Row>
                     <br></br>
-                    <Col xs={{ size: 3, offset: 9 }}>
-                        <Button color="primary" size="lg" onClick={this.clearList} xs={1}>
-                            Clear List
-                        </Button>
-                    </Col>
                     <Table hover bordered small>
                         <thead>
                             <tr>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
-                                <th></th>
+                                <th>
+                                    <Button color="primary" size="sm" onClick={this.clearList} 
+                                    xs={1}>
+                                        Clear
+                                    </Button>
+                                </th>
                             </tr>
                         </thead>
                         {this.renderList()}
