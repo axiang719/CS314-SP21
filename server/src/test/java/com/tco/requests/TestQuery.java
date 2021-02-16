@@ -41,6 +41,6 @@ public class TestQuery {
         Query sql = new Query("");
         sql.setLimit(5);
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " Limit 5;", resultQuery);
+        assertEquals(testQuery + "ORDER BY RAND() Limit 5;", resultQuery);
     }
 }
