@@ -43,4 +43,12 @@ public class TestQuery {
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + " ORDER BY RAND() Limit 5;", resultQuery);
     }
+
+    @Test
+    @DisplayName("Testing for query count")
+    public void testCountQuery() {
+        Query sql = new Query("");
+        String resultQuery = sql.getCountQuery();
+        assertEquals("SELECT Count(*) AS row_count FROM world;", resultQuery);
+    }
 }

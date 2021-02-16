@@ -16,11 +16,25 @@ public class Query {
         return resultQuery + ";";
     }
 
+    public String getCountQuery() {
+        generateStartCountSql();
+        generateMatchSql();
+        return resultQuery + ";";
+    }
+
     private void generateStartDataSql() {
         resultQuery = "SELECT world.name, world.latitude, world.longitude, " 
                     + "world.id, world.altitude, world.municipality, "
                     + "world.type, world.iso_region, world.iso_country, "
                     + "world.home_link FROM world";
+        
+        if (!match.equals("")) {
+            resultQuery += " WHERE";
+        }     
+    }
+
+    private void generateStartCountSql() {
+        resultQuery = "SELECT Count(*) AS row_count FROM world";
         
         if (!match.equals("")) {
             resultQuery += " WHERE";
@@ -37,7 +51,7 @@ public class Query {
     }
 
     private void generateLimitSql() {
-        if (limit != null) {
+        if (limit != null && limit != 0) {
             resultQuery += " Limit " + Integer.toString(limit);
         }
     }
