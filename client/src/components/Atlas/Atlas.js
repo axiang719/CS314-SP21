@@ -64,7 +64,6 @@ export default class Atlas extends Component {
 
     renderList() {
         return (
-            <table>
             <tbody>
                 {this.state.listOfClicks.map((place, index) => (
                     <tr>
@@ -78,7 +77,6 @@ export default class Atlas extends Component {
                     </tr>
                 ))}
             </tbody>
-            </table>
         );
     }
 
