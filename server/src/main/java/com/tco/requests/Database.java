@@ -51,7 +51,7 @@ public class Database {
         int index = 0;
         while(result.next()){
             places.add(new HashMap<String,String>());
-            for(int i=1; i < columns; i++){
+            for(int i=1; i <= columns; i++){
                 String key = meta.getColumnName(i);
                 String value = result.getString(i);
                 places.get(index).put(key,value);

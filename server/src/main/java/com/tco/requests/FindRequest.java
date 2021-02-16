@@ -17,6 +17,7 @@ public class FindRequest extends RequestHeader {
   public void buildResponse() {
       log.trace("buildResponse -> {}", this);
       populatePlaces();
+      populateFound();
   }
 
   private void populatePlaces() {
@@ -24,6 +25,13 @@ public class FindRequest extends RequestHeader {
       query.setLimit(limit);
       String dataQuery = query.getDataQuery();
       places = Database.queryDB(dataQuery);
+  }
+
+  private void populateFound() {
+      Query query = new Query(match);
+      String dataQuery = query.getCountQuery();
+      ArrayList<HashMap<String, String>> count = Database.queryDB(dataQuery);
+      found = Integer.parseInt(count.get(0).get("row_count"));
   }
   
   /* The following methods exist only for testing purposes and are not used
