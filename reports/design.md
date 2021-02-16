@@ -150,9 +150,9 @@ This sprint will focus on adding search functionality to the Atlas component. Th
 ![sprint 2 component hierarchy](images/Sp2ComponentDiagram.png)
 
 ### Classes
-For Sprint 2, no changes will be made to the class structure. 
+Sprint 2 will add both the Database class and the Query class. Query generates the SQL string needed to search the database for the information corosponding to a find request. Database opens a connection to the database and sends a query with a SQL string, returning the information it receives back.
 
-![class diagram](images/BaseClassDiagram.png)
+![class diagram](images/Sprint 2 Class Diagram.png)
 
 # Sprint 3
 # Sprint 4 
