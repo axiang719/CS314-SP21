@@ -123,9 +123,11 @@ export default class Atlas extends Component {
     handleGeolocation(position) {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
         this.setState({mapCenter: latlng, markerPosition: latlng});
-        
-        // use LOG.info() rather than console.log() in your code
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
+    }
+
+    handleGeolocationError() {
+        console.log("Error retrieving the user's position.");
     }
 
     setMarker(mapClickInfo) {
