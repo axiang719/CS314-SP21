@@ -112,6 +112,12 @@ export default class Atlas extends Component {
         );
     }
 
+    requestUserLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
+        }
+      }
+
     setMarker(mapClickInfo) {
         this.state.listOfClicks.unshift(mapClickInfo.latlng);
         this.setState({ markerPosition: mapClickInfo.latlng });
