@@ -31,6 +31,9 @@ public class Query {
         if (!match.equals("")) {
             resultQuery += " world.name LIKE '%" + match + "%'";
         }
+        else {
+            resultQuery += " ORDER BY RAND()";
+        }
     }
 
     private void generateLimitSql() {
