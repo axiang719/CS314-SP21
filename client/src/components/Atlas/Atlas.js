@@ -35,7 +35,7 @@ export default class Atlas extends Component {
     }
 
     componentDidMount(previousProps, previousState, snapShot){
-       
+       this.requestUserLocation();
     }
 
     render() {
