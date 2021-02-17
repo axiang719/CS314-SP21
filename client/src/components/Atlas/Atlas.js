@@ -28,6 +28,7 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
+            mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: []
         };
     
@@ -106,7 +107,7 @@ export default class Atlas extends Component {
                 minZoom={MAP_MIN_ZOOM}
                 maxZoom={MAP_MAX_ZOOM}
                 maxBounds={MAP_BOUNDS}
-                center={MAP_CENTER_DEFAULT}
+                center={this.state.mapCenter}
                 onClick={this.setMarker}
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
