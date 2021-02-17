@@ -133,6 +133,7 @@ export default class Atlas extends Component {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
         this.setState({mapCenter: latlng, markerPosition: latlng});
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
+        this.state.listOfClicks.unshift(latlng);
     }
 
     handleGeolocationError() {
