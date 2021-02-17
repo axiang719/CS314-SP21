@@ -38,6 +38,7 @@ export default class Atlas extends Component {
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
+                            {this.renderFindMeButton()}
                         </Col>
                     </Row>
                     <br></br>
@@ -111,6 +112,12 @@ export default class Atlas extends Component {
             </Map>
         );
     }
+
+    renderFindMeButton() {
+        return (
+          <Button onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
+        );
+      }
 
     requestUserLocation() {
         if (navigator.geolocation) {
