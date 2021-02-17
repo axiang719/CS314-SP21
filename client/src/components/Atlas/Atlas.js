@@ -23,6 +23,8 @@ export default class Atlas extends Component {
         
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
+        this.requestUserLocation = this.requestUserLocation.bind(this);
+        this.handleGeolocation = this.handleGeolocation.bind(this);
         
         this.state = {
             markerPosition: null,
@@ -109,6 +111,7 @@ export default class Atlas extends Component {
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+                {this.requestUserLocation}
             </Map>
         );
     }
