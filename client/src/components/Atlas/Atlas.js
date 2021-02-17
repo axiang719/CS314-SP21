@@ -23,9 +23,12 @@ export default class Atlas extends Component {
         
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
+        this.requestUserLocation = this.requestUserLocation.bind(this);
+        this.handleGeolocation = this.handleGeolocation.bind(this);
         
         this.state = {
             markerPosition: null,
+            mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: []
         };
     
@@ -38,6 +41,7 @@ export default class Atlas extends Component {
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
+                            {this.renderFindMeButton()}
                         </Col>
                     </Row>
                     <br></br>
@@ -103,14 +107,21 @@ export default class Atlas extends Component {
                 minZoom={MAP_MIN_ZOOM}
                 maxZoom={MAP_MAX_ZOOM}
                 maxBounds={MAP_BOUNDS}
-                center={MAP_CENTER_DEFAULT}
+                center={this.state.mapCenter}
                 onClick={this.setMarker}
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+                {this.requestUserLocation}
             </Map>
         );
     }
+
+    renderFindMeButton() {
+        return (
+          <Button onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
+        );
+      }
 
     requestUserLocation() {
         if (navigator.geolocation) {
@@ -120,6 +131,7 @@ export default class Atlas extends Component {
 
     handleGeolocation(position) {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+        this.state.listOfClicks.unshift(latlng);
         this.setState({mapCenter: latlng, markerPosition: latlng});
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
     }
