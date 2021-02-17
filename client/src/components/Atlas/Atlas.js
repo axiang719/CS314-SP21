@@ -34,6 +34,10 @@ export default class Atlas extends Component {
     
     }
 
+    componentDidMount(previousProps, previousState, snapShot){
+       
+    }
+
     render() {
         return (
             <div>
