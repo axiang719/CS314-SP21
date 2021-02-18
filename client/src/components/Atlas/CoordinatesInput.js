@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input} from 'reactstrap';
+import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input,Form,FormGroup} from 'reactstrap';
 import Coordinates from "coordinate-parser"; 
 
 export default class CoordinatesInput extends Component {
@@ -25,16 +25,19 @@ export default class CoordinatesInput extends Component {
             </Row>
         );
     }
-
+   //pull from code pen
     renderCoordinatesInput() {
         const coordinates = this.state.coordinates;
+        const validCoordinates = coordinates.latLng != null;
+        const inputBoxEmpty = !coordinates.inputText;
     
         return (
             <InputGroup className="mt-4">
                 <Input
-                    placeholder="Latitude, Longitude"
-                    value={coordinates.inputText}
-                    onChange={this.processCoordinatesInput}
+                   onChange={this.processCoordinatesInput}
+                   value={coordinates.inputText}
+                   valid={validCoordinates}
+                   invalid={!inputBoxEmpty && !validCoordinates}
                 />
                 <InputGroupAddon addonType="append">
                     <Button color="primary">Search</Button>
