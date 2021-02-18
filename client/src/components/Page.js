@@ -62,7 +62,6 @@ export default class Page extends Component {
 		return (
 			<Collapse isOpen={!this.state.showAbout}>
 				<Atlas showMessage={this.props.showMessage}/>
-               
 			</Collapse>
 		);
 	}
