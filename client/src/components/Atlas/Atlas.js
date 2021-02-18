@@ -189,6 +189,7 @@ export default class Atlas extends Component {
     }
    
     moveMarkerToUserInput() {
+        this.state.listOfClicks.unshift(CoordinatesInput.state.latLng);
         this.setState({markerPosition: CoordinatesInput.state.latLng});
         this.setState({mapCenter: CoordinatesInput.state.latLng});
     }
