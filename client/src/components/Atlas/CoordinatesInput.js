@@ -28,17 +28,13 @@ export default class CoordinatesInput extends Component {
 
     renderCoordinatesInput() {
         const coordinates = this.state.coordinates;
-        const validCoordinates = coordinates.latLng != null;
-        const inputBoxEmpty = !coordinates.inputText;
     
         return (
             <InputGroup className="mt-4">
                 <Input
                     placeholder="Latitude, Longitude"
-                    onChange={this.processCoordinatesInput}
                     value={coordinates.inputText}
-                    valid={validCoordinates}
-                    invalid={!inputBoxEmpty && !validCoordinates}
+                    onChange={this.processCoordinatesInput}
                 />
                 <InputGroupAddon addonType="append">
                     <Button color="primary">Search</Button>
@@ -49,8 +45,8 @@ export default class CoordinatesInput extends Component {
 
     processCoordinatesInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
-        
         const coordinates = this.state.coordinates;
+
         coordinates.inputText = inputText;
         coordinates.latLng = this.getCoordinatesOrNull(inputText);
     
