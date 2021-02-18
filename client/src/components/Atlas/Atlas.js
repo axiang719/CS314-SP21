@@ -187,5 +187,10 @@ export default class Atlas extends Component {
             this.processServerConfigSuccess(FindResponse);
         }
     }
+   
+    moveMarkerToUserInput() {
+        this.setState({markerPosition: CoordinatesInput.state.latLng});
+        this.setState({mapCenter: CoordinatesInput.state.latLng});
+    }
 }
 
