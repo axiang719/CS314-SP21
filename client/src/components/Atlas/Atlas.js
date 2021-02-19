@@ -54,25 +54,27 @@ export default class Atlas extends Component {
                     </Row>
                     {this.renderCoordinatesInput()}
                     <br></br>
-                    <Table hover bordered small>
-                        <thead>
-                            <tr>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                                <th>
-                                    <Button color="primary" size="sm" onClick={this.clearList} 
-                                    xs={1}>
-                                        Clear
-                                    </Button>
-                                </th>
-                            </tr>
-                        </thead>
-                        {this.renderList()}
-                    </Table>
+                    <Row>
+                        <Col sm={12} md={{ size: 10, offset: 1 }}>
+                            <Table hover bordered small>
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>
+                                            <Button color="primary" size="sm" onClick={this.clearList} 
+                                            xs={1}>
+                                                Clear
+                                            </Button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                {this.renderList()}
+                            </Table>
+                        </Col>
+                    </Row>
                 </Container>
-                
             </div>
-
         );
     }
 
@@ -82,7 +84,7 @@ export default class Atlas extends Component {
 
     renderList() {
         return (
-            <tbody>
+            <tbody class="text-center">
                 {this.state.listOfClicks.map((place, index) => (
                     <tr>
                         <td>{place.lat.toFixed(6)}</td>
