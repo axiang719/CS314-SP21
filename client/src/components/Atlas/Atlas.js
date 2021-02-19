@@ -28,6 +28,7 @@ export default class Atlas extends Component {
         this.clearList = this.clearList.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
+        this.moveMarkerToUserInput = this.moveMarkerToUserInput.bind(this);
         
         this.state = {
             markerPosition: null,
@@ -189,10 +190,10 @@ export default class Atlas extends Component {
         }
     }
    
-    moveMarkerToUserInput() {
-        //check if there is any input
-        //this.setState({markerPosition: [userInput]});
-        //this.setState({mapCenter: [userInput]});
-        console.log(`This method actually got called.`);
+    moveMarkerToUserInput(latLng) {
+        if (latLng) {
+            this.setState({markerPosition: latLng});
+            this.setState({mapCenter: latLng});
+        }
     }
 }
