@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input,Form,FormGroup} from 'reactstrap';
+import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input,Form,FormGroup, FormFeedback} from 'reactstrap';
 import Coordinates from "coordinate-parser"; 
 
 export default class CoordinatesInput extends Component {
@@ -32,17 +32,24 @@ export default class CoordinatesInput extends Component {
         const inputBoxEmpty = !coordinates.inputText;
     
         return (
-            <InputGroup className="mt-4">
-                <Input
-                   onChange={this.processCoordinatesInput}
-                   value={coordinates.inputText}
-                   valid={validCoordinates}
-                   invalid={!inputBoxEmpty && !validCoordinates}
-                />
-                <InputGroupAddon addonType="append">
-                    <Button color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
-                </InputGroupAddon>
-            </InputGroup>
+            <Form>
+                <FormGroup>
+                    <InputGroup className="mt-4">
+                         <Input
+                            placeholder = "Latitude, Longitude"
+                            onChange={this.processCoordinatesInput}
+                            value={coordinates.inputText}
+                            valid={validCoordinates}
+                            invalid={!inputBoxEmpty && !validCoordinates}
+                         />
+                            
+                            <InputGroupAddon addonType="append">
+                                <Button color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
+                            </InputGroupAddon>
+                            <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
+                    </InputGroup>
+                </FormGroup>
+            </Form>
         );
     }
 
