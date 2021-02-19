@@ -24,6 +24,7 @@ export default class Atlas extends Component {
 
         super(props);
         
+        this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
@@ -77,7 +78,7 @@ export default class Atlas extends Component {
     }
 
     renderCoordinatesInput() {
-        return <CoordinatesInput marker={this.moveMarkerToUserInput}/>
+        return <CoordinatesInput setMarker={this.setMarker}/>;
     }
 
     renderList() {
@@ -122,7 +123,7 @@ export default class Atlas extends Component {
                 maxZoom={MAP_MAX_ZOOM}
                 maxBounds={MAP_BOUNDS}
                 center={this.state.mapCenter}
-                onClick={this.setMarker}
+                onClick={this.handleMapClick}
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
@@ -154,10 +155,16 @@ export default class Atlas extends Component {
         console.log("Error retrieving the user's position.");
     }
 
-    setMarker(mapClickInfo) {
-        this.state.listOfClicks.unshift(mapClickInfo.latlng);
-        this.setState({markerPosition: mapClickInfo.latlng });
-        this.setState({mapCenter: mapClickInfo.latlng});
+    handleMapClick(mapClickInfo) {
+        this.setMarker(mapClickInfo.latlng);
+    }
+
+    setMarker(latlng) {
+        if (latlng != null) {
+            this.state.listOfClicks.unshift(latlng);
+            this.setState({markerPosition: latlng });
+            this.setState({mapCenter: latlng});
+        }
     }
 
     getMarker() {
@@ -187,13 +194,6 @@ export default class Atlas extends Component {
             this.processServerConfigError("Configuration Response Not Valid. Check The Server.");
         } else {
             this.processServerConfigSuccess(FindResponse);
-        }
-    }
-   
-    moveMarkerToUserInput(latLng) {
-        if (latLng) {
-            this.setState({markerPosition: latLng});
-            this.setState({mapCenter: latLng});
         }
     }
 }
