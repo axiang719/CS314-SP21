@@ -8,7 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { latLng } from 'leaflet';
 
-import CoordinatesInput from './CoordinatesInput';
+import CoordinatesInput from "./CoordinatesInput"
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -70,6 +70,7 @@ export default class Atlas extends Component {
                         {this.renderList()}
                     </Table>
                 </Container>
+                
             </div>
 
         );
@@ -195,4 +196,3 @@ export default class Atlas extends Component {
         }
     }
 }
-

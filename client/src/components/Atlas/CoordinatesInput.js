@@ -7,7 +7,7 @@ export default class CoordinatesInput extends Component {
         super(props);
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
-    
+
         this.state = {
             coordinates: {
                 inputText: "",
@@ -30,7 +30,7 @@ export default class CoordinatesInput extends Component {
         const coordinates = this.state.coordinates;
         const validCoordinates = coordinates.latLng != null;
         const inputBoxEmpty = !coordinates.inputText;
-    
+
         return (
             <InputGroup className="mt-4">
                 <Input
@@ -45,7 +45,7 @@ export default class CoordinatesInput extends Component {
             </InputGroup>
         );
     }
-
+        //problem: how to give movemarker method a parameter when passing this way?
     processCoordinatesInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
         const coordinates = this.state.coordinates;
