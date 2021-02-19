@@ -76,7 +76,7 @@ export default class Atlas extends Component {
     }
 
     renderCoordinatesInput() {
-        return <CoordinatesInput/>;
+        return <CoordinatesInput marker={this.moveMarkerToUserInput}/>
     }
 
     renderList() {
@@ -190,10 +190,9 @@ export default class Atlas extends Component {
     }
    
     moveMarkerToUserInput() {
-        if (CoordinatesInput.state.coordinates.latLng) {
-            this.setState({markerPosition: CoordinatesInput.state.coordinates.latLng});
-            this.setState({mapCenter: CoordinatesInput.state.coordinates.latLng});
-            console.log(`user entered ${JSON.stringify(CoordinatesInput.state.coordinates.latLng)}.`);
-        }
+        //check if there is any input
+        //this.setState({markerPosition: [userInput]});
+        //this.setState({mapCenter: [userInput]});
+        console.log(`This method actually got called.`);
     }
 }

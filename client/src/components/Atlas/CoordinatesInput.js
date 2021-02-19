@@ -7,7 +7,7 @@ export default class CoordinatesInput extends Component {
         super(props);
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
-    
+
         this.state = {
             coordinates: {
                 inputText: "",
@@ -40,15 +40,12 @@ export default class CoordinatesInput extends Component {
                    invalid={!inputBoxEmpty && !validCoordinates}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button onClick={() => {//super.setState(markerPosition, this.state.coordinates.latLng);
-                                            //super.setState(mapCenter, this.state.coordinates.latLng);
-                                            console.log(`${JSON.stringify(this.state.coordinates.latLng)}`)} } 
-                                            color="primary">Search</Button>
+                    <Button onClick={this.props.marker} color="primary">Search</Button>
                 </InputGroupAddon>
             </InputGroup>
         );
     }
-
+        //problem: how to give movemarker method a parameter when passing this way?
     processCoordinatesInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
         const coordinates = this.state.coordinates;
