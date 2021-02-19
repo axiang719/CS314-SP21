@@ -30,7 +30,7 @@ export default class CoordinatesInput extends Component {
         const coordinates = this.state.coordinates;
         const validCoordinates = coordinates.latLng != null;
         const inputBoxEmpty = !coordinates.inputText;
-    
+
         return (
             <InputGroup className="mt-4">
                 <Input
@@ -40,7 +40,10 @@ export default class CoordinatesInput extends Component {
                    invalid={!inputBoxEmpty && !validCoordinates}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button color="primary">Search</Button>
+                    <Button onClick={() => {//super.setState(markerPosition, this.state.coordinates.latLng);
+                                            //super.setState(mapCenter, this.state.coordinates.latLng);
+                                            console.log(`${JSON.stringify(this.state.coordinates.latLng)}`)} } 
+                                            color="primary">Search</Button>
                 </InputGroupAddon>
             </InputGroup>
         );

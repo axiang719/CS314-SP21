@@ -8,7 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { latLng } from 'leaflet';
 
-import CoordinatesInput from './CoordinatesInput';
+import CoordinatesInput from "./CoordinatesInput"
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -69,13 +69,14 @@ export default class Atlas extends Component {
                         {this.renderList()}
                     </Table>
                 </Container>
+                
             </div>
 
         );
     }
 
     renderCoordinatesInput() {
-        return <CoordinatesInput />;
+        return <CoordinatesInput/>;
     }
 
     renderList() {
@@ -189,9 +190,10 @@ export default class Atlas extends Component {
     }
    
     moveMarkerToUserInput() {
-        this.state.listOfClicks.unshift(CoordinatesInput.state.latLng);
-        this.setState({markerPosition: CoordinatesInput.state.latLng});
-        this.setState({mapCenter: CoordinatesInput.state.latLng});
+        if (CoordinatesInput.state.coordinates.latLng) {
+            this.setState({markerPosition: CoordinatesInput.state.coordinates.latLng});
+            this.setState({mapCenter: CoordinatesInput.state.coordinates.latLng});
+            console.log(`user entered ${JSON.stringify(CoordinatesInput.state.coordinates.latLng)}.`);
+        }
     }
 }
-
