@@ -40,7 +40,7 @@ export default class CoordinatesInput extends Component {
                    invalid={!inputBoxEmpty && !validCoordinates}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button color="primary">Search</Button>
+                    <Button color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
                 </InputGroupAddon>
             </InputGroup>
         );
