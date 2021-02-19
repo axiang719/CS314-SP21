@@ -29,7 +29,6 @@ export default class Atlas extends Component {
         this.clearList = this.clearList.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
-        this.moveMarkerToUserInput = this.moveMarkerToUserInput.bind(this);
         
         this.state = {
             markerPosition: null,
