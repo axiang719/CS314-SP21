@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input,Form,FormGroup, FormFeedback} from 'reactstrap';
+import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
 import Coordinates from "coordinate-parser"; 
 
 export default class CoordinatesInput extends Component {
@@ -7,8 +7,13 @@ export default class CoordinatesInput extends Component {
         super(props);
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.setNameSearch = this.setNameSearch.bind(this);
+        this.setCoordinateSearch = this.setCoordinateSearch.bind(this);
 
         this.state = {
+            searchType: "Coordinates",
+            dropdownOpen: false,
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -18,40 +23,93 @@ export default class CoordinatesInput extends Component {
 
     render() {
         return (
-            <Row>
+            <Row className="mt-4">
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
-                    {this.renderCoordinatesInput()}
+                    <Form onSubmit={e => { e.preventDefault(); }}>
+                        <FormGroup>
+                            {this.chooseInput()}
+                        </FormGroup>
+                    </Form>
                 </Col>
             </Row>
         );
     }
-   //pull from code pen
+
+    chooseInput() {
+        if (this.state.searchType == "Keyword") {
+            return this.renderNameInput();
+        }
+        else {
+            return this.renderCoordinatesInput();
+        }
+    }
+
+    renderNameInput() {
+        return (
+            <InputGroup >
+                <Input
+                    placeholder = "Keyword"
+                    />
+                    {this.renderDropdown()}
+                <Button className="ml-1" color="primary">Search</Button>
+            </InputGroup>
+        );
+    }
+    
+    
+    //pull from code pen
     renderCoordinatesInput() {
         const coordinates = this.state.coordinates;
         const validCoordinates = coordinates.latLng != null;
         const inputBoxEmpty = !coordinates.inputText;
 
         return (
-            <Form>
-                <FormGroup>
-                    <InputGroup className="mt-4">
-                         <Input
-                            placeholder = "Latitude, Longitude"
-                            onChange={this.processCoordinatesInput}
-                            value={coordinates.inputText}
-                            valid={validCoordinates}
-                            invalid={!inputBoxEmpty && !validCoordinates}
-                         />
-                            
-                            <InputGroupAddon addonType="append">
-                                <Button color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
-                            </InputGroupAddon>
-                            <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
-                    </InputGroup>
-                </FormGroup>
-            </Form>
+            <InputGroup>
+                <Input
+                    placeholder = "Latitude, Longitude"
+                    onChange={this.processCoordinatesInput}
+                    value={coordinates.inputText}
+                    valid={validCoordinates}
+                    invalid={!inputBoxEmpty && !validCoordinates}
+                    />
+                    {this.renderDropdown()}
+                <Button className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
+                <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
+            </InputGroup>
         );
     }
+
+    renderDropdown() {
+        return (
+            <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+                <DropdownToggle color="primary" caret>
+                    Type
+                </DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem onClick={this.setNameSearch}>Keyword</DropdownItem>
+                    <DropdownItem onClick={this.setCoordinateSearch}>Coordinates</DropdownItem>
+                </DropdownMenu>
+            </InputGroupButtonDropdown>
+        )
+    }
+
+    toggleDropDown () {
+        const isOpen = this.state.dropdownOpen;
+        this.setState({ dropdownOpen: !isOpen });
+    }
+
+    setNameSearch() {
+        this.setState({ 
+            searchType: "Keyword"
+        })
+    }
+
+    setCoordinateSearch() {
+        this.setState({ 
+            searchType: "Coordinates"
+        })
+    }
+
         //problem: how to give movemarker method a parameter when passing this way?
     processCoordinatesInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
