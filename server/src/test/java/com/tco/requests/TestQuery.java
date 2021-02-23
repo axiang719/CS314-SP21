@@ -1,5 +1,7 @@
 package com.tco.requests;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -62,4 +64,17 @@ public class TestQuery {
                     + "INNER JOIN world ON region.id = world.iso_region "
                     + "ORDER BY RAND();", resultQuery);
     }
+
+    @Test
+    @DisplayName("Testing for type in query")
+    public void testTypeQuery() {
+        Query sql = new Query("");
+        ArrayList<String> check = new ArrayList<String>();
+        check.add("airport");
+        sql.setType(check);
+        String resultQuery = sql.getDataQuery();
+        
+        assertEquals(testQuery + " ORDER BY RAND() WHERE world.type LIKE 'airport';", resultQuery );
+    }
+    
 }

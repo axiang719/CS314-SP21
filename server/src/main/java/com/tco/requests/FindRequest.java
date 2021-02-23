@@ -11,6 +11,7 @@ public class FindRequest extends RequestHeader {
   private Integer limit;
   private Integer found;
   private ArrayList<HashMap<String, String>> places;
+  private ArrayList<String> type;
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
 
   @Override

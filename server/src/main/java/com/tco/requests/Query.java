@@ -1,17 +1,21 @@
 package com.tco.requests;
+import java.util.ArrayList;
 
 public class Query {
     private String resultQuery;
     private String match;
+    private ArrayList<String> type;
     private Integer limit;
 
     public Query(String match) {
         this.match = match;
+
     }
 
     public String getDataQuery() {
         generateStartDataSql();
         generateWhereSql();
+        generateTypeSQL();
         generateLimitSql();
         return resultQuery + ";";
     }
@@ -30,6 +34,7 @@ public class Query {
         generateFromSql();
     }
 
+  
     private void generateStartCountSql() {
         resultQuery = "SELECT Count(*) AS row_count ";
         generateFromSql();
@@ -55,6 +60,31 @@ public class Query {
         }
     }
 
+    private void generateTypeSQL(){
+        if(type != null){
+            if(match.equals("")){
+                resultQuery += " WHERE";
+            }
+            else{
+                resultQuery += " OR";
+            }
+            for(int i = 0; i < type.size(); i++){
+                if(type.get(i) == "other"){
+                    resultQuery += " world.type NOT LIKE 'airport' OR 'helipad' OR 'balloonport'";
+                }
+                resultQuery += " world.type LIKE '" + type.get(i) + "'";
+                if(i+1 < type.size()){
+                  resultQuery += "OR";
+                }
+                
+            }
+        }
+        else{
+            type=null;
+        }
+    }
+
+
     private String generateKey() {
         String key = "";
         if (!match.equals("")) {
@@ -72,4 +102,10 @@ public class Query {
     public void setLimit(Integer limit) {
         this.limit = limit;
     }
+
+    public void setType(ArrayList<String> type){
+           this.type = type;
+    }
+
+ 
 }
