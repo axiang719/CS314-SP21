@@ -14,9 +14,13 @@ public class TestQuery {
     @BeforeEach
     public void createConfigurationForTestCases() {
         testQuery = "SELECT world.name, world.latitude, world.longitude, "
-        + "world.id, world.altitude, world.municipality, "
-        + "world.type, world.iso_region, world.iso_country, world.home_link "
-        + "FROM world";
+                + "world.altitude, world.municipality, world.type, "
+                + "region.name AS 'region', country.name AS 'country', "
+                + "continent.name AS 'continent', world.home_link AS 'url' "
+                + "FROM continent "
+                + "INNER JOIN country ON continent.id = country.continent "
+                + "INNER JOIN region ON country.id = region.iso_country "
+                + "INNER JOIN world ON region.id = world.iso_region";
     }
 
     @Test
@@ -32,7 +36,10 @@ public class TestQuery {
     public void testMatchQuery() {
         Query sql = new Query("Epps Airpark");
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " WHERE world.name LIKE '%Epps Airpark%';", resultQuery);
+        assertEquals(testQuery + " WHERE country.name LIKE '%Epps Airpark%' "
+                    + "OR region.name LIKE '%Epps Airpark%' "
+                    + "OR world.name LIKE '%Epps Airpark%' "
+                    + "OR world.municipality LIKE '%Epps Airpark%';", resultQuery);
     }
 
     @Test
@@ -49,6 +56,10 @@ public class TestQuery {
     public void testCountQuery() {
         Query sql = new Query("");
         String resultQuery = sql.getCountQuery();
-        assertEquals("SELECT Count(*) AS row_count FROM world ORDER BY RAND();", resultQuery);
+        assertEquals("SELECT Count(*) AS row_count FROM continent "
+                    + "INNER JOIN country ON continent.id = country.continent "
+                    + "INNER JOIN region ON country.id = region.iso_country "
+                    + "INNER JOIN world ON region.id = world.iso_region "
+                    + "ORDER BY RAND();", resultQuery);
     }
 }
