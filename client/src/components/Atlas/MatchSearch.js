@@ -1,20 +1,63 @@
 import React, { Component } from 'react';
+import { Button, InputGroup, Input } from 'reactstrap';
 
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
-import { isJsonResponseValid, sendServerRequest } from "../../utils/restfulAPI";
+import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
 
 export default class MatchSearch extends Component {
     constructor(props) {
 		super(props);
 
+		this.processKeywordInput = this.processKeywordInput.bind(this);
+		this.processKeywordButton = this.processKeywordButton.bind(this);
         this.sendFindRequest = this.sendFindRequest.bind(this);
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 
         this.state = {
+			keyword: "",
+			findRequest: {
+                requestType: "find",
+                match: "",
+                limit: 100
+            },
             listOfMatches: []
         };
+    }
+
+	render() {
+		const keyword = this.state.keyword;
+		const validMatch = this.state.findRequest.match != null;
+
+		return (
+			<InputGroup>
+                <Input
+                    placeholder = "Keyword"
+                    onChange={this.processKeywordInput}
+                    value = {keyword}
+					valid = {validMatch}
+					invalid = {!validMatch}
+                    />
+                    {this.props.renderDropdown()}
+                <Button className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+            </InputGroup>
+		);
+	}
+
+	processKeywordInput(onChangeEvent) {
+        const inputText = onChangeEvent.target.value;
+		const findRequest = this.state.findRequest;
+		findRequest.match = inputText;
+        
+        this.setState({ keyword: inputText, findRequest: findRequest});
+    }
+
+	processKeywordButton() {
+        const findRequest = this.state.findRequest;
+        if (findRequest.match != null) {
+            this.sendFindRequest(findRequest);
+        } 
     }
   	
 	sendFindRequest(request) {
@@ -37,7 +80,7 @@ export default class MatchSearch extends Component {
 	}
 
     processServerFindSuccess(findResponse) {
-		LOG.info("Receiving find response from:", this.props.serverSettings.serverPort);
-		this.setState({listOfMatches: findResponse});
+		LOG.info("Receiving find response from:", getOriginalServerPort());
+		this.props.setListOfMatches(findResponse);
 	}
 }
