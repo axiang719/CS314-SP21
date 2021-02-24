@@ -1,17 +1,21 @@
 package com.tco.requests;
+import java.util.ArrayList;
 
 public class Query {
     private String resultQuery;
     private String match;
+    private ArrayList<String> type;
     private Integer limit;
 
     public Query(String match) {
         this.match = match;
+
     }
 
     public String getDataQuery() {
         generateStartDataSql();
         generateWhereSql();
+        generateTypeSQL();
         generateLimitSql();
         return resultQuery + ";";
     }
@@ -30,6 +34,7 @@ public class Query {
         generateFromSql();
     }
 
+  
     private void generateStartCountSql() {
         resultQuery = "SELECT Count(*) AS row_count ";
         generateFromSql();
@@ -50,10 +55,35 @@ public class Query {
             + " OR world.name LIKE " + key
             + " OR world.municipality LIKE " + key;
         }
-        else {
-            resultQuery += " ORDER BY RAND()";
-        }
+        
     }
+
+    private void generateTypeSQL(){
+        if(type != null && !type.isEmpty()){
+            if(match.equals("")){
+                resultQuery += " WHERE";
+            }
+            else{
+                resultQuery += " AND";
+            }
+            for(int i = 0; i < type.size(); i++){
+                if(type.get(i).equals("other")){
+                    resultQuery += " world.type NOT LIKE '%airport%' AND"
+                                +  " world.type NOT LIKE '%heliport%' AND"
+                                +  " world.type NOT LIKE '%balloonport%' ";
+                            }
+                else{
+                 resultQuery += " world.type LIKE '%" + type.get(i) + "%'";
+                }
+                
+                if(i+1 < type.size()){
+                  resultQuery += "OR";
+                }
+            }
+        }
+       
+    }
+
 
     private String generateKey() {
         String key = "";
@@ -64,12 +94,26 @@ public class Query {
     }
 
     private void generateLimitSql() {
+            if(match.equals("")){
+            resultQuery += " ORDER BY RAND()";
+        }
+    
+        
+     
+        
         if (limit != null && limit != 0) {
             resultQuery += " Limit " + Integer.toString(limit);
         }
     }
+    
 
     public void setLimit(Integer limit) {
         this.limit = limit;
     }
+
+    public void setType(ArrayList<String> type){
+           this.type = type;
+    }
+
+ 
 }
