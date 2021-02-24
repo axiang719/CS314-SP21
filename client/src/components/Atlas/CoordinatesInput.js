@@ -51,7 +51,8 @@ export default class CoordinatesInput extends Component {
         return (
             <MatchSearch 
             renderDropdown={this.renderDropdown}
-            setListOfMatches={this.setListOfMatches}/>
+            setListOfMatches={this.setListOfMatches}
+            showMessage={this.props.showMessage}/>
         );
     }
     

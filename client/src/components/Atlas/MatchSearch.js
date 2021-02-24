@@ -66,14 +66,14 @@ export default class MatchSearch extends Component {
 				if (findResponse) {
 					this.processFindResponse(findResponse);
 				} else {
-					this.props.showMessage("The Request To The Server Failed. Please Try Again Later.", "error");
+					this.props.showMessage("The Request To The Server Failed.", "error");
 				}
 		    });
 	}
 
 	processFindResponse(findResponse) {
 		if (!isJsonResponseValid(findResponse, findSchema)) {
-			this.processServerConfigError("Find Response Not Valid. Check The Server.");
+			this.processFindRequestError("Find Response Not Valid. Check The Server.");
 		} else {
 			this.processServerFindSuccess(findResponse);
 		}
@@ -83,4 +83,10 @@ export default class MatchSearch extends Component {
 		LOG.info("Receiving find response from:", getOriginalServerPort());
 		this.props.setListOfMatches(findResponse);
 	}
+
+	processFindRequestError(message) {
+		LOG.error(message);
+		this.props.showMessage(message, "error");
+	}
+
 }
