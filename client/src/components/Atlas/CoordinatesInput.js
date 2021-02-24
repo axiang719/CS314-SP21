@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
-import Coordinates from "coordinate-parser"; 
+import Coordinates from "coordinate-parser";
+
+import {LOG} from "../../utils/constants";
+import * as findSchema from "../../../schemas/FindResponse";
+import { isJsonResponseValid, sendServerRequest } from "../../utils/restfulAPI";
 
 export default class CoordinatesInput extends Component {
     constructor(props) {
         super(props);
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
+        this.processKeywordInput = this.processKeywordInput.bind(this);
+        this.processKeywordButton = this.processKeywordButton.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.setNameSearch = this.setNameSearch.bind(this);
-        this.setCoordinateSearch = this.setCoordinateSearch.bind(this);
+        this.sendFindRequest = this.sendFindRequest.bind(this);
+        this.processFindResponse = this.processFindResponse.bind(this);
+        this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
+            keyword: "",
+            findRequest: {
+                requestType: "find",
+                match: "",
+                limit: 100
+            },
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -46,6 +59,7 @@ export default class CoordinatesInput extends Component {
 
     renderNameInput() {
         const keyword = this.state.keyword;
+        const findRequest = this.state.findRequest;
 
         return (
             <InputGroup>
@@ -55,7 +69,7 @@ export default class CoordinatesInput extends Component {
                     value = {keyword}
                     />
                     {this.renderDropdown()}
-                <Button className="ml-1" color="primary">Search</Button>
+                <Button className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
             </InputGroup>
         );
     }
@@ -90,8 +104,8 @@ export default class CoordinatesInput extends Component {
                     Type
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem onClick={this.setNameSearch}>Keyword</DropdownItem>
-                    <DropdownItem onClick={this.setCoordinateSearch}>Coordinates</DropdownItem>
+                    <DropdownItem onClick={() => this.setState({ searchType: "Keyword" })}>Keyword</DropdownItem>
+                    <DropdownItem onClick={() => this.setState({ searchType: "Coordinates" })}>Coordinates</DropdownItem>
                 </DropdownMenu>
             </InputGroupButtonDropdown>
         )
@@ -102,16 +116,17 @@ export default class CoordinatesInput extends Component {
         this.setState({ dropdownOpen: !isOpen });
     }
 
-    setNameSearch() {
-        this.setState({ 
-            searchType: "Keyword"
-        })
+    processKeywordInput(onChangeEvent) {
+        const inputText = onChangeEvent.target.value;
+        
+        this.setState({ keyword: inputText });
     }
 
-    setCoordinateSearch() {
-        this.setState({ 
-            searchType: "Coordinates"
-        })
+    processKeywordButton() {
+        const findRequest = this.state.findRequest;
+        if (findRequest.match != null) {
+            this.sendFindRequest(findRequest);
+        } 
     }
 
         //problem: how to give movemarker method a parameter when passing this way?
@@ -136,4 +151,28 @@ export default class CoordinatesInput extends Component {
             return null;
         }
     }
+
+    sendFindRequest(request) {
+		sendServerRequest(request)
+			.then(findResponse => {
+				if (findResponse) {
+					this.processFindResponse(findResponse);
+				} else {
+					this.props.showMessage("The Request To The Server Failed. Please Try Again Later.", "error");
+				}
+		    });
+	}
+
+	processFindResponse(findResponse) {
+		if (!isJsonResponseValid(findResponse, findSchema)) {
+			this.processServerConfigError("Find Response Not Valid. Check The Server.");
+		} else {
+			this.processServerFindSuccess(findResponse);
+		}
+	}
+
+    processServerFindSuccess(findResponse) {
+		LOG.info("Receiving find response from:", this.props.serverSettings.serverPort);
+		this.setState({listOfMatches: findResponse});
+	}
 }

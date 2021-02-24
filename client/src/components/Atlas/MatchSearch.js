@@ -1,18 +1,24 @@
+import React, { Component } from 'react';
+
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest } from "../../utils/restfulAPI";
 
-export default class Page extends Component {
+export default class MatchSearch extends Component {
     constructor(props) {
 		super(props);
+
+        this.sendFindRequest = this.sendFindRequest.bind(this);
+        this.processFindResponse = this.processFindResponse.bind(this);
+        this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 
         this.state = {
             listOfMatches: []
         };
     }
   	
-	sendFindRequst(request) {
-		sendServerRequest({request})
+	sendFindRequest(request) {
+		sendServerRequest(request)
 			.then(findResponse => {
 				if (findResponse) {
 					this.processFindResponse(findResponse);
