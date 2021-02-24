@@ -56,8 +56,8 @@ export default class Atlas extends Component {
                     <br></br>
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <Table hover bordered small>
-                                <thead class="text-center">
+                            <Table hover bordered size="sm">
+                                <thead className="text-center">
                                     <tr>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
@@ -84,9 +84,9 @@ export default class Atlas extends Component {
 
     renderList() {
         return (
-            <tbody class="text-center">
+            <tbody className="text-center">
                 {this.state.listOfClicks.map((place, index) => (
-                    <tr>
+                    <tr key={index}>
                         <td>{place.lat.toFixed(6)}</td>
                         <td>{place.lng.toFixed(6)}</td>
                         <td>
@@ -128,7 +128,6 @@ export default class Atlas extends Component {
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.requestUserLocation}
             </Map>
         );
     }
