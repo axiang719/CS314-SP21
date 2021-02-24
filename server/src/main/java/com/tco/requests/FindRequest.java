@@ -12,6 +12,7 @@ public class FindRequest extends RequestHeader {
   private Integer found;
   private ArrayList<HashMap<String, String>> places;
   private ArrayList<String> type;
+  private ArrayList<String> where;
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
 
   @Override
@@ -25,12 +26,15 @@ public class FindRequest extends RequestHeader {
       Query query = new Query(match);
       query.setLimit(limit);
       query.setType(type);
+      query.setWhere(where);
       String dataQuery = query.getDataQuery();
       places = Database.queryDB(dataQuery);
   }
 
   private void populateFound() {
       Query query = new Query(match);
+      query.setType(type);
+      query.setWhere(where);
       String dataQuery = query.getCountQuery();
       ArrayList<HashMap<String, String>> count = Database.queryDB(dataQuery);
       found = Integer.parseInt(count.get(0).get("row_count"));
