@@ -81,7 +81,7 @@ export default class About extends Component {
                 <br></br>
                 <CardColumns>
                     {people.map((person) => (
-                        <Card>
+                        <Card key={person.cardNum}>
                             <CardHeader tag="h4">{person.name}</CardHeader>
                             <CardBody>
                                 <CardImg width="100%" src={person.imagePath} alt={"Picture of " + person.name} />
