@@ -45,10 +45,14 @@ export default class CoordinatesInput extends Component {
     }
 
     renderNameInput() {
+        const keyword = this.state.keyword;
+
         return (
-            <InputGroup >
+            <InputGroup>
                 <Input
                     placeholder = "Keyword"
+                    onChange={this.processKeywordInput}
+                    value = {keyword}
                     />
                     {this.renderDropdown()}
                 <Button className="ml-1" color="primary">Search</Button>
