@@ -13,6 +13,7 @@ public class TestQuery {
 
     private String testQuery;
 
+    
     @BeforeEach
     public void createConfigurationForTestCases() {
         testQuery = "SELECT world.name, world.latitude, world.longitude, "
@@ -38,10 +39,10 @@ public class TestQuery {
     public void testMatchQuery() {
         Query sql = new Query("Epps Airpark");
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " WHERE country.name LIKE '%Epps Airpark%' "
+        assertEquals(testQuery + " WHERE (country.name LIKE '%Epps Airpark%' "
                     + "OR region.name LIKE '%Epps Airpark%' "
                     + "OR world.name LIKE '%Epps Airpark%' "
-                    + "OR world.municipality LIKE '%Epps Airpark%';", resultQuery);
+                    + "OR world.municipality LIKE '%Epps Airpark%');", resultQuery);
     }
 
     @Test
@@ -72,7 +73,7 @@ public class TestQuery {
         check.add("airport");
         sql.setType(check);
         String resultQuery = sql.getDataQuery();
-        assertEquals(testQuery + " WHERE world.type LIKE '%airport%' ORDER BY RAND();", resultQuery );
+        assertEquals(testQuery + " WHERE ( world.type LIKE '%airport%') ORDER BY RAND();", resultQuery );
     }
     
 }

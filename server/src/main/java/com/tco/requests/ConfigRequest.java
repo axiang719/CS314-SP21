@@ -18,6 +18,7 @@ public class ConfigRequest extends RequestHeader {
         features.add("config");
         features.add("find");
         features.add("type");
+        features.add("where");
         log.trace("buildResponse -> {}", this);
     }
 
