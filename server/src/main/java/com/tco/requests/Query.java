@@ -17,8 +17,8 @@ public class Query {
     public String getDataQuery() {
         generateStartDataSql();
         generateMatchSql();
-        generateWhereSql();
         generateTypeSQL();
+        generateWhereSql();
         generateLimitSql();
         return resultQuery + ";";
     }
@@ -26,8 +26,8 @@ public class Query {
     public String getCountQuery() {
         generateStartCountSql();
         generateMatchSql();
-        generateWhereSql();
         generateTypeSQL();
+        generateWhereSql();
         return resultQuery + ";";
     }
 
@@ -55,10 +55,10 @@ public class Query {
     private void generateMatchSql() {
         String key = generateKey();
         if (!key.equals("")) {
-            resultQuery += " WHERE country.name LIKE " + key
+            resultQuery += " WHERE (country.name LIKE " + key
             + " OR region.name LIKE " + key
             + " OR world.name LIKE " + key
-            + " OR world.municipality LIKE " + key;
+            + " OR world.municipality LIKE " + key + ")";
             appendFlag = true;
         }   
     }
@@ -68,7 +68,7 @@ public class Query {
             if(!appendFlag) {
                 resultQuery += " WHERE";
             } else{
-                resultQuery += " AND";
+                resultQuery += " AND(";
             }
             for(int i = 0; i < where.size(); i++){
                 final String place = "'" + where.get(i) + "'";
@@ -80,6 +80,7 @@ public class Query {
                     resultQuery += "OR";
                 }
             }
+            resultQuery += ")";
             appendFlag = true;   
         }    
     }
@@ -89,7 +90,7 @@ public class Query {
             if(!appendFlag){
                 resultQuery += " WHERE";
             } else{
-                resultQuery += " AND";
+                resultQuery += " AND(";
             }
             for(int i = 0; i < type.size(); i++){
                 if(type.get(i).equals("other")){
@@ -104,9 +105,9 @@ public class Query {
                   resultQuery += "OR";
                 }
             }
+            resultQuery += ")";
             appendFlag = true;
         }
-       
     }
 
 
@@ -119,7 +120,7 @@ public class Query {
     }
 
     private void generateLimitSql() {
-            if(match.equals("")){
+        if(match.equals("")){
             resultQuery += " ORDER BY RAND()";
         }   
         if (limit != null && limit != 0) {
@@ -139,6 +140,7 @@ public class Query {
     public void setWhere(ArrayList<String> where){
         this.where = where;
     }
+
 
  
 }
