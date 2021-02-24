@@ -66,9 +66,9 @@ public class Query {
     private void generateWhereSql() {
         if(where != null && !where.isEmpty()){
             if(!appendFlag) {
-                resultQuery += " WHERE";
+                resultQuery += " WHERE (";
             } else{
-                resultQuery += " AND(";
+                resultQuery += " AND (";
             }
             for(int i = 0; i < where.size(); i++){
                 final String place = "'" + where.get(i) + "'";
@@ -88,9 +88,9 @@ public class Query {
     private void generateTypeSQL(){
         if(type != null && !type.isEmpty()){
             if(!appendFlag){
-                resultQuery += " WHERE";
+                resultQuery += " WHERE (";
             } else{
-                resultQuery += " AND(";
+                resultQuery += " AND (";
             }
             for(int i = 0; i < type.size(); i++){
                 if(type.get(i).equals("other")){
