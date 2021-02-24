@@ -55,33 +55,33 @@ public class Query {
             + " OR world.name LIKE " + key
             + " OR world.municipality LIKE " + key;
         }
-        else {
-            resultQuery += " ORDER BY RAND()";
-        }
+        
     }
 
     private void generateTypeSQL(){
-        if(type != null){
+        if(type != null && !type.isEmpty()){
             if(match.equals("")){
                 resultQuery += " WHERE";
             }
             else{
-                resultQuery += " OR";
+                resultQuery += " AND";
             }
             for(int i = 0; i < type.size(); i++){
-                if(type.get(i) == "other"){
-                    resultQuery += " world.type NOT LIKE 'airport' OR 'helipad' OR 'balloonport'";
+                if(type.get(i).equals("other")){
+                    resultQuery += " world.type NOT LIKE '%airport%' AND"
+                                +  " world.type NOT LIKE '%heliport%' AND"
+                                +  " world.type NOT LIKE '%balloonport%' ";
+                            }
+                else{
+                 resultQuery += " world.type LIKE '%" + type.get(i) + "%'";
                 }
-                resultQuery += " world.type LIKE '" + type.get(i) + "'";
+                
                 if(i+1 < type.size()){
                   resultQuery += "OR";
                 }
-                
             }
         }
-        else{
-            type=null;
-        }
+       
     }
 
 
@@ -94,10 +94,18 @@ public class Query {
     }
 
     private void generateLimitSql() {
+            if(match.equals("")){
+            resultQuery += " ORDER BY RAND()";
+        }
+    
+        
+     
+        
         if (limit != null && limit != 0) {
             resultQuery += " Limit " + Integer.toString(limit);
         }
     }
+    
 
     public void setLimit(Integer limit) {
         this.limit = limit;
