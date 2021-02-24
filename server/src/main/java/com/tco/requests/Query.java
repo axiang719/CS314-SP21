@@ -12,7 +12,6 @@ public class Query {
 
     public Query(String match) {
         this.match = match;
-
     }
 
     public String getDataQuery() {
@@ -61,8 +60,7 @@ public class Query {
             + " OR world.name LIKE " + key
             + " OR world.municipality LIKE " + key;
             appendFlag = true;
-        }
-        
+        }   
     }
 
     private void generateWhereSql() {
@@ -72,7 +70,7 @@ public class Query {
             } else{
                 resultQuery += " AND";
             }
-            for(int i= 0; i<where.size(); i++){
+            for(int i = 0; i < where.size(); i++){
                 final String place = "'" + where.get(i) + "'";
                 resultQuery += " country.name LIKE " + place
                 + " OR region.name LIKE " + place
@@ -123,11 +121,7 @@ public class Query {
     private void generateLimitSql() {
             if(match.equals("")){
             resultQuery += " ORDER BY RAND()";
-        }
-    
-        
-     
-        
+        }   
         if (limit != null && limit != 0) {
             resultQuery += " Limit " + Integer.toString(limit);
         }
