@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, Dropdown,DropdownItem, Input, Form,FormGroup, FormFeedback, InputGroupAddon} 
+import { Button, InputGroup, Input, InputGroupAddon} 
     from 'reactstrap';
 
 
@@ -34,11 +34,12 @@ export default class WhereSearch extends Component {
         return(
             <InputGroup>
 			    <Input
+                    onFocus = {()=>{this.props.processFocus("where");}}
 				    placeholder = "Where?"
 				    onChange={this.processOnChange}
 				    value = {whereValue}
 			    />
-                <InputGroupAddon type="button" addonType="append" onClick={this.processOnClickWhere}><Button>Add</Button></InputGroupAddon>
+                <InputGroupAddon type={this.state.focus==="where"?"submit":"button"} addonType="append" onClick={this.processOnClickWhere}><Button>Add</Button></InputGroupAddon>
 		    </InputGroup>
         );
 
