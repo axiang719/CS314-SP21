@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
 import Coordinates from "coordinate-parser"; 
+import PlacesList from "./PlacesList"
 
 export default class CoordinatesInput extends Component {
     constructor(props) {
@@ -35,6 +36,10 @@ export default class CoordinatesInput extends Component {
         );
     }
 
+    renderPlacesList() {
+        <PlacesList/>
+    }
+
     chooseInput() {
         if (this.state.searchType == "Keyword") {
             return this.renderNameInput();
@@ -51,7 +56,7 @@ export default class CoordinatesInput extends Component {
                     placeholder = "Keyword"
                     />
                     {this.renderDropdown()}
-                <Button className="ml-1" color="primary">Search</Button>
+                <Button className="ml-1" color="primary" onClick={() => this.renderPlacesList}>Search</Button>
             </InputGroup>
         );
     }

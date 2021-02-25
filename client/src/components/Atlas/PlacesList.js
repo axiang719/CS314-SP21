@@ -8,7 +8,11 @@ export default class PlacesList extends Component {
 
     render() {
         return (
-            <p>TODO</p>
-        )
+            <Row>
+                <Col>
+                    TODO
+                </Col>
+            </Row>
+        );
     }
 }
