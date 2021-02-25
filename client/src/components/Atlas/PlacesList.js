@@ -49,6 +49,8 @@ export default class PlacesList extends Component {
                 <PopoverBody>
                     {"Municipality: " + place.municipality}
                     <br/>
+                    {"Type: " + place.type}
+                    <br/>
                     {"Latitude: " + latitude.toFixed(6)}
                     <br/>
                     {"Longitude: " + longitude.toFixed(6)}

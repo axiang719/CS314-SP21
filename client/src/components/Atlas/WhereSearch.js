@@ -10,6 +10,7 @@ export default class WhereSearch extends Component {
 
         this.processOnChange = this.processOnChange.bind(this);
         this.processOnClickWhere = this.processOnClickWhere.bind(this);
+        this.renderWhereButtons = this.renderWhereButtons.bind(this);
 
         this.state = {
             whereValue: "",
@@ -20,10 +21,11 @@ export default class WhereSearch extends Component {
     render() {
         const {show} = this.state;
 		return (
-			<div>
-                <Button type= "submit" className="ml-1 mt-1 mb-1"  color="primary" onClick={()=>this.setState({show:!show})} > Where?</Button>
+			<>
+                <Button type= "button" className="ml-1 mr-1 mt-1 mb-1"  color="primary" onClick={()=>this.setState({show:!show})} > Where?</Button>
+                {show && this.renderWhereButtons()}
                 {show && this.renderWhereInput()}
-			</div>
+			</>
 		);
 	}
 
@@ -36,10 +38,24 @@ export default class WhereSearch extends Component {
 				    onChange={this.processOnChange}
 				    value = {whereValue}
 			    />
-                <InputGroupAddon addonType="append" className="ml-1" onClick={this.processOnClickWhere}><Button>Add</Button></InputGroupAddon>
+                <InputGroupAddon type="button" addonType="append" onClick={this.processOnClickWhere}><Button>Add</Button></InputGroupAddon>
 		    </InputGroup>
         );
 
+    }
+
+    renderWhereButtons() {
+        return (
+            <>
+                {this.props.where.map((place, index) => (
+                    <Button type="button" 
+                            onClick={()=> this.processPlaceButtonClick(index)} 
+                            className="mr-1 mt-1 mb-1 " 
+                            key={index}>{place + " [x]"}
+                    </Button>
+                ))}
+            </>
+        )
     }
 
     processOnChange(onChangeEvent){
@@ -50,8 +66,17 @@ export default class WhereSearch extends Component {
     processOnClickWhere(){
         const where = this.props.where;
         const {whereValue} = this.state;
-        where.push(whereValue);
-        this.props.setWhere(where);
+        if (!where.includes(whereValue) && whereValue != "") {
+            where.push(whereValue);
+            this.props.setWhere(where);
+            this.setState({whereValue: ""});
+        }
+    }
+
+    processPlaceButtonClick(index) {
+        const {where, setWhere} = this.props;
+        where.splice(index, 1);
+        setWhere(where);
     }
 
 }
