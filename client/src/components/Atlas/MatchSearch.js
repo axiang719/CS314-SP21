@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
 
-import SearchList from "./SearchList";
+import PlacesList from "./PlacesList";
 
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
@@ -25,7 +25,7 @@ export default class MatchSearch extends Component {
                 match: "",
                 limit: 100
             },
-            listOfMatches: [],
+			listOfMatches: [],
 			modalOpen: false
         };
     }
@@ -49,9 +49,10 @@ export default class MatchSearch extends Component {
 					<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
 					<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
 				</InputGroup>
-				<SearchList modalOpen={this.state.modalOpen} 
+				<PlacesList modalOpen={this.state.modalOpen} 
 							listOfMatches={this.state.listOfMatches}
-							toggleModal={this.toggleModal}/>
+							toggleModal={this.toggleModal}
+							setMarker={this.props.setMarker}/>
 			</div>
 		);
 	}
@@ -82,7 +83,7 @@ export default class MatchSearch extends Component {
         const findRequest = this.state.findRequest;
         if (findRequest.match != null) {
             this.sendFindRequest(findRequest);
-			this.props.toggle();
+			this.toggleModal();
         } 
     }
   	
@@ -106,8 +107,8 @@ export default class MatchSearch extends Component {
 	}
 
     processServerFindSuccess(findResponse) {
-		LOG.info("Receiving find response from:", getOriginalServerPort());
-		this.props.setListOfMatches(findResponse);
+		LOG.info("Receiving find response from:", findResponse);
+		this.setState({listOfMatches: findResponse.places});
 	}
 
 	processFindRequestError(message) {
@@ -116,7 +117,7 @@ export default class MatchSearch extends Component {
 	}
 
 	toggleModal() {
-        const modalOpen = this.props.modalOpen;
+        const modalOpen = this.state.modalOpen;
         this.setState({ modalOpen: !modalOpen })
     }
 
