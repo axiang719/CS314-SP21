@@ -13,15 +13,11 @@ export default class CoordinatesInput extends Component {
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
         this.renderDropdown = this.renderDropdown.bind(this);
-        this.setListOfMatches = this.setListOfMatches.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.changeModalOpen = this.changeModalOpen.bind(this);
 
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
-            listOfMatches: [],
-            modalOpen: false,
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -38,7 +34,6 @@ export default class CoordinatesInput extends Component {
                             {this.chooseInput()}
                         </FormGroup>
                     </Form>
-                    <PlacesList mod={this.state.modalOpen} change={this.changeModalOpen}/>
                 </Col>
             </Row>
         );
@@ -53,17 +48,14 @@ export default class CoordinatesInput extends Component {
         }
     }
 
-    changeModalOpen() {
-        const modalOpen = this.props.modalOpen;
-        this.setState({modalOpen: !modalOpen});
-    }
-
     renderNameInput() {
         return (
             <MatchSearch 
             renderDropdown={this.renderDropdown}
+            listOfMatches={this.state.listOfMatches}
             setListOfMatches={this.setListOfMatches}
             showMessage={this.props.showMessage}
+            setMarker={this.props.setMarker}
             toggle={this.changeModalOpen}/>
         );
     }
@@ -129,10 +121,6 @@ export default class CoordinatesInput extends Component {
         } catch (error) {
             return null;
         }
-    }
-
-    setListOfMatches(matches) {
-        this.setState({listOfMatches: matches});
     }
 
 }
