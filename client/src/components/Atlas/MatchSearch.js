@@ -6,6 +6,7 @@ import PlacesList from "./PlacesList";
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
+import TypeSearch from "./TypeSearch";
 
 export default class MatchSearch extends Component {
     constructor(props) {
@@ -17,16 +18,23 @@ export default class MatchSearch extends Component {
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
+		this.setType = this.setType.bind(this);
 
         this.state = {
 			keyword: "",
 			findRequest: {
                 requestType: "find",
                 match: "",
+				type:[],
                 limit: 100
             },
+
+           
+			
+
 			listOfMatches: [],
 			modalOpen: false
+
         };
     }
 
@@ -37,6 +45,9 @@ export default class MatchSearch extends Component {
 
 		return (
 			<div>
+
+		
+		
 				<InputGroup>
 					<Input
 						placeholder = "Match"
@@ -53,11 +64,15 @@ export default class MatchSearch extends Component {
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
+				<TypeSearch type={this.state.findRequest.type}
+				            setType={this.setType}/>
+
 			</div>
 		);
 	}
+    
 
-	processKeywordInput(onChangeEvent) {
+   processKeywordInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
         
 		this.getMatchOrNull(inputText);
@@ -116,9 +131,18 @@ export default class MatchSearch extends Component {
 		this.props.showMessage(message, "error");
 	}
 
+
+
 	toggleModal() {
         const modalOpen = this.state.modalOpen;
         this.setState({ modalOpen: !modalOpen })
     }
+
+	setType(type){
+		const findRequest=this.state.findRequest;
+		findRequest.type = type;
+		this.setState({findRequest: findRequest});
+	}
+
 
 }

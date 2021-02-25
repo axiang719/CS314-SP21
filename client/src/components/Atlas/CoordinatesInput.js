@@ -5,6 +5,8 @@ import Coordinates from "coordinate-parser";
 
 import PlacesList from "./PlacesList"
 import MatchSearch from "./MatchSearch";
+import TypeSearch from "./TypeSearch";
+
 
 
 export default class CoordinatesInput extends Component {
@@ -18,6 +20,8 @@ export default class CoordinatesInput extends Component {
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
+
+
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -54,9 +58,11 @@ export default class CoordinatesInput extends Component {
             renderDropdown={this.renderDropdown}
             listOfMatches={this.state.listOfMatches}
             setListOfMatches={this.setListOfMatches}
+
             showMessage={this.props.showMessage}
             setMarker={this.props.setMarker}
             toggle={this.changeModalOpen}/>
+
         );
     }
     
@@ -67,6 +73,7 @@ export default class CoordinatesInput extends Component {
         const inputBoxEmpty = !coordinates.inputText;
 
         return (
+          
             <InputGroup>
                 <Input
                     placeholder = "Latitude, Longitude"
@@ -79,6 +86,7 @@ export default class CoordinatesInput extends Component {
                 <Button type="submit" className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
                 <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
             </InputGroup>
+           
         );
     }
 
@@ -89,10 +97,12 @@ export default class CoordinatesInput extends Component {
                 <DropdownMenu>
                     <DropdownItem onClick={() => this.setState({ searchType: "Match", dropdownName: "Match" })}>Match</DropdownItem>
                     <DropdownItem onClick={() => this.setState({ searchType: "Coordinates", dropdownName: "Coord." })}>Coordinates</DropdownItem>
-                </DropdownMenu>
+                    </DropdownMenu>
             </InputGroupButtonDropdown>
         )
     }
+
+   
 
     toggleDropDown () {
         const isOpen = this.state.dropdownOpen;
@@ -122,5 +132,6 @@ export default class CoordinatesInput extends Component {
             return null;
         }
     }
+
 
 }
