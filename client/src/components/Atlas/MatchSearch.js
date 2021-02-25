@@ -149,6 +149,4 @@ export default class MatchSearch extends Component {
 		findRequest.where = where;
 		this.setState({findRequest: findRequest});
 	}
-
-
 }
