@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
+import { Button, InputGroup, Input, FormFeedback, Container, Row } from 'reactstrap';
 
 import PlacesList from "./PlacesList";
 
@@ -7,6 +7,8 @@ import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
 import TypeSearch from "./TypeSearch";
+import WhereSearch from "./WhereSearch";
+
 
 export default class MatchSearch extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ export default class MatchSearch extends Component {
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.setType = this.setType.bind(this);
+		this.setWhere = this.setWhere.bind(this);
 
         this.state = {
 			keyword: "",
@@ -26,12 +29,9 @@ export default class MatchSearch extends Component {
                 requestType: "find",
                 match: "",
 				type:[],
+				where:[],
                 limit: 100
             },
-
-           
-			
-
 			listOfMatches: [],
 			modalOpen: false
 
@@ -45,9 +45,6 @@ export default class MatchSearch extends Component {
 
 		return (
 			<div>
-
-		
-		
 				<InputGroup>
 					<Input
 						placeholder = "Match"
@@ -57,16 +54,21 @@ export default class MatchSearch extends Component {
 						invalid = {!inputBoxEmpty && !validMatch}
 						/>
 						{this.props.renderDropdown()}
-					<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
-					<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
+						<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+						<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
 				</InputGroup>
 				<PlacesList modalOpen={this.state.modalOpen} 
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
-				<TypeSearch type={this.state.findRequest.type}
-				            setType={this.setType}/>
-
+				<Container>	
+					<Row>
+						<TypeSearch type={this.state.findRequest.type}
+				        	setType={this.setType}/>
+						<WhereSearch where = {this.state.findRequest.where}
+							setWhere = {this.setWhere}/>
+					</Row>	
+				</Container>	
 			</div>
 		);
 	}
@@ -131,8 +133,6 @@ export default class MatchSearch extends Component {
 		this.props.showMessage(message, "error");
 	}
 
-
-
 	toggleModal() {
         const modalOpen = this.state.modalOpen;
         this.setState({ modalOpen: !modalOpen })
@@ -141,6 +141,12 @@ export default class MatchSearch extends Component {
 	setType(type){
 		const findRequest=this.state.findRequest;
 		findRequest.type = type;
+		this.setState({findRequest: findRequest});
+	}
+
+	setWhere(where){
+		const findRequest=this.state.findRequest;
+		findRequest.where = where;
 		this.setState({findRequest: findRequest});
 	}
 

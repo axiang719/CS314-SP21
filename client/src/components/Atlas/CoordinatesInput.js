@@ -58,7 +58,6 @@ export default class CoordinatesInput extends Component {
             renderDropdown={this.renderDropdown}
             listOfMatches={this.state.listOfMatches}
             setListOfMatches={this.setListOfMatches}
-
             showMessage={this.props.showMessage}
             setMarker={this.props.setMarker}
             toggle={this.changeModalOpen}/>
