@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
 
+import SearchList from "./SearchList";
+
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
@@ -14,6 +16,7 @@ export default class MatchSearch extends Component {
         this.sendFindRequest = this.sendFindRequest.bind(this);
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
 
         this.state = {
 			keyword: "",
@@ -22,7 +25,8 @@ export default class MatchSearch extends Component {
                 match: "",
                 limit: 100
             },
-            listOfMatches: []
+            listOfMatches: [],
+			modalOpen: false
         };
     }
 
@@ -32,18 +36,23 @@ export default class MatchSearch extends Component {
 		const inputBoxEmpty = !keyword;
 
 		return (
-			<InputGroup>
-                <Input
-                    placeholder = "Match"
-                    onChange={this.processKeywordInput}
-                    value = {keyword}
-					valid = {validMatch}
-					invalid = {!inputBoxEmpty && !validMatch}
-                    />
-                    {this.props.renderDropdown()}
-                <Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
-				<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
-            </InputGroup>
+			<div>
+				<InputGroup>
+					<Input
+						placeholder = "Match"
+						onChange={this.processKeywordInput}
+						value = {keyword}
+						valid = {validMatch}
+						invalid = {!inputBoxEmpty && !validMatch}
+						/>
+						{this.props.renderDropdown()}
+					<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+					<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
+				</InputGroup>
+				<SearchList modalOpen={this.state.modalOpen} 
+							listOfMatches={this.state.listOfMatches}
+							toggleModal={this.toggleModal}/>
+			</div>
 		);
 	}
 
@@ -104,5 +113,10 @@ export default class MatchSearch extends Component {
 		LOG.error(message);
 		this.props.showMessage(message, "error");
 	}
+
+	toggleModal() {
+        const modalOpen = this.props.modalOpen;
+        this.setState({ modalOpen: !modalOpen })
+    }
 
 }
