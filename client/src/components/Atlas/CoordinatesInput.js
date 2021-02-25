@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
 
 import Coordinates from "coordinate-parser"; 
-import PlacesList from "./PlacesList"
 
+import PlacesList from "./PlacesList"
 import MatchSearch from "./MatchSearch";
 
 
@@ -15,11 +15,13 @@ export default class CoordinatesInput extends Component {
         this.renderDropdown = this.renderDropdown.bind(this);
         this.setListOfMatches = this.setListOfMatches.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.changeModalOpen = this.changeModalOpen.bind(this);
 
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
             listOfMatches: [],
+            modalOpen: false,
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -36,13 +38,10 @@ export default class CoordinatesInput extends Component {
                             {this.chooseInput()}
                         </FormGroup>
                     </Form>
+                    <PlacesList mod={this.state.modalOpen} change={this.changeModalOpen}/>
                 </Col>
             </Row>
         );
-    }
-
-    renderPlacesList() {
-        <PlacesList/>
     }
 
     chooseInput() {
@@ -54,12 +53,18 @@ export default class CoordinatesInput extends Component {
         }
     }
 
+    changeModalOpen() {
+        const modalOpen = this.props.modalOpen;
+        this.setState({modalOpen: !modalOpen});
+    }
+
     renderNameInput() {
         return (
             <MatchSearch 
             renderDropdown={this.renderDropdown}
             setListOfMatches={this.setListOfMatches}
-            showMessage={this.props.showMessage}/>
+            showMessage={this.props.showMessage}
+            toggle={this.changeModalOpen}/>
         );
     }
     

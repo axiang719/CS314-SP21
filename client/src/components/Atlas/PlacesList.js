@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Col, Row, Button} from 'reactstrap';
+import { Col, Row, Button, Modal, ModalHeader, ModalHeaderProps} from 'reactstrap';
 
 export default class PlacesList extends Component {
     constructor(props) {
@@ -8,11 +8,9 @@ export default class PlacesList extends Component {
 
     render() {
         return (
-            <Row>
-                <Col>
-                    TODO
-                </Col>
-            </Row>
+            <Modal isOpen={this.props.mod} toggle={this.props.change}>
+                TODO
+            </Modal>
         );
     }
 }
