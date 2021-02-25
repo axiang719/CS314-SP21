@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
+import { Button, InputGroup, Input, FormFeedback, Container, Row } from 'reactstrap';
 
 import PlacesList from "./PlacesList";
 
@@ -61,10 +61,14 @@ export default class MatchSearch extends Component {
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
-				<TypeSearch type={this.state.findRequest.type}
-				            setType={this.setType}/>
-				<WhereSearch where = {this.state.findRequest.where}
+				<Container>	
+					<Row>
+						<TypeSearch type={this.state.findRequest.type}
+				        	setType={this.setType}/>
+						<WhereSearch where = {this.state.findRequest.where}
 							setWhere = {this.setWhere}/>
+					</Row>	
+				</Container>	
 			</div>
 		);
 	}
