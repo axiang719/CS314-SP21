@@ -4,6 +4,7 @@ import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
+import TypeSearch from "./TypeSearch";
 
 export default class MatchSearch extends Component {
     constructor(props) {
@@ -20,9 +21,11 @@ export default class MatchSearch extends Component {
 			findRequest: {
                 requestType: "find",
                 match: "",
+				type:[],
                 limit: 100
             },
-            listOfMatches: []
+            listOfMatches: [],
+			
         };
     }
 
@@ -32,7 +35,8 @@ export default class MatchSearch extends Component {
 		const inputBoxEmpty = !keyword;
 
 		return (
-			<InputGroup>
+		
+		   <InputGroup>
                 <Input
                     placeholder = "Match"
                     onChange={this.processKeywordInput}
@@ -46,8 +50,9 @@ export default class MatchSearch extends Component {
             </InputGroup>
 		);
 	}
+    
 
-	processKeywordInput(onChangeEvent) {
+   processKeywordInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
         
 		this.getMatchOrNull(inputText);
