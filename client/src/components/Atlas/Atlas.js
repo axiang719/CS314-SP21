@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { latLng } from 'leaflet';
 
 import CoordinatesInput from "./CoordinatesInput"
+import ServerSettings from '../Margins/ServerSettings';
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -79,7 +80,9 @@ export default class Atlas extends Component {
     }
 
     renderCoordinatesInput() {
-        return <CoordinatesInput setMarker={this.setMarker}/>;
+        return <CoordinatesInput setMarker={this.setMarker} 
+                showMessage={this.props.showMessage}
+                serverSettings={this.props.serverSettings}/>;
     }
 
     renderList() {

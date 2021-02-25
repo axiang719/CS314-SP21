@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
-import Coordinates from "coordinate-parser"; 
+import Coordinates from "coordinate-parser";
+
+import MatchSearch from "./MatchSearch";
 
 export default class CoordinatesInput extends Component {
     constructor(props) {
         super(props);
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
+        this.renderDropdown = this.renderDropdown.bind(this);
+        this.setListOfMatches = this.setListOfMatches.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.setNameSearch = this.setNameSearch.bind(this);
-        this.setCoordinateSearch = this.setCoordinateSearch.bind(this);
 
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
+            listOfMatches: [],
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -36,7 +39,7 @@ export default class CoordinatesInput extends Component {
     }
 
     chooseInput() {
-        if (this.state.searchType == "Keyword") {
+        if (this.state.searchType == "Match") {
             return this.renderNameInput();
         }
         else {
@@ -46,16 +49,12 @@ export default class CoordinatesInput extends Component {
 
     renderNameInput() {
         return (
-            <InputGroup >
-                <Input
-                    placeholder = "Keyword"
-                    />
-                    {this.renderDropdown()}
-                <Button className="ml-1" color="primary">Search</Button>
-            </InputGroup>
+            <MatchSearch 
+            renderDropdown={this.renderDropdown}
+            setListOfMatches={this.setListOfMatches}
+            showMessage={this.props.showMessage}/>
         );
     }
-    
     
     //pull from code pen
     renderCoordinatesInput() {
@@ -73,7 +72,7 @@ export default class CoordinatesInput extends Component {
                     invalid={!inputBoxEmpty && !validCoordinates}
                     />
                     {this.renderDropdown()}
-                <Button className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
+                <Button type="submit" className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
                 <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
             </InputGroup>
         );
@@ -82,12 +81,10 @@ export default class CoordinatesInput extends Component {
     renderDropdown() {
         return (
             <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                <DropdownToggle color="primary" caret>
-                    Type
-                </DropdownToggle>
+                <DropdownToggle color="primary" caret />
                 <DropdownMenu>
-                    <DropdownItem onClick={this.setNameSearch}>Keyword</DropdownItem>
-                    <DropdownItem onClick={this.setCoordinateSearch}>Coordinates</DropdownItem>
+                    <DropdownItem onClick={() => this.setState({ searchType: "Match", dropdownName: "Match" })}>Match</DropdownItem>
+                    <DropdownItem onClick={() => this.setState({ searchType: "Coordinates", dropdownName: "Coord." })}>Coordinates</DropdownItem>
                 </DropdownMenu>
             </InputGroupButtonDropdown>
         )
@@ -98,17 +95,6 @@ export default class CoordinatesInput extends Component {
         this.setState({ dropdownOpen: !isOpen });
     }
 
-    setNameSearch() {
-        this.setState({ 
-            searchType: "Keyword"
-        })
-    }
-
-    setCoordinateSearch() {
-        this.setState({ 
-            searchType: "Coordinates"
-        })
-    }
 
         //problem: how to give movemarker method a parameter when passing this way?
     processCoordinatesInput(onChangeEvent) {
@@ -132,4 +118,9 @@ export default class CoordinatesInput extends Component {
             return null;
         }
     }
+
+    setListOfMatches(matches) {
+        this.setState({listOfMatches: matches});
+    }
+
 }
