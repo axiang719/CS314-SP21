@@ -8,7 +8,7 @@ import Atlas from '../src/components/Atlas/Atlas';
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
     let atlasWrapper;
-    let reverseWrapper;
+
 
     beforeEach(() => {
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}/>);
@@ -32,14 +32,6 @@ describe('Atlas', () => {
 
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
         expect(atlasWrapper.find(Marker).length).toEqual(1);
-    });
-    
-    it('reverse geocoding', () => {
-          const testString = null;
-          const expectedString = null;
-          const postion = {lat:40.576099, lng: -105.080901};
-          expectedString = reverseGeoCoding(postion);
-          expect(expectedString != testString);
     });
     
 
