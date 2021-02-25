@@ -64,7 +64,8 @@ export default class MatchSearch extends Component {
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
-				<TypeSearch type={this.state.type}/>
+				<TypeSearch type={this.state.findRequest.type}
+				            setType={this.setType}/>
 
 			</div>
 		);
