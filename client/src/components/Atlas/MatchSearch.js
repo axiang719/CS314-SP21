@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
 
+import PlacesList from "./PlacesList";
+
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
@@ -15,6 +17,7 @@ export default class MatchSearch extends Component {
         this.sendFindRequest = this.sendFindRequest.bind(this);
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
 
         this.state = {
 			keyword: "",
@@ -24,8 +27,13 @@ export default class MatchSearch extends Component {
 				type:[],
                 limit: 100
             },
-            listOfMatches: [],
+
+           
 			
+
+			listOfMatches: [],
+			modalOpen: false
+
         };
     }
 
@@ -36,20 +44,26 @@ export default class MatchSearch extends Component {
 
 		return (
 			<div>
+
 		
-		   <InputGroup>
-                <Input
-                    placeholder = "Match"
-                    onChange={this.processKeywordInput}
-                    value = {keyword}
-					valid = {validMatch}
-					invalid = {!inputBoxEmpty && !validMatch}
-                    />
-                    {this.props.renderDropdown()}
-                <Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
-				<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
-            </InputGroup>
-			<TypeSearch type={this.state.type}/>
+		
+				<InputGroup>
+					<Input
+						placeholder = "Match"
+						onChange={this.processKeywordInput}
+						value = {keyword}
+						valid = {validMatch}
+						invalid = {!inputBoxEmpty && !validMatch}
+						/>
+						{this.props.renderDropdown()}
+					<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+					<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
+				</InputGroup>
+				<PlacesList modalOpen={this.state.modalOpen} 
+							listOfMatches={this.state.listOfMatches}
+							toggleModal={this.toggleModal}
+							setMarker={this.props.setMarker}/>
+
 			</div>
 		);
 	}
@@ -81,6 +95,7 @@ export default class MatchSearch extends Component {
         const findRequest = this.state.findRequest;
         if (findRequest.match != null) {
             this.sendFindRequest(findRequest);
+			this.toggleModal();
         } 
     }
   	
@@ -104,8 +119,8 @@ export default class MatchSearch extends Component {
 	}
 
     processServerFindSuccess(findResponse) {
-		LOG.info("Receiving find response from:", getOriginalServerPort());
-		this.props.setListOfMatches(findResponse);
+		LOG.info("Receiving find response from:", findResponse);
+		this.setState({listOfMatches: findResponse.places});
 	}
 
 	processFindRequestError(message) {
@@ -113,8 +128,12 @@ export default class MatchSearch extends Component {
 		this.props.showMessage(message, "error");
 	}
 
-	setType(type){
-        this.setState({type: type});
-	}
+
+
+	toggleModal() {
+        const modalOpen = this.state.modalOpen;
+        this.setState({ modalOpen: !modalOpen })
+    }
+
 
 }

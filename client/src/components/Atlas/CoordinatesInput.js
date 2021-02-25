@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Form,FormGroup, FormFeedback} from 'reactstrap';
-import Coordinates from "coordinate-parser";
 
+import Coordinates from "coordinate-parser"; 
+
+import PlacesList from "./PlacesList"
 import MatchSearch from "./MatchSearch";
 import TypeSearch from "./TypeSearch";
+
 
 
 export default class CoordinatesInput extends Component {
@@ -12,14 +15,13 @@ export default class CoordinatesInput extends Component {
         
         this.processCoordinatesInput = this.processCoordinatesInput.bind(this);
         this.renderDropdown = this.renderDropdown.bind(this);
-        this.setListOfMatches = this.setListOfMatches.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
 
         this.state = {
             searchType: "Coordinates",
             dropdownOpen: false,
-            listOfMatches: [],
-            typeArray: [],
+
+
             coordinates: {
                 inputText: "",
                 latLng: null
@@ -54,9 +56,13 @@ export default class CoordinatesInput extends Component {
         return (
             <MatchSearch 
             renderDropdown={this.renderDropdown}
+            listOfMatches={this.state.listOfMatches}
             setListOfMatches={this.setListOfMatches}
-            showMessage={this.props.showMessage}/>
-         
+
+            showMessage={this.props.showMessage}
+            setMarker={this.props.setMarker}
+            toggle={this.changeModalOpen}/>
+
         );
     }
     
@@ -125,10 +131,6 @@ export default class CoordinatesInput extends Component {
         } catch (error) {
             return null;
         }
-    }
-
-    setListOfMatches(matches) {
-        this.setState({listOfMatches: matches});
     }
 
 
