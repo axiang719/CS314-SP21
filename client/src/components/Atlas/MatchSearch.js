@@ -18,6 +18,7 @@ export default class MatchSearch extends Component {
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
+		this.setType = this.setType.bind(this);
 
         this.state = {
 			keyword: "",
@@ -63,6 +64,7 @@ export default class MatchSearch extends Component {
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
+				<TypeSearch type={this.state.type}/>
 
 			</div>
 		);
@@ -134,6 +136,12 @@ export default class MatchSearch extends Component {
         const modalOpen = this.state.modalOpen;
         this.setState({ modalOpen: !modalOpen })
     }
+
+	setType(type){
+		const findRequest=this.state.findRequest;
+		findRequest.type = type;
+		this.setState({findRequest: findRequest});
+	}
 
 
 }
