@@ -77,8 +77,21 @@ public class TestQuery {
     }
 
     @Test
+    @DisplayName("Testing for where in query")
+    public void testWhereQuery() {
+        Query sql = new Query("");
+        ArrayList<String> where = new ArrayList<String>();
+        where.add("Denver");
+        sql.setWhere(where);
+        String resultQuery = sql.getDataQuery();
+        assertEquals(testQuery + " WHERE ( country.name LIKE 'Denver' "
+                    + "OR region.name LIKE 'Denver' "
+                    + "OR world.municipality LIKE 'Denver') ORDER BY RAND();", resultQuery);
+    }
+
+    @Test
     @DisplayName("Testing for sanitization in query")
-    public void tesSanatizeQuery() {
+    public void testSanatizeQuery() {
         Query sql = new Query("");
         ArrayList<String> where = new ArrayList<String>();
         where.add("Grand&Junction");
