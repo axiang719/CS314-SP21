@@ -21,6 +21,7 @@ export default class MatchSearch extends Component {
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.setType = this.setType.bind(this);
+		this.setWhere = this.setWhere.bind(this);
 
         this.state = {
 			keyword: "",
@@ -62,7 +63,8 @@ export default class MatchSearch extends Component {
 							setMarker={this.props.setMarker}/>
 				<TypeSearch type={this.state.findRequest.type}
 				            setType={this.setType}/>
-				<WhereSearch where = {this.state.findRequest.where}/>
+				<WhereSearch where = {this.state.findRequest.where}
+							setWhere = {this.setWhere}/>
 			</div>
 		);
 	}
@@ -127,8 +129,6 @@ export default class MatchSearch extends Component {
 		this.props.showMessage(message, "error");
 	}
 
-
-
 	toggleModal() {
         const modalOpen = this.state.modalOpen;
         this.setState({ modalOpen: !modalOpen })
@@ -137,6 +137,12 @@ export default class MatchSearch extends Component {
 	setType(type){
 		const findRequest=this.state.findRequest;
 		findRequest.type = type;
+		this.setState({findRequest: findRequest});
+	}
+
+	setWhere(where){
+		const findRequest=this.state.findRequest;
+		findRequest.where = where;
 		this.setState({findRequest: findRequest});
 	}
 
