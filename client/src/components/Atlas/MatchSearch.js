@@ -22,9 +22,11 @@ export default class MatchSearch extends Component {
 		this.toggleModal = this.toggleModal.bind(this);
 		this.setType = this.setType.bind(this);
 		this.setWhere = this.setWhere.bind(this);
+		this.processFocus = this.processFocus.bind(this);
 
         this.state = {
 			keyword: "",
+			focus: "match",
 			findRequest: {
                 requestType: "find",
                 match: "",
@@ -48,13 +50,14 @@ export default class MatchSearch extends Component {
 				<InputGroup>
 					<Input
 						placeholder = "Match"
+						onFocus = {()=>{this.processFocus("match");}}
 						onChange={this.processKeywordInput}
 						value = {keyword}
 						valid = {validMatch}
 						invalid = {!inputBoxEmpty && !validMatch}
 						/>
 						{this.props.renderDropdown()}
-						<Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+						<Button type={this.state.focus==="match"?"submit":"button"} className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
 						<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
 				</InputGroup>
 				<PlacesList modalOpen={this.state.modalOpen} 
@@ -66,6 +69,8 @@ export default class MatchSearch extends Component {
 						<TypeSearch type={this.state.findRequest.type}
 				        	setType={this.setType}/>
 						<WhereSearch where = {this.state.findRequest.where}
+							processFocus = {this.processFocus}
+							focus = {this.state.focus}
 							setWhere = {this.setWhere}/>
 					</Row>	
 				</Container>	
@@ -80,6 +85,10 @@ export default class MatchSearch extends Component {
 		this.getMatchOrNull(inputText);
         this.setState({ keyword: inputText});
     }
+
+	processFocus(focus) {
+		this.setState({focus});
+	}
 
 	getMatchOrNull(matchString) {
 		const findRequest = this.state.findRequest;

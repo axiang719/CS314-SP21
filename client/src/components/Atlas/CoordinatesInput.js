@@ -3,9 +3,8 @@ import { Col, Row, Button, InputGroup, InputGroupButtonDropdown, DropdownToggle,
 
 import Coordinates from "coordinate-parser"; 
 
-import PlacesList from "./PlacesList"
 import MatchSearch from "./MatchSearch";
-import TypeSearch from "./TypeSearch";
+
 
 
 
