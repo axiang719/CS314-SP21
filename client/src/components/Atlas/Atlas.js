@@ -33,12 +33,14 @@ export default class Atlas extends Component {
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
+        this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
         
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
-            address: ""
+            address:"" ,
+            addressList:[]
         };
     
     }
@@ -64,6 +66,7 @@ export default class Atlas extends Component {
                             <Table hover bordered size="sm">
                                 <thead className="text-center">
                                     <tr>
+                                        <th>Address</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
                                         <th>
@@ -94,6 +97,7 @@ export default class Atlas extends Component {
             <tbody className="text-center">
                 {this.state.listOfClicks.map((place, index) => (
                     <tr key={index}>
+                        <td>{this.state.addressList[index]}</td>
                         <td>{place.lat.toFixed(6)}</td>
                         <td>{place.lng.toFixed(6)}</td>
                         <td>
@@ -149,13 +153,13 @@ export default class Atlas extends Component {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
         }
-      }
+    }
 
     handleGeolocation(position) {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
-        this.state.listOfClicks.unshift(latlng);
-        this.setState({mapCenter: latlng, markerPosition: latlng});
+        this.setMarker(latlng);
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
+
     }
 
     handleGeolocationError() {
@@ -169,9 +173,7 @@ export default class Atlas extends Component {
     setMarker(latlng) {
         if (latlng != null) {
             this.state.listOfClicks.unshift(latlng);
-            this.setState({markerPosition: latlng });
-            this.setState({mapCenter: latlng});
-            this.reverseGeoCoding(latlng).then();
+            this.reverseGeoCoding(latlng).then(()=>this.setState({markerPosition: latlng,mapCenter: latlng}));
         }
     }
 
@@ -194,7 +196,6 @@ export default class Atlas extends Component {
     }
 
     getStringMarkerPosition() {
-        //console.log(this.state.adress)
         return (
           <div>  
             {this.state.address}
@@ -212,6 +213,8 @@ export default class Atlas extends Component {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
         console.log(data);
         const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
-        this.setState({ address: addressLabel});
+        const addressList = this.state.addressList;
+        addressList.unshift(addressLabel);
+        this.setState({addressList :addressList, address: addressLabel});
       }
 }
