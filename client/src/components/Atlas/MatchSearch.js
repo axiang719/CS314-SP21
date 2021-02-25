@@ -82,6 +82,7 @@ export default class MatchSearch extends Component {
         const findRequest = this.state.findRequest;
         if (findRequest.match != null) {
             this.sendFindRequest(findRequest);
+			this.props.toggle();
         } 
     }
   	
