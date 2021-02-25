@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, Input } from 'reactstrap';
+import { Button, InputGroup, Input, FormFeedback } from 'reactstrap';
 
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
@@ -29,29 +29,45 @@ export default class MatchSearch extends Component {
 	render() {
 		const keyword = this.state.keyword;
 		const validMatch = this.state.findRequest.match != null;
+		const inputBoxEmpty = !keyword;
 
 		return (
 			<InputGroup>
                 <Input
-                    placeholder = "Keyword"
+                    placeholder = "Match"
                     onChange={this.processKeywordInput}
                     value = {keyword}
 					valid = {validMatch}
-					invalid = {!validMatch}
+					invalid = {!inputBoxEmpty && !validMatch}
                     />
                     {this.props.renderDropdown()}
-                <Button className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+                <Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
+				<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
             </InputGroup>
 		);
 	}
 
 	processKeywordInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
-		const findRequest = this.state.findRequest;
-		findRequest.match = inputText;
         
-        this.setState({ keyword: inputText, findRequest: findRequest});
+		this.getMatchOrNull(inputText);
+        this.setState({ keyword: inputText});
     }
+
+	getMatchOrNull(matchString) {
+		const findRequest = this.state.findRequest;
+		const regex = /^[a-zA-Z0-9_ ]*$/;
+		const matchIsValid = matchString.match(regex);
+		
+		if (matchIsValid) {
+			findRequest.match = matchString;
+		} else {
+			findRequest.match = null;
+		}
+
+		this.setState({ findRequest: findRequest });
+
+	}
 
 	processKeywordButton() {
         const findRequest = this.state.findRequest;

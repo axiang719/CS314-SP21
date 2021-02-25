@@ -39,7 +39,7 @@ export default class CoordinatesInput extends Component {
     }
 
     chooseInput() {
-        if (this.state.searchType == "Keyword") {
+        if (this.state.searchType == "Match") {
             return this.renderNameInput();
         }
         else {
@@ -55,7 +55,6 @@ export default class CoordinatesInput extends Component {
             showMessage={this.props.showMessage}/>
         );
     }
-    
     
     //pull from code pen
     renderCoordinatesInput() {
@@ -73,7 +72,7 @@ export default class CoordinatesInput extends Component {
                     invalid={!inputBoxEmpty && !validCoordinates}
                     />
                     {this.renderDropdown()}
-                <Button className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
+                <Button type="submit" className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
                 <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
             </InputGroup>
         );
@@ -84,7 +83,7 @@ export default class CoordinatesInput extends Component {
             <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
                 <DropdownToggle color="primary" caret />
                 <DropdownMenu>
-                    <DropdownItem onClick={() => this.setState({ searchType: "Keyword", dropdownName: "Key" })}>Keyword</DropdownItem>
+                    <DropdownItem onClick={() => this.setState({ searchType: "Match", dropdownName: "Match" })}>Match</DropdownItem>
                     <DropdownItem onClick={() => this.setState({ searchType: "Coordinates", dropdownName: "Coord." })}>Coordinates</DropdownItem>
                 </DropdownMenu>
             </InputGroupButtonDropdown>
