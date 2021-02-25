@@ -35,6 +35,7 @@ export default class MatchSearch extends Component {
 		const inputBoxEmpty = !keyword;
 
 		return (
+			<div>
 		
 		   <InputGroup>
                 <Input
@@ -48,6 +49,8 @@ export default class MatchSearch extends Component {
                 <Button type="submit" className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
 				<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
             </InputGroup>
+			<TypeSearch type={this.state.type}/>
+			</div>
 		);
 	}
     
@@ -108,6 +111,10 @@ export default class MatchSearch extends Component {
 	processFindRequestError(message) {
 		LOG.error(message);
 		this.props.showMessage(message, "error");
+	}
+
+	setType(type){
+        this.setState({type: type});
 	}
 
 }

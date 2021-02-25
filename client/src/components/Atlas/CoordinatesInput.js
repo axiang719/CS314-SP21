@@ -67,7 +67,7 @@ export default class CoordinatesInput extends Component {
         const inputBoxEmpty = !coordinates.inputText;
 
         return (
-            <div>
+          
             <InputGroup>
                 <Input
                     placeholder = "Latitude, Longitude"
@@ -80,8 +80,7 @@ export default class CoordinatesInput extends Component {
                 <Button type="submit" className="ml-1" color="primary" onClick={() => this.props.setMarker(coordinates.latLng)}>Search</Button>
                 <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
             </InputGroup>
-             <TypeSearch/>
-            </div>
+           
         );
     }
 
