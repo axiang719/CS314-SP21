@@ -198,11 +198,8 @@ export default class Atlas extends Component {
     }
 
     async reverseGeoCoding(coordinates) {
-        // Here the coordinates are in LatLng Format
-        // if you wish to use other formats you will have to change the lat and lng in the fetch URL
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
         console.log(data);
-        
         const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
         this.setState({ address: addressLabel});
       }
