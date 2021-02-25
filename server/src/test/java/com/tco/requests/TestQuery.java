@@ -75,5 +75,18 @@ public class TestQuery {
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + " WHERE ( world.type LIKE '%airport%') ORDER BY RAND();", resultQuery );
     }
+
+    @Test
+    @DisplayName("Testing for sanitization in query")
+    public void tesSanatizeQuery() {
+        Query sql = new Query("");
+        ArrayList<String> where = new ArrayList<String>();
+        where.add("Grand&Junction");
+        sql.setWhere(where);
+        String resultQuery = sql.getDataQuery();
+        assertEquals(testQuery + " WHERE ( country.name LIKE 'Grand_Junction' "
+                    + "OR region.name LIKE 'Grand_Junction' "
+                    + "OR world.municipality LIKE 'Grand_Junction') ORDER BY RAND();", resultQuery);
+    }
     
 }

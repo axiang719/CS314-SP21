@@ -1,5 +1,6 @@
 package com.tco.requests;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Query {
     private String resultQuery;
@@ -53,8 +54,8 @@ public class Query {
     }
 
     private void generateMatchSql() {
-        String key = generateKey();
-        if (!key.equals("")) {
+        if (!match.equals("")) {
+            String key = "'%" + match + "%'";
             resultQuery += " WHERE (country.name LIKE " + key
             + " OR region.name LIKE " + key
             + " OR world.name LIKE " + key
@@ -110,15 +111,6 @@ public class Query {
         }
     }
 
-
-    private String generateKey() {
-        String key = "";
-        if (!match.equals("")) {
-            key += "'%" + match + "%'";
-        }
-        return key;
-    }
-
     private void generateLimitSql() {
         if(match.equals("")){
             resultQuery += " ORDER BY RAND()";
@@ -127,8 +119,7 @@ public class Query {
             resultQuery += " Limit " + Integer.toString(limit);
         }
     }
-    
-
+  
     public void setLimit(Integer limit) {
         this.limit = limit;
     }
@@ -139,8 +130,16 @@ public class Query {
 
     public void setWhere(ArrayList<String> where){
         this.where = where;
+        if (this.where != null) {
+            sanitizeStringList(this.where);
+        }
     }
 
-
- 
+    private void sanitizeStringList(ArrayList<String> stringList) {
+        for (int i=0; i<stringList.size(); i++) {
+            String word = stringList.get(i);
+            word = word.replaceAll("[^a-zA-Z0-9]", "_"); 
+            stringList.set(i, word);
+        }
+    }
 }

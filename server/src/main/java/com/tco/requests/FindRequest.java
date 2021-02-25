@@ -24,9 +24,9 @@ public class FindRequest extends RequestHeader {
 
   private void populatePlaces() {
       Query query = new Query(match);
-      query.setLimit(limit);
       query.setType(type);
-      query.setWhere(where);
+      query.setWhere(new ArrayList(where));
+      query.setLimit(limit);
       String dataQuery = query.getDataQuery();
       places = Database.queryDB(dataQuery);
   }
@@ -34,7 +34,7 @@ public class FindRequest extends RequestHeader {
   private void populateFound() {
       Query query = new Query(match);
       query.setType(type);
-      query.setWhere(where);
+      query.setWhere(new ArrayList(where));
       String dataQuery = query.getCountQuery();
       ArrayList<HashMap<String, String>> count = Database.queryDB(dataQuery);
       found = Integer.parseInt(count.get(0).get("row_count"));
