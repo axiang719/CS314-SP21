@@ -9,6 +9,7 @@ describe('Atlas', () => {
     const createSnackBar = jest.fn();
     let atlasWrapper;
 
+
     beforeEach(() => {
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}/>);
     });
@@ -32,6 +33,7 @@ describe('Atlas', () => {
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
         expect(atlasWrapper.find(Marker).length).toEqual(1);
     });
+    
 
     function simulateOnClickEvent(wrapper, event) {
         wrapper.find('Map').at(0).simulate('click', event);

@@ -8,7 +8,8 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { latLng } from 'leaflet';
 
-import CoordinatesInput from "./CoordinatesInput"
+import CoordinatesInput from "./CoordinatesInput";
+
 import ServerSettings from '../Margins/ServerSettings';
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -16,6 +17,7 @@ const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
 const MARKER_ICON = L.icon({ iconUrl: icon, shadowUrl: iconShadow, iconAnchor: [12, 40] });
 const MAP_LAYER_ATTRIBUTION = "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors";
 const MAP_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const GEOCODE_URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=";
 const MAP_MIN_ZOOM = 1;
 const MAP_MAX_ZOOM = 19;
 
@@ -30,11 +32,13 @@ export default class Atlas extends Component {
         this.clearList = this.clearList.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
+        this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
-            listOfClicks: []
+            listOfClicks: [],
+            address: ""
         };
     
     }
@@ -167,6 +171,7 @@ export default class Atlas extends Component {
             this.state.listOfClicks.unshift(latlng);
             this.setState({markerPosition: latlng });
             this.setState({mapCenter: latlng});
+            this.reverseGeoCoding(latlng).then();
         }
     }
 
@@ -192,11 +197,13 @@ export default class Atlas extends Component {
         return latLng.lat.toFixed(6) + ', ' + latLng.lng.toFixed(6);
     }
 
-    processConfigResponse(FindResponse) {
-        if (!isJsonResponseValid(FindResponse, FindSchema)) {
-            this.processServerConfigError("Configuration Response Not Valid. Check The Server.");
-        } else {
-            this.processServerConfigSuccess(FindResponse);
-        }
-    }
+    async reverseGeoCoding(coordinates) {
+        // Here the coordinates are in LatLng Format
+        // if you wish to use other formats you will have to change the lat and lng in the fetch URL
+        const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
+        console.log(data);
+        
+        const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
+        this.setState({ address: addressLabel});
+      }
 }
