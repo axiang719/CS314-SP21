@@ -173,7 +173,8 @@ export default class Atlas extends Component {
     setMarker(latlng) {
         if (latlng != null) {
             this.state.listOfClicks.unshift(latlng);
-            this.reverseGeoCoding(latlng).then(()=>this.setState({markerPosition: latlng,mapCenter: latlng}));
+            this.reverseGeoCoding(latlng).then();
+            this.setState({markerPosition: latlng,mapCenter: latlng});
         }
     }
 
