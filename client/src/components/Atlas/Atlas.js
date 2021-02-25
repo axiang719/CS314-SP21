@@ -180,7 +180,7 @@ export default class Atlas extends Component {
             return (
                 <Marker ref={(ref) => this.showMarkerPopup(ref)} position={this.state.markerPosition} icon={MARKER_ICON}>
                     <Popup offset={[0, -18]} className="font-weight-bold">
-                        {this.getLatLngText(this.state.markerPosition)}
+                        {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
                 </Marker>
             );
@@ -192,6 +192,17 @@ export default class Atlas extends Component {
             ref.leafletElement.openPopup();
         }
     }
+
+    getStringMarkerPosition() {
+        //console.log(this.state.adress)
+        return (
+          <div>  
+            {this.state.address}
+            <br/>
+            {this.state.markerPosition.lat.toFixed(8) + ", " + this.state.markerPosition.lng.toFixed(8)}
+          </div>
+        );
+      }
 
     getLatLngText(latLng) {
         return latLng.lat.toFixed(6) + ', ' + latLng.lng.toFixed(6);
