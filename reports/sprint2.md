@@ -82,9 +82,18 @@ Based on previous results we should be able to complete all 5 epics planned. In 
 ## Review
 
 ### Epics completed  
-
+##### Epic One
+Epic one entailed implementing the server protocol for the find feature. This epic was the longest part of the sprint, as the team learned about servers and databases. Upon completion, our server can succeessfully recieve a find request from the organazation that populates as the specifications require. 
+##### Epic Two
+Epic Two was completed efficiently and it allows users to find themselves by sharing thier location with the server. We were able to successfully move the map and marker to the users location when the webpage launches, also updating the table that was built on the website. A "find me" button was also implemented which takes the user back to thier location after clicking the button. The final part of this epic was centering the map on each click. 
+##### Epic Three
+In epic three, the team made it possible for users to search for a specific latidute or longitude, which was then updated in the table. Input was then validated, ensuring that users were passing in a correct format for latitude or longitude. The map was also updated for the user's search, moving the map marker to the specified location. 
+##### Epic Four
+Epic four implemented the "where" and "type" functionality for our server allowing users to search for a specific location based on where it is (country,city,municipality) or a type of location (airport,heliport,balloonport or other). We enabled our server to properly handle requests for these criteria, while also adding new buttons below the search bar. A toggle button was added for users to switch on and off a specific type and when the user designates a location in the "where?" field, it pops up a small button that allows users to track recent searches. When the user completes the search, it opens a table of locations that the user can scroll through and add a specific location. This also updates the map marker and table with the location.
+##### Epic Five
+Epic five was the quickest Epic for this sprint and it showed users extra information on the map for every click. Now instead of soley lat/lon, users can see an actual place with an address. This shows on the map, as well as updates the table with the new address field. 
 ### Epics not completed 
-
+All epic were successfully completed, after much stress to the Epic Gamers.
 ## Retrospective
 
 ### Things that went well
