@@ -141,7 +141,7 @@ For this sprint, our team will not be making any changes to the class structure.
 #### Main section
 Our team will be adding a button to the main page to return the user to their current postion. We will aslo be adding a search bar to allow users to search for places in several ways. We will also be fixing our our table to accommodate the textual representation of lat and long. the marker will also be updated to show textual form of lat and long
 
-![PhoneDesignSprint2](images/phoneDesign.jpg)
+![PhoneDesignSprint2](images/phoneDesign.JPG)
 
 
 ### Component Hierarchy
