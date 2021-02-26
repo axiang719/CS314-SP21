@@ -2,7 +2,7 @@ import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
 
 import React from 'react';
-import {DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import {InputGroup, DropdownItem} from 'reactstrap';
 
 import CoordinatesInput from '../src/components/Atlas/CoordinatesInput';
 import { beforeEach, expect, it } from '@jest/globals';
