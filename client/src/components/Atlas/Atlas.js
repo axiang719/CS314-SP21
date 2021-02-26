@@ -70,7 +70,7 @@ export default class Atlas extends Component {
                                         <th>Latitude</th>
                                         <th>Longitude</th>
                                         <th>
-                                            <Button color="primary" size="sm" onClick={this.clearList} 
+                                            <Button id="clear" color="primary" size="sm" onClick={this.clearList} 
                                             xs={1}>
                                                 Clear
                                             </Button>
@@ -101,7 +101,7 @@ export default class Atlas extends Component {
                         <td>{place.lat.toFixed(6)}</td>
                         <td>{place.lng.toFixed(6)}</td>
                         <td>
-                            <Button color="primary" size="sm" onClick={this.removePlace.bind(this, index)} xs={1}>
+                            <Button id="xButton" color="primary" size="sm" onClick={this.removePlace.bind(this, index)} xs={1}>
                                 X
                             </Button>
                         </td>
@@ -145,7 +145,7 @@ export default class Atlas extends Component {
 
     renderFindMeButton() {
         return (
-          <Button onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
+          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
         );
       }
 

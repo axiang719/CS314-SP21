@@ -4,6 +4,8 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import {Marker} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
+import { it, toEqual } from '@jest/globals';
+
 
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
@@ -33,7 +35,19 @@ describe('Atlas', () => {
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
         expect(atlasWrapper.find(Marker).length).toEqual(1);
     });
-    
+
+    it('fills and clears a listOfClicks', () => {
+        const clickPosition = {lat: 50, lng: 50};
+        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
+        atlasWrapper.find('#xButton').simulate('click');
+        expect(atlasWrapper.state().listOfClicks).toEqual([]);
+
+        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
+        expect(atlasWrapper.state().listOfClicks).toEqual([{"lat": 50, "lng" : 50}]);
+        atlasWrapper.find('#clear').simulate('click');
+        expect(atlasWrapper.state().listOfClicks).toEqual([]);
+
+    });
 
     function simulateOnClickEvent(wrapper, event) {
         wrapper.find('Map').at(0).simulate('click', event);
