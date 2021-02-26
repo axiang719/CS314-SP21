@@ -95,9 +95,10 @@ Epic five was the quickest Epic for this sprint and it showed users extra inform
 ### Epics not completed 
 All epic were successfully completed, after much stress to the Epic Gamers.
 ## Retrospective
-
+In retrospective, the team achieved everything that we set out to and implemented an awesome app. Everything came out better than expected, with additional functionality to what was planned. The work put in was as insane amount and the website is something the Epic Gamers are proud of after Sprint 2.
 ### Things that went well
-
+Some things that went well were the server implementation and user interface implementation. Our server properly takes in post requests and generates data according to the company guidelines. Along with that, our interface is mobile freindly and incredibly easy for users to use. 
 ### Things we need to improve
-
+Teamwork is the main thing that needs to improve for the next sprint. Communication was often an issue, with many people leaving meetings or not showing up entirely. People have been assigned tasks that were not finished on time, which led to teammates falling behind. Time was often wasted getting back on the same page with each other, having to explain code that was written. 
 ### One thing we will change next time
+Teamwork will be improved next sprint. In the future, communication will be an added emphasis, leading to the Epic Gamers working more effiently with each teammate up to speed on what is being done. 
