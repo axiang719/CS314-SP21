@@ -77,6 +77,7 @@ Based on previous results we should be able to complete all 5 epics planned. In 
 | 2/22/2021 | 0 | 14 | none |
 | 2/23/2021 | 1 | 13 | none |
 | 2/24/2021 | 6 |  8 | none |
+| 2/25/2021 |12 |  0 | none |
 
 ## Review
 
