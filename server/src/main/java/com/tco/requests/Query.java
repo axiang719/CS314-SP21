@@ -129,8 +129,8 @@ public class Query {
     }
 
     public void setWhere(ArrayList<String> where){
-        this.where = where;
-        if (this.where != null) {
+        if (where != null) {
+            this.where = new ArrayList(where);
             sanitizeStringList(this.where);
         }
     }
