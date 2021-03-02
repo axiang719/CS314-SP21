@@ -1,10 +1,10 @@
-# Sprint 3 - *your team number* - *your team name*
+# Sprint 3 - *t13* - *The Epic Gamers*
 
 ## Goal
 ### *How far is it?*
 
 ## Sprint Leader: 
-### *firstname lastname*
+### *Chad Minning*
 
 ## Definition of Done
 
