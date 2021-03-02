@@ -3,7 +3,7 @@
 ## Goal
 ### *How far is it?*
 
-## Sprint Leader: 
+## Scrum Master: 
 ### *Chad Minning*
 
 ## Definition of Done
