@@ -3,7 +3,7 @@
 ## Goal
 ### *How far is it?*
 
-## Scrum Master: 
+## Sprint Leader: 
 ### *Chad Minning*
 
 ## Definition of Done
@@ -37,6 +37,8 @@
 
 ## Planned Epics
 
+### Epic One
+Epic 1 will focus on implementing the distance request. We will add "distance" to the list of API features. The user can input locations and get the distance between two endpoints in response.
 
 ## Metrics
 
