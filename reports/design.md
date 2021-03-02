@@ -145,7 +145,7 @@ Our team will be adding a button to the main page to return the user to their cu
 
 
 ### Component Hierarchy
-This sprint will focus on adding search functionality to the Atlas component. This will include a component that seraches locations by name and type, returning a list of matching results that can be selected from. We will also build a component that allows the user to search for a specific location by latitude and longitude which will update the atlas component and the list of clicks component with the matching location.
+This sprint will focus on adding search functionality to the Atlas component. This will include a component that searches locations by name and type, returning a list of matching results that can be selected from. We will also build a component that allows the user to search for a specific location by latitude and longitude which will update the atlas component and the list of clicks component with the matching location.
 
 ![sprint 2 component hierarchy](images/Sprint2Diagram.png)
 
@@ -162,7 +162,9 @@ Sprint 3 will add the ability to see the distances between places store inside o
 ![sprint 3 UI diagram](images/Sprint3UI.png)
 
 ### Component Hierarchy
+This sprint will focus on adding distance functionality to the Atlas component. This will include a component that calculates distance between locations.
 
+![sprint 3 component hierarchy](images/Sprint3Diagram.png)
 
 ### Classes
 
