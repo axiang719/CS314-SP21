@@ -39,6 +39,9 @@
 
 ### Epic One
 Epic 1 will focus on implementing the distance request. We will add "distance" to the list of API features. The user can input locations and get the distance between two endpoints in response.
+### Epic Two
+Epic two will allow useres to calculate distances for thier planned trip, using the earths radius of 3959 miles. This feature will also show distances on the map for adjacent places and forming a "tour" by showing the distance from the last place added to the first. In the history table, users will see the cumalitive distances traveled and the total distance of the tour.
+
 
 ## Metrics
 
