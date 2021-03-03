@@ -18,7 +18,9 @@ public class DistanceRequest extends RequestHeader {
       
   }
 
- 
+  public static float calculateDistance(float firstPoint, float secondPoint) {
+    return 0.0;
+  }
   
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
