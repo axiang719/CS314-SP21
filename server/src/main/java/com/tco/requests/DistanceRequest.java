@@ -19,8 +19,17 @@ public class DistanceRequest extends RequestHeader {
       
   }
 
-  public static float calculateDistance(float firstPoint, float secondPoint) {
-    return Math.abs(firstPoint - secondPoint);
+  public static float calculateDistance(float firstPointLat, float firstPointLong,
+                                        float secondPointLat, float secondPointLong) {
+    float aSquared = Math.abs(Math.abs(firstPointLat) - 
+                              Math.abs(secondPointLat));
+    aSquared *= aSquared;
+    float bSquared = Math.abs(Math.abs(firstPointLong) - 
+                              Math.abs(secondPointLong));
+    bSquared *= bSquared;
+    float cSquared = aSquared + bSquared;
+    float retVal = (float) Math.sqrt(cSquared);
+    return retVal;
   }
   
   /* The following methods exist only for testing purposes and are not used
@@ -31,8 +40,10 @@ public class DistanceRequest extends RequestHeader {
   }
 
   public float testCalculateDistance() {
-    float first = 1.5f;
-    float second = 3.25f;
-    return calculateDistance(first,second);
+    float firstLat = -5.0f;
+    float firstLong = -5.0f;
+    float secondLat = -8.0f;
+    float secondLong = -9.0f;
+    return calculateDistance(firstLat,firstLong,secondLat,secondLong);
   }
 }
