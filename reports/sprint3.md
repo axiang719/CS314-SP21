@@ -59,7 +59,7 @@ Epic four will allow users to see a specific place from the trip on the map. Whe
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* |  | 
+| 03/02/21 | 1 | 3 |  | 
 
 
 ## Review
