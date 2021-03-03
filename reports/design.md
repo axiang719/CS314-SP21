@@ -167,7 +167,7 @@ This sprint will focus on adding distance functionality to the Atlas component. 
 ![sprint 3 component hierarchy](images/Sprint3Diagram.png)
 
 ### Classes
-
+![sprint 3 class diagram](images/Sp3ClassDiagram.png)
 
 # Sprint 4 
 # Sprint 5
