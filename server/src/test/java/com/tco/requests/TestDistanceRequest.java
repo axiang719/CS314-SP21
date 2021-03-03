@@ -20,7 +20,7 @@ public class TestDistanceRequest {
     @DisplayName("Test calculateDistance()")
     public void testCalculateDistance() {
         float actual = distance.testCalculateDistance();
-        float expected = 2.0f;
+        float expected = 1.75f;
         assertEquals(actual, expected);
     }
 }
