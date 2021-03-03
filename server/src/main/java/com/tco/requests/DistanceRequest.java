@@ -20,7 +20,8 @@ public class DistanceRequest extends RequestHeader {
   }
 
   public static float calculateDistance(float firstPoint, float secondPoint) {
-    float maxVal, minVal;
+    float maxVal = 0.0f;
+    float minVal = 0.0f;
     if (firstPoint > secondPoint) {
       maxVal = firstPoint; 
       minVal = secondPoint;
@@ -37,5 +38,11 @@ public class DistanceRequest extends RequestHeader {
 
   public DistanceRequest() {
     this.requestType = "distance";
+  }
+
+  public float testCalculateDistance() {
+    float first = 3.0f;
+    float second = 1.0f;
+    return calculateDistance(first,second);
   }
 }
