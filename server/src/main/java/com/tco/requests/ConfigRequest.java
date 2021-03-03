@@ -19,6 +19,7 @@ public class ConfigRequest extends RequestHeader {
         features.add("find");
         features.add("type");
         features.add("where");
+        features.add("distance");
         log.trace("buildResponse -> {}", this);
     }
 
