@@ -3,6 +3,7 @@ package com.tco.requests;
 import com.tco.requests.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.lang.Math;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,16 @@ public class DistanceRequest extends RequestHeader {
   }
 
   public static float calculateDistance(float firstPoint, float secondPoint) {
-    return 0.0;
+    float maxVal, minVal;
+    if (firstPoint > secondPoint) {
+      maxVal = firstPoint; 
+      minVal = secondPoint;
+    }
+    else {
+      maxVal = secondPoint;
+      minVal = firstPoint;
+    }    
+    return maxVal - minVal;
   }
   
   /* The following methods exist only for testing purposes and are not used
