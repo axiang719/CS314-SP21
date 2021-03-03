@@ -21,14 +21,12 @@ public class TestDistanceRequest {
         testPlaces = new ArrayList<HashMap<String, String>>();
     }
 
-    
     @Test
     @DisplayName("Request type is \"distances\"")
     public void testType() {
         String type = distanceRequest.getRequestType();
         assertEquals("distances", type);
     }
-
 
     @Test
     @DisplayName("Check that distances list is filled")
@@ -43,5 +41,13 @@ public class TestDistanceRequest {
         ArrayList<Integer> distances = distanceRequest.testDistanceList(testPlaces);
         assertEquals(0, distances.get(0));
         assertEquals(2, distances.size());
+    }
+
+    @Test
+    @DisplayName("Test calculateDistance()")
+    public void testCalculateDistance() {
+        int actual = distanceRequest.testCalculateDistance();
+        int expected = 5;
+        assertEquals(actual, expected);
     }
 }
