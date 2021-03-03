@@ -19,8 +19,8 @@ public class TestDistanceRequest {
     @Test
     @DisplayName("Test calculateDistance()")
     public void testCalculateDistance() {
-        float actual = distance.testCalculateDistance();
-        float expected = 5.0f;
+        int actual = distance.testCalculateDistance();
+        int expected = 5;
         assertEquals(actual, expected);
     }
 }

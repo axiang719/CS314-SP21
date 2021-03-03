@@ -19,12 +19,12 @@ public class DistanceRequest extends RequestHeader {
       
   }
   //check for if one is negative and other positive
-  public static float calculateDistance(float firstPointLat, float firstPointLong,
+  public static int calculateDistance(float firstPointLat, float firstPointLong,
                                         float secondPointLat, float secondPointLong) {
     float aSquared = checkSigns(firstPointLat,secondPointLat);
     float bSquared = checkSigns(firstPointLong,secondPointLong);
     float cSquared = aSquared + bSquared;              //use pythagorean theorem to find distance
-    float retVal = (float) Math.sqrt(cSquared);
+    int retVal = (int) Math.sqrt(cSquared);
     return retVal;
   }
 
@@ -50,7 +50,7 @@ public class DistanceRequest extends RequestHeader {
     this.requestType = "distance";
   }
 
-  public float testCalculateDistance() {
+  public int testCalculateDistance() {
     float firstLat = 3.0f;
     float firstLong = 2.0f;
     float secondLat = -1.0f;
