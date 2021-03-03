@@ -20,23 +20,24 @@ public class DistanceRequest extends RequestHeader {
   }
 
   private void fillDistancesList() {
-    this.distances = new ArrayList<Integer>();
     int size = places.size();
     float previousLatitude = 0;
     float previousLongitude = 0;
+    if (size > 1) {
+      this.distances = new ArrayList<Integer>();
+      for(int i=0; i <= size; i++) {
+        HashMap<String, String> place = places.get(i % size);
+        float latitude = Float.parseFloat(place.get("latitude"));
+        float longitude = Float.parseFloat(place.get("longitude"));
 
-    for(int i=0; i <= size; i++) {
-      HashMap<String, String> place = places.get(i % size);
-      float latitude = Float.parseFloat(place.get("latitude"));
-      float longitude = Float.parseFloat(place.get("longitude"));
+        if (i != 0) {
+          int resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude);
+          this.distances.add(resultDistance);
+        }
 
-      if (i != 0) {
-        int resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude); //TODO Add call to distance function here. Replace 0 with results.
-        this.distances.add(resultDistance);
+        previousLatitude = latitude;
+        previousLongitude = longitude;
       }
-
-      previousLatitude = latitude;
-      previousLongitude = longitude;
     }
   }
 
