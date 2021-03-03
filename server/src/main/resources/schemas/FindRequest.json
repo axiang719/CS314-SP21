@@ -12,8 +12,7 @@
     },
     "match": {
       "description":"an alphanumeric pattern used to find geographic locations.",
-      "type":"string",
-      "pattern":"^[a-zA-Z0-9_ ]*$"
+      "type":"string"
     },
     "type": {
       "description": "types of places to choose",
