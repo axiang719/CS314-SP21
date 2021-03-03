@@ -9,9 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestDistanceRequest {
    
+    private DistanceRequest distance;
+
+    @BeforeEach
+    public void createConfigurationForTestCases() {
+        distance = new DistanceRequest();
+    }
+
     @Test
-    @DisplayName("Placeholder")
-    public void placeholder() {
-        assertEquals(true, true);
+    @DisplayName("Test calculateDistance()")
+    public void testCalculateDistance() {
+        int actual = distance.testCalculateDistance();
+        int expected = 5;
+        assertEquals(actual, expected);
     }
 }
