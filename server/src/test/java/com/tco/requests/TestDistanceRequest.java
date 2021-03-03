@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestDistance {
+public class TestDistanceRequest {
    
     @Test
     @DisplayName("Placeholder")
