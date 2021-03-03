@@ -167,6 +167,7 @@ This sprint will focus on adding distance functionality to the Atlas component. 
 ![sprint 3 component hierarchy](images/Sprint3Diagram.png)
 
 ### Classes
+Sprint 3 will add the DistanceRequest class, which will allow our server to handle new distance requests. DistanceRequest will take in a request and build a JSON response based on company guidelines. 
 ![sprint 3 class diagram](images/Sp3ClassDiagram.png)
 
 # Sprint 4 
