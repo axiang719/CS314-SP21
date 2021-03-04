@@ -12,7 +12,7 @@ The checklist will be updated as we identify new faults in our code that we wish
 * If character strings are used, is a delimiter explicitly assigned?
 * Is there any possibility of a buffer overflow?
 * Are important variables accessible by every method that needs them?
-* Is private data kept private?
+* Is private data kept private (ex. public methods expose private data)?
 * Are all streams that we're done using closed?
 
 ### Control faults
@@ -53,3 +53,5 @@ The checklist will be updated as we identify new faults in our code that we wish
 * Could a complex method be broken up into multiple methods?
 * Is the same code written twice elsewhere in the program?
 * Are method names descriptive and make their function obvious?
+* Does every method have test coverage?
+* Are variables declared in the order that they are used?
