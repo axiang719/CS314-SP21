@@ -46,6 +46,8 @@ public class TestDistanceRequest {
     @Test
     @DisplayName("Test calculateDistance()")
     public void testCalculateDistance() {
-        assertEquals(true, true);
+        int actual = distanceRequest.testCalcDist();
+        int expected = 13433;
+        assertEquals(actual,expected);
     }
 }
