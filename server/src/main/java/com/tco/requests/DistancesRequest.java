@@ -7,11 +7,11 @@ import java.lang.Math;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DistanceRequest extends RequestHeader {
-  private Float earthRadius;
+public class DistancesRequest extends RequestHeader {
+  private Double earthRadius;
   private ArrayList<Integer> distances;
   private ArrayList<HashMap<String, String>> places;
-  private final transient Logger log = LoggerFactory.getLogger(DistanceRequest.class);
+  private final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
 
   @Override
   public void buildResponse() {
@@ -21,14 +21,14 @@ public class DistanceRequest extends RequestHeader {
 
   private void fillDistancesList() {
     int size = places.size();
-    float previousLatitude = 0;
-    float previousLongitude = 0;
+    double previousLatitude = 0;
+    double previousLongitude = 0;
     if (size > 1) {
       this.distances = new ArrayList<Integer>();
       for(int i=0; i <= size; i++) {
         HashMap<String, String> place = places.get(i % size);
-        float latitude = Float.parseFloat(place.get("latitude"));
-        float longitude = Float.parseFloat(place.get("longitude"));
+        double latitude = Double.parseDouble(place.get("latitude"));
+        double longitude = Double.parseDouble(place.get("longitude"));
 
         if (i != 0) {
           int resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude);
@@ -42,33 +42,33 @@ public class DistanceRequest extends RequestHeader {
   }
 
   //check for if one is negative and other positive
-  public static int calculateDistance(float firstPointLatD, float firstPointLongD,
-                                      float secondPointLatD, float secondPointLongD) {
-    float firstPointLat = (float) (firstPointLatD * (Math.PI/180));
-    float firstPointLong = (float) (firstPointLongD * (Math.PI/180));
-    float secondPointLat = (float) (secondPointLatD * (Math.PI/180));
-    float secondPointLong = (float) (secondPointLongD * (Math.PI/180));
-    float vincentPOne = (float) (Math.cos(secondPointLat) * 
+  public int calculateDistance(double firstPointLatD, double firstPointLongD,
+                              double secondPointLatD, double secondPointLongD) {
+    double firstPointLat = (firstPointLatD * (Math.PI/180));
+    double firstPointLong =  (firstPointLongD * (Math.PI/180));
+    double secondPointLat = (secondPointLatD * (Math.PI/180));
+    double secondPointLong = (secondPointLongD * (Math.PI/180));
+    double vincentPOne = (Math.cos(secondPointLat) * 
                          Math.sin(Math.abs(firstPointLong-secondPointLong)));
-    float vincentPTwo = (float) ((Math.cos(firstPointLat) * Math.sin(secondPointLat)) -
+    double vincentPTwo = ((Math.cos(firstPointLat) * Math.sin(secondPointLat)) -
                          (Math.sin(firstPointLat) * Math.cos(secondPointLat) * 
                          Math.cos(Math.abs(firstPointLong-secondPointLong))));
-    vincentPOne = (float) Math.pow(vincentPOne,2);
-    vincentPTwo = (float) Math.pow(vincentPTwo,2);
-    float vincentPThree = (float) (Math.sin(firstPointLat) * Math.sin(secondPointLat));
-    float vincentPFour = (float) (Math.cos(firstPointLat) * Math.cos(secondPointLat) * 
+    vincentPOne =  Math.pow(vincentPOne,2);
+    vincentPTwo =  Math.pow(vincentPTwo,2);
+    double vincentPThree = (Math.sin(firstPointLat) * Math.sin(secondPointLat));
+    double vincentPFour =  (Math.cos(firstPointLat) * Math.cos(secondPointLat) * 
                           Math.cos(Math.abs(firstPointLong-secondPointLong)));
-    float arcTanOne = (float) Math.sqrt(vincentPOne + vincentPTwo);
-    float arcTanTwo = (float) vincentPThree + vincentPFour; 
-    float angle = (float) Math.atan2(arcTanOne,arcTanTwo);
-    int distance = (int) (6371.0f * angle);
+    double arcTanOne =  Math.sqrt(vincentPOne + vincentPTwo);
+    double arcTanTwo =  vincentPThree + vincentPFour; 
+    double angle =  Math.atan2(arcTanOne,arcTanTwo);
+    int distance = (int)Math.round(earthRadius * angle);
     return distance;
   }
   
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 
-  public DistanceRequest() {
+  public DistancesRequest() {
     this.requestType = "distances";
   }
 
@@ -79,10 +79,10 @@ public class DistanceRequest extends RequestHeader {
   }
 
   public int testCalcDist() {
-    float latOne = 40.6f;
-    float longOne = -105.1f;
-    float latTwo = -33.9f;
-    float longTwo = 151.2f;
+    double latOne = 40.6f;
+    double longOne = -105.1f;
+    double latTwo = -33.9f;
+    double longTwo = 151.2f;
     return calculateDistance(latOne,longOne,latTwo,longTwo);
   }
 
