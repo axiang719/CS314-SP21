@@ -9,15 +9,38 @@ import org.slf4j.LoggerFactory;
 
 public class DistanceRequest extends RequestHeader {
   private Float earthRadius;
-  private ArrayList<Float> distances;
+  private ArrayList<Integer> distances;
   private ArrayList<HashMap<String, String>> places;
   private final transient Logger log = LoggerFactory.getLogger(DistanceRequest.class);
 
   @Override
   public void buildResponse() {
-      log.trace("buildResponse -> {}", this);
-      
+    log.trace("buildResponse -> {}", this);
+    fillDistancesList();
   }
+
+  private void fillDistancesList() {
+    int size = places.size();
+    float previousLatitude = 0;
+    float previousLongitude = 0;
+    if (size > 1) {
+      this.distances = new ArrayList<Integer>();
+      for(int i=0; i <= size; i++) {
+        HashMap<String, String> place = places.get(i % size);
+        float latitude = Float.parseFloat(place.get("latitude"));
+        float longitude = Float.parseFloat(place.get("longitude"));
+
+        if (i != 0) {
+          int resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude);
+          this.distances.add(resultDistance);
+        }
+
+        previousLatitude = latitude;
+        previousLongitude = longitude;
+      }
+    }
+  }
+
   //check for if one is negative and other positive
   public static int calculateDistance(double firstPointLat, double firstPointLong,
                                       double secondPointLat, double secondPointLong) {
@@ -37,7 +60,13 @@ public class DistanceRequest extends RequestHeader {
   during normal execution, including the constructor. */
 
   public DistanceRequest() {
-    this.requestType = "distance";
+    this.requestType = "distances";
+  }
+
+  public ArrayList<Integer> testDistanceList(ArrayList<HashMap<String, String>> places) {
+    this.places = places;
+    fillDistancesList();
+    return this.distances;
   }
 
   public int testCalculateDistance() {
