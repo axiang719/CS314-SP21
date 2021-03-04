@@ -78,15 +78,8 @@ public class DistancesRequest extends RequestHeader {
     return this.distances;
   }
 
-  public int testCalcDist() {
-    double latOne = 40.6f;
-    double longOne = -105.1f;
-    double latTwo = -33.9f;
-    double longTwo = 151.2f;
-    return calculateDistance(latOne,longOne,latTwo,longTwo);
-  }
-
-  public int testCalcDistZero() {
-    return calculateDistance(10.0f,30.0f,10.0f,30.0f);
+  public double setRadius(double radius){
+    this.earthRadius = radius;
+    return radius;
   }
 }
