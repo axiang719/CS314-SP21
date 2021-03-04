@@ -31,6 +31,7 @@ public class TestDistancesRequest {
     @Test
     @DisplayName("Check that distances list is filled")
     public void testDistanceList() {
+        distancesRequest.setRadius(6378);
         int expectedDistance = 0;
         HashMap<String, String> place = new HashMap<String, String>();
         place.put("name", "testPlace");
