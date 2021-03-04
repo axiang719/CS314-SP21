@@ -85,4 +85,8 @@ public class DistanceRequest extends RequestHeader {
     float longTwo = 151.2f;
     return calculateDistance(latOne,longOne,latTwo,longTwo);
   }
+
+  public int testCalcDistZero() {
+    return calculateDistance(10.0f,30.0f,10.0f,30.0f);
+  }
 }

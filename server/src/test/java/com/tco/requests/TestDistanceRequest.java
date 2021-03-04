@@ -50,4 +50,12 @@ public class TestDistanceRequest {
         int expected = 13433;
         assertEquals(actual,expected);
     }
+
+    @Test
+    @DisplayName("Distance of zero if enter same place twice") 
+    public void testCalculateDistanceZero() {
+        int actual = distanceRequest.testCalcDistZero();
+        int expected = 0;
+        assertEquals(actual,expected);
+    }
 }
