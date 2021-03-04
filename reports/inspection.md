@@ -2,9 +2,9 @@
  
 | Inspection | Details |
 | ----- | ----- |
-| Subject | *file and methods/line range to review for meeting* |
-| Meeting | *date, time, location* |
-| Checklist | *reference, URL, etc.* |
+| Subject | MatchSearch.js |
+| Meeting | 3/8, 3:00PM, Discord |
+| Checklist | https://github.com/csucs314s21/t13/tree/main/reports/checklist.md |
 
 ### Roles
 
