@@ -8,42 +8,36 @@ import {
 
 import { CLIENT_TEAM_NAME } from "../../utils/constants";
 
-import andieImage from "/src/static/images/bio-picture-andie.png";
-import chadImage from "/src/static/images/ChadTurtle.jpg";
-import ethanImage from "/src/static/images/EthanPanda.jpg";
-import anthonyImage from "/src/static/images/Anthonylama.jpg";
-import michaelImage from "/src/static/images/MichaelCat.jpg";
-
 export default class About extends Component {
     render() {
         const people = [{
             name: "Andie Groeling",
             bio: "I am a 3rd year Computer Engineering and Computer Science double major who enjoys vintage computers, baking, and Linux.",
-            imagePath: andieImage,
+            imagePath: "/src/static/images/bio-picture-andie.png",
             cardNum: 1
         },
         {
             name: "Chad Minning",
             bio: "My name is Chad Minning. I'm a non-traditional student in my 3rd year of the Computer Science program. I've gone from owning my own company in the construction industry, to full time education and I've loved the change. I enjoy cycling, videogames, and all things CS.",
-            imagePath: chadImage,
+            imagePath: "/src/static/images/ChadTurtle.jpg",
             cardNum: 2
         },
         {
             name: "Ethan Seefried",
             bio: "I'm Ethan Seefried, a student veteran who is a junior in Applied Physics with a minor in Computer Science. I enjoy playing video games in my free time, playing almost evry any sport and spending time with my family. My goal in life is to one day code on a space related project.",
-            imagePath: ethanImage,
+            imagePath: "/src/static/images/EthanPanda.jpg",
             cardNum: 3
         },
         {
             name: "Anthony Xiang",
             bio: "Hi my name is Anthony, I'm a senior majoring in Applied Computing Technology and getting my minor in business administration. I Love to do anything outdoor related and I also have a deep passion about learning how technology works ",
-            imagePath: anthonyImage,
+            imagePath: "/src/static/images/Anthonylama.jpg",
             cardNum: 4
         },
         {
             name: "Michael Young",
             bio: "Hello, my name is Michael Young. I'm a junior majoring in Computer Science at CSU. In my free time I like playing video games, watching cartoons, drawing, and photographing animals. My dream job is to work in game development.",
-            imagePath: michaelImage,
+            imagePath: "/src/static/images/MichaelCat.jpg",
             cardNum: 5
         }];
 
