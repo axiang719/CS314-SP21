@@ -13,6 +13,7 @@ describe('Atlas', () => {
 
 
     beforeEach(() => {
+        mockGeoLocateResponse();
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}/>);
     });
 
@@ -48,6 +49,16 @@ describe('Atlas', () => {
         expect(atlasWrapper.state().listOfClicks).toEqual([]);
 
     });
+
+    function mockGeoLocateResponse() {
+      const responseData = {
+         address: {
+             LongLabel: "test label"
+         }
+      };
+      
+      fetch.mockResponse(JSON.stringify(responseData));
+   }
 
     function simulateOnClickEvent(wrapper, event) {
         wrapper.find('Map').at(0).simulate('click', event);
