@@ -12,6 +12,7 @@
 | ---- | ---- |
 | Chad Minning | 2 hours |
 | Ethan Seefried | 1 hour |
+| Anthony Xiang | 1 hour |
 
 ### Problems found
 
@@ -19,3 +20,4 @@
 | --- | --- | :---: | :---: | --- |
 | MatchSearch.js | No way to set search limit | low | Chad | #390 |
 | MatchSearch.js | Set type and where use redundant code | low | Ethan | #391 |
+| MatchSearch.js | There is no easy way for the user to access random places | med | Anthony | #392 |
