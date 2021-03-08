@@ -24,3 +24,4 @@
 | MatchSearch.js | Set type and where use redundant code | low | Ethan | #391 |
 | MatchSearch.js | There is no easy way for the user to access random places | med | Anthony | #392 |
 | MatchSearch.js | Handle whitespace input | low | Andie | #393 |
+| MatchSearch.js | MatchSearch.js does not have a test file | high | Michael | #351 |
