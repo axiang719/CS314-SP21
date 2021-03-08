@@ -13,6 +13,7 @@
 | Chad Minning | 2 hours |
 | Ethan Seefried | 1 hour |
 | Anthony Xiang | 1 hour |
+| Michael Young | 0 hours |
 
 ### Problems found
 
