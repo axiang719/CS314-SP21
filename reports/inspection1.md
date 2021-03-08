@@ -10,12 +10,12 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-|  |  |
+| Chad Minning | 2 hours |
 |  |  |
 
 ### Problems found
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
-|  | | | | |
+| MatchSearch.js | No way to set search limit | low | Chad | #390 |
 |  | | | | |
