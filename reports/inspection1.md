@@ -1,4 +1,4 @@
-# Inspection - Team *T##* 
+# Inspection - Team *T13* 
  
 | Inspection | Details |
 | ----- | ----- |
@@ -11,11 +11,11 @@
 | Name | Preparation Time |
 | ---- | ---- |
 | Chad Minning | 2 hours |
-|  |  |
+| Ethan Seefried | 1 hour |
 
 ### Problems found
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
 | MatchSearch.js | No way to set search limit | low | Chad | #390 |
-|  | | | | |
+| MatchSearch.js | Set type and where use redundant code | low | Ethan | #391 |
