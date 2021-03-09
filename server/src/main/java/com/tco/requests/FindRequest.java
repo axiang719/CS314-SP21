@@ -15,6 +15,14 @@ public class FindRequest extends RequestHeader {
   private ArrayList<String> where;
   private final transient Logger log = LoggerFactory.getLogger(FindRequest.class);
 
+  public FindRequest(String match, Integer limit, Integer found, ArrayList<String> type, ArrayList<String> where){
+    this.match = match;
+    this.limit = limit;
+    this.found = found;
+    this.type = type;
+    this.where = where;
+  }
+
   @Override
   public void buildResponse() {
       log.trace("buildResponse -> {}", this);
@@ -46,4 +54,20 @@ public class FindRequest extends RequestHeader {
   public FindRequest() {
     this.requestType = "find";
   }
+  public getMatch(){
+    return match;
+  }
+  public getLimit(){
+    return limit;
+  }
+  public getFound(){
+    return found;
+  }
+  public getType(){
+    return type;
+  }
+  public getWhere(){
+    return where;
+  }
+  
 }
