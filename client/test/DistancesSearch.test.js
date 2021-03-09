@@ -13,7 +13,7 @@ describe('Distances Search', () => {
     const showMessage = jest.fn();
     const request = { requestType: 'distances', 
                     places: [], 
-                    earthRadius: 5000 }
+                    earthRadius: 5000 };
 
 
     beforeEach(() => {
@@ -41,6 +41,12 @@ describe('Distances Search', () => {
 
     });
 
+
+    it('Sends fails with bad api request', () => {
+        distancesSearchWrapper.instance().sendDistancesRequest({"name": "and nothing else"});
+        const actualDistances = distancesSearchWrapper.state().distances;
+        expect(actualDistances).toEqual([]);
+    });
 
     function mockDistancesResponse() {
         const responseData = {
