@@ -5,7 +5,7 @@ import PlacesList from "./PlacesList";
 
 import {LOG} from "../../utils/constants";
 import * as findSchema from "../../../schemas/FindResponse";
-import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
+import { isJsonResponseValid, sendServerRequest } from "../../utils/restfulAPI";
 import TypeSearch from "./TypeSearch";
 import WhereSearch from "./WhereSearch";
 
