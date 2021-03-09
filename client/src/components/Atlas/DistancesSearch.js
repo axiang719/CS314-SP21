@@ -11,14 +11,21 @@ export default class DistancesSearch {
     };
     var distances = []
 
+    getDistances() {
+        if (distances.length == 0) {
+            sendDistancesRequest();
+        }
+        return this.distances;
+    }
+
     addDistancesArrayElements = (accumulator, currentValue) => accumulator + currentValue;
    
     sumDistances() {
         return this.distances.reduce(addDistancesArrayElements);
     }
    
-    sendDistancesRequest(request) {
-	    sendServerRequest(request)
+    sendDistancesRequest() {
+	    sendServerRequest(JSON.stringify(request))
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
 				    this.processDistancesResponse(distancesResponse);
