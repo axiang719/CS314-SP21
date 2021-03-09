@@ -54,19 +54,19 @@ public class FindRequest extends RequestHeader {
   public FindRequest() {
     this.requestType = "find";
   }
-  public getMatch(){
+  public String getMatch(){
     return match;
   }
-  public getLimit(){
+  public Integer getLimit(){
     return limit;
   }
-  public getFound(){
+  public Integer getFound(){
     return found;
   }
-  public getType(){
+  public ArrayList<String> getType(){
     return type;
   }
-  public getWhere(){
+  public ArrayList<String> getWhere(){
     return where;
   }
   

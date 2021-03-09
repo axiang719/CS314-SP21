@@ -23,6 +23,7 @@ public class TestFindRequest {
     @BeforeEach
     public void createConfigurationForTestCases() {
         find = new FindRequest();
+        find.buildResponse();
         testPlaces = new ArrayList<HashMap<String, String>>();
     }
 
@@ -33,22 +34,4 @@ public class TestFindRequest {
         assertEquals("find", type);
     }
 
-    @Test
-    @DisplayName("test Build Response")
-    public void testBuildResponse(){
-        
-    }
-
-    @Test
-    @DisplayName("test Populate Places")
-    public void testPopulatePlaces(){
-       testPlaces = find.testPopulatePlaces();
-       assertEquals(1,testPlaces.size());
-    }
-
-    @Test
-    @DisplayName("Test Populate Found")
-    public void testPopulateFound(){
-        
-    }
 }
