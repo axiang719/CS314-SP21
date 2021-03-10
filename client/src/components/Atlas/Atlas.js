@@ -171,12 +171,11 @@ export default class Atlas extends Component {
         }
     }
 
-    handleDistances() {
-        var distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
-        var distances = [];
-        distanceRequest.sendDistancesRequest()
-            .then(() => {distances = distanceRequest.getDistances()})
-            .then(this.handleDistancesResponse(distances));
+    async handleDistances() {
+        const distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
+        await distanceRequest.sendDistancesRequest();
+        const distances = distanceRequest.getDistances();
+        this.handleDistancesResponse(distances);
     }
 
     handleDistancesResponse(distances) {

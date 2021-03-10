@@ -25,14 +25,13 @@ export default class DistancesSearch {
     }
    
     sendDistancesRequest() {
-	    sendServerRequest(this.request)
+	    return sendServerRequest(this.request)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
 				    this.processDistancesResponse(distancesResponse);
 				} else {
 					LOG.error("Distances Request To The Server Failed.");
 				}
-                return null
 		    });
 	}
 
