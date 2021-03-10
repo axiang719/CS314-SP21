@@ -115,8 +115,7 @@ export default class Atlas extends Component {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
         }
-
-        this.setState({ listOfClicks: newList });
+        this.setState({ listOfClicks: newList }, this.handleDistances);
     }
 
     renderLeafletMap() {
@@ -240,7 +239,6 @@ export default class Atlas extends Component {
         const listOfClicks = this.state.listOfClicks;
         const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
         listOfClicks.unshift(place);
-        this.setState({listOfClicks: listOfClicks, address: addressLabel});
-        this.handleDistances();
+        this.setState({listOfClicks: listOfClicks, address: addressLabel}, this.handleDistances);
       }
 }
