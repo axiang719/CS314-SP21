@@ -4,16 +4,19 @@ import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from ".
 import { LatLngBounds } from 'leaflet';
 
 export default class DistancesSearch {
-    var request = {
-        requestType: "distances",
-        places: [],
-        earthRadius: null
-    };
-    var distances = []
+
+    constructor(places, earthRadius) {
+        this.request = {
+            requestType: "distances",
+            places: places,
+            earthRadius: earthRadius,
+        };
+        this.distances = []
+    }
 
     getDistances() {
-        if (distances.length == 0) {
-            sendDistancesRequest();
+        if (this.distances.length == 0) {
+            this.sendDistancesRequest();
         }
         return this.distances;
     }
@@ -25,7 +28,8 @@ export default class DistancesSearch {
     }
    
     sendDistancesRequest() {
-	    sendServerRequest(JSON.stringify(request))
+        LOG.info(this.request);
+	    sendServerRequest(this.request)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
 				    this.processDistancesResponse(distancesResponse);
@@ -45,6 +49,6 @@ export default class DistancesSearch {
 
    processDistancesSuccess(distancesResponse) {
        LOG.info("Receiving distances response from:", getOriginalServerPort());
-       distances = distancesResponse.distances;
+       this.distances = distancesResponse.distances;
 	}
 } 

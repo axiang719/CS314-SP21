@@ -10,6 +10,7 @@ import { latLng } from 'leaflet';
 
 import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
+import DistancesSearch from "./DistancesSearch";
 
 import ServerSettings from '../Margins/ServerSettings';
 
@@ -41,7 +42,7 @@ export default class Atlas extends Component {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
-            address:"" ,
+            address: ""
         };
     
     }
@@ -70,7 +71,7 @@ export default class Atlas extends Component {
                                         <th>Address</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
-                                        <th>Distance</th>
+                                        <th>Distances</th>
                                         <th>
                                             <Button id="clear" color="primary" size="sm" onClick={this.clearList} 
                                             xs={1}>
@@ -165,9 +166,40 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
+            this.handleDistances();
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng,mapCenter: latlng});
+            this.setState({markerPosition: latlng, mapCenter: latlng});
         }
+    }
+
+    handleDistances() {
+        var distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
+        var distances = [];
+        distances = distanceRequest.getDistances();
+
+        this.handleDistancesResponse(distances);
+    }
+
+    getPlaces() {
+        var places = [];
+        for(var i = 0; i < this.state.listOfClicks.length; i++) {
+            const place = {
+                name: this.state.listOfClicks[i].address,
+                latitude: this.state.listOfClicks[i].latitude.toString(),
+                longitude: this.state.listOfClicks[i].longitude.toString()
+            }
+            places.unshift(place);
+        }
+        return places;
+    }
+
+    handleDistancesResponse(distances) {
+        var newList = this.state.listOfClicks;
+        var numPlaces = newList.length;
+        for(var i = 0; i < numPlaces; i++) {
+            newList[i].distance = distances[(numPlaces - 1) - i];
+        }
+        this.setState({listOfClicks: newList});
     }
 
     getMarker() {
@@ -207,7 +239,7 @@ export default class Atlas extends Component {
         console.log(data);
         const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
         const listOfClicks = this.state.listOfClicks;
-        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng};
+        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
         listOfClicks.unshift(place);
         this.setState({listOfClicks: listOfClicks, address: addressLabel});
       }
