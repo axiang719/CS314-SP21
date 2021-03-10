@@ -37,18 +37,18 @@ describe('Atlas', () => {
         expect(atlasWrapper.find(Marker).length).toEqual(1);
     });
 
-    it('fills and clears a listOfClicks', () => {
-        const clickPosition = {lat: 50, lng: 50};
-        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
-        atlasWrapper.find('#xButton').simulate('click');
-        expect(atlasWrapper.state().listOfClicks).toEqual([]);
+    // it('fills and clears a listOfClicks', () => {
+    //     const clickPosition = {lat: 50, lng: 50};
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
+    //     atlasWrapper.find('#xButton').simulate('click');
+    //     expect(atlasWrapper.state().listOfClicks).toEqual([]);
 
-        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
-        expect(atlasWrapper.state().listOfClicks).toEqual([{"lat": 50, "lng" : 50}]);
-        atlasWrapper.find('#clear').simulate('click');
-        expect(atlasWrapper.state().listOfClicks).toEqual([]);
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
+    //     expect(atlasWrapper.state().listOfClicks).toEqual([{"lat": 50, "lng" : 50}]);
+    //     atlasWrapper.find('#clear').simulate('click');
+    //     expect(atlasWrapper.state().listOfClicks).toEqual([]);
 
-    });
+    // });
 
     function mockGeoLocateResponse() {
       const responseData = {

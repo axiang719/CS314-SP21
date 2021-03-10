@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { latLng } from 'leaflet';
 
 import CoordinatesInput from "./CoordinatesInput";
+import ListOfClicks from "./ListOfClicks";
 
 import ServerSettings from '../Margins/ServerSettings';
 
@@ -30,6 +31,7 @@ export default class Atlas extends Component {
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
+        this.removePlace = this.removePlace.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
@@ -40,7 +42,6 @@ export default class Atlas extends Component {
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address:"" ,
-            addressList:[]
         };
     
     }
@@ -94,20 +95,11 @@ export default class Atlas extends Component {
 
     renderList() {
         return (
-            <tbody className="text-center">
-                {this.state.listOfClicks.map((place, index) => (
-                    <tr key={index}>
-                        <td>{this.state.addressList[index]}</td>
-                        <td>{place.lat.toFixed(6)}</td>
-                        <td>{place.lng.toFixed(6)}</td>
-                        <td>
-                            <Button id="xButton" color="primary" size="sm" onClick={this.removePlace.bind(this, index)} xs={1}>
-                                X
-                            </Button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
+            <ListOfClicks
+                listOfClicks = { this.state.listOfClicks }
+                clearList = { this.clearList }
+                removePlace = { this.removePlace }
+            />
         );
     }
 
@@ -121,6 +113,7 @@ export default class Atlas extends Component {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
         }
+
         this.setState({ listOfClicks: newList });
     }
 
@@ -159,7 +152,6 @@ export default class Atlas extends Component {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
         this.setMarker(latlng);
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
-
     }
 
     handleGeolocationError() {
@@ -172,7 +164,6 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            this.state.listOfClicks.unshift(latlng);
             this.reverseGeoCoding(latlng).then();
             this.setState({markerPosition: latlng,mapCenter: latlng});
         }
@@ -214,8 +205,9 @@ export default class Atlas extends Component {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
         console.log(data);
         const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
-        const addressList = this.state.addressList;
-        addressList.unshift(addressLabel);
-        this.setState({addressList :addressList, address: addressLabel});
+        const listOfClicks = this.state.listOfClicks;
+        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng};
+        listOfClicks.unshift(place);
+        this.setState({listOfClicks: listOfClicks, address: addressLabel});
       }
 }
