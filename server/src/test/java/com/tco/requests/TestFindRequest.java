@@ -65,6 +65,4 @@ public class TestFindRequest {
         Integer found = find.getFound();
         assertEquals(5, found);
     }
-
-
 }
