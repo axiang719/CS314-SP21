@@ -166,7 +166,6 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            this.handleDistances();
             this.reverseGeoCoding(latlng).then();
             this.setState({markerPosition: latlng, mapCenter: latlng});
         }
@@ -175,9 +174,19 @@ export default class Atlas extends Component {
     handleDistances() {
         var distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
         var distances = [];
-        distances = distanceRequest.getDistances();
+        distanceRequest.sendDistancesRequest()
+            .then(() => {distances = distanceRequest.getDistances()})
+            .then(this.handleDistancesResponse(distances));
+    }
 
-        this.handleDistancesResponse(distances);
+    handleDistancesResponse(distances) {
+        console.log(distances);
+        var newList = this.state.listOfClicks;
+        var numPlaces = newList.length;
+        for(var i = 0; i < numPlaces; i++) {
+            newList[i].distance = distances[(numPlaces - 1) - i];
+        }
+        this.setState({listOfClicks: newList});
     }
 
     getPlaces() {
@@ -191,15 +200,6 @@ export default class Atlas extends Component {
             places.unshift(place);
         }
         return places;
-    }
-
-    handleDistancesResponse(distances) {
-        var newList = this.state.listOfClicks;
-        var numPlaces = newList.length;
-        for(var i = 0; i < numPlaces; i++) {
-            newList[i].distance = distances[(numPlaces - 1) - i];
-        }
-        this.setState({listOfClicks: newList});
     }
 
     getMarker() {
@@ -242,5 +242,6 @@ export default class Atlas extends Component {
         const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
         listOfClicks.unshift(place);
         this.setState({listOfClicks: listOfClicks, address: addressLabel});
+        this.handleDistances();
       }
 }

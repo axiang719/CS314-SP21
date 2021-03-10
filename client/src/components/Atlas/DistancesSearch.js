@@ -15,9 +15,6 @@ export default class DistancesSearch {
     }
 
     getDistances() {
-        if (this.distances.length == 0) {
-            this.sendDistancesRequest();
-        }
         return this.distances;
     }
 
@@ -28,7 +25,6 @@ export default class DistancesSearch {
     }
    
     sendDistancesRequest() {
-        LOG.info(this.request);
 	    sendServerRequest(this.request)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
@@ -36,6 +32,7 @@ export default class DistancesSearch {
 				} else {
 					LOG.error("Distances Request To The Server Failed.");
 				}
+                return null
 		    });
 	}
 
