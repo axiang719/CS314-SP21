@@ -14,6 +14,7 @@ export default class ListOfClicks extends Component {
                         <td>{place.address}</td>
                         <td>{place.latitude.toFixed(6)}</td>
                         <td>{place.longitude.toFixed(6)}</td>
+                        <td>{place.distance}</td>
                         <td>
                             <Button id="xButton" color="primary" size="sm" onClick={this.props.removePlace.bind(this.props, index)} xs={1}>
                                 X
