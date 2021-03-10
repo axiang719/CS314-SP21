@@ -70,6 +70,7 @@ export default class Atlas extends Component {
                                         <th>Address</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
+                                        <th>Distance</th>
                                         <th>
                                             <Button id="clear" color="primary" size="sm" onClick={this.clearList} 
                                             xs={1}>
