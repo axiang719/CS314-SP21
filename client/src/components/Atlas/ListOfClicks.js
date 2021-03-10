@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {  Button } from 'reactstrap';
 
-import DistancesSearch from './DistancesSearch'
-
 export default class ListOfClicks extends Component { 
     constructor(props) {
         super(props);    
