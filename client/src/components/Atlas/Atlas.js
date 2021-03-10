@@ -42,7 +42,8 @@ export default class Atlas extends Component {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
-            address: ""
+            address: "",
+            totalDistance: 0
         };
     
     }
@@ -71,7 +72,7 @@ export default class Atlas extends Component {
                                         <th>Address</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
-                                        <th>Distances</th>
+                                        <th>Distance to Next<br/>({this.state.totalDistance})</th>
                                         <th>
                                             <Button id="clear" color="primary" size="sm" onClick={this.clearList} 
                                             xs={1}>
@@ -106,7 +107,7 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({ listOfClicks: [] });
+        this.setState({listOfClicks: [], totalDistance: 0});
     }
 
     removePlace(index) {
@@ -171,20 +172,12 @@ export default class Atlas extends Component {
     }
 
     async handleDistances() {
-        const distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
-        await distanceRequest.sendDistancesRequest();
-        const distances = distanceRequest.getDistances();
-        this.handleDistancesResponse(distances);
-    }
-
-    handleDistancesResponse(distances) {
-        console.log(distances);
-        var newList = this.state.listOfClicks;
-        var numPlaces = newList.length;
-        for(var i = 0; i < numPlaces; i++) {
-            newList[i].distance = distances[(numPlaces - 1) - i];
+        if(this.state.listOfClicks.length >= 2) {
+            const distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
+            await distanceRequest.sendDistancesRequest();
+            const distances = distanceRequest.getDistances();
+            this.handleDistancesResponse(distances);
         }
-        this.setState({listOfClicks: newList});
     }
 
     getPlaces() {
@@ -198,6 +191,17 @@ export default class Atlas extends Component {
             places.unshift(place);
         }
         return places;
+    }
+
+    handleDistancesResponse(distances) {
+        var newList = this.state.listOfClicks;
+        var distanceSum = 0;
+        var numPlaces = newList.length;
+        for(var i = 0; i < numPlaces; i++) {
+            newList[i].distance = distances[(numPlaces - 1) - i];
+            distanceSum += distances[i];
+        }
+        this.setState({listOfClicks: newList, totalDistance: distanceSum});
     }
 
     getMarker() {
