@@ -40,6 +40,7 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
+            priorMarkerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address: "",
@@ -134,6 +135,7 @@ export default class Atlas extends Component {
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+                {this.getPriorMarkers()}
             </Map>
         );
     }
@@ -166,8 +168,9 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
+            const lastMarker = this.state.markerPosition;
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, mapCenter: latlng});
+            this.setState({markerPosition: latlng, priorMarkerPosition: lastMarker, mapCenter: latlng});
         }
     }
 
@@ -212,6 +215,14 @@ export default class Atlas extends Component {
                         {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
                 </Marker>
+            );
+        }
+    }
+
+    getPriorMarkers() {
+        if (this.state.priorMarkerPosition) {
+            return (
+                <Marker position={this.state.priorMarkerPosition} icon={MARKER_ICON}></Marker>
             );
         }
     }
