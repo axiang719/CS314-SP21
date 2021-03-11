@@ -37,6 +37,7 @@ export default class Atlas extends Component {
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
+        this.returnToInitialTrip = this.returnToInitialTrip.bind(this);
         
         this.state = {
             markerPosition: null,
@@ -60,6 +61,7 @@ export default class Atlas extends Component {
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
                             {this.renderFindMeButton()}
+                            {this.renderReturnMeButton()}
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
@@ -144,10 +146,21 @@ export default class Atlas extends Component {
         );
       }
 
+    renderReturnMeButton(){
+        return (
+            <Button id="return" onClick={this.returnToInitialTrip} color="primary" block>Return</Button>
+        );
+    }
+
     requestUserLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
         }
+    }
+
+    returnToInitialTrip(){
+        const latlng = {lat: this.state.listOfClicks[listOfClicks.length()-1].latitude, lng: this.state.listOfClicks[listOfClicks.length()-1].longitude}
+        this.setMarker(latlng);
     }
 
     handleGeolocation(position) {
