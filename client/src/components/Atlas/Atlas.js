@@ -6,7 +6,9 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { latLng } from 'leaflet';
+import { control, latLng } from 'leaflet';
+import Control from 'react-leaflet-control';
+
 
 import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
@@ -61,7 +63,6 @@ export default class Atlas extends Component {
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
                             {this.renderFindMeButton()}
-                            {this.renderReturnMeButton()}
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
@@ -133,13 +134,15 @@ export default class Atlas extends Component {
                 maxBounds={MAP_BOUNDS}
                 center={this.state.mapCenter}
                 onClick={this.handleMapClick}
-            >
+            >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+                <Control position="topleft">
+                    {this.renderReturnMeButton()}
+                </Control>
             </Map>
         );
     }
-
     renderFindMeButton() {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
@@ -148,7 +151,7 @@ export default class Atlas extends Component {
 
     renderReturnMeButton(){
         return (
-            <Button id="return" onClick={this.returnToInitialTrip} color="primary" block>Return</Button>
+            <Button id="return" onClick={this.returnToInitialTrip} color="danger" block>Return</Button>
         );
     }
 
@@ -159,9 +162,8 @@ export default class Atlas extends Component {
     }
 
     returnToInitialTrip(){
-        const latlng = {lat: this.state.listOfClicks[this.state.listOfClicks.length-1].latitude, 
-                lng: this.state.listOfClicks[this.state.listOfClicks.length-1].longitude}
-        this.setMarker(latlng);
+        const latlng = {lat: this.state.listOfClicks[this.state.listOfClicks.length-1].latitude, lng: this.state.listOfClicks[this.state.listOfClicks.length-1].longitude}
+        this.setState({mapCenter: latlng});
     }
 
     handleGeolocation(position) {
