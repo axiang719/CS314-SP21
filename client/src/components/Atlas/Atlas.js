@@ -8,6 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
+import { BsGeoAlt } from "react-icons/bs"
 
 
 import CoordinatesInput from "./CoordinatesInput";
@@ -62,7 +63,6 @@ export default class Atlas extends Component {
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
-                            {this.renderFindMeButton()}
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
@@ -137,15 +137,16 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                <Control position="topleft">
+                <Control position="bottomright">
                     {this.renderReturnMeButton()}
+                    {this.renderFindMeButton()}
                 </Control>
             </Map>
         );
     }
     renderFindMeButton() {
         return (
-          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
+          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsGeoAlt/></Button>
         );
       }
 
