@@ -53,7 +53,6 @@ public class FindRequest extends RequestHeader {
   public FindRequest() {
     this.requestType = "find";
   }
-
   public String getMatch(){
     return match;
   }

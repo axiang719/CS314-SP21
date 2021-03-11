@@ -6,7 +6,10 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { latLng } from 'leaflet';
+import { control, latLng } from 'leaflet';
+import Control from 'react-leaflet-control';
+import { BsGeoAlt } from "react-icons/bs"
+
 
 import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
@@ -37,6 +40,7 @@ export default class Atlas extends Component {
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
+        this.returnToInitialTrip = this.returnToInitialTrip.bind(this);
         
         this.state = {
             markerPosition: null,
@@ -60,7 +64,6 @@ export default class Atlas extends Component {
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.renderLeafletMap()}
-                            {this.renderFindMeButton()}
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
@@ -132,24 +135,41 @@ export default class Atlas extends Component {
                 maxBounds={MAP_BOUNDS}
                 center={this.state.mapCenter}
                 onClick={this.handleMapClick}
-            >
+            >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+
+                <Control position="bottomright">
+                    {this.renderReturnMeButton()}
+                    {this.renderFindMeButton()}
+                </Control>
                 {this.getPriorMarker()}
             </Map>
         );
     }
-
     renderFindMeButton() {
         return (
-          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block>Find Me</Button>
+          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsGeoAlt/></Button>
         );
       }
+
+    renderReturnMeButton(){
+        return (
+            <Button id="return" onClick={this.returnToInitialTrip} color="danger" block>Return</Button>
+        );
+    }
 
     requestUserLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
         }
+    }
+
+    returnToInitialTrip(){
+        const {listOfClicks} = this.state;
+        const location = listOfClicks[listOfClicks.length - 1]
+        const latlng = {lat: location.latitude, lng: location.longitude}
+        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
     }
 
     handleGeolocation(position) {
