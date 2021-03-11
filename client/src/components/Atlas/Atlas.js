@@ -159,7 +159,8 @@ export default class Atlas extends Component {
     }
 
     returnToInitialTrip(){
-        const latlng = {lat: this.state.listOfClicks[listOfClicks.length()-1].latitude, lng: this.state.listOfClicks[listOfClicks.length()-1].longitude}
+        const latlng = {lat: this.state.listOfClicks[this.state.listOfClicks.length-1].latitude, 
+                lng: this.state.listOfClicks[this.state.listOfClicks.length-1].longitude}
         this.setMarker(latlng);
     }
 
