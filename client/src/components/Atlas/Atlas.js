@@ -44,6 +44,7 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
+            priorMarkerPositions: [],
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address: "",
@@ -110,7 +111,7 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0});
+        this.setState({listOfClicks: [], totalDistance: 0, priorMarkerPositions: []});
     }
 
     removePlace(index) {
@@ -137,10 +138,12 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+
                 <Control position="bottomright">
                     {this.renderReturnMeButton()}
                     {this.renderFindMeButton()}
                 </Control>
+                {this.getPriorMarker()}
             </Map>
         );
     }
@@ -183,8 +186,10 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
+            let lastMarkers = this.state.priorMarkerPositions;
+            if (this.state.markerPosition) lastMarkers.push(this.state.markerPosition);
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, mapCenter: latlng});
+            this.setState({markerPosition: latlng, priorMarkerPositions: lastMarkers, mapCenter: latlng});
         }
     }
 
@@ -230,6 +235,33 @@ export default class Atlas extends Component {
                     </Popup>
                 </Marker>
             );
+        }
+    }
+
+    getPriorMarker() {
+        let retval = [];
+        for (let i = 0; i < this.state.priorMarkerPositions.length; i++) {
+            retval.push(this.getPriorMarkers(i));
+        }
+        return (
+            <div>
+                {retval.map((position,index) => (
+                    <li key={index}>
+                        {position}
+                    </li>
+                ))}
+            </div>
+        );
+    }
+
+    getPriorMarkers(index) {
+        if (index == this.state.priorMarkerPositions.length) return;
+        else {
+            if (this.state.priorMarkerPositions[index]) {
+                return (
+                    <Marker position={this.state.priorMarkerPositions[index]} icon={MARKER_ICON}></Marker>
+                );
+            }
         }
     }
 
