@@ -166,8 +166,10 @@ export default class Atlas extends Component {
     }
 
     returnToInitialTrip(){
-        const latlng = {lat: this.state.listOfClicks[this.state.listOfClicks.length-1].latitude, lng: this.state.listOfClicks[this.state.listOfClicks.length-1].longitude}
-        this.setState({markerPosition: latlng, mapCenter:latlng, address: this.state.listOfClicks[this.state.listOfClicks.length-1].address});
+        const {listOfClicks} = this.state;
+        const location = listOfClicks[listOfClicks.length - 1]
+        const latlng = {lat: location.latitude, lng: location.longitude}
+        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
     }
 
     handleGeolocation(position) {
