@@ -108,16 +108,20 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0});
+        this.setState({listOfClicks: [], totalDistance: 0, priorMarkerPositions: []});
     }
 
     removePlace(index) {
-        let newList = [];
+        let newClickList = [];
+        //let newMarkerList = this.state.priorMarkerPositions;
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
-                newList.push(this.state.listOfClicks[i]);
+                newClickList.push(this.state.listOfClicks[i]);
+            //else {
+            //    newMarkerList[i] = null;
+            //}
         }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
+        this.setState({ listOfClicks: newClickList }, this.handleDistances);
     }
 
     renderLeafletMap() {
