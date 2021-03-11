@@ -40,7 +40,7 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
-            priorMarkerPosition: null,
+            priorMarkerPositions: [],
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address: "",
@@ -135,7 +135,7 @@ export default class Atlas extends Component {
             >
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPriorMarkers()}
+                {this.getPriorMarker()}
             </Map>
         );
     }
@@ -168,9 +168,10 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            const lastMarker = this.state.markerPosition;
+            let lastMarkers = this.state.priorMarkerPositions;
+            if (this.state.markerPosition) lastMarkers.push(this.state.markerPosition);
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, priorMarkerPosition: lastMarker, mapCenter: latlng});
+            this.setState({markerPosition: latlng, priorMarkerPositions: lastMarkers, mapCenter: latlng});
         }
     }
 
@@ -219,11 +220,24 @@ export default class Atlas extends Component {
         }
     }
 
-    getPriorMarkers() {
-        if (this.state.priorMarkerPosition) {
+    getPriorMarker() {
+        let retval = []
+        for (let i = 0; i < this.state.priorMarkerPositions.length; i++) {
+            retval.push(this.getPriorMarkers(i));
+        }
+        return retval;
+    }
+
+    getPriorMarkers(index) {
+        if (index == this.state.priorMarkerPositions.length) return;
+        else {
+
+        if (this.state.priorMarkerPositions[index]) {
+            console.log("Last marker at index " + index.toString() + " is " + JSON.stringify(this.state.priorMarkerPositions[index]));
             return (
-                <Marker position={this.state.priorMarkerPosition} icon={MARKER_ICON}></Marker>
+                <Marker position={this.state.priorMarkerPositions[index]} icon={MARKER_ICON}></Marker>
             );
+        }
         }
     }
 
