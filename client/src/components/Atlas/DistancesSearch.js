@@ -18,10 +18,8 @@ export default class DistancesSearch {
         return this.distances;
     }
 
-    addDistancesArrayElements = (accumulator, currentValue) => accumulator + currentValue;
-   
     sumDistances() {
-        return this.distances.reduce(addDistancesArrayElements);
+        return this.distances.reduce((accumulator, currentValue) =>{ accumulator + currentValue});
     }
    
     sendDistancesRequest() {
