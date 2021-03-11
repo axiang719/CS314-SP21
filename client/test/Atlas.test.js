@@ -14,6 +14,7 @@ describe('Atlas', () => {
 
     beforeEach(() => {
         mockGeoLocateResponse();
+        mockDistanceResponse();
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}/>);
     });
 
@@ -70,13 +71,27 @@ describe('Atlas', () => {
     });
 
     function mockGeoLocateResponse() {
-      const responseData = {
+      const geoResponseData = {
          address: {
              LongLabel: "test label"
          }
       };
       
-      fetch.mockResponse(JSON.stringify(responseData));
+      fetch.mockResponse(JSON.stringify(geoResponseData));
+   }
+
+   function mockDistanceResponse() {
+       const distResponseData = {
+        
+            "requestType"    : "distances",
+            "places"         : [{"name":"place1", "latitude":  "40.6",  "longitude": "-105.1"},
+                                {"name": "place2", "latitude":  "-33.9", "longitude": "151.2"},
+                                {"name": "place3", "latitude":  "-57.9", "longitude": "175.2"}],
+            "earthRadius"    : 6371.0,
+            "distances"       : [1034, 785, 1503]
+        };
+
+        fetch.mockResponse(JSON.stringify(distResponseData))
    }
 
     function simulateOnClickEvent(wrapper, event) {
