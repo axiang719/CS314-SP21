@@ -221,23 +221,29 @@ export default class Atlas extends Component {
     }
 
     getPriorMarker() {
-        let retval = []
+        let retval = [];
         for (let i = 0; i < this.state.priorMarkerPositions.length; i++) {
             retval.push(this.getPriorMarkers(i));
         }
-        return retval;
+        return (
+            <div>
+                {retval.map((position,index) => (
+                    <li key={index}>
+                        {position}
+                    </li>
+                ))}
+            </div>
+        );
     }
 
     getPriorMarkers(index) {
         if (index == this.state.priorMarkerPositions.length) return;
         else {
-
-        if (this.state.priorMarkerPositions[index]) {
-            console.log("Last marker at index " + index.toString() + " is " + JSON.stringify(this.state.priorMarkerPositions[index]));
-            return (
-                <Marker position={this.state.priorMarkerPositions[index]} icon={MARKER_ICON}></Marker>
-            );
-        }
+            if (this.state.priorMarkerPositions[index]) {
+                return (
+                    <Marker position={this.state.priorMarkerPositions[index]} icon={MARKER_ICON}></Marker>
+                );
+            }
         }
     }
 
