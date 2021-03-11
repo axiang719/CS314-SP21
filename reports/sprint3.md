@@ -65,6 +65,7 @@ Epic four will allow users to see a specific place from the trip on the map. Whe
 | 03/08/21 | 0 | 4 |  |
 | 03/09/21 | 1 | 4 |  |
 | 03/10/21 | 3 | 4 |  |
+| 03/11/21 | 2 | 4 |  |
 
 
 ## Review
