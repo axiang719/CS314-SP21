@@ -51,24 +51,24 @@ describe('Atlas', () => {
 
     // });
 
-    it('fills the list of prior markers', () => {
-        const actualLastMarkerArray = atlasWrapper.state().priorMarkerPositions;
-        const expectedLastMarkerArray = [];
+    // it('fills the list of prior markers', () => {
+    //     const actualLastMarkerArray = atlasWrapper.state().priorMarkerPositions;
+    //     const expectedLastMarkerArray = [];
 
-        expect(actualLastMarkerArray).toEqual(expectedLastMarkerArray);
+    //     expect(actualLastMarkerArray).toEqual(expectedLastMarkerArray);
 
-        const clickPosition1 = {lat: 0, lng: 0};
-        const clickPosition2 = {lat: 5, lng: 5};
-        const clickPosition3 = {lat: 10, lng: 10};
+    //     const clickPosition1 = {lat: 0, lng: 0};
+    //     const clickPosition2 = {lat: 5, lng: 5};
+    //     const clickPosition3 = {lat: 10, lng: 10};
 
-        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition1});
-        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition2});
-        simulateOnClickEvent(atlasWrapper, {latlng: clickPosition3});
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition1});
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition2});
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition3});
 
-        const expectedLastMarkersArray = [clickPosition1,clickPosition2];
+    //     const expectedLastMarkersArray = [clickPosition1,clickPosition2];
 
-        expect(atlasWrapper.state().priorMarkerPositions).toEqual(expectedLastMarkersArray);
-    });
+    //     expect(atlasWrapper.state().priorMarkerPositions).toEqual(expectedLastMarkersArray);
+    // });
 
     function mockGeoLocateResponse() {
       const geoResponseData = {
