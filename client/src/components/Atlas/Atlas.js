@@ -240,9 +240,9 @@ export default class Atlas extends Component {
     }
 
     getPriorMarker() {
-        return this.state.listOfClicks.map((position) => (
-                    <Marker position={[position["latitude"],position["longitude"]]} icon={MARKER_ICON}></Marker>
-                    ))}
+        return this.state.listOfClicks.map((position,index) => (
+            <Marker key={index} position={[position["latitude"],position["longitude"]]} icon={MARKER_ICON}></Marker>
+        ))}
     
     showMarkerPopup(ref) {
         if (ref) {
