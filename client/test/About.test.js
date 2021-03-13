@@ -6,7 +6,7 @@ import React from 'react';
 import About from '../src/components/About/About';
 import { beforeEach, expect, it } from '@jest/globals';
 
-describe('CoordinatesInput', () => {
+describe('About', () => {
     
     let aboutWrapper;
 
