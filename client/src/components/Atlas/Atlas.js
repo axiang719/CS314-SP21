@@ -44,7 +44,6 @@ export default class Atlas extends Component {
         
         this.state = {
             markerPosition: null,
-            priorMarkerPositions: [],
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address: "",
@@ -188,10 +187,9 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            let lastMarkers = this.state.priorMarkerPositions;
-            if (this.state.markerPosition) lastMarkers.push(this.state.markerPosition);
+            
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, priorMarkerPositions: lastMarkers, mapCenter: latlng});
+            this.setState({markerPosition: latlng, mapCenter: latlng});
         }
     }
 
@@ -232,6 +230,7 @@ export default class Atlas extends Component {
         if (this.state.markerPosition) {
             return (
                 <Marker ref={(ref) => this.showMarkerPopup(ref)} position={this.state.markerPosition} icon={MARKER_ICON}>
+
                     <Popup offset={[0, -18]} className="font-weight-bold">
                         {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
@@ -241,32 +240,10 @@ export default class Atlas extends Component {
     }
 
     getPriorMarker() {
-        let retval = [];
-        for (let i = 0; i < this.state.priorMarkerPositions.length; i++) {
-            retval.push(this.getPriorMarkers(i));
-        }
-        return (
-            <div>
-                {retval.map((position,index) => (
-                    <li key={index}>
-                        {position}
-                    </li>
-                ))}
-            </div>
-        );
-    }
-
-    getPriorMarkers(index) {
-        if (index == this.state.priorMarkerPositions.length) return;
-        else {
-            if (this.state.priorMarkerPositions[index]) {
-                return (
-                    <Marker position={this.state.priorMarkerPositions[index]} icon={MARKER_ICON}></Marker>
-                );
-            }
-        }
-    }
-
+        return this.state.listOfClicks.map((position,index) => (
+            <Marker key={index} position={[position["latitude"],position["longitude"]]} icon={MARKER_ICON}></Marker>
+        ))}
+    
     showMarkerPopup(ref) {
         if (ref) {
             ref.leafletElement.openPopup();
