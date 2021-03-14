@@ -1,10 +1,8 @@
 import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
-
 import React, { Component } from 'react';
 import {Marker} from 'react-leaflet';
 import TypeSearch from '../src/components/Atlas/TypeSearch';
-
 import { it } from '@jest/globals';
 
 describe('TypeSearch', () => {
@@ -42,6 +40,8 @@ describe('TypeSearch', () => {
 
         typeSearchWrapper.find('DropdownItem').at(3).simulate('click');
         typeSearchWrapper.update();
+
+        expect(typeSearchWrapper.find('DropdownItem')).toHaveLength(4);
     
     });
 });
