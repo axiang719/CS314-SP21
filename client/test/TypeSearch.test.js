@@ -2,10 +2,9 @@ import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
 
 import React, { Component } from 'react';
-import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, } from 'reactstrap';
 import {Marker} from 'react-leaflet';
 import TypeSearch from '../src/components/Atlas/TypeSearch';
-import MatchSearch from '../src/components/Atlas/MatchSearch';
+
 import { it } from '@jest/globals';
 
 describe('TypeSearch', () => {
