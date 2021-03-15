@@ -10,6 +10,7 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
+| Ethan Seefried | 2 Hours |
 
 
 
@@ -17,5 +18,4 @@
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
-
-
+| Atlas | Atlas has 25 functions, while 20 are allowed. | High | Ethan | #426 |
