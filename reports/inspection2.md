@@ -14,6 +14,7 @@
 | Andie Groeling | 1.5 Hours |
 | Michael Young | 0.5 Hours |
 | Chad Minning | 1.5 Hours |
+|Anthony Xiang | 1 Hour |
 
 
 ### Problems found
