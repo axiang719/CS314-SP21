@@ -96,7 +96,7 @@ export default class MatchSearch extends Component {
 		const matchIsValid = matchString.match(regex);
 		
 		if (matchIsValid) {
-			findRequest.match = matchString;
+			findRequest.match = matchString.trim();
 		} else {
 			findRequest.match = null;
 		}
