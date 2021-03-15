@@ -105,6 +105,7 @@ export default class Atlas extends Component {
                 listOfClicks = { this.state.listOfClicks }
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
+                centerMapToIndex = { this.centerMapToIndex }
             />
         );
     }
