@@ -12,8 +12,7 @@
 | ---- | ---- |
 | Ethan Seefried | 2 Hours |
 | Andie Groeling | 1.5 Hours |
-| Anthony Xiang | 1 Hour |
-
+| Michael Young | 0.5 Hours |
 
 
 ### Problems found
@@ -25,4 +24,4 @@
 | Atlas | Order of functions in Atlas is disorganized and makes Atlas hard to read | Low | Andie | #429 |
 | Atlas:42 | Atlas has unnecessary function bindings | Low | Andie | #430 |
 | Atlas:167 | ReturnToInitialTrip is not generic, will need to made generic before completeting #330 | High | Andie | #431 |
-| Atlas:222 | For loop is adding the distances the distances also has a adding funtion | Med | Anthony | #435 |
+| Atlas | Many methods in Atlas could be in ListOfClicks which right now has no functions | Med | Michael | #437 |
