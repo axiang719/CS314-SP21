@@ -29,3 +29,4 @@
 | Atlas:196-203| Error messages from distances api calls log quietly and cause undefined behavior | High | Chad | #426 |
 | Atlas:116-123 | Sum of distances does not reset when all items are deleted individually | Med | Chad | #438 |
 | Atlas:112-114 | Deleting all items or clearing items leaves markers on the map | Low | Chad | #440 |
+| Atlas:222 | For loop is adding the distances the distances also has a adding funtion | Med | Anthony | #435 |
