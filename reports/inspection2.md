@@ -12,7 +12,7 @@
 | ---- | ---- |
 | Ethan Seefried | 2 Hours |
 | Andie Groeling | 1.5 Hours |
-
+| Michael Young | 0.5 Hours |
 
 
 ### Problems found
