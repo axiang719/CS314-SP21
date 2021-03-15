@@ -40,7 +40,7 @@ export default class Atlas extends Component {
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
-        this.returnToInitialTrip = this.returnToInitialTrip.bind(this);
+        this.centerMapToIndex = this.centerMapToIndex.bind(this);
         
         this.state = {
             markerPosition: null,
@@ -153,8 +153,9 @@ export default class Atlas extends Component {
       }
 
     renderReturnMeButton(){
+        const indexOfLast = this.state.listOfClicks.length - 1;
         return (
-            <Button id="return" onClick={this.returnToInitialTrip} color="danger" block>Return</Button>
+            <Button id="return" onClick={this.centerMapToIndex.bind(this, indexOfLast)} color="danger" block>Return</Button>
         );
     }
 
@@ -164,9 +165,9 @@ export default class Atlas extends Component {
         }
     }
 
-    returnToInitialTrip(){
+    centerMapToIndex(index){
         const {listOfClicks} = this.state;
-        const location = listOfClicks[listOfClicks.length - 1]
+        const location = listOfClicks[index]
         const latlng = {lat: location.latitude, lng: location.longitude}
         this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
     }
@@ -187,7 +188,6 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            
             this.reverseGeoCoding(latlng).then();
             this.setState({markerPosition: latlng, mapCenter: latlng});
         }
