@@ -10,7 +10,7 @@ export default class ListOfClicks extends Component {
         return (
             <tbody className="text-center">
                 {this.props.listOfClicks.map((place, index) => (
-                    <tr key={index}>
+                    <tr key={index} onClick={this.props.centerMapToIndex.bind(this.props, index)}>
                         <td>{place.address}</td>
                         <td>{place.latitude.toFixed(6)}</td>
                         <td>{place.longitude.toFixed(6)}</td>

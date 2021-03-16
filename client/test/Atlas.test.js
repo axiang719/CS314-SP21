@@ -2,7 +2,7 @@ import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
 
 import React from 'react';
-import {Marker} from 'react-leaflet';
+import {Marker, Polyline} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
 import { expect, it, toEqual } from '@jest/globals';
 
@@ -36,6 +36,14 @@ describe('Atlas', () => {
 
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
         expect(atlasWrapper.find(Marker).length).toEqual(1);
+    });
+
+    it('extracts lines from object array', () => {
+        const testPlaces = [{latitude: 0.0, longitude: 0.0},{latitude: 50.0, longitude: 50.0}]
+        const expectedArray = [[[0.0, 0.0], [50.0, 50.0], [0.0, 0.0]], [[50.0, 50.0], [0.0, 0.0], [50.0, 50.0]]];
+        const actualArray = atlasWrapper.instance().extractLines(testPlaces);
+
+        expect(actualArray).toEqual(expectedArray);
     });
 
     function mockGeoLocateResponse() {

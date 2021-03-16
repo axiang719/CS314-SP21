@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Container, Row, Button, Table } from 'reactstrap';
 
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -40,7 +40,9 @@ export default class Atlas extends Component {
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
-        this.returnToInitialTrip = this.returnToInitialTrip.bind(this);
+        this.getPolylines = this.getPolylines.bind(this);
+        this.centerMapToIndex = this.centerMapToIndex.bind(this);
+
         
         this.state = {
             markerPosition: null,
@@ -105,6 +107,7 @@ export default class Atlas extends Component {
                 listOfClicks = { this.state.listOfClicks }
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
+                centerMapToIndex = { this.centerMapToIndex }
             />
         );
     }
@@ -127,7 +130,6 @@ export default class Atlas extends Component {
             <Map
                 className={'mapStyle'}
                 boxZoom={false}
-                useFlyTo={true}
                 zoom={15}
                 minZoom={MAP_MIN_ZOOM}
                 maxZoom={MAP_MAX_ZOOM}
@@ -137,12 +139,14 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
+                {this.getPolylines()}
 
                 <Control position="bottomright">
                     {this.renderReturnMeButton()}
                     {this.renderFindMeButton()}
                 </Control>
                 {this.getPriorMarker()}
+
             </Map>
         );
     }
@@ -153,8 +157,9 @@ export default class Atlas extends Component {
       }
 
     renderReturnMeButton(){
+        const indexOfLast = this.state.listOfClicks.length - 1;
         return (
-            <Button id="return" onClick={this.returnToInitialTrip} color="danger" block>Return</Button>
+            <Button id="return" onClick={this.centerMapToIndex.bind(this, indexOfLast)} color="danger" block>Return</Button>
         );
     }
 
@@ -164,9 +169,9 @@ export default class Atlas extends Component {
         }
     }
 
-    returnToInitialTrip(){
+    centerMapToIndex(index){
         const {listOfClicks} = this.state;
-        const location = listOfClicks[listOfClicks.length - 1]
+        const location = listOfClicks[index]
         const latlng = {lat: location.latitude, lng: location.longitude}
         this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
     }
@@ -187,7 +192,6 @@ export default class Atlas extends Component {
 
     setMarker(latlng) {
         if (latlng != null) {
-            
             this.reverseGeoCoding(latlng).then();
             this.setState({markerPosition: latlng, mapCenter: latlng});
         }
@@ -242,7 +246,36 @@ export default class Atlas extends Component {
     getPriorMarker() {
         return this.state.listOfClicks.map((position,index) => (
             <Marker key={index} position={[position["latitude"],position["longitude"]]} icon={MARKER_ICON}></Marker>
-        ))}
+        ))
+    }
+
+    getPolylines() {
+        const {listOfClicks} = this.state;
+        if (listOfClicks.length > 1) {
+            let polylineArray = this.extractLines(listOfClicks);          
+            return <Polyline positions={polylineArray}/>
+        }
+    }
+
+    extractLines(listOfPlaces) {
+        let polylineArray = [];
+            const length = listOfPlaces.length;
+            let lastPlace;
+            
+            for (let i = 0; i <= length; i++) {
+                const currentPlace = listOfPlaces[i % length];
+                
+                if (lastPlace) {
+                    const polyline = [[lastPlace.latitude, lastPlace.longitude], [currentPlace.latitude, currentPlace.longitude], [lastPlace.latitude, lastPlace.longitude]];
+                    polylineArray.push(polyline);
+                }
+                lastPlace = currentPlace;
+            }
+
+        return polylineArray;
+    }
+    
+        
     
     showMarkerPopup(ref) {
         if (ref) {
