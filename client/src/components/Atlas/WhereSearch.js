@@ -79,5 +79,4 @@ export default class WhereSearch extends Component {
         where.splice(index, 1);
         setWhere(where);
     }
-
 }
