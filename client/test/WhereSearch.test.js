@@ -45,6 +45,13 @@ describe('WhereSearch', () => {
         expect(whereSearchWrapper.state().show).toEqual(true);
     });
 
+    it('checks the where button works', () => {
+        whereSearchWrapper.find('Button').at(2).simulate('click');
+        whereSearchWrapper.update();
+
+        // expect(whereSearchWrapper.state().show).toEqual(true);
+    });
+
 
     
 
