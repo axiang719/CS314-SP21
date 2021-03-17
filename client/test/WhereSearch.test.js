@@ -5,7 +5,7 @@ import React from 'react';
 import { Button, InputGroup, Input } from 'reactstrap';
 import {Marker} from 'react-leaflet';
 import WhereSearch from '../src/components/Atlas/WhereSearch';
-import { it } from '@jest/globals';
+import { expect, it } from '@jest/globals';
 
 describe('WhereSearch', () => {
     let whereSearchWrapper;
@@ -55,5 +55,9 @@ describe('WhereSearch', () => {
 
     it ('test',()=>{
         whereSearchWrapper.find('Button').at(2).simulate('click');
+        const expectedWhere = "tokyo";
+
+        expect(expectedWhere).toEqual(whereSearchWrapper.state().whereValue);
+
     })
 });
