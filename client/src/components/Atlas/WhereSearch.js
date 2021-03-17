@@ -22,7 +22,7 @@ export default class WhereSearch extends Component {
         const {show} = this.state;
 		return (
 			<>
-                <Button type= "button" id = "100" className="ml-1 mr-1 mt-1 mb-1"  color="primary" onClick={()=>this.setState({show:!show})} > Where?</Button>
+                <Button type= "button" className="ml-1 mr-1 mt-1 mb-1"  color="primary" onClick={()=>this.setState({show:!show})} > Where?</Button>
                 {show && this.renderWhereButtons()}
                 {show && this.renderWhereInput()}
 			</>
