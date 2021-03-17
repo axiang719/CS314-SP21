@@ -18,7 +18,7 @@ export default class DistancesSearch {
         return this.distances;
     }
 
-    sumDistances() {
+    getSumDistances() {
         return this.distances.reduce((accumulator, currentValue) =>{ accumulator + currentValue});
     }
    

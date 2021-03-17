@@ -121,6 +121,7 @@ export default class Atlas extends Component {
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
+                 
         }
         this.setState({ listOfClicks: newList }, this.handleDistances);
     }

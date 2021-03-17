@@ -16,18 +16,8 @@ describe('MatchSearch', () => {
                     where: ["United States"],
                     limit: 1
                 };
-    const badRequest ={
-        requestType: 'find',
-        match : "pickle", 
-        
-        limit: 5
-
-    };
-    const emptyRequest={
-              requestType: 'find',
-              mathc: null
-    };
-
+    
+ 
     beforeEach(() => {
         mockFindResponse();
         matchSearchWrapper = shallow(<MatchSearch 
@@ -75,25 +65,29 @@ describe('MatchSearch', () => {
             matchSearchWrapper.instance().setType();
             const expectedType = "airport";
             setTimeout( () => {
-                const acutalWhere =  matchSearchWrapper.state().findRequest.type;
-                expect(acutalWhere).toEqual(expectedWhere);}, 10);
+                const acutalType =  matchSearchWrapper.state().findRequest.type;
+                expect(acutalType).toEqual(expectedType);}, 10);
     
         });
 
-    
-        
-      
-    
+        it('set focus', () =>{
+            let focus =matchSearchWrapper.instance().processFocus("match");
+            const actualFocus = "match";
+            setTimeout(() =>{
+            expect(focus).toEqual(actualFocus);},10);
+
+        });
+
         it('Sends request to api', () => {
-           matchSearchWrapper.instance().sendFindRequest(request);
-           matchSearchWrapper.instance().sendFindRequest(badRequest);
+        matchSearchWrapper.instance().sendFindRequest(request);
+           matchSearchWrapper.instance().processFindRequestError("bad message");
            simulateInput(matchSearchWrapper,"bad Input");
            expect(matchSearchWrapper.state().findRequest.match).toEqual(null);
 
             setTimeout( () => {
                 const actualFocus= matchSearchWrapper.state().focus;
                 expect(actualFocus).toEqual("match");}, 10);
-    
+              
         });
 
         function simulateInput(wrapper, input) {
@@ -103,7 +97,6 @@ describe('MatchSearch', () => {
         
         function mockFindResponse() {
             const responseData = {
-                
                     match: "dave",
                     limit: 1,
                     found: 18,
@@ -118,25 +111,15 @@ describe('MatchSearch', () => {
                             "type": "small_airport",
                             "region": "Colorado",
                             "longitude": "-105.124000549"
-                        }
-                    ],
-                    type: [
-                        "airport"
-                    ],
-                    where: [
-                        "United States"
-                    ],
+                        }],
+                    
+                    type: ["airport"],
+                    where: ["United States"],
                     requestType: "find"
-                
-            };
+                 };
             fetch.mockResponse(JSON.stringify(responseData));
         }
-        
-        // function simulateOnClickEvent(wrapper) {
-        //     wrapper.find('button').at(0).simulate('click');
-        //     wrapper.update();
-        // }; 
-
+    
   
 
 
