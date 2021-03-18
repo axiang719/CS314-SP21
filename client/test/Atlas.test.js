@@ -2,7 +2,7 @@ import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
 
 import React from 'react';
-import {Marker} from 'react-leaflet';
+import {Marker, Polyline} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
 import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 
@@ -70,26 +70,13 @@ describe('Atlas', () => {
         expect(navigator.geolocation).toEqual(mockGeolocation);
     });
 
-    it('tests return to initial trip', () =>{
-        const place  = {latitude: 10.123456, longitude: 20.123456}
+    it('tests center map', ()=>{
+        const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456};
         atlasWrapper.setState({listOfClicks: [place]});
-        atlasWrapper.instance().returnToInitialTrip();
+        atlasWrapper.instance().centerMapToIndex(0);
 
-        const expectedMapCenter = atlasWrapper.state().mapCenter;
-        expect(expectedMapCenter.lat).toEqual(place.latitude);
-        expect(expectedMapCenter.lng).toEqual(place.longitude);
-    });
-    
-    // it('tests handle Geolocation', ()=>{
-    //     const mockGeolocation = {
-    //         getCurrentPosition: jest.fn(),
-    //         watchPosition: jest.fn(),
-    //       };
-    //     const position = {latitude: 10.123456, longitude: 20.123456}
-    //     atlasWrapper.instance().handleGeolocation(position);
-
-    // });
-
+        expect(atlasWrapper.state().address).toEqual(place.address);
+    })
     it('tests the geolocation error', ()=>{
         atlasWrapper.instance().handleGeolocationError();
         expect(console.log).toHaveBeenCalled();
@@ -105,7 +92,7 @@ describe('Atlas', () => {
     });
 
     it('tests get places', () =>{
-        const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456}
+        const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456};
         atlasWrapper.setState({listOfClicks: [place]});
         const expectedArray = atlasWrapper.instance().getPlaces();
 
@@ -122,6 +109,14 @@ describe('Atlas', () => {
 
     it('calls show marker',() =>{
         atlasWrapper.instance().showMarkerPopup();
+    });
+
+    it('extracts lines from object array', () => {
+        const testPlaces = [{latitude: 0.0, longitude: 0.0},{latitude: 50.0, longitude: 50.0}]
+        const expectedArray = [[[0.0, 0.0], [50.0, 50.0], [0.0, 0.0]], [[50.0, 50.0], [0.0, 0.0], [50.0, 50.0]]];
+        const actualArray = atlasWrapper.instance().extractLines(testPlaces);
+
+        expect(actualArray).toEqual(expectedArray);
     });
 
     function mockGeoLocateResponse() {

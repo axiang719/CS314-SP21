@@ -56,7 +56,7 @@ export default class MatchSearch extends Component {
 						valid = {validMatch}
 						invalid = {!inputBoxEmpty && !validMatch}
 						/>
-						{this.props.renderDropdown()}
+						{this.props.renderDropdown()} 
 						<Button type={this.state.focus==="match"?"submit":"button"} className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
 						<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
 				</InputGroup>
@@ -92,11 +92,11 @@ export default class MatchSearch extends Component {
 
 	getMatchOrNull(matchString) {
 		const findRequest = this.state.findRequest;
-		const regex = /^[a-zA-Z0-9_ ]*$/;
+		const regex = /^[a-zA-Z0-9_]*$/;
 		const matchIsValid = matchString.match(regex);
 		
 		if (matchIsValid) {
-			findRequest.match = matchString;
+			findRequest.match = matchString.trim();
 		} else {
 			findRequest.match = null;
 		}
