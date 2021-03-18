@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import {Marker} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
-import { expect, it, toEqual } from '@jest/globals';
+import { expect, it, jest, toEqual } from '@jest/globals';
 
 
 describe('Atlas', () => {
@@ -64,15 +64,23 @@ describe('Atlas', () => {
         expect(navigator.geolocation).toEqual(mockGeolocation);
     });
 
-    // it('tests return to initial trip', () =>{
-    //     atlasWrapper.setState({listOfClicks: ["osaka","tokyo"]});
-    //     atlasWrapper.location.longitude = "10";
-    //     atlasWrapper.location.latitude = "10";
-    //     atlasWrapper.instance().returnToInitialTrip();
-    // });
+    it('tests return to initial trip', () =>{
+        const place  = {latitude: 10.123456, longitude: 20.123456}
+        atlasWrapper.setState({listOfClicks: [place]});
+        atlasWrapper.instance().returnToInitialTrip();
+
+        const expectedMapCenter = atlasWrapper.state().mapCenter;
+        expect(expectedMapCenter.lat).toEqual(place.latitude);
+        expect(expectedMapCenter.lng).toEqual(place.longitude);
+    });
     
+    it('tests handle Geolocation', ()=>{
+        const latlng = {lat: 10.123456, lng: 20.123456};
+        atlasWrapper.instance().handleGeolocation(latlng);
+
+    });
     it('tests the geolocation error', ()=>{
-        atlasWrapper.instance().handleGeolocationError();
+        atlasWrapper.instance().handleGeolocationError() - jest.fn();
         expect(console.log).toHaveBeenCalled();
     });
 
