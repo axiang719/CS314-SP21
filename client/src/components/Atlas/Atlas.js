@@ -70,7 +70,7 @@ export default class Atlas extends Component {
                     <br></br>
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right"> Total Distance: {this.state.totalDistance}</div>
+                            <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
                     </Row>
@@ -183,10 +183,13 @@ export default class Atlas extends Component {
 
     async handleDistances() {
         if(this.state.listOfClicks.length >= 2) {
-            const distanceRequest = new DistancesSearch(this.getPlaces(), 6371);
+            const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
             await distanceRequest.sendDistancesRequest();
             const distances = distanceRequest.getDistances();
             this.handleDistancesResponse(distances);
+        }
+        else {
+            this.setState({totalDistance: 0});
         }
     }
 
