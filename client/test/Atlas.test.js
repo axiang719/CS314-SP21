@@ -84,9 +84,14 @@ describe('Atlas', () => {
         expect(console.log).toHaveBeenCalled();
     });
 
-    // it('calls handleDistances',() =>{
-    //     atlasWrapper.instance.handleDistances();
-    // });
+    it('calls handleDistances', () =>{
+        const place  = {distances: 1000};
+        atlasWrapper.setState({listOfClicks: [place]});
+
+        const testArray = [1000];
+        atlasWrapper.instance().handleDistancesResponse(testArray);
+        expect(testArray[0]).toEqual(atlasWrapper.state().totalDistance);
+    });
 
     it('tests get places', () =>{
         const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456}
@@ -94,8 +99,6 @@ describe('Atlas', () => {
         const expectedArray = atlasWrapper.instance().getPlaces();
 
         expect(expectedArray.address).toEqual(atlasWrapper.state().listOfClicks.name);
-        
-
     });
 
     it('tests get latlng', () =>{
@@ -106,6 +109,9 @@ describe('Atlas', () => {
         expect(trueString).toEqual(expectedString);
     });
 
+    it('calls show marker',() =>{
+        atlasWrapper.instance().showMarkerPopup();
+    });
 
 
     function mockGeoLocateResponse() {

@@ -230,6 +230,7 @@ export default class Atlas extends Component {
         if (this.state.markerPosition) {
             return (
                 <Marker ref={(ref) => this.showMarkerPopup(ref)} position={this.state.markerPosition} icon={MARKER_ICON}>
+
                     <Popup offset={[0, -18]} className="font-weight-bold">
                         {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
