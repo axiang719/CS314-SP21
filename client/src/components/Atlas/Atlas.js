@@ -36,11 +36,8 @@ export default class Atlas extends Component {
         this.setMarker = this.setMarker.bind(this);
         this.clearList = this.clearList.bind(this);
         this.removePlace = this.removePlace.bind(this);
-        this.requestUserLocation = this.requestUserLocation.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
-        this.getStringMarkerPosition = this.getStringMarkerPosition.bind(this);
-        this.getPolylines = this.getPolylines.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
 
         this.state = {
@@ -275,14 +272,12 @@ export default class Atlas extends Component {
           <div>  
             {this.state.address}
             <br/>
-            {this.state.markerPosition.lat.toFixed(8) + ", " + this.state.markerPosition.lng.toFixed(8)}
+            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} 
+            <br/>
+            {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );
       }
-
-    getLatLngText(latLng) {
-        return latLng.lat.toFixed(6) + ', ' + latLng.lng.toFixed(6);
-    }
 
     async reverseGeoCoding(coordinates) {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
