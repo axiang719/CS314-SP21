@@ -70,11 +70,14 @@ describe('MatchSearch', () => {
     
         });
 
+        it('set processKeyWord',() =>{
+            matchSearchWrapper.find("Button").at(0).simulate("click");
+        });
+
         it('set focus', () =>{
-            let focus =matchSearchWrapper.instance().processFocus("match");
-            const actualFocus = "match";
-            setTimeout(() =>{
-            expect(focus).toEqual(actualFocus);},10);
+            simulateInputFocus(matchSearchWrapper, "match")
+            expect(matchSearchWrapper.state().focus).toEqual("match");
+           
 
         });
 
@@ -93,6 +96,11 @@ describe('MatchSearch', () => {
         function simulateInput(wrapper, input) {
             wrapper.find('Input').at(0).simulate('change', { target: { value: input } });
             wrapper.update();
+        };
+
+        function simulateInputFocus(wrapper, match){
+            
+            wrapper.find('Input').at(0).simulate('focus',{target: {value: match}});
         };
         
         function mockFindResponse() {
