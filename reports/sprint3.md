@@ -85,11 +85,12 @@ Epic three was completed, allowing users to see a "trip line" on the interface m
 ##### Epic Four 
 Epic four updated the trip table UI allowing users to select specific entries to see on the map. Additional information was added to the trip table, as well as the table being reformatted to be more user friendly. When a user clicks a specific location from the table, the map will zoom and show them the new location.
 ### Epics not completed 
-
+All epics that were planned got completed by the team. One epic was left in the icebox which we hoped to get to, however it will be moved to next sprint.
 ## Retrospective
-
+Our team completed the work we set out to and took time to ensure we meat user requirements. Less work was done than on previous sprints, allowing the team to complete tests as well as think about UI updates. 
 ### Things that went well
-
+One thing that went well for our team was better time management. Previously, we needed to work overtime to push last minute changes that made us work until the last second. THis sprint, we finished what was set out to be done early, giving us time to test our product before our final release.
 ### Things we need to improve
-
+Communication between team members needs to improve. Often times teammates were stuck or confused on a task given which could have been solved by another teammember. Additionally breaking down large tasks to more managable tasks will help improve our team.
 ### One thing we will change next time
+Communcation will be changed next time. Team members will be encouraged to reach out more often if they are stuck or sitting on a task, in order to keep progress moving. Working as a team is a must if we want to succeed and currently communication is our biggest falter.
