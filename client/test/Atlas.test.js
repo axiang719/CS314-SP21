@@ -15,7 +15,8 @@ describe('Atlas', () => {
     beforeEach(() => {
         mockGeoLocateResponse();
         mockDistanceResponse();
-        atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}/>);
+        atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}
+                                      getCurrentPosition = {createSnackBar}/>);
     });
 
     it('initializes as expected', () => {
@@ -52,9 +53,16 @@ describe('Atlas', () => {
         expect(atlasWrapper.state().listOfClicks).toEqual(expectedArray);
     });
 
-    // it('tests user location', () =>{
-    //     atlasWrapper.instance().requestUserLocation();
-    // });
+    it('tests user location', () =>{
+        const mockGeolocation = {
+            getCurrentPosition: jest.fn(),
+            watchPosition: jest.fn()
+          };    
+        global.navigator.geolocation = mockGeolocation;
+
+        atlasWrapper.instance().requestUserLocation();
+        expect(navigator.geolocation).toEqual(mockGeolocation);
+    });
 
     // it('tests return to initial trip', () =>{
     //     atlasWrapper.setState({listOfClicks: ["osaka","tokyo"]});
@@ -73,8 +81,11 @@ describe('Atlas', () => {
     // });
 
     // it('tests get places', () =>{
-    //     atlasWrapper.setState({listOfClicks.address: "tokyo"});
-    //     atlasWrapper.instance().getPlaces();
+    //     const place = atlasWrapper.setState({address: "tokyo", lat: 10.123456, lng: 20.123456});
+    //     atlasWrapper.setState
+    //     atlasWrapper.setState({listOfClicks: place});
+        
+    //     expect(place).toEqual(atlasWrapper.instance().getPlaces());
     // });
 
     it('tests get latlng', () =>{
