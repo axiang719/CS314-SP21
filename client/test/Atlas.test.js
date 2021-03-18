@@ -37,7 +37,7 @@ describe('Atlas', () => {
         simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
 
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
-        expect(atlasWrapper.find(Marker).length).toEqual(3);
+        expect(atlasWrapper.find(Marker).length).toEqual(1);
     });
 
     it('tests clear list functionality', () =>{
