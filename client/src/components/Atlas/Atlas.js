@@ -19,6 +19,7 @@ import ServerSettings from '../Margins/ServerSettings';
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
+const MAP_ZOOM_DEFAULT = 15;
 const MARKER_ICON = L.icon({ iconUrl: icon, shadowUrl: iconShadow, iconAnchor: [12, 40] });
 const MAP_LAYER_ATTRIBUTION = "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors";
 const MAP_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -31,6 +32,8 @@ export default class Atlas extends Component {
     constructor(props) {
 
         super(props);
+
+        this.mapRef = React.createRef();
         
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
@@ -49,7 +52,8 @@ export default class Atlas extends Component {
             listOfClicks: [],
             address: "",
             totalDistance: 0,
-            userLocation: null
+            userLocation: null,
+            zoom: MAP_ZOOM_DEFAULT
         };
     
     }
@@ -98,7 +102,7 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0, priorMarkerPositions: []});
+        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
     }
 
     removePlace(index) {
@@ -113,13 +117,14 @@ export default class Atlas extends Component {
     renderLeafletMap() {
         return (
             <Map
+                ref={this.mapRef}
                 className={'mapStyle'}
                 boxZoom={false}
-                zoom={15}
+                zoom={this.state.zoom}
                 minZoom={MAP_MIN_ZOOM}
                 maxZoom={MAP_MAX_ZOOM}
                 maxBounds={MAP_BOUNDS}
-                center={this.state.mapCenter}
+                viewport={{center: this.state.mapCenter}}
                 onClick={this.handleMapClick}
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
@@ -127,7 +132,6 @@ export default class Atlas extends Component {
                 {this.getPolylines()}
 
                 <Control position="bottomright">
-                    {this.renderReturnMeButton()}
                     {this.renderFindMeButton()}
                 </Control>
 
@@ -139,13 +143,6 @@ export default class Atlas extends Component {
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
       }
-
-    renderReturnMeButton(){
-        const indexOfLast = this.state.listOfClicks.length - 1;
-        return (
-            <Button id="return" onClick={this.centerMapToIndex.bind(this, indexOfLast)} color="danger" block>Return</Button>
-        );
-    }
 
     requestUserLocation() {
         const {userLocation} = this.state
@@ -185,7 +182,9 @@ export default class Atlas extends Component {
     setMarker(latlng) {
         if (latlng != null) {
             this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, mapCenter: latlng});
+            this.setState({markerPosition: latlng, 
+                           mapCenter: latlng, 
+                           zoom: this.mapRef.current.leafletElement.getZoom()});
         }
     }
 
