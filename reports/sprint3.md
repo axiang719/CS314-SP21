@@ -76,7 +76,14 @@ Epic four will allow users to see a specific place from the trip on the map. Whe
 ## Review
 
 ### Epics completed  
-
+##### Epic One
+Epic one allowed our users to send a distance request to our server. We implemented a new API feature which took in a radius and as many places as the user wanted. The user would be sent back a response, where they would see the total distance of thier trip, as well as each individual distance between locations.
+##### Epic Two
+Epic two entailed the calculation for the distances responses. Using the "vincenty formula" we could properly calculate the distance between any two places on the earth. The Vincenty forumla calculates an angle between two locations which can then be used to calulate an "arclength" which is the distance between two places on a sphere. With these calculations, we updated our API to allow users the funcionality that was promised.
+##### Epic Three
+Epic three was completed, allowing users to see a "trip line" on the interface map. When users add locations to the trip, a new marker will be set on the map and a line starting at the origin will pass through the marker then returning to the inital location, forming a complete trip. 
+##### Epic Four 
+Epic four updated the trip table UI allowing users to select specific entries to see on the map. Additional information was added to the trip table, as well as the table being reformatted to be more user friendly. When a user clicks a specific location from the table, the map will zoom and show them the new location.
 ### Epics not completed 
 
 ## Retrospective
