@@ -40,6 +40,7 @@ export default class Atlas extends Component {
         this.handleGeolocation = this.handleGeolocation.bind(this);
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
+        this.requestUserLocation = this.requestUserLocation.bind(this);
 
         this.state = {
             markerPosition: null,
