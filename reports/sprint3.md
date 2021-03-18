@@ -50,9 +50,9 @@ Epic four will allow users to see a specific place from the trip on the map. Whe
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *count* | *count* |
-| Tasks |  *count*   | *count* | 
-| Story Points |  *sum*  | *sum* | 
+| Epics | 4 | 4 |
+| Tasks |  43   | 47 | 
+| Story Points |  44  | 44 | 
 
 
 ## Scrums
