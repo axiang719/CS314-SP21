@@ -8,7 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
-import { BsGeoAlt } from "react-icons/bs"
+import { BsCursorFill } from "react-icons/bs"
 
 
 import CoordinatesInput from "./CoordinatesInput";
@@ -43,7 +43,6 @@ export default class Atlas extends Component {
         this.getPolylines = this.getPolylines.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
 
-        
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
@@ -69,25 +68,10 @@ export default class Atlas extends Component {
                     </Row>
                     {this.renderCoordinatesInput()}
                     <br></br>
-                    <Row>
+                    <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <Table hover bordered size="sm">
-                                <thead className="text-center">
-                                    <tr>
-                                        <th>Address</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
-                                        <th>Distance to Next<br/>({this.state.totalDistance})</th>
-                                        <th>
-                                            <Button id="clear" color="primary" size="sm" onClick={this.clearList} 
-                                            xs={1}>
-                                                Clear
-                                            </Button>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                {this.renderList()}
-                            </Table>
+                            <div className="text-right"> Total Distance: {this.state.totalDistance}</div>
+                            {this.renderList()}
                         </Col>
                     </Row>
                 </Container>
@@ -152,7 +136,7 @@ export default class Atlas extends Component {
     }
     renderFindMeButton() {
         return (
-          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsGeoAlt/></Button>
+          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
       }
 
