@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import {Marker} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
-import { expect, it, jest, toEqual } from '@jest/globals';
+import { expect, it, toEqual } from '@jest/globals';
 
 
 describe('Atlas', () => {
@@ -74,13 +74,13 @@ describe('Atlas', () => {
         expect(expectedMapCenter.lng).toEqual(place.longitude);
     });
     
-    it('tests handle Geolocation', ()=>{
-        const latlng = {lat: 10.123456, lng: 20.123456};
-        atlasWrapper.instance().handleGeolocation(latlng);
+    // it('tests handle Geolocation', ()=>{
+    //     const latlng = {lat: 10.123456,lng: 20.123456};
+    //     atlasWrapper.instance().handleGeolocation(latlng);
 
-    });
+    // });
     it('tests the geolocation error', ()=>{
-        atlasWrapper.instance().handleGeolocationError() - jest.fn();
+        atlasWrapper.instance().handleGeolocationError();
         expect(console.log).toHaveBeenCalled();
     });
 
@@ -88,13 +88,15 @@ describe('Atlas', () => {
     //     atlasWrapper.instance.handleDistances();
     // });
 
-    // it('tests get places', () =>{
-    //     const place = atlasWrapper.setState({address: "tokyo", lat: 10.123456, lng: 20.123456});
-    //     atlasWrapper.setState
-    //     atlasWrapper.setState({listOfClicks: place});
+    it('tests get places', () =>{
+        const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456}
+        atlasWrapper.setState({listOfClicks: [place]});
+        const expectedArray = atlasWrapper.instance().getPlaces();
+
+        expect(expectedArray.address).toEqual(atlasWrapper.state().listOfClicks.name);
         
-    //     expect(place).toEqual(atlasWrapper.instance().getPlaces());
-    // });
+
+    });
 
     it('tests get latlng', () =>{
         const latlng = {lat: 10.123456,lng: 20.123456};
