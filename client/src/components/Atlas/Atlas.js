@@ -8,9 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
-import { BsGeoAlt} from "react-icons/bs"
 import { BsCursorFill } from "react-icons/bs"
-
 
 
 import CoordinatesInput from "./CoordinatesInput";
@@ -50,7 +48,8 @@ export default class Atlas extends Component {
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
             address: "",
-            totalDistance: 0
+            totalDistance: 0,
+            userLocation: null
         };
     
     }
@@ -107,7 +106,6 @@ export default class Atlas extends Component {
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
-                 
         }
         this.setState({ listOfClicks: newList }, this.handleDistances);
     }
@@ -132,7 +130,6 @@ export default class Atlas extends Component {
                     {this.renderReturnMeButton()}
                     {this.renderFindMeButton()}
                 </Control>
-                {this.getPriorMarker()}
 
             </Map>
         );
@@ -151,8 +148,13 @@ export default class Atlas extends Component {
     }
 
     requestUserLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
+        const {userLocation} = this.state
+        if (userLocation != null) {
+            this.handleGeolocation(userLocation)
+        }
+
+        else if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
         }
     }
 
@@ -167,6 +169,9 @@ export default class Atlas extends Component {
         const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
         this.setMarker(latlng);
         console.log(`The user is located at ${JSON.stringify(latlng)}.`);
+        if (this.state.userLocation == null) {
+            this.setState({userLocation: position})
+        }
     }
 
     handleGeolocationError() {
@@ -230,11 +235,6 @@ export default class Atlas extends Component {
         }
     }
 
-    getPriorMarker() {
-        return this.state.listOfClicks.map((position,index) => (
-            <Marker key={index} position={[position["latitude"],position["longitude"]]} icon={MARKER_ICON}></Marker>
-        ))
-    }
 
     getPolylines() {
         const {listOfClicks} = this.state;
