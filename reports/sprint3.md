@@ -79,9 +79,9 @@ Epic four will allow users to see a specific place from the trip on the map. Whe
 
 ### Epics completed  
 ##### Epic One
-Epic one allowed our users to send a distance request to our server. We implemented a new API feature which took in a radius and as many places as the user wanted. The user would be sent back a response, where they would see the total distance of thier trip, as well as each individual distance between locations.
+Epic one allowed our users to send a distance request to our server. We implemented a new API feature which took in a radius and as many places as the user wanted. The user would be sent back a response, where they would see the total distance of thier trip, as well as each individual distance between locations. Using the "vincenty formula" we could properly calculate the distance between any two places on the earth. The Vincenty forumla calculates an angle between two locations which can then be used to calulate an "arclength" which is the distance between two places on a sphere. With these calculations, we updated our API to allow users the funcionality that was promised.
 ##### Epic Two
-Epic two entailed the calculation for the distances responses. Using the "vincenty formula" we could properly calculate the distance between any two places on the earth. The Vincenty forumla calculates an angle between two locations which can then be used to calulate an "arclength" which is the distance between two places on a sphere. With these calculations, we updated our API to allow users the funcionality that was promised.
+Epic two was the implementation of an api wrapper that allowed for the client to make distances requests to the api. This allowed us to render information about distance on the web application such as total distance traveled in the trip list and the distances between each location in the list.
 ##### Epic Three
 Epic three was completed, allowing users to see a "trip line" on the interface map. When users add locations to the trip, a new marker will be set on the map and a line starting at the origin will pass through the marker then returning to the inital location, forming a complete trip. 
 ##### Epic Four 
@@ -89,10 +89,10 @@ Epic four updated the trip table UI allowing users to select specific entries to
 ### Epics not completed 
 All epics that were planned got completed by the team. One epic was left in the icebox which we hoped to get to, however it will be moved to next sprint.
 ## Retrospective
-Our team completed the work we set out to and took time to ensure we meat user requirements. Less work was done than on previous sprints, allowing the team to complete tests as well as think about UI updates. 
+Our team completed the work we set out to and took time to ensure we meat user requirements. Less work was done than on previous sprints, allowing the team to complete tests as well as think about UI updates.
 ### Things that went well
-One thing that went well for our team was better time management. Previously, we needed to work overtime to push last minute changes that made us work until the last second. THis sprint, we finished what was set out to be done early, giving us time to test our product before our final release.
+One thing that went well for our team was better time management. Previously, we needed to work overtime to push last minute changes that made us work until the last second. This sprint, we finished what was set out to be done early, giving us time to test our product before our final release. Work was also more evenly distributed between team members making the overall workload more manageable for everyone.
 ### Things we need to improve
-Communication between team members needs to improve. Often times teammates were stuck or confused on a task given which could have been solved by another teammember. Additionally breaking down large tasks to more managable tasks will help improve our team.
+Communication between team members needs to improve. Often times teammates were stuck or confused on a task given which could have been solved by another teammember.  Additionally breaking down large tasks to more managable tasks will help improve our team.
 ### One thing we will change next time
 Communcation will be changed next time. Team members will be encouraged to reach out more often if they are stuck or sitting on a task, in order to keep progress moving. Working as a team is a must if we want to succeed and currently communication is our biggest falter.
