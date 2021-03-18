@@ -64,9 +64,27 @@ describe('Atlas', () => {
     // });
     
     it('tests the geolocation error', ()=>{
-        atlasWrapper.instance(). handleGeolocationError();
+        atlasWrapper.instance().handleGeolocationError();
         expect(console.log).toHaveBeenCalled();
     });
+
+    // it('calls handleDistances',() =>{
+    //     atlasWrapper.instance.handleDistances();
+    // });
+
+    // it('tests get places', () =>{
+    //     atlasWrapper.setState({listOfClicks.address: "tokyo"});
+    //     atlasWrapper.instance().getPlaces();
+    // });
+
+    it('tests get latlng', () =>{
+        const latlng = {lat: 10.123456,lng: 20.123456};
+        const trueString = atlasWrapper.instance().getLatLngText(latlng);
+        const expectedString = "10.123456, 20.123456";
+
+        expect(trueString).toEqual(expectedString);
+    });
+
 
 
     function mockGeoLocateResponse() {
