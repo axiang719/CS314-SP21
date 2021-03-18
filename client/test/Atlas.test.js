@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import {Marker} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
-import { expect, it, toEqual } from '@jest/globals';
+import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 
 
 describe('Atlas', () => {
@@ -17,6 +17,7 @@ describe('Atlas', () => {
         mockDistanceResponse();
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}
                                       getCurrentPosition = {createSnackBar}/>);
+        atlasWrapper.setState({listOfClicks: ["osaka","tokyo"]});
     });
 
     it('initializes as expected', () => {
@@ -36,7 +37,7 @@ describe('Atlas', () => {
         simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
 
         expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
-        expect(atlasWrapper.find(Marker).length).toEqual(1);
+        expect(atlasWrapper.find(Marker).length).toEqual(3);
     });
 
     it('tests clear list functionality', () =>{
@@ -56,11 +57,16 @@ describe('Atlas', () => {
     it('tests user location', () =>{
         const mockGeolocation = {
             getCurrentPosition: jest.fn(),
-            watchPosition: jest.fn()
-          };    
+              coords: {
+                latitude: 10.123456,
+                longitude: 20.123456
+            }
+        };
         global.navigator.geolocation = mockGeolocation;
 
         atlasWrapper.instance().requestUserLocation();
+        atlasWrapper.instance().handleGeolocation(mockGeolocation);
+
         expect(navigator.geolocation).toEqual(mockGeolocation);
     });
 
@@ -75,10 +81,15 @@ describe('Atlas', () => {
     });
     
     // it('tests handle Geolocation', ()=>{
-    //     const latlng = {lat: 10.123456,lng: 20.123456};
-    //     atlasWrapper.instance().handleGeolocation(latlng);
+    //     const mockGeolocation = {
+    //         getCurrentPosition: jest.fn(),
+    //         watchPosition: jest.fn(),
+    //       };
+    //     const position = {latitude: 10.123456, longitude: 20.123456}
+    //     atlasWrapper.instance().handleGeolocation(position);
 
     // });
+
     it('tests the geolocation error', ()=>{
         atlasWrapper.instance().handleGeolocationError();
         expect(console.log).toHaveBeenCalled();
@@ -112,7 +123,6 @@ describe('Atlas', () => {
     it('calls show marker',() =>{
         atlasWrapper.instance().showMarkerPopup();
     });
-
 
     function mockGeoLocateResponse() {
         const geoResponseData = {
