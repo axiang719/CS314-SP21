@@ -32,8 +32,6 @@ export default class Atlas extends Component {
     constructor(props) {
 
         super(props);
-
-        this.mapRef = React.createRef();
         
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
@@ -117,7 +115,6 @@ export default class Atlas extends Component {
     renderLeafletMap() {
         return (
             <Map
-                ref={this.mapRef}
                 className={'mapStyle'}
                 boxZoom={false}
                 zoom={this.state.zoom}
@@ -183,8 +180,7 @@ export default class Atlas extends Component {
         if (latlng != null) {
             this.reverseGeoCoding(latlng).then();
             this.setState({markerPosition: latlng, 
-                           mapCenter: latlng, 
-                           zoom: this.mapRef.current.leafletElement.getZoom()});
+                           mapCenter: latlng});
         }
     }
 
