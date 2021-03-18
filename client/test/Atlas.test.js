@@ -38,6 +38,14 @@ describe('Atlas', () => {
         expect(atlasWrapper.find(Marker).length).toEqual(1);
     });
 
+    it('tests clear list functionality', () =>{
+        atlasWrapper.setState({listOfClicks: ["tokyo","osaka"]});
+        const expectedArray = [];
+        atlasWrapper.instance().clearList();
+        expect(atlasWrapper.state().listOfClicks).toEqual(expectedArray);
+    });
+
+
     function mockGeoLocateResponse() {
         const geoResponseData = {
             address: {
