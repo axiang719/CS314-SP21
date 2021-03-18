@@ -272,11 +272,13 @@ export default class Atlas extends Component {
           <div>  
             {this.state.address}
             <br/>
-            {this.state.markerPosition.lat.toFixed(2) + ", " + this.state.markerPosition.lng.toFixed(2)}
+            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} 
+            <br/>
+            {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );
       }
-      
+
     async reverseGeoCoding(coordinates) {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
         console.log(data);

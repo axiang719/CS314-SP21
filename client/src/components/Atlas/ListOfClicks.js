@@ -9,7 +9,6 @@ export default class ListOfClicks extends Component {
         this.getRowInfo = this.getRowInfo.bind(this)
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
-        
         this.state = {
             toggleRow: null
         }
@@ -60,7 +59,7 @@ export default class ListOfClicks extends Component {
         return(
             <Collapse isOpen={toggleRow == index}>
                 <Row className="mt-2" noGutters={true}>
-                    <Col xs="4" className="float-right">latitude: {place.latitude.toFixed(2)}<br/>Longitude: {place.longitude.toFixed(2)}</Col>
+                    <Col xs="4" className="float-right">Latitude:  {place.latitude.toFixed(2)}<br/>Longitude: {place.longitude.toFixed(2)}</Col>
                     <Col xs="4">Distance to next: {place.distance}</Col>
                     <Col xs="2" className="text-right">
                         <Button color="primary" size="md" onClick={this.props.centerMapToIndex.bind(this.props, index)}>
