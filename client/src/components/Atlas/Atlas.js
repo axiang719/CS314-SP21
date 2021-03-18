@@ -8,7 +8,9 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
+import { BsGeoAlt} from "react-icons/bs"
 import { BsCursorFill } from "react-icons/bs"
+
 
 
 import CoordinatesInput from "./CoordinatesInput";
