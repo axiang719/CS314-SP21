@@ -44,6 +44,8 @@ Epic two will focus on implementing a tour request for our server. We will add "
 TODO
 ### Epic Four
 Epic four will allow the user to load a previously saved tour. There will be a UI element that will bring up a list of tours, and display information about each. The user can click on a tour to load it. The tour will be successfully loaded whether it is in CSV or JSON format. 
+### Epic Five
+Epic five will introduce a user interface element that allows them to reorder the list of places in their tour so that the trip is in a more optimal order. This epic will also focus on the optomization of the 'tour' API call so that the user can recieve the newly ordered list in less than a second after requesting the tour. 
 ## Metrics
 
 | Statistic | # Planned | # Completed |
