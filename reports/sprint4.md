@@ -4,7 +4,7 @@
 ### *Shorter tours!*
 
 ## Sprint Leader: 
-### *firstname lastname*
+### *Michael Young*
 
 ## Definition of Done
 
