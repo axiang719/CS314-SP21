@@ -172,4 +172,10 @@ Sprint 3 will add the DistanceRequest class, which will allow our server to hand
 ![sprint 3 class diagram](images/Sp3ClassDiagram.png)
 
 # Sprint 4 
+
+### Classes
+Sprint 4 will introduce the TourRequest class, which will allow the server to recieve 'tour' requests. A user will send a tour request with a JSON object containing a list of locations and the server will organize the list so that the distance between the places in the tour are more optimal before sending them back. 
+
+![sprint 4 class diagram](images/Sp4ClassDiagram.png)
+
 # Sprint 5
