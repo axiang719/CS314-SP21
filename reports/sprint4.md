@@ -38,7 +38,8 @@
 ## Planned Epics
 ### Epic One 
 For epic one we will be making or SQL more robust so that our search bar can accept airport codes and zipcodes. The SQL will also be able to handle partial city searches. 
-
+### Epic Two
+Epic two will focus on implementing a tour request for our server. We will add "tour" to the list of API features. A tour response will allow users to form a tour and see the places visted in index order until the last place returns to the first forming a trip.
 ## Metrics
 
 | Statistic | # Planned | # Completed |
