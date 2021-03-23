@@ -36,7 +36,8 @@
 
 
 ## Planned Epics
-
+### Epic One 
+For epic one we will be making or SQL more robust so that our search bar can accept airport codes and zipcodes. The SQL will also be able to handle partial city searches. 
 
 ## Metrics
 
