@@ -40,6 +40,10 @@
 For epic one we will be making or SQL more robust so that our search bar can accept airport codes and zipcodes. The SQL will also be able to handle partial city searches. 
 ### Epic Two
 Epic two will focus on implementing a tour request for our server. We will add "tour" to the list of API features. A tour response will allow users to form a tour and see the places visted in index order until the last place returns to the first forming a trip.
+### Epic Three
+TODO
+### Epic Four
+Epic four will allow the user to load a previously saved tour. There will be a UI element that will bring up a list of tours, and display information about each. The user can click on a tour to load it. The tour will be successfully loaded whether it is in CSV or JSON format. 
 ## Metrics
 
 | Statistic | # Planned | # Completed |
