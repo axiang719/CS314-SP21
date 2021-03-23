@@ -43,9 +43,9 @@ For epic one we will be making or SQL more robust so that our search bar can acc
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *count* | *count* |
-| Tasks |  *count*   | *count* | 
-| Story Points |  *sum*  | *sum* | 
+| Epics | 5 | *count* |
+| Tasks |  42   | *count* | 
+| Story Points |  39  | *sum* | 
 
 
 ## Scrums
