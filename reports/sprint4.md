@@ -1,4 +1,4 @@
-# Sprint 4 - *your team number* - *your team name*
+# Sprint 4 - *13* - *The Epic Gamers*
 
 ## Goal
 ### *Shorter tours!*
