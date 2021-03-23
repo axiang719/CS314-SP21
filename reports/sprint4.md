@@ -41,7 +41,7 @@ Epic one we will be making or SQL more robust so that our search bar can accept 
 ### Epic Two
 Epic two will focus on implementing a tour request for our server. We will add "tour" to the list of API features. A tour response will allow users to form a tour and see the places visted in index order until the last place returns to the first forming a trip.
 ### Epic Three
-TODO
+Epic three will be implementing functions for saving and exporting maps and tours. This will entail creating a new tour object, a list of tours, methods for exporting to various formats, storing data on the client side to remember export preferences, as well as creating UI elements for the list, buttons to add and remove from the new list, and UI for exporting tours and maps. UI elements to ask whether the website is allowed to store a cookie may also be necessary.
 ### Epic Four
 Epic four will allow the user to load a previously saved tour. There will be a UI element that will bring up a list of tours, and display information about each. The user can click on a tour to load it. The tour will be successfully loaded whether it is in CSV or JSON format. 
 ### Epic Five
