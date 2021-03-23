@@ -172,4 +172,18 @@ Sprint 3 will add the DistanceRequest class, which will allow our server to hand
 ![sprint 3 class diagram](images/Sp3ClassDiagram.png)
 
 # Sprint 4 
+### User Interface
+Sprint 4 will add buttons that allow for the user to order the current trip list, save the trip they've created, or load a previously created trip.
+
+![sprint 4 UI diagram](images/Sprint4UI.png)
+
+### Component Hierarchy
+This sprint will focus on adding tour functionality to the Atlas comoonent. This will include a component that forms a tour from a list of places visited in index order. 
+![sprint 4 component hierarchy](images/Sprint4Diagram.png)
+
+### Classes
+Sprint 4 will introduce the TourRequest class, which will allow the server to recieve 'tour' requests. A user will send a tour request with a JSON object containing a list of locations and the server will organize the list so that the distance between the places in the tour are more optimal before sending them back. 
+
+![sprint 4 class diagram](images/Sp4ClassDiagram.png)
+
 # Sprint 5
