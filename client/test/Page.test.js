@@ -12,6 +12,7 @@ describe('Page', () => {
     const helper = jest.fn();
 
     beforeEach(() => {
+        mockConfigResponse();
         pageWrapper = shallow(<Page
                             showMessage = {helper}/>);
     });
@@ -26,4 +27,16 @@ describe('Page', () => {
         pageWrapper.instance().processServerConfigError("this is a test error");
 
     });
+
+    function mockConfigResponse() {
+       const configResponseData = {
+           "requestType"        : "config",
+           "serverName"         : "t13 team name",
+           "features"  : ["config", "find", "distances", "tour", "type", "where"],
+           "type" : ["airport","heliport","balloonport"],
+           "where": ["Canada","Mexico","United States"]
+       }
+
+        fetch.mockResponse(JSON.stringify(configResponseData))
+   }
 });
