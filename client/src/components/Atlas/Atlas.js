@@ -125,8 +125,13 @@ export default class Atlas extends Component {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
-      }
+    }
 
+    showMarkerPopup(ref) {
+        if (ref) {
+            ref.leafletElement.openPopup();
+        }
+    }
 
     clearList() {
         this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
@@ -262,14 +267,6 @@ export default class Atlas extends Component {
         return polylineArray;
     }
     
-        
-    
-    showMarkerPopup(ref) {
-        if (ref) {
-            ref.leafletElement.openPopup();
-        }
-    }
-
     getStringMarkerPosition() {
         return (
           <div>  
