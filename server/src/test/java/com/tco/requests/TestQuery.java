@@ -17,7 +17,7 @@ public class TestQuery {
     @BeforeEach
     public void createConfigurationForTestCases() {
         testQuery = "SELECT world.name, world.latitude, world.longitude, "
-                + "world.altitude, world.municipality, world.type, "
+                + "world.altitude, world.municipality, world.iata_code, world.type, "
                 + "region.name AS 'region', country.name AS 'country', "
                 + "continent.name AS 'continent', world.home_link AS 'url' "
                 + "FROM continent "
@@ -42,7 +42,8 @@ public class TestQuery {
         assertEquals(testQuery + " WHERE (country.name LIKE '%Epps Airpark%' "
                     + "OR region.name LIKE '%Epps Airpark%' "
                     + "OR world.name LIKE '%Epps Airpark%' "
-                    + "OR world.municipality LIKE '%Epps Airpark%');", resultQuery);
+                    + "OR world.municipality LIKE '%Epps Airpark%' "
+                    + "OR world.iata_code LIKE '%Epps Airpark%');", resultQuery);
     }
 
     @Test
