@@ -133,37 +133,14 @@ export default class Atlas extends Component {
         }
     }
 
-    clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
-    }
-
-    removePlace(index) {
-        let newList = [];
-        for (let i = 0; i < this.state.listOfClicks.length; i++) {
-            if (i != index)
-                newList.push(this.state.listOfClicks[i]);
-        }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
-    }
-
-    
-  
-    requestUserLocation() {
-        const {userLocation} = this.state
-        if (userLocation != null) {
-            this.handleGeolocation(userLocation)
-        }
-
-        else if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
-        }
-    }
-
-    centerMapToIndex(index){
-        const {listOfClicks} = this.state;
-        const location = listOfClicks[index]
-        const latlng = {lat: location.latitude, lng: location.longitude}
-        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
+    async reverseGeoCoding(coordinates) {
+        const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
+        console.log(data);
+        const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
+        const listOfClicks = this.state.listOfClicks;
+        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
+        listOfClicks.unshift(place);
+        this.setState({listOfClicks: listOfClicks, address: addressLabel}, this.handleDistances);
     }
 
     handleGeolocation(position) {
@@ -179,6 +156,18 @@ export default class Atlas extends Component {
         console.log("Error retrieving the user's position.");
     }
 
+     
+    requestUserLocation() {
+        const {userLocation} = this.state
+        if (userLocation != null) {
+            this.handleGeolocation(userLocation)
+        }
+
+        else if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.handleGeolocation, this.handleGeolocationError);
+        }
+    }
+
     handleMapClick(mapClickInfo) {
         this.setMarker(mapClickInfo.latlng);
     }
@@ -189,42 +178,6 @@ export default class Atlas extends Component {
             this.setState({markerPosition: latlng, 
                            mapCenter: latlng});
         }
-    }
-
-    async handleDistances() {
-        if(this.state.listOfClicks.length >= 2) {
-            const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
-            await distanceRequest.sendDistancesRequest();
-            const distances = distanceRequest.getDistances();
-            this.handleDistancesResponse(distances);
-        }
-        else {
-            this.setState({totalDistance: 0});
-        }
-    }
-
-    getPlaces() {
-        var places = [];
-        for(var i = 0; i < this.state.listOfClicks.length; i++) {
-            const place = {
-                name: this.state.listOfClicks[i].address,
-                latitude: this.state.listOfClicks[i].latitude.toString(),
-                longitude: this.state.listOfClicks[i].longitude.toString()
-            }
-            places.unshift(place);
-        }
-        return places;
-    }
-
-    handleDistancesResponse(distances) {
-        var newList = this.state.listOfClicks;
-        var distanceSum = 0;
-        var numPlaces = newList.length;
-        for(var i = 0; i < numPlaces; i++) {
-            newList[i].distance = distances[(numPlaces - 1) - i];
-            distanceSum += distances[i];
-        }
-        this.setState({listOfClicks: newList, totalDistance: distanceSum});
     }
 
     getMarker() {
@@ -239,7 +192,6 @@ export default class Atlas extends Component {
             );
         }
     }
-
 
     getPolylines() {
         const {listOfClicks} = this.state;
@@ -266,6 +218,62 @@ export default class Atlas extends Component {
 
         return polylineArray;
     }
+
+    handleDistancesResponse(distances) {
+        var newList = this.state.listOfClicks;
+        var distanceSum = 0;
+        var numPlaces = newList.length;
+        for(var i = 0; i < numPlaces; i++) {
+            newList[i].distance = distances[(numPlaces - 1) - i];
+            distanceSum += distances[i];
+        }
+        this.setState({listOfClicks: newList, totalDistance: distanceSum});
+    }
+
+    centerMapToIndex(index){
+        const {listOfClicks} = this.state;
+        const location = listOfClicks[index]
+        const latlng = {lat: location.latitude, lng: location.longitude}
+        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
+    }
+
+    clearList() {
+        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
+    }
+
+    removePlace(index) {
+        let newList = [];
+        for (let i = 0; i < this.state.listOfClicks.length; i++) {
+            if (i != index)
+                newList.push(this.state.listOfClicks[i]);
+        }
+        this.setState({ listOfClicks: newList }, this.handleDistances);
+    }
+
+    async handleDistances() {
+        if(this.state.listOfClicks.length >= 2) {
+            const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
+            await distanceRequest.sendDistancesRequest();
+            const distances = distanceRequest.getDistances();
+            this.handleDistancesResponse(distances);
+        }
+        else {
+            this.setState({totalDistance: 0});
+        }
+    }
+
+    getPlaces() {
+        var places = [];
+        for(var i = 0; i < this.state.listOfClicks.length; i++) {
+            const place = {
+                name: this.state.listOfClicks[i].address,
+                latitude: this.state.listOfClicks[i].latitude.toString(),
+                longitude: this.state.listOfClicks[i].longitude.toString()
+            }
+            places.unshift(place);
+        }
+        return places;
+    }
     
     getStringMarkerPosition() {
         return (
@@ -277,15 +285,5 @@ export default class Atlas extends Component {
             {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );
-      }
-
-    async reverseGeoCoding(coordinates) {
-        const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
-        console.log(data);
-        const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
-        const listOfClicks = this.state.listOfClicks;
-        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
-        listOfClicks.unshift(place);
-        this.setState({listOfClicks: listOfClicks, address: addressLabel}, this.handleDistances);
-      }
+    }
 }
