@@ -37,7 +37,6 @@ public class Database {
         ) {
             return process(result);
         } catch(SQLException e) { 
-            System.err.println(query);
             System.err.println("SQLException: " + e.getMessage());
         }
 
