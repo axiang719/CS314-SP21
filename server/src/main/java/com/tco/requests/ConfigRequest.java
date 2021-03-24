@@ -23,6 +23,13 @@ public class ConfigRequest extends RequestHeader {
         log.trace("buildResponse -> {}", this);
     }
 
+    public String validType(Arraylist<String> type){
+        type = new ArrayList<String>();
+        type.add("airport");
+        type.add("heliport");
+       
+    }
+
   /* The following methods exist only for testing purposes and are not used
   during normal execution, including the constructor. */
 
