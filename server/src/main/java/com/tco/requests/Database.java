@@ -36,7 +36,8 @@ public class Database {
             ResultSet result = statement.executeQuery(query);
         ) {
             return process(result);
-        } catch(SQLException e) {
+        } catch(SQLException e) { 
+            System.err.println(query);
             System.err.println("SQLException: " + e.getMessage());
         }
 

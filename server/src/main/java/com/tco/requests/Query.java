@@ -34,7 +34,7 @@ public class Query {
 
     private void generateStartDataSql() {
         resultQuery = "SELECT world.name, world.latitude, world.longitude, " 
-                    + "world.altitude, world.municipality, world.type, "
+                    + "world.altitude, world.municipality, world.iata_code, world.type, "
                     + "region.name AS 'region', country.name AS 'country', "
                     + "continent.name AS 'continent', world.home_link AS 'url' ";
         generateFromSql();
@@ -59,7 +59,8 @@ public class Query {
             resultQuery += " WHERE (country.name LIKE " + key
             + " OR region.name LIKE " + key
             + " OR world.name LIKE " + key
-            + " OR world.municipality LIKE " + key + ")";
+            + " OR world.municipality LIKE " + key 
+            + " OR world.iata_code LIKE " + key + ")";
             appendFlag = true;
         }   
     }
