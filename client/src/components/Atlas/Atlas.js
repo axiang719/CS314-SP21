@@ -97,19 +97,6 @@ export default class Atlas extends Component {
         );
     }
 
-    clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
-    }
-
-    removePlace(index) {
-        let newList = [];
-        for (let i = 0; i < this.state.listOfClicks.length; i++) {
-            if (i != index)
-                newList.push(this.state.listOfClicks[i]);
-        }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
-    }
-
     renderLeafletMap() {
         return (
             <Map
@@ -133,12 +120,29 @@ export default class Atlas extends Component {
             </Map>
         );
     }
+
     renderFindMeButton() {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
       }
 
+
+    clearList() {
+        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
+    }
+
+    removePlace(index) {
+        let newList = [];
+        for (let i = 0; i < this.state.listOfClicks.length; i++) {
+            if (i != index)
+                newList.push(this.state.listOfClicks[i]);
+        }
+        this.setState({ listOfClicks: newList }, this.handleDistances);
+    }
+
+    
+  
     requestUserLocation() {
         const {userLocation} = this.state
         if (userLocation != null) {
