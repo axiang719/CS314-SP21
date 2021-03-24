@@ -84,7 +84,7 @@ describe('MatchSearch', () => {
         it('Sends request to api', () => {
         matchSearchWrapper.instance().sendFindRequest(request);
            matchSearchWrapper.instance().processFindRequestError("bad message");
-           simulateInput(matchSearchWrapper,"bad Input");
+           simulateInput(matchSearchWrapper,"#badInputgang");
            expect(matchSearchWrapper.state().findRequest.match).toEqual(null);
 
             setTimeout( () => {

@@ -14,6 +14,8 @@ public class ConfigRequest extends RequestHeader {
     private final transient Logger log = LoggerFactory.getLogger(ConfigRequest.class);
     private ArrayList<String> features;
     private ArrayList<String> where;
+    private ArrayList<String> type;
+
 
     @Override
     public void buildResponse() {
@@ -24,6 +26,7 @@ public class ConfigRequest extends RequestHeader {
         features.add("type");
         features.add("where");
         features.add("distances");
+        validType();
         getWhereDomain();
         log.trace("buildResponse -> {}", this);
     }
@@ -45,6 +48,14 @@ public class ConfigRequest extends RequestHeader {
                 where.add(value);
             }
         }
+    }
+
+    public void validType(){
+        type = new ArrayList<String>();
+        type.add("airport");
+        type.add("heliport");
+        type.add("balloonport");
+        type.add("other");
     }
 
   /* The following methods exist only for testing purposes and are not used
