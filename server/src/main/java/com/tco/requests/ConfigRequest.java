@@ -10,6 +10,7 @@ public class ConfigRequest extends RequestHeader {
     private String serverName;
     private final transient Logger log = LoggerFactory.getLogger(ConfigRequest.class);
     private ArrayList<String> features;
+    private ArrayList<String> type;
 
     @Override
     public void buildResponse() {
@@ -20,13 +21,17 @@ public class ConfigRequest extends RequestHeader {
         features.add("type");
         features.add("where");
         features.add("distances");
+        validType();
         log.trace("buildResponse -> {}", this);
     }
 
-    public String validType(Arraylist<String> type){
+    public ArrayList<String> validType(){
         type = new ArrayList<String>();
         type.add("airport");
         type.add("heliport");
+        type.add("balloonport");
+        type.add("other");
+        return type;
        
     }
 
