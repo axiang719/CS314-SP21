@@ -26,6 +26,7 @@ public class ConfigRequest extends RequestHeader {
         features.add("type");
         features.add("where");
         features.add("distances");
+        features.add("tour");
         validType();
         getWhereDomain();
         log.trace("buildResponse -> {}", this);
