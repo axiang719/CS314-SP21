@@ -16,9 +16,6 @@ describe('Page', () => {
         pageWrapper = shallow(<Page
                             showMessage = {helper}/>);
     });
-    it('toggles as expected', () => {
-        expect(false).toEqual(false);
-    });
 
     it('toggles as expected', () => {
         pageWrapper.setState({showAbout: true});
