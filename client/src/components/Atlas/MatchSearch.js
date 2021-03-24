@@ -92,7 +92,7 @@ export default class MatchSearch extends Component {
 
 	getMatchOrNull(matchString) {
 		const findRequest = this.state.findRequest;
-		const regex = /^[a-zA-Z0-9_]*$/;
+		const regex = /^[a-zA-Z0-9_ ]*$/;
 		const matchIsValid = matchString.match(regex);
 		
 		if (matchIsValid) {
