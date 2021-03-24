@@ -86,8 +86,7 @@ public class TestQuery {
         sql.setWhere(where);
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + " WHERE ( country.name LIKE 'Denver' "
-                    + "OR region.name LIKE 'Denver' "
-                    + "OR world.municipality LIKE 'Denver') ORDER BY RAND();", resultQuery);
+                    + "OR region.name LIKE 'Denver') ORDER BY RAND();", resultQuery);
     }
 
     @Test
@@ -99,8 +98,7 @@ public class TestQuery {
         sql.setWhere(where);
         String resultQuery = sql.getDataQuery();
         assertEquals(testQuery + " WHERE ( country.name LIKE 'Grand_Junction' "
-                    + "OR region.name LIKE 'Grand_Junction' "
-                    + "OR world.municipality LIKE 'Grand_Junction') ORDER BY RAND();", resultQuery);
+                    + "OR region.name LIKE 'Grand_Junction') ORDER BY RAND();", resultQuery);
     }
     
 }

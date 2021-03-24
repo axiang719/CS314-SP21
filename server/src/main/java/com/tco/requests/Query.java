@@ -15,6 +15,11 @@ public class Query {
         this.match = match;
     }
 
+    public String getDomainQuery() {
+        generateDomainSql();
+        return resultQuery + ";";
+    }
+
     public String getDataQuery() {
         generateStartDataSql();
         generateMatchSql();
@@ -30,6 +35,12 @@ public class Query {
         generateTypeSQL();
         generateWhereSql();
         return resultQuery + ";";
+    }
+
+    private void generateDomainSql() {
+        resultQuery = "SELECT country.name AS 'country', "
+                    + "region.name AS 'region' ";
+        generateFromSql();
     }
 
     private void generateStartDataSql() {
@@ -75,8 +86,8 @@ public class Query {
             for(int i = 0; i < where.size(); i++){
                 final String place = "'" + where.get(i) + "'";
                 resultQuery += " country.name LIKE " + place
-                + " OR region.name LIKE " + place
-                + " OR world.municipality LIKE " + place;
+                + " OR region.name LIKE " + place;
+                // + " OR world.municipality LIKE " + place;
 
                 if(i+1 < where.size()){
                     resultQuery += "OR";
