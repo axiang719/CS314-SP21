@@ -230,6 +230,18 @@ export default class Atlas extends Component {
         this.setState({listOfClicks: newList, totalDistance: distanceSum});
     }
 
+    async handleDistances() {
+        if(this.state.listOfClicks.length >= 2) {
+            const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
+            await distanceRequest.sendDistancesRequest();
+            const distances = distanceRequest.getDistances();
+            this.handleDistancesResponse(distances);
+        }
+        else {
+            this.setState({totalDistance: 0});
+        }
+    }
+
     centerMapToIndex(index){
         const {listOfClicks} = this.state;
         const location = listOfClicks[index]
@@ -248,18 +260,6 @@ export default class Atlas extends Component {
                 newList.push(this.state.listOfClicks[i]);
         }
         this.setState({ listOfClicks: newList }, this.handleDistances);
-    }
-
-    async handleDistances() {
-        if(this.state.listOfClicks.length >= 2) {
-            const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
-            await distanceRequest.sendDistancesRequest();
-            const distances = distanceRequest.getDistances();
-            this.handleDistancesResponse(distances);
-        }
-        else {
-            this.setState({totalDistance: 0});
-        }
     }
 
     getPlaces() {
