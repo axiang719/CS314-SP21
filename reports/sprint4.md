@@ -58,9 +58,10 @@ Epic five will introduce a user interface element that allows them to reorder th
 ## Scrums
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
-| --- | ---: | ---: | ---: |
+| --- | --- | --- | --- |
 | 3/22/21 | None | #514, #515 | None |
 | 3/23/21 | #514, #515 | #207, #429, #482, #487, #518 | None |
+| 3/24/21 | #480, #487, #492, #518, #521, #523, #525 | #489, #503, #511, #512 | None |
 
 
 ## Review
