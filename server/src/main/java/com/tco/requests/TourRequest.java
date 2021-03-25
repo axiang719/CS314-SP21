@@ -23,10 +23,6 @@ public class TourRequest extends RequestHeader {
       //give sorting 1 second to execute
       //will need to not be hard-coded time eventually
     }
-
-    public void sort() {
-      //this is where the sorting goes
-    }
     
     /* The following methods exist only for testing purposes and are not used
     during normal execution, including the constructor. */
