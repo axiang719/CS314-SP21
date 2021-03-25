@@ -18,6 +18,11 @@ public class TourRequest extends RequestHeader {
     public void buildResponse() {
       log.trace("buildResponse -> {}", this);
       //use ScheduledExecutorService to control exec time
+      //Timer and TimerTask could work but are outdated
+      //idea is to schedule a stopper method that will
+      //stop the execution of sort at a given time,
+      //usually after 1 second has passed but it will
+      //be able to accept any amount of time passed.
     }
     
     /* The following methods exist only for testing purposes and are not used
