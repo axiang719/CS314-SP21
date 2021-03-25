@@ -17,7 +17,12 @@ public class TourRequest extends RequestHeader {
     @Override
     public void buildResponse() {
       log.trace("buildResponse -> {}", this);
-
     }
     
+    /* The following methods exist only for testing purposes and are not used
+    during normal execution, including the constructor. */
+
+    public TourRequest() {
+      this.requestType = "tour";
+    }
 }
