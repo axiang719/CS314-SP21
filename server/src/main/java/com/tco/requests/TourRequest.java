@@ -4,7 +4,7 @@ import com.tco.requests.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Math;
-import java.lang.Timer;
+import java.util.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +19,10 @@ public class TourRequest extends RequestHeader {
     public void buildResponse() {
       log.trace("buildResponse -> {}", this);
       //Timer t = new Timer("response time");
-      //t.schedule(() -> { sorting goes here }, 1000);
-      //give sorting 1 second to execute
-      //will need to not be hard-coded time eventually
+      //sort(); call method that will sort
+      //t.schedule(() -> preempt sort, 1000);
+      //after 1 second do something that will
+      //stop sort and force execution to continue
     }
     
     /* The following methods exist only for testing purposes and are not used
