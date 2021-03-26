@@ -5,18 +5,24 @@ import React from 'react';
 import { Button, InputGroup, Input } from 'reactstrap';
 import {Marker} from 'react-leaflet';
 import WhereSearch from '../src/components/Atlas/WhereSearch';
-import { expect, it } from '@jest/globals';
+import { expect, it, toHaveBeenCalled } from '@jest/globals';
 
 describe('WhereSearch', () => {
     let whereSearchWrapper;
     const helper = jest.fn();
     const whereArray = ["Osaka","Kyoto"];
+    const serverSettings = {
+        serverConfig: {
+            where: ["place1", "place2", "place3"]
+        }
+    } 
 
     beforeEach(() => {
         whereSearchWrapper = shallow(<WhereSearch where = {whereArray}
                                                   whereType = {helper}
                                                   processFocus = {helper}
-                                                  setWhere = {helper}/>);
+                                                  setWhere = {helper}
+                                                  serverSettings = {serverSettings}/>);
         whereSearchWrapper.setState({show : true});
         whereSearchWrapper.setState({whereValue : "tokyo"});
         whereSearchWrapper.update();
@@ -30,12 +36,11 @@ describe('WhereSearch', () => {
         expect(actualWhereValue).toEqual(expectedWhereValue);
     });
    
-    it('tests processOnClickWhere function',() => {
-        const actualWhereValue = whereSearchWrapper.state().whereValue;
-        const expectedWhereValue = "tokyo";
+    it('tests processOnChangeWhere function',() => {
+        const whereValue = "tokyo";
         
-        whereSearchWrapper.instance().processOnClickWhere();
-        expect(actualWhereValue).toEqual(expectedWhereValue);
+        whereSearchWrapper.instance().processOnChangeWhere(whereValue);
+        expect(helper).toHaveBeenCalled()
     });
 
     it('checks the where button works', () => {
@@ -45,13 +50,6 @@ describe('WhereSearch', () => {
         expect(whereSearchWrapper.state().show).toEqual(false);
     });
 
-    it('checks the where array buttons work', () => {
-        whereSearchWrapper.find(Input).at(0).simulate('change', { target: { value: "osaka" } });
-        whereSearchWrapper.find(Input).at(0).simulate('focus', { target: { value: "osaka" } });
-        whereSearchWrapper.update();
-
-        expect(whereSearchWrapper.state().whereValue).toEqual("osaka");
-    });    
 
     it ('test',()=>{
         whereSearchWrapper.find('Button').at(2).simulate('click');

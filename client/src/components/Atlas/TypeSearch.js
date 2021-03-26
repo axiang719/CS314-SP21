@@ -16,7 +16,7 @@ export default class TypeSearch extends Component {
         render() {
             return (
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                    <DropdownToggle className="mt-1" color="primary" caret>Type</DropdownToggle>
+                    <DropdownToggle color="primary" caret>Type</DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem toggle={false} onClick={() => this.FillTypeArray("airport")}>Airport {this.checkIfSelected("airport")}</DropdownItem>
                         <DropdownItem toggle={false} onClick={() => this.FillTypeArray("balloonport")}>Balloonport {this.checkIfSelected("balloonport")}</DropdownItem>
