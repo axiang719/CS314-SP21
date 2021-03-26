@@ -3,7 +3,8 @@ package com.tco.requests;
 import com.tco.requests.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.lang.Math;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,19 +15,24 @@ public class TourRequest extends RequestHeader {
     private ArrayList<HashMap<String, String>> places;
     private final transient Logger log = LoggerFactory.getLogger(TourRequest.class);
     private boolean sort;
-    
+
     @Override
     public void buildResponse() {
       log.trace("buildResponse -> {}", this);
       sort = true;
+      Timer t = new Timer();
+      TimerTask task = new TimerTask() {
+        public void run() {
+          sort = false;
+        }
+      };
+      t.schedule(task,1000);
       Tour T = new Tour(earthRadius,places);
-      private final ScheduledExecutorService s =
-      Executors.newScheduledThreadPool(1);
-      Runnable stop = () -> { sort = false; }
-      ScheduledFuture<?> cancelSort =
-      s.schedule(stop,1,SECONDS);
+      int i = 0;
       while(sort) {
-        T = T.sortTourByDistance();
+        T = T.sortTourByDistance(T,i,0);
+        i += 1;
+        break;
       }
     }
     
