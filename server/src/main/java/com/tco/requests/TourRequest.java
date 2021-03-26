@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class TourRequest extends RequestHeader {
     private Double earthRadius;
-    private String response[];
+    private String response;
     private ArrayList<HashMap<String, String>> places;
     private final transient Logger log = LoggerFactory.getLogger(TourRequest.class);
     private boolean sort;
@@ -24,13 +24,15 @@ public class TourRequest extends RequestHeader {
 
     public void setTimer() {
       sort = true;
+      double d = Double.parseDouble(response);
+      int time = (int) d * 1000;
       Timer t = new Timer();
       TimerTask task = new TimerTask() {
         public void run() {
           sort = false;
         }
       };
-      t.schedule(task,1000);
+      t.schedule(task,time);
       Tour T = new Tour(earthRadius,places);
       int i = 0;
       while(sort) {
