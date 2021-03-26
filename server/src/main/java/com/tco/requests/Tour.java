@@ -110,12 +110,6 @@ public class Tour {
 		DistancesRequest dr = new DistancesRequest();
 		Double eRD = dr.setRadius(earthRadius);
 		ArrayList<Integer> distances = dr.testDistanceList(places);
-		System.out.println(eRD.doubleValue());
-		System.out.println(earthRadius);
-		System.out.println(distances);
-		System.out.println(places);
-		System.out.println(places.size());
-		System.out.println(distances.get(0));
 		for(Integer distance:distances) {
 			tourDistance += distance.intValue();
 		}
