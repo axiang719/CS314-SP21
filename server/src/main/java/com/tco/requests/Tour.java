@@ -2,6 +2,7 @@ package com.tco.requests;
 
 import com.tco.requests.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.lang.Math;
 
 public class Tour {
@@ -31,18 +32,18 @@ public class Tour {
 	}
 
 	public Integer getTourDistance() {
-		if(TourDistanceIsDirty) {
+		if(tourDistanceIsDirty) {
 			findTourDistance();
 		}
-		return TourDistance;
+		return tourDistance;
 	}
 
 	private void findTourDistance() {
 		int tourDistance = 0;
 
-		DistanceRequest dr = new DistanceRequest;
+		DistancesRequest dr = new DistancesRequest();
 		dr.setRadius(6371);
-		ArrayList<Integer> distances = dr.testDistancesList(places);
+		ArrayList<Integer> distances = dr.testDistanceList(places);
 		for(Integer distance:distances) {
 			tourDistance += distance.intValue();
 		}
