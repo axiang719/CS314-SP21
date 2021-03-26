@@ -39,6 +39,7 @@ public class TourRequest extends RequestHeader {
         T = T.sortTourByDistance(T,i,0);
         i += 1;
       }
+      this.places = T.getPlaces();
     }
     
     /* The following methods exist only for testing purposes and are not used
