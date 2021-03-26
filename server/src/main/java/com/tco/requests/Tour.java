@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.lang.Math;
 
 public class Tour {
+	private int earthRadius;
 	private int tourDistance;
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
     
-	public Tour(ArrayList<HashMap<String, String>> places) {
+	public Tour(int earthRadius, ArrayList<HashMap<String, String>> places) {
+		this.earthRadius = earthRadius;
 		this.places = places;
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
@@ -42,7 +44,7 @@ public class Tour {
 		int tourDistance = 0;
 
 		DistancesRequest dr = new DistancesRequest();
-		dr.setRadius(6371);
+		dr.setRadius(earthRadius);
 		ArrayList<Integer> distances = dr.testDistanceList(places);
 		for(Integer distance:distances) {
 			tourDistance += distance.intValue();
