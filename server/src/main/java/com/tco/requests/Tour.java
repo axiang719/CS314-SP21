@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.lang.Math;
 
 public class Tour {
-	private static int earthRadius;
+	private static double earthRadius;
 	private int tourDistance;
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
@@ -15,7 +15,7 @@ public class Tour {
 		this(tour.getEarthRadius(), tour.getPlaces());
 	}
 
-	public Tour(int earthRadius, ArrayList<HashMap<String, String>> places) {
+	public Tour(double earthRadius, ArrayList<HashMap<String, String>> places) {
 		this.earthRadius = earthRadius;
 		this.places = places;
 		tourDistance = 0;
@@ -48,7 +48,7 @@ public class Tour {
 			double neighborLongitude = Double.parseDouble(neighbor.get(1));
 
 			DistancesRequest dr = new DistancesRequest();
-			dr.setRadius = tour.getEarthRadius();
+			dr.setRadius(earthRadius);
 			int distance = dr.calculateDistance(startLatitude, startLongitude, neighborLatitude, neighborLongitude);
 			if(distance < shortestDistance) {
 				shortestDistance = distance;
@@ -86,7 +86,7 @@ public class Tour {
 		return place;
 	}
 
-	public int getEarthRadius() {
+	public double getEarthRadius() {
 		return earthRadius;
 	}
 
