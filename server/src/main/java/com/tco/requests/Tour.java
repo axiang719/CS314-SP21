@@ -66,6 +66,12 @@ public class Tour {
 		return shortTour.appendTour(sortPlacesByDistance(tempTour, i, lookAheadLimit));
 	}
 
+	public void appendTour(Tour tour) {
+		for(HashMap<String, String> place:tour.getPlaces()) {
+			appendPlace(place);
+		}
+	}
+
 	public void appendPlace(HashMap<String, String> place) {
 		places.add(place);
 		tourDistanceIsDirty = true;
