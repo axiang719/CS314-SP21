@@ -19,6 +19,10 @@ public class TourRequest extends RequestHeader {
     @Override
     public void buildResponse() {
       log.trace("buildResponse -> {}", this);
+      setTimer();
+    }
+
+    public void setTimer() {
       sort = true;
       Timer t = new Timer();
       TimerTask task = new TimerTask() {
@@ -32,7 +36,6 @@ public class TourRequest extends RequestHeader {
       while(sort) {
         T = T.sortTourByDistance(T,i,0);
         i += 1;
-        break;
       }
     }
     
