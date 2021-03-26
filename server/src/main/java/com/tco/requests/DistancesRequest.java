@@ -41,7 +41,6 @@ public class DistancesRequest extends RequestHeader {
     }
   }
 
-  //check for if one is negative and other positive
   public int calculateDistance(double firstPointLatD, double firstPointLongD,
                               double secondPointLatD, double secondPointLongD) {
     double firstPointLat = (firstPointLatD * (Math.PI/180));
