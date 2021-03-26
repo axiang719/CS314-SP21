@@ -38,9 +38,8 @@ public class Query {
     }
 
     private void generateDomainSql() {
-        resultQuery = "SELECT country.name AS 'country', "
-                    + "region.name AS 'region' ";
-        generateFromSql();
+        resultQuery = "SELECT country.name AS 'country', region.name AS 'region' "
+                    + "FROM country INNER JOIN region ON country.id = region.iso_country";
     }
 
     private void generateStartDataSql() {
@@ -87,7 +86,6 @@ public class Query {
                 final String place = "'" + where.get(i) + "'";
                 resultQuery += " country.name LIKE " + place
                 + " OR region.name LIKE " + place;
-                // + " OR world.municipality LIKE " + place;
 
                 if(i+1 < where.size()){
                     resultQuery += "OR";

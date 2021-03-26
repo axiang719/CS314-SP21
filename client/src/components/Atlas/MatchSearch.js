@@ -65,13 +65,14 @@ export default class MatchSearch extends Component {
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					<Row>
+					<Row className="mt-1">
 						<TypeSearch type={this.state.findRequest.type}
 				        	setType={this.setType}/>
 						<WhereSearch where = {this.state.findRequest.where}
 							processFocus = {this.processFocus}
 							focus = {this.state.focus}
-							setWhere = {this.setWhere}/>
+							setWhere = {this.setWhere}
+							serverSettings={this.props.serverSettings}/>
 					</Row>	
 				</Container>	
 			</div>
