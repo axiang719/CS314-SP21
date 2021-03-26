@@ -12,11 +12,7 @@ public class Tour {
 	private ArrayList<HashMap<String, String>> places;
     
 	public Tour(Tour tour) {
-		this(tour.getEarthRadius(), tour.getPlaces().clone());
-	}
-
-	public Tour(int earthRadius, HashMap<String, String> place) {
-		this(earthRadius, new ArrayList<>(place));
+		this(tour.getEarthRadius(), tour.getPlaces());
 	}
 
 	public Tour(int earthRadius, ArrayList<HashMap<String, String>> places) {
@@ -33,7 +29,7 @@ public class Tour {
 		}
 		//recursion case
 		Tour tempTour = new Tour(tour);
-		HashMap<String, String> start = tempTour.remove(startingIndex);
+		HashMap<String, String> start = tempTour.removePlace(startingIndex);
 		double startLatitude = Double.parseDouble(start.get(0));
 		double startLongitude = Double.parseDouble(start.get(1));
 		if(lookAheadLimit == 0 || lookAheadLimit > tour.size()) {
@@ -47,9 +43,9 @@ public class Tour {
 			if(i == tour.size()){
 				i = 0;
 			}
-			HashMap<String, String> neighbor = tempTour.getPlaces().at(i);
+			HashMap<String, String> neighbor = tempTour.getPlaces().get(i);
 			double neighborLatitude = Double.parseDouble(neighbor.get(0));
-			double neighborLongitude = Double.parseDouble(neighor.get(1));
+			double neighborLongitude = Double.parseDouble(neighbor.get(1));
 
 			DistancesRequest dr = new DistancesRequest();
 			dr.setRadius = tour.getEarthRadius();
@@ -61,9 +57,16 @@ public class Tour {
 			i++;
 			neighborIndexDistance++;
 		}
-		shortTour = new Tour(tour.getEarthRadius(), start);
+		Tour shortTour = new Tour(tour.getEarthRadius(), new ArrayList());
+		shortTour.appendPlace(start);
 		shortTour.appendPlace(tempTour.removePlace(closestNeighborIndex));
-		return shortTour.appendTour(sortPlacesByDistance(tempTour, i, lookAheadLimit));
+		shortTour.appendTour(sortPlacesByDistance(tempTour, i, lookAheadLimit));
+		if(tour.getTourDistance() > shortTour.getTourDistance()) {
+			return tour;
+		}
+		else {
+			return shortTour;
+		}
 	}
 
 	public void appendTour(Tour tour) {
