@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.lang.Math;
 
 public class Tour {
-	private int earthRadius;
+	private static int earthRadius;
 	private int tourDistance;
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
@@ -81,6 +81,10 @@ public class Tour {
 		HashMap<String, String> place = places.remove(index);
 		tourDistanceIsDirty = true;
 		return place;
+	}
+
+	public int getEarthRadius() {
+		return earthRadius;
 	}
 
 	public ArrayList<HashMap<String, String>> getPlaces() {
