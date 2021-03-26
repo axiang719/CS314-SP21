@@ -11,8 +11,8 @@ public class Tour {
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
     
-	public Tour(double earthRadius, ArrayList<HashMap<String, String>> places) {
-		this.earthRadius = earthRadius;
+	public Tour(Double earthRadius, ArrayList<HashMap<String, String>> places) {
+		this.earthRadius = earthRadius.doubleValue();
 		this.places = places;
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
@@ -58,10 +58,10 @@ public class Tour {
 	private static int getDistance(HashMap<String, String> start, HashMap<String, String> end) {
 		DistancesRequest dr = new DistancesRequest();
 		dr.setRadius(earthRadius);
-		double startLatitude = Double.parseDouble(start.get(0));
-		double startLongitude = Double.parseDouble(start.get(1));
-		double endLatitude = Double.parseDouble(end.get(0));
-		double endLongitude = Double.parseDouble(end.get(1));
+		double startLatitude = Double.parseDouble(start.get("latitude"));
+		double startLongitude = Double.parseDouble(start.get("longitude"));
+		double endLatitude = Double.parseDouble(end.get("latitude"));
+		double endLongitude = Double.parseDouble(end.get("longitude"));
 		return dr.calculateDistance(startLatitude, startLongitude, endLatitude, endLongitude);
 	}
 
@@ -102,8 +102,11 @@ public class Tour {
 	}
 
 	private void findTourDistance() {
+		if (places.size() < 2) {
+			this.tourDistance = 0;
+		}
+		else {
 		int tourDistance = 0;
-
 		DistancesRequest dr = new DistancesRequest();
 		dr.setRadius(earthRadius);
 		ArrayList<Integer> distances = dr.testDistanceList(places);
@@ -112,6 +115,7 @@ public class Tour {
 		}
 
 		this.tourDistance = tourDistance;
+		}
 		tourDistanceIsDirty = false;
 	}
 }

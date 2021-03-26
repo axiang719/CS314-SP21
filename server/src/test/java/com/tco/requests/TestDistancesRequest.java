@@ -31,7 +31,7 @@ public class TestDistancesRequest {
     @Test
     @DisplayName("Check that distances list is filled")
     public void testDistanceList() {
-        distancesRequest.setRadius(6378);
+        distancesRequest.setRadius(6378.0);
         int expectedDistance = 0;
         HashMap<String, String> place = new HashMap<String, String>();
         place.put("name", "testPlace");
@@ -47,7 +47,7 @@ public class TestDistancesRequest {
     @Test
     @DisplayName("Test calculateDistances()")
     public void testCalculateDistance() {
-        distancesRequest.setRadius(6378);
+        distancesRequest.setRadius(6378.0);
         int expected = 13448;
         assertEquals(distancesRequest.calculateDistance(40.6, -105.1, -33.9, 151.2), expected);
     }
@@ -55,13 +55,13 @@ public class TestDistancesRequest {
     @Test
     @DisplayName("Distance of zero if enter same place twice") 
     public void testCalculateDistanceZero() {
-        distancesRequest.setRadius(0);
+        distancesRequest.setRadius(0.0);
         assertEquals(0, distancesRequest.calculateDistance(40, 41, 42, 45));
     }
 
     @Test
     @DisplayName("Test setRadius")
     public void testSetRadius() {
-        assertEquals(100, distancesRequest.setRadius(100));
+        assertEquals(100, distancesRequest.setRadius(100.0));
     }
 }

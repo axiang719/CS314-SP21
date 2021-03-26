@@ -41,7 +41,6 @@ public class DistancesRequest extends RequestHeader {
     }
   }
 
-  //check for if one is negative and other positive
   public int calculateDistance(double firstPointLatD, double firstPointLongD,
                               double secondPointLatD, double secondPointLongD) {
     double firstPointLat = (firstPointLatD * (Math.PI/180));
@@ -78,8 +77,9 @@ public class DistancesRequest extends RequestHeader {
     return this.distances;
   }
 
-  public double setRadius(double radius){
-    this.earthRadius = radius;
-    return radius;
+  public Double setRadius(double radius) {
+    Double d = new Double(radius);
+    this.earthRadius = d;
+    return d;
   }
 }
