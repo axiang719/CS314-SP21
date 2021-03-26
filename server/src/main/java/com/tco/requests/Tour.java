@@ -15,13 +15,24 @@ public class Tour {
 		tourDistanceIsDirty = true;
 	}
 
+	public void appendPlaces(HashMap<String, String> place) {
+		places.add(place);
+		tourDistanceIsDirty = true;
+	}
+
+	public HashMap<String, String> removePlace(int index) {
+		HashMap<String, String> place = places.remove(index);
+		tourDistanceIsDirty = true;
+		return place;
+	}
+
 	public ArrayList<HashMap<String, String>> getPlaces() {
 		return places;
 	}
 
 	public Integer getTourDistance() {
 		if(TourDistanceIsDirty) {
-			findTourDistance()
+			findTourDistance();
 		}
 		return TourDistance;
 	}
