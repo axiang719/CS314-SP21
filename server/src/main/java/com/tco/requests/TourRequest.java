@@ -33,7 +33,6 @@ public class TourRequest extends RequestHeader {
         }
       };
       t.schedule(task,time);
-      System.out.println(places);
       Tour T = new Tour(earthRadius,places);
       int i = 0;
       while(sort) {
