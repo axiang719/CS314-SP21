@@ -23,9 +23,18 @@ public class TourRequest extends RequestHeader {
     }
 
     public void setTimer() {
-      sort = true;
+      Tour T = new Tour(earthRadius,places);
       double d = Double.parseDouble(response);
-      int time = (int) d * 1000;
+      if (d != 0.0 && response != "") {
+        T = sort(d,T);
+      }
+      this.places = T.getPlaces();
+    }
+
+    public Tour sort(double d, Tour T) {
+      sort = true;
+      int time = (int) (d * 1000.0);
+      time -= (time / 2); 
       Timer t = new Timer();
       TimerTask task = new TimerTask() {
         public void run() {
@@ -33,14 +42,13 @@ public class TourRequest extends RequestHeader {
         }
       };
       t.schedule(task,time);
-      Tour T = new Tour(earthRadius,places);
       int i = 0;
       while(sort) {
         T = T.sortTourByDistance(T,i,0);
         i += 1;
         if (i >= places.size()) break;
       }
-      this.places = T.getPlaces();
+      return T;
     }
     
     /* The following methods exist only for testing purposes and are not used
