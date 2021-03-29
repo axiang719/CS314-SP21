@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class DistancesRequest extends RequestHeader {
   private Double earthRadius;
-  private ArrayList<Integer> distances;
+  private ArrayList<Long> distances;
   private ArrayList<HashMap<String, String>> places;
   private final transient Logger log = LoggerFactory.getLogger(DistancesRequest.class);
 
@@ -24,14 +24,14 @@ public class DistancesRequest extends RequestHeader {
     double previousLatitude = 0;
     double previousLongitude = 0;
     if (size > 1) {
-      this.distances = new ArrayList<Integer>();
+      this.distances = new ArrayList<Long>();
       for(int i=0; i <= size; i++) {
         HashMap<String, String> place = places.get(i % size);
         double latitude = Double.parseDouble(place.get("latitude"));
         double longitude = Double.parseDouble(place.get("longitude"));
 
         if (i != 0) {
-          int resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude);
+          long resultDistance = calculateDistance(latitude, longitude, previousLatitude, previousLongitude);
           this.distances.add(resultDistance);
         }
 
@@ -41,12 +41,12 @@ public class DistancesRequest extends RequestHeader {
     }
   }
 
-  public int calculateDistance(double firstPointLatD, double firstPointLongD,
+  public long calculateDistance(double firstPointLatD, double firstPointLongD,
                               double secondPointLatD, double secondPointLongD) {
-    double firstPointLat = (firstPointLatD * (Math.PI/180));
-    double firstPointLong =  (firstPointLongD * (Math.PI/180));
-    double secondPointLat = (secondPointLatD * (Math.PI/180));
-    double secondPointLong = (secondPointLongD * (Math.PI/180));
+    double firstPointLat = Math.toRadians(firstPointLatD);
+    double firstPointLong =  Math.toRadians(firstPointLongD);
+    double secondPointLat = Math.toRadians(secondPointLatD);
+    double secondPointLong = Math.toRadians(secondPointLongD);
     double vincentPOne = (Math.cos(secondPointLat) * 
                          Math.sin(Math.abs(firstPointLong-secondPointLong)));
     double vincentPTwo = ((Math.cos(firstPointLat) * Math.sin(secondPointLat)) -
@@ -60,7 +60,7 @@ public class DistancesRequest extends RequestHeader {
     double arcTanOne =  Math.sqrt(vincentPOne + vincentPTwo);
     double arcTanTwo =  vincentPThree + vincentPFour; 
     double angle =  Math.atan2(arcTanOne,arcTanTwo);
-    int distance = (int)Math.round(earthRadius * angle);
+    long distance = (long)Math.round(earthRadius * angle);
     return distance;
   }
   
@@ -71,7 +71,7 @@ public class DistancesRequest extends RequestHeader {
     this.requestType = "distances";
   }
 
-  public ArrayList<Integer> testDistanceList(ArrayList<HashMap<String, String>> places) {
+  public ArrayList<Long> testDistanceList(ArrayList<HashMap<String, String>> places) {
     this.places = places;
     fillDistancesList();
     return this.distances;
