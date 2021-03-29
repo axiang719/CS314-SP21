@@ -12,6 +12,7 @@
 | ---- | ---- |
 | Chad Minning | 4 Hours |
 | Michael Young | 1 hour |
+| Ethan Seefried | 1 hour |
 
 ### Problems found
 
@@ -19,3 +20,5 @@
 | --- | --- | :---: | :---: | --- |
 | DistancesRequest:12 | Distances stored as ints | hi | Chad | #553 |
 | DistancesRequest | No 'distances' parameter returned when 'places' is empty | low | Chad | #554 |
+| DistanceRequest 44-61 | Rename variables and legibility | low | Ethan | #556 |
+| DistanceRequest | When given massive radius we get an off by one error | high | Ethan | #558 |
