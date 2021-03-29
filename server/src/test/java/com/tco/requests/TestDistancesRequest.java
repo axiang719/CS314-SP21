@@ -39,7 +39,7 @@ public class TestDistancesRequest {
         place.put("longitude", "50");
         testPlaces.add(place);
         testPlaces.add(place);
-        ArrayList<Integer> distances = distancesRequest.testDistanceList(testPlaces);
+        ArrayList<Long> distances = distancesRequest.testDistanceList(testPlaces);
         assertEquals(0, distances.get(0));
         assertEquals(2, distances.size());
     }

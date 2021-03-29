@@ -29,14 +29,14 @@ public class Tour {
 		if(lookAheadLimit == 0 || lookAheadLimit > tempTour.size()) {
 			lookAheadLimit = tempTour.size();
 		}
-		int shortestDistance = Integer.MAX_VALUE;
+		long shortestDistance = Integer.MAX_VALUE;
 		int closestNeighborIndex = 0;
 		int i = startingIndex;
 		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++) {
 			if(i == tour.size()){
 				i = 0;
 			}
-			int distance = getDistance(start, tempTour.getPlaces().get(i));
+			long distance = getDistance(start, tempTour.getPlaces().get(i));
 			if(distance < shortestDistance) {
 				shortestDistance = distance;
 				closestNeighborIndex = i;
@@ -55,7 +55,7 @@ public class Tour {
 		}
 	}
 
-	private static int getDistance(HashMap<String, String> start, HashMap<String, String> end) {
+	private static long getDistance(HashMap<String, String> start, HashMap<String, String> end) {
 		DistancesRequest dr = new DistancesRequest();
 		dr.setRadius(earthRadius);
 		double startLatitude = Double.parseDouble(start.get("latitude"));
@@ -109,8 +109,8 @@ public class Tour {
 		int tourDistance = 0;
 		DistancesRequest dr = new DistancesRequest();
 		dr.setRadius(earthRadius);
-		ArrayList<Integer> distances = dr.testDistanceList(places);
-		for(Integer distance:distances) {
+		ArrayList<Long> distances = dr.testDistanceList(places);
+		for(Long distance:distances) {
 			tourDistance += distance.intValue();
 		}
 
