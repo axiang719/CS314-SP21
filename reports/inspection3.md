@@ -14,6 +14,7 @@
 | Michael Young | 1 hour |
 | Ethan Seefried | 1 hour |
 | Anthony Xiang | 1 hour |
+| Andie Groeling | 1 hour |
 
 ### Problems found
 
@@ -25,3 +26,5 @@
 | DistanceRequest | When given massive radius we get an off by one error | high | Ethan | #558 |
 | DistanceRequest | The distance member varible should be just an array of longs | med | Anthony | #559 |
 | DistanceRequest:33 | Only checks if distance should be 0 when i is 0 | med | Michael | #560 |
+| DistanceRequest | Math functions should be separate from API wrapper | low | Andie | #555 |
+| DistanceRequest:67-83 | This section is not just used for testing and should be refactored to reflect this | med | Andie | #549 |
