@@ -24,26 +24,31 @@ public class TourRequest extends RequestHeader {
 
     public void setTimer() {
       Tour T = new Tour(earthRadius,places);
-      if (Double.parseDouble(response) != 0.0 && response != "") {
-        sort = true;
-        double d = Double.parseDouble(response);
-        int time = (int) (d * 1000.0);
-        time -= (time / 2); 
-        Timer t = new Timer();
-        TimerTask task = new TimerTask() {
-          public void run() {
-            sort = false;
-          }
-        };
-        t.schedule(task,time);
-        int i = 0;
-        while(sort) {
-          T = T.sortTourByDistance(T,i,0);
-          i += 1;
-          if (i >= places.size()) break;
-        }
+      double d = Double.parseDouble(response);
+      if (d != 0.0 && response != "") {
+        T = sort(d,T);
       }
       this.places = T.getPlaces();
+    }
+
+    public Tour sort(double d, Tour T) {
+      sort = true;
+      int time = (int) (d * 1000.0);
+      time -= (time / 2); 
+      Timer t = new Timer();
+      TimerTask task = new TimerTask() {
+        public void run() {
+          sort = false;
+        }
+      };
+      t.schedule(task,time);
+      int i = 0;
+      while(sort) {
+        T = T.sortTourByDistance(T,i,0);
+        i += 1;
+        if (i >= places.size()) break;
+      }
+      return T;
     }
     
     /* The following methods exist only for testing purposes and are not used
