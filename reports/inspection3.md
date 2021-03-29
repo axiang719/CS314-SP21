@@ -24,3 +24,4 @@
 | DistanceRequest 44-61 | Rename variables and legibility | low | Ethan | #556 |
 | DistanceRequest | When given massive radius we get an off by one error | high | Ethan | #558 |
 | DistanceRequest | The distance member varible should be just an array of longs | med | Anthony | #559 |
+| DistanceRequest:33 | Only refuses distance calculation if i does not equal 0 | medium | Michael | #560 |
