@@ -23,22 +23,24 @@ public class TourRequest extends RequestHeader {
     }
 
     public void setTimer() {
-      sort = true;
-      double d = Double.parseDouble(response);
-      int time = (int) d * 1000;
-      Timer t = new Timer();
-      TimerTask task = new TimerTask() {
-        public void run() {
-          sort = false;
-        }
-      };
-      t.schedule(task,time);
       Tour T = new Tour(earthRadius,places);
-      int i = 0;
-      while(sort) {
-        T = T.sortTourByDistance(T,i,0);
-        i += 1;
-        if (i >= places.size()) break;
+      if (Double.parseDouble(response) != 0.0 && response != "") {
+        sort = true;
+        double d = Double.parseDouble(response);
+        int time = (int) d * 1000;
+        Timer t = new Timer();
+        TimerTask task = new TimerTask() {
+          public void run() {
+            sort = false;
+          }
+        };
+        t.schedule(task,time);
+        int i = 0;
+        while(sort) {
+          T = T.sortTourByDistance(T,i,0);
+          i += 1;
+          if (i >= places.size()) break;
+        }
       }
       this.places = T.getPlaces();
     }
