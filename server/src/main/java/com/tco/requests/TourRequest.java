@@ -29,7 +29,6 @@ public class TourRequest extends RequestHeader {
         double d = Double.parseDouble(response);
         int time = (int) (d * 1000.0);
         time -= (time / 2); 
-        System.out.println(time);
         Timer t = new Timer();
         TimerTask task = new TimerTask() {
           public void run() {
@@ -41,10 +40,7 @@ public class TourRequest extends RequestHeader {
         while(sort) {
           T = T.sortTourByDistance(T,i,0);
           i += 1;
-          if (i >= places.size()) {
-            i -= 1;
-            continue;
-          }
+          if (i >= places.size()) break;
         }
       }
       this.places = T.getPlaces();
