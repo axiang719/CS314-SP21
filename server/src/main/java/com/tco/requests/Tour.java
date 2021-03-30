@@ -10,12 +10,34 @@ public class Tour {
 	private int tourDistance;
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
+	private long[][] distanceMatrix;
     
 	public Tour(Double earthRadius, ArrayList<HashMap<String, String>> places) {
 		this.earthRadius = earthRadius.doubleValue();
 		this.places = places;
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
+	}
+
+	public long[][] buildDistanceMatrix() {
+		DistancesRequest distancesReq = new DistancesRequest(earthRadius);
+		int size = places.size();
+		distanceMatrix = new long[size][size];
+		for(int i=0; i < size; i++) {
+			HashMap<String, String> firstPoint = places.get(i);
+			for(int j=i; j < size; j++) {
+				HashMap<String, String> secondPoint = places.get(j);
+				double firstLatitude = Double.parseDouble(firstPoint.get("latitude"));
+				double firstLongitude = Double.parseDouble(firstPoint.get("longitude"));
+				double secondLatitude = Double.parseDouble(secondPoint.get("latitude"));
+				double secondLongitude = Double.parseDouble(secondPoint.get("longitude"));
+
+				long distance = distancesReq.calculateDistance(firstLatitude, firstLongitude,
+															secondLatitude, secondLongitude);
+				distanceMatrix[i][j] = distance;
+			}
+		}
+		return distanceMatrix;
 	}
 
 	static public Tour sortTourByDistance(Tour tour, int startingIndex, int lookAheadLimit) {

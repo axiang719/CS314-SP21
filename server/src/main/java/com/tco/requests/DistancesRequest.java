@@ -19,6 +19,10 @@ public class DistancesRequest extends RequestHeader {
     fillDistancesList();
   }
 
+  public DistancesRequest(Double earthRadius){
+    this.earthRadius = earthRadius;
+  }
+
   private void fillDistancesList() {
     int size = places.size();
     double previousLatitude = 0;
