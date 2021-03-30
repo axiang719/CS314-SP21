@@ -82,7 +82,7 @@ public class DistancesRequest extends RequestHeader {
   }
 
   public Double setRadius(double radius) {
-    Double d = new Double(radius);
+    Double d = radius;
     this.earthRadius = d;
     return d;
   }
