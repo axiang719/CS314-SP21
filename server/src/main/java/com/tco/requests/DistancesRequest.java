@@ -23,8 +23,8 @@ public class DistancesRequest extends RequestHeader {
     int size = places.size();
     double previousLatitude = 0;
     double previousLongitude = 0;
+    this.distances = new ArrayList<Long>();
     if (size > 1) {
-      this.distances = new ArrayList<Long>();
       for(int i=0; i <= size; i++) {
         HashMap<String, String> place = places.get(i % size);
         double latitude = Double.parseDouble(place.get("latitude"));
@@ -40,7 +40,6 @@ public class DistancesRequest extends RequestHeader {
       }
     }
     else if (size == 1) {
-      this.distances = new ArrayList<Long>();
       distances.add(0L);
     }
   }
