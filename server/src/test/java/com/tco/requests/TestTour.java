@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestTour {
     private Tour tour;
 
-    @BeforeEach
-    public void createConfigurationForTestCases() {
-        tour = new Tour();
-    }
-}
+    public void testGetEarthRadius(){
+        tour.setEarthRadius(10); 
+        assertEquals(10, tour.getEarthRadius());
+    }  
+} 

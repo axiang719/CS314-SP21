@@ -86,6 +86,10 @@ public class Tour {
 		return earthRadius;
 	}
 
+	public void setEarthRadius(double radius) {
+		earthRadius = radius;
+	}
+
 	public ArrayList<HashMap<String, String>> getPlaces() {
 		return places;
 	}
