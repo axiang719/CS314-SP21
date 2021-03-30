@@ -3,16 +3,22 @@ import {shallow} from 'enzyme';
 import React, { Component } from 'react';
 import {Marker} from 'react-leaflet';
 import TypeSearch from '../src/components/Atlas/TypeSearch';
-import { it } from '@jest/globals';
+import { expect, it, toHaveBeenCalled } from '@jest/globals';
 
 describe('TypeSearch', () => {
     let typeSearchWrapper;
     const helper = jest.fn();
     const type = ["airport","heliport","balloonport","other"];
+    const serverSettings = {
+        serverConfig: {
+            type: type
+        }
+    } 
 
     beforeEach(() => {
         typeSearchWrapper = shallow(<TypeSearch type = {type}
-                                                setType = {helper}/>);
+                                                setType = {helper}
+                                                serverSettings = {serverSettings}/>);
         typeSearchWrapper.state().dropdownOpen = true;
     });
 
@@ -43,5 +49,13 @@ describe('TypeSearch', () => {
 
         expect(typeSearchWrapper.find('DropdownItem')).toHaveLength(4);
     
+    });
+
+    it('uses all branches of fillTypeArray', () => {
+        typeSearchWrapper.instance().checkIfSelected("invalid value");
+        typeSearchWrapper.instance().FillTypeArray("airport");
+        typeSearchWrapper.instance().FillTypeArray("airport");
+
+        expect(helper).toHaveBeenCalled();
     });
 });

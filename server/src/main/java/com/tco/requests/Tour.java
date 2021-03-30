@@ -32,7 +32,7 @@ public class Tour {
 		long shortestDistance = Integer.MAX_VALUE;
 		int closestNeighborIndex = 0;
 		int i = startingIndex;
-		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++) {
+		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++, i++) {
 			if(i == tour.size()){
 				i = 0;
 			}
@@ -41,12 +41,11 @@ public class Tour {
 				shortestDistance = distance;
 				closestNeighborIndex = i;
 			}
-			i++;
 		}
 		Tour shortTour = new Tour(tour.getEarthRadius(), new ArrayList());
 		shortTour.appendPlace(start);
 		shortTour.appendPlace(tempTour.removePlace(closestNeighborIndex));
-		shortTour.appendTour(sortTourByDistance(tempTour, i, lookAheadLimit));
+		shortTour.appendTour(sortTourByDistance(tempTour, i % tempTour.size(), lookAheadLimit));
 		if(tour.getTourDistance() > shortTour.getTourDistance()) {
 			return tour;
 		}
@@ -84,6 +83,10 @@ public class Tour {
 
 	public double getEarthRadius() {
 		return earthRadius;
+	}
+
+	public void setEarthRadius(double radius) {
+		earthRadius = radius;
 	}
 
 	public ArrayList<HashMap<String, String>> getPlaces() {
