@@ -67,7 +67,8 @@ export default class MatchSearch extends Component {
 				<Container>	
 					<Row className="mt-1">
 						<TypeSearch type={this.state.findRequest.type}
-				        	setType={this.setType}/>
+				        	setType={this.setType}
+							serverSettings={this.props.serverSettings}/>
 						<WhereSearch where = {this.state.findRequest.where}
 							processFocus = {this.processFocus}
 							focus = {this.state.focus}
