@@ -9,10 +9,16 @@ describe('TypeSearch', () => {
     let typeSearchWrapper;
     const helper = jest.fn();
     const type = ["airport","heliport","balloonport","other"];
+    const serverSettings = {
+        serverConfig: {
+            type: type
+        }
+    } 
 
     beforeEach(() => {
         typeSearchWrapper = shallow(<TypeSearch type = {type}
-                                                setType = {helper}/>);
+                                                setType = {helper}
+                                                serverSettings = {serverSettings}/>);
         typeSearchWrapper.state().dropdownOpen = true;
     });
 

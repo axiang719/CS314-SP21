@@ -14,14 +14,16 @@ export default class TypeSearch extends Component {
     };
 
         render() {
+            const {serverSettings} = this.props;
+            const validTypes = serverSettings.serverConfig.type;
+
             return (
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
                     <DropdownToggle color="primary" caret>Type</DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem toggle={false} onClick={() => this.FillTypeArray("airport")}>Airport {this.checkIfSelected("airport")}</DropdownItem>
-                        <DropdownItem toggle={false} onClick={() => this.FillTypeArray("balloonport")}>Balloonport {this.checkIfSelected("balloonport")}</DropdownItem>
-                        <DropdownItem toggle={false} onClick={() => this.FillTypeArray("heliport")}>Heliport {this.checkIfSelected("heliport")}</DropdownItem>
-                        <DropdownItem toggle={false} onClick={() => this.FillTypeArray("other")}>Other {this.checkIfSelected("other")}</DropdownItem>
+                        {validTypes.map((type, index) => {
+                            return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
+                        })}
                     </DropdownMenu>
                 </Dropdown>
             )
