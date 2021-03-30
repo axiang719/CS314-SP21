@@ -39,7 +39,7 @@ public class DistancesRequest extends RequestHeader {
         previousLongitude = longitude;
       }
     }
-    else {
+    else if (size == 1) {
       this.distances = new ArrayList<Long>();
       distances.add(0L);
     }
