@@ -11,7 +11,7 @@ This table lists each student in the team and the team they verified interoperab
 | Name | Team |
 | ---- | ---- |
 | Andie Groeling | 5 |
-|  |  |
+| Chad Minning | 3 |
 
 ### Problems found
 
