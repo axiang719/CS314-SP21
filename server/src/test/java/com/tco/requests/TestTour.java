@@ -76,12 +76,12 @@ public class TestTour {
         porlatau.put("longitude", "59.267");
         testPlaces.add(porlatau);
         HashMap<String, String> shakhaman = new HashMap<>();
-        shakhaman.put("latitude", "43.615");
-        shakhaman.put("longitude", "59.267");
+        shakhaman.put("latitude", "43.22");
+        shakhaman.put("longitude", "59.59");
         testPlaces.add(shakhaman);
         HashMap<String, String> karauzyak = new HashMap<>();
-        karauzyak.put("latitude", "43.615");
-        karauzyak.put("longitude", "59.267");
+        karauzyak.put("latitude", "43.38");
+        karauzyak.put("longitude", "59.33");
         testPlaces.add(karauzyak);
         HashMap<String, String> h4airbase = new HashMap<>();
         h4airbase.put("latitude", "32.5392");
