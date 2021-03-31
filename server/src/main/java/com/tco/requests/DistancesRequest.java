@@ -43,10 +43,9 @@ public class DistancesRequest extends RequestHeader {
 
   public long calculateDistance(double firstPointLat, double firstPointLong,
                               double secondPointLat, double secondPointLong) {
-    firstPointLat = convertToRadians(firstPointLat);
-    firstPointLong =  convertToRadians(firstPointLong);
-    secondPointLat = convertToRadians(secondPointLat);
-    secondPointLong = convertToRadians(secondPointLong);
+    
+    double points []= new double [] {firstPointLat,firstPointLong,secondPointLat,secondPointLong};
+    convertToRadians(points);
 
     double vincentPOne = (Math.cos(secondPointLat) * 
                          Math.sin(Math.abs(firstPointLong-secondPointLong)));
@@ -65,8 +64,11 @@ public class DistancesRequest extends RequestHeader {
     return distance;
   }
 
-  public Double convertToRadians(double point){
-    return Math.toRadians(point);
+  public double[] convertToRadians(double[] points){
+    for(int i=0; i<points.length; i++){
+      points[i] = Math.toRadians(points[i]);
+    }
+    return points;
   }
   
   /* The following methods exist only for testing purposes and are not used
