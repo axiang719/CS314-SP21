@@ -41,12 +41,13 @@ public class DistancesRequest extends RequestHeader {
     }
   }
 
-  public long calculateDistance(double firstPointLatD, double firstPointLongD,
-                              double secondPointLatD, double secondPointLongD) {
-    double firstPointLat = Math.toRadians(firstPointLatD);
-    double firstPointLong =  Math.toRadians(firstPointLongD);
-    double secondPointLat = Math.toRadians(secondPointLatD);
-    double secondPointLong = Math.toRadians(secondPointLongD);
+  public long calculateDistance(double firstPointLat, double firstPointLong,
+                              double secondPointLat, double secondPointLong) {
+    firstPointLat = convertToRadians(firstPointLat);
+    firstPointLong =  convertToRadians(firstPointLong);
+    secondPointLat = convertToRadians(secondPointLat);
+    secondPointLong = convertToRadians(secondPointLong);
+
     double vincentPOne = (Math.cos(secondPointLat) * 
                          Math.sin(Math.abs(firstPointLong-secondPointLong)));
     double vincentPTwo = ((Math.cos(firstPointLat) * Math.sin(secondPointLat)) -
@@ -62,6 +63,10 @@ public class DistancesRequest extends RequestHeader {
     double angle =  Math.atan2(arcTanOne,arcTanTwo);
     long distance = (long)Math.round(earthRadius * angle);
     return distance;
+  }
+
+  public Double convertToRadians(double point){
+    return Math.toRadians(point);
   }
   
   /* The following methods exist only for testing purposes and are not used
