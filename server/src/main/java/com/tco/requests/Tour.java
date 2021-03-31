@@ -15,6 +15,7 @@ public class Tour {
 	public Tour(Double earthRadius, ArrayList<HashMap<String, String>> places) {
 		this.earthRadius = earthRadius.doubleValue();
 		this.places = places;
+		places.trimToSize();
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
 	}
