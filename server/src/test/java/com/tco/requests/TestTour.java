@@ -73,33 +73,39 @@ public class TestTour {
         HashMap<String, String> porlatau = new HashMap<>();
         placeOne.put("latitude", "43.615");
         placeOne.put("longitude", "59.267");
+        testPlaces.add(porlatau);
         HashMap<String, String> shakhaman = new HashMap<>();
         placeOne.put("latitude", "43.615");
         placeOne.put("longitude", "59.267");
+        testPlaces.add(shakhaman);
         HashMap<String, String> karauzyak = new HashMap<>();
         placeOne.put("latitude", "43.615");
         placeOne.put("longitude", "59.267");
+        testPlaces.add(karazyak);
         HashMap<String, String> h4airbase = new HashMap<>();
         placeTwo.put("latitude", "32.5392");
         placeTwo.put("longitude", "38.195");
+        testPlaces.add(h4airbase);
         HashMap<String, String> brussels = new HashMap<>();
         placeThree.put("latitude", "50.913");
         placeThree.put("longitude", "4.49");
+        testPlaces.add(brussels);
         HashMap<String, String> luxembourg = new HashMap<>();
         placeThree.put("latitude", "49.61");
         placeThree.put("longitude", "6.14");
+        testPlaces.add(luxembourg);
         HashMap<String, String> mons = new HashMap<>();
         placeThree.put("latitude", "50.44");
         placeThree.put("longitude", "3.97");
+        testPlaces.add(mons);
         HashMap<String, String> reims = new HashMap<>();
         placeThree.put("latitude", "49.25");
         placeThree.put("longitude", "4.06");
+        testPlaces.add(reims);
         HashMap<String, String> charleroi = new HashMap<>();
         placeThree.put("latitude", "50.42");
         placeThree.put("longitude", "4.43");
+        testPlaces.add(charleroi);
 
-        testPlaces.add(placeOne);
-        testPlaces.add(placeTwo);
-        testPlaces.add(placeThree);
     }
 } 
