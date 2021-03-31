@@ -43,7 +43,7 @@ public class Tour {
 
 	static public Tour sortTourByDistance(Tour tour, int startingIndex, int lookAheadLimit) {
 		//base case
-		if(tour.size() <= 3) { 
+		if(tour.size() <= 2) { 
 			return tour;
 		}
 		//recursion case
