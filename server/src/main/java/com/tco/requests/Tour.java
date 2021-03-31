@@ -24,25 +24,29 @@ public class Tour {
 	public long[][] buildDistanceMatrix() {
 		int size = places.size();
 		distanceMatrix = new long[size][size];
-		for(int i=0; i < size; i++) {
-			HashMap<String, String> firstPoint = places.get(i);
-			
-			for(int j=i; j < size; j++) {
-				long distance;
-				
-				if (j == i) {
-					distance = 0;
-				} else {
-					HashMap<String, String> secondPoint = places.get(j);
-					distance = findDistance(firstPoint, secondPoint);
-				}
-				
-				distanceMatrix[i][j] = distance;
-				distanceMatrix[j][i] = distance;
-			}
+		for(int colIndex=0; colIndex < size; colIndex++) {
+			buildMatrixColumn(size, colIndex, distanceMatrix);
 		}
 
 		return distanceMatrix;
+	}
+
+	private void buildMatrixColumn(int size, int colIndex, long[][] distanceMatrix) {
+		HashMap<String, String> firstPoint = places.get(colIndex);
+			
+		for(int rowIndex=colIndex; rowIndex < size; rowIndex++) {
+			long distance;
+			
+			if (rowIndex == colIndex) {
+				distance = 0;
+			} else {
+				HashMap<String, String> secondPoint = places.get(rowIndex);
+				distance = findDistance(firstPoint, secondPoint);
+			}
+			
+			distanceMatrix[colIndex][rowIndex] = distance;
+			distanceMatrix[rowIndex][colIndex] = distance;
+		}
 	}
 
 	private long findDistance(HashMap<String, String> firstPoint, HashMap<String, String> secondPoint) {
