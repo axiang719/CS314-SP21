@@ -43,7 +43,7 @@ public class DistancesRequest extends RequestHeader {
 
   public long calculateDistance(double firstPointLat, double firstPointLong, double secondPointLat, double secondPointLong) {
     
-    double points []= new double [] {firstPointLat,firstPointLong,secondPointLat,secondPointLong};
+    double points [] = new double [] {firstPointLat,firstPointLong,secondPointLat,secondPointLong};
     convertToRadians(points);
 
     double sineLHS = (Math.cos(points[2]) * Math.sin(Math.abs(points[1]-points[3])));
