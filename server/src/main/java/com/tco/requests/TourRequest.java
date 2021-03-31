@@ -43,11 +43,13 @@ public class TourRequest extends RequestHeader {
       };
       t.schedule(task,time);
       int i = 0;
+      HashMap<String,String> startPlace = places.get(0);
       while(sort) {
         T = T.sortTourByDistance(T,i,0);
         i += 1;
         if (i >= places.size()) break;
       }
+      T = T.sortPlaces(T,startPlace);
       return T;
     }
     

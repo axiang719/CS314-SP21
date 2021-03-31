@@ -162,4 +162,22 @@ public class Tour {
 		}
 		tourDistanceIsDirty = false;
 	}
+
+	public Tour sortPlaces(Tour T, HashMap<String,String> startPlace) {
+		ArrayList<HashMap<String,String>> tPlaces = T.getPlaces();
+		String startLat = startPlace.get("latitude");
+		String startLon = startPlace.get("longitude");
+		int size = tPlaces.size();
+		while (tPlaces.get(0).get("latitude") != startLat &&
+			   tPlaces.get(0).get("longitude") != startLon) {
+			for (int i = 0; i < size-1; i++) {
+				int iPlusOne = (i+1) % size;
+				HashMap<String,String> temp = tPlaces.get(iPlusOne);
+				tPlaces.set(iPlusOne,tPlaces.get(i));
+				tPlaces.set(i,temp);
+			}
+		}
+		T.places = tPlaces;
+		return T;
+	}
 }
