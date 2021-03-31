@@ -16,6 +16,7 @@ public class Tour {
 	public Tour(Double earthRadius, ArrayList<HashMap<String, String>> places) {
 		this.earthRadius = earthRadius.doubleValue();
 		this.places = places;
+		places.trimToSize();
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
 		distancesReq = new DistancesRequest(earthRadius);
@@ -74,7 +75,7 @@ public class Tour {
 		int closestNeighborIndex = 0;
 		int i = startingIndex;
 		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++, i++) {
-			if(i == tour.size()){
+			if(i == tempTour.size()){
 				i = 0;
 			}
 			long distance = getDistance(start, tempTour.getPlaces().get(i));
@@ -85,9 +86,8 @@ public class Tour {
 		}
 		Tour shortTour = new Tour(tour.getEarthRadius(), new ArrayList());
 		shortTour.appendPlace(start);
-		shortTour.appendPlace(tempTour.removePlace(closestNeighborIndex));
-		shortTour.appendTour(sortTourByDistance(tempTour, i % tempTour.size(), lookAheadLimit));
-		if(tour.getTourDistance() > shortTour.getTourDistance()) {
+		shortTour.appendTour(sortTourByDistance(tempTour, closestNeighborIndex, lookAheadLimit));
+		if(tour.getTourDistance() < shortTour.getTourDistance()) {
 			return tour;
 		}
 		else {
@@ -131,7 +131,7 @@ public class Tour {
 	}
 
 	public ArrayList<HashMap<String, String>> getPlaces() {
-		return places;
+		return (ArrayList) places.clone();
 	}
 
 	public int size() {
