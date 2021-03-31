@@ -48,27 +48,30 @@ public class DistancesRequest extends RequestHeader {
     }
   }
 
-  public long calculateDistance(double firstPointLatD, double firstPointLongD,
-                              double secondPointLatD, double secondPointLongD) {
-    double firstPointLat = Math.toRadians(firstPointLatD);
-    double firstPointLong =  Math.toRadians(firstPointLongD);
-    double secondPointLat = Math.toRadians(secondPointLatD);
-    double secondPointLong = Math.toRadians(secondPointLongD);
-    double vincentPOne = (Math.cos(secondPointLat) * 
-                         Math.sin(Math.abs(firstPointLong-secondPointLong)));
-    double vincentPTwo = ((Math.cos(firstPointLat) * Math.sin(secondPointLat)) -
-                         (Math.sin(firstPointLat) * Math.cos(secondPointLat) * 
-                         Math.cos(Math.abs(firstPointLong-secondPointLong))));
-    vincentPOne =  Math.pow(vincentPOne,2);
-    vincentPTwo =  Math.pow(vincentPTwo,2);
-    double vincentPThree = (Math.sin(firstPointLat) * Math.sin(secondPointLat));
-    double vincentPFour =  (Math.cos(firstPointLat) * Math.cos(secondPointLat) * 
-                          Math.cos(Math.abs(firstPointLong-secondPointLong)));
-    double arcTanOne =  Math.sqrt(vincentPOne + vincentPTwo);
-    double arcTanTwo =  vincentPThree + vincentPFour; 
-    double angle =  Math.atan2(arcTanOne,arcTanTwo);
-    long distance = (long)Math.round(earthRadius * angle);
+  public long calculateDistance(double firstPointLat, double firstPointLong, double secondPointLat, double secondPointLong) {
+    
+    double points [] = new double [] {firstPointLat,firstPointLong,secondPointLat,secondPointLong};
+    convertToRadians(points);
+
+    double sineLHS = (Math.cos(points[2]) * Math.sin(Math.abs(points[1]-points[3])));
+    double sineRHS = ((Math.cos(points[0]) * Math.sin(points[2])) - (Math.sin(points[0]) * Math.cos(points[2]) * 
+                          Math.cos(Math.abs(points[1]-points[3]))));
+    double sine =  Math.sqrt(Math.pow(sineLHS,2) + Math.pow(sineRHS,2));
+   
+    double cosLHS = (Math.sin(points[0]) * Math.sin(points[2]));
+    double cosRHS =  (Math.cos(points[0]) * Math.cos(points[2]) * Math.cos(Math.abs(points[1]-points[3])));
+    double cos =  cosLHS + cosRHS; 
+
+    double deltaSigma =  Math.atan2(sine,cos);
+    long distance = (long)Math.round(earthRadius * deltaSigma);
     return distance;
+  }
+
+  public double[] convertToRadians(double[] points){
+    for(int i=0; i < points.length; i++){
+      points[i] = Math.toRadians(points[i]);
+    }
+    return points;
   }
   
   /* The following methods exist only for testing purposes and are not used
