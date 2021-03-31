@@ -66,4 +66,22 @@ public class TestTour {
         assertEquals(4289, matrix[1][2]);
         assertEquals(0, matrix[1][1]);
     }
+
+    @Test
+    @DisplayName("Testing sortTourByDistance")
+    public void testSortTourByDistance() {
+        HashMap<String, String> placeOne = new HashMap<>();
+        placeOne.put("latitude", "43.615");
+        placeOne.put("longitude", "59.267");
+        HashMap<String, String> placeTwo = new HashMap<>();
+        placeTwo.put("latitude", "32.5392");
+        placeTwo.put("longitude", "38.195");
+        HashMap<String, String> placeThree = new HashMap<>();
+        placeThree.put("latitude", "50.913");
+        placeThree.put("longitude", "4.49");
+
+        testPlaces.add(placeOne);
+        testPlaces.add(placeTwo);
+        testPlaces.add(placeThree);
+    }
 } 
