@@ -11,33 +11,52 @@ public class Tour {
 	private boolean tourDistanceIsDirty;
 	private ArrayList<HashMap<String, String>> places;
 	private long[][] distanceMatrix;
+	private DistancesRequest distancesReq;
     
 	public Tour(Double earthRadius, ArrayList<HashMap<String, String>> places) {
 		this.earthRadius = earthRadius.doubleValue();
 		this.places = places;
 		tourDistance = 0;
 		tourDistanceIsDirty = true;
+		distancesReq = new DistancesRequest(earthRadius);
 	}
 
 	public long[][] buildDistanceMatrix() {
-		DistancesRequest distancesReq = new DistancesRequest(earthRadius);
 		int size = places.size();
 		distanceMatrix = new long[size][size];
-		for(int i=0; i < size; i++) {
-			HashMap<String, String> firstPoint = places.get(i);
-			for(int j=i; j < size; j++) {
-				HashMap<String, String> secondPoint = places.get(j);
-				double firstLatitude = Double.parseDouble(firstPoint.get("latitude"));
-				double firstLongitude = Double.parseDouble(firstPoint.get("longitude"));
-				double secondLatitude = Double.parseDouble(secondPoint.get("latitude"));
-				double secondLongitude = Double.parseDouble(secondPoint.get("longitude"));
-
-				long distance = distancesReq.calculateDistance(firstLatitude, firstLongitude,
-															secondLatitude, secondLongitude);
-				distanceMatrix[i][j] = distance;
-			}
+		for(int colIndex=0; colIndex < size; colIndex++) {
+			buildMatrixColumn(size, colIndex, distanceMatrix);
 		}
+
 		return distanceMatrix;
+	}
+
+	private void buildMatrixColumn(int size, int colIndex, long[][] distanceMatrix) {
+		HashMap<String, String> firstPoint = places.get(colIndex);
+			
+		for(int rowIndex=colIndex; rowIndex < size; rowIndex++) {
+			long distance;
+			
+			if (rowIndex == colIndex) {
+				distance = 0;
+			} else {
+				HashMap<String, String> secondPoint = places.get(rowIndex);
+				distance = findDistance(firstPoint, secondPoint);
+			}
+			
+			distanceMatrix[colIndex][rowIndex] = distance;
+			distanceMatrix[rowIndex][colIndex] = distance;
+		}
+	}
+
+	private long findDistance(HashMap<String, String> firstPoint, HashMap<String, String> secondPoint) {
+		double firstLatitude = Double.parseDouble(firstPoint.get("latitude"));
+		double firstLongitude = Double.parseDouble(firstPoint.get("longitude"));
+		double secondLatitude = Double.parseDouble(secondPoint.get("latitude"));
+		double secondLongitude = Double.parseDouble(secondPoint.get("longitude"));
+
+		return distancesReq.calculateDistance(firstLatitude, firstLongitude,
+													secondLatitude, secondLongitude);
 	}
 
 	static public Tour sortTourByDistance(Tour tour, int startingIndex, int lookAheadLimit) {

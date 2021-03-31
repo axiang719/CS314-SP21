@@ -31,14 +31,14 @@ public class TestTour {
         place.put("latitude", "150.0");
         place.put("longitude", "150.0");
 
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<500; i++) {
             testPlaces.add(place);
         }
 
         tour = new Tour(8000.0, testPlaces);
         long[][] matrix = tour.buildDistanceMatrix();
-        assertEquals(5, matrix.length);
-        assertEquals(5, matrix[0].length);
+        assertEquals(500, matrix.length);
+        assertEquals(500, matrix[0].length);
     }
 
     @Test
@@ -64,6 +64,7 @@ public class TestTour {
         long[][] matrix = tour.buildDistanceMatrix();
         assertEquals(2772, matrix[0][1]);
         assertEquals(4289, matrix[1][2]);
+        assertEquals(4289, matrix[2][1]);
         assertEquals(0, matrix[1][1]);
     }
 } 
