@@ -119,15 +119,15 @@ public class TestTour {
     }
 
     @Test
-    @DisplayName("Testing sortPlaces") 
-    public void testSortPlaces() {
+    @DisplayName("Testing reorderTour") 
+    public void testReorderTour() {
         makeLongTour();
 
         HashMap<String,String> startPlace = testPlaces.get(0);
         Tour T = new Tour(8000.0,testPlaces);
         T = Tour.sortTourByDistance(T,0,0);
         Tour sortedUnorderedTour = T;
-        Tour sortedOrderedTour = Tour.sortPlaces(T,startPlace);
+        Tour sortedOrderedTour = Tour.reorderTour(T,startPlace);
         assertTrue(sortedUnorderedTour.size() == sortedOrderedTour.size());
         int unorderedDistance = sortedUnorderedTour.getTourDistance().intValue();
         int orderedDistance = sortedOrderedTour.getTourDistance().intValue();

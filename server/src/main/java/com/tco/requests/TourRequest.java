@@ -49,7 +49,7 @@ public class TourRequest extends RequestHeader {
         i += 1;
         if (i >= places.size()) break;
       }
-      T = T.sortPlaces(T,startPlace);
+      T = T.reorderTour(T,startPlace);
       return T;
     }
     

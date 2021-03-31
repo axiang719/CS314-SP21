@@ -163,7 +163,7 @@ public class Tour {
 		tourDistanceIsDirty = false;
 	}
 
-	public static Tour sortPlaces(Tour T, HashMap<String,String> startPlace) {
+	public static Tour reorderTour(Tour T, HashMap<String,String> startPlace) {
 		ArrayList<HashMap<String,String>> tPlaces = T.getPlaces();
 		String startLat = startPlace.get("latitude");
 		String startLon = startPlace.get("longitude");
