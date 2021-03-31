@@ -51,12 +51,12 @@ public class DistancesRequest extends RequestHeader {
                           Math.cos(Math.abs(points[1]-points[3]))));
     double sine =  Math.sqrt(Math.pow(sineLHS,2) + Math.pow(sineRHS,2));
    
-    double cosLHS = (Math.sin(points[0]) * Math.sin(points[3]));
+    double cosLHS = (Math.sin(points[0]) * Math.sin(points[2]));
     double cosRHS =  (Math.cos(points[0]) * Math.cos(points[2]) * Math.cos(Math.abs(points[1]-points[3])));
     double cos =  cosLHS + cosRHS; 
-    
+
     double deltaSigma =  Math.atan2(sine,cos);
-    long distance = (long)Math.round(earthRadius * angle);
+    long distance = (long)Math.round(earthRadius * deltaSigma);
     return distance;
   }
 
