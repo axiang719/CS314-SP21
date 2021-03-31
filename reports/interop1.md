@@ -22,5 +22,5 @@ You should discuss the issues found with the other team and create defects in Gi
 
 | team | C/S | problem | github# |
 | :--- | :---: | :--- | --- |
-|  |  |  |  |
+| 3 | S | Our client tries to render type and where compnants but they aren't supported features | #586 |
 |  |  |  |  |
