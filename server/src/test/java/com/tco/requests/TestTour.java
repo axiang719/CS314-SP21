@@ -70,7 +70,6 @@ public class TestTour {
     @Test
     @DisplayName("Testing sortTourByDistance")
     public void testSortTourByDistance() {
-	testplaces = new ArrayList();
         HashMap<String, String> porlatau = new HashMap<>();
         porlatau.put("latitude", "43.615");
         porlatau.put("longitude", "59.267");
@@ -108,11 +107,9 @@ public class TestTour {
         charleroi.put("longitude", "4.43");
         testPlaces.add(charleroi);
 
-	System.out.println("Test Places: "+testPlaces);
         Tour originalTour = new Tour(8000.0, testPlaces);
-	System.out.println("Original Tour: "+originalTour.getPlaces());
 	Tour sortedTour = Tour.sortTourByDistance(originalTour, 0, 0);
-	System.out.println("Sorted Tour: "+sortedTour.getPlaces());
+	assertTrue(originalTour.size() == sortedTour.size());
 	assertTrue(originalTour.getTourDistance() > sortedTour.getTourDistance());
     }
 } 
