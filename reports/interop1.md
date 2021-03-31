@@ -13,6 +13,7 @@ This table lists each student in the team and the team they verified interoperab
 | Andie Groeling | 5 |
 | Chad Minning | 3 |
 | Michael Young | 22 |
+| Anthony Xiang | 14 |
 
 ### Problems found
 
@@ -23,4 +24,4 @@ You should discuss the issues found with the other team and create defects in Gi
 | team | C/S | problem | github# |
 | :--- | :---: | :--- | --- |
 | 3 | S | Our client tries to render type and where componants but they aren't supported features | #586 |
-|  |  |  |  |
+| 14 | S | Our client tries to render type and where componants but they aren't supported features | #586  |
