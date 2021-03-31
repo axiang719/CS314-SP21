@@ -27,3 +27,4 @@ You should discuss the issues found with the other team and create defects in Gi
 | 3 | S | Our client tries to render type and where componants but they aren't supported features | #586 |
 | 14 | S | Our client tries to render type and where componants but they aren't supported features | #586 |
 | 9 | S | Our client tries to render type and where componants but they aren't supported features | #586 |
+| 22 | S | Our client tries to render type and where componants but they aren't supported features | #586 |
