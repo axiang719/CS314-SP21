@@ -16,8 +16,6 @@ import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 
-import ServerSettings from '../Margins/ServerSettings';
-
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
 const MAP_ZOOM_DEFAULT = 15;
@@ -69,7 +67,6 @@ export default class Atlas extends Component {
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
-                    <br></br>
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             <div className="text-right">{this.renderLoadTour()}</div>
@@ -192,7 +189,6 @@ export default class Atlas extends Component {
         if (this.state.markerPosition) {
             return (
                 <Marker ref={(ref) => this.showMarkerPopup(ref)} position={this.state.markerPosition} icon={MARKER_ICON}>
-
                     <Popup offset={[0, -18]} className="font-weight-bold">
                         {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
@@ -286,10 +282,8 @@ export default class Atlas extends Component {
     getStringMarkerPosition() {
         return (
           <div>  
-            {this.state.address}
-            <br/>
-            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} 
-            <br/>
+            {this.state.address} <br/>
+            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} <br/>
             {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );
