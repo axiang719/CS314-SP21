@@ -14,4 +14,9 @@ describe('LoadTour', () => {
     it('initializes as expected', () => {
         expect(loadTourWrapper.find("Button")).toHaveLength(1);
     });
+
+    it('toggles the modal', () => {
+        loadTourWrapper.instance().toggleModal();
+        expect(loadTourWrapper.state().modalOpen).toEqual(true);
+    });
 });
