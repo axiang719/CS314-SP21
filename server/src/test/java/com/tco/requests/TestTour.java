@@ -23,6 +23,45 @@ public class TestTour {
         tour.setEarthRadius(10); 
         assertEquals(10, tour.getEarthRadius());
     } 
+
+    public void makeLongTour() {
+        HashMap<String, String> porlatau = new HashMap<>();
+        porlatau.put("latitude", "43.615");
+        porlatau.put("longitude", "59.267");
+        testPlaces.add(porlatau);
+        HashMap<String, String> shakhaman = new HashMap<>();
+        shakhaman.put("latitude", "43.22");
+        shakhaman.put("longitude", "59.59");
+        testPlaces.add(shakhaman);
+        HashMap<String, String> karauzyak = new HashMap<>();
+        karauzyak.put("latitude", "43.38");
+        karauzyak.put("longitude", "59.33");
+        testPlaces.add(karauzyak);
+        HashMap<String, String> h4airbase = new HashMap<>();
+        h4airbase.put("latitude", "32.5392");
+        h4airbase.put("longitude", "38.195");
+        testPlaces.add(h4airbase);
+        HashMap<String, String> brussels = new HashMap<>();
+        brussels.put("latitude", "50.913");
+        brussels.put("longitude", "4.49");
+        testPlaces.add(brussels);
+        HashMap<String, String> luxembourg = new HashMap<>();
+        luxembourg.put("latitude", "49.61");
+        luxembourg.put("longitude", "6.14");
+        testPlaces.add(luxembourg);
+        HashMap<String, String> mons = new HashMap<>();
+        mons.put("latitude", "50.44");
+        mons.put("longitude", "3.97");
+        testPlaces.add(mons);
+        HashMap<String, String> reims = new HashMap<>();
+        reims.put("latitude", "49.25");
+        reims.put("longitude", "4.06");
+        testPlaces.add(reims);
+        HashMap<String, String> charleroi = new HashMap<>();
+        charleroi.put("latitude", "50.42");
+        charleroi.put("longitude", "4.43");
+        testPlaces.add(charleroi);
+    }
     
     @Test
     @DisplayName("Testing build Matrix")
@@ -71,46 +110,27 @@ public class TestTour {
     @Test
     @DisplayName("Testing sortTourByDistance")
     public void testSortTourByDistance() {
-        HashMap<String, String> porlatau = new HashMap<>();
-        porlatau.put("latitude", "43.615");
-        porlatau.put("longitude", "59.267");
-        testPlaces.add(porlatau);
-        HashMap<String, String> shakhaman = new HashMap<>();
-        shakhaman.put("latitude", "43.22");
-        shakhaman.put("longitude", "59.59");
-        testPlaces.add(shakhaman);
-        HashMap<String, String> karauzyak = new HashMap<>();
-        karauzyak.put("latitude", "43.38");
-        karauzyak.put("longitude", "59.33");
-        testPlaces.add(karauzyak);
-        HashMap<String, String> h4airbase = new HashMap<>();
-        h4airbase.put("latitude", "32.5392");
-        h4airbase.put("longitude", "38.195");
-        testPlaces.add(h4airbase);
-        HashMap<String, String> brussels = new HashMap<>();
-        brussels.put("latitude", "50.913");
-        brussels.put("longitude", "4.49");
-        testPlaces.add(brussels);
-        HashMap<String, String> luxembourg = new HashMap<>();
-        luxembourg.put("latitude", "49.61");
-        luxembourg.put("longitude", "6.14");
-        testPlaces.add(luxembourg);
-        HashMap<String, String> mons = new HashMap<>();
-        mons.put("latitude", "50.44");
-        mons.put("longitude", "3.97");
-        testPlaces.add(mons);
-        HashMap<String, String> reims = new HashMap<>();
-        reims.put("latitude", "49.25");
-        reims.put("longitude", "4.06");
-        testPlaces.add(reims);
-        HashMap<String, String> charleroi = new HashMap<>();
-        charleroi.put("latitude", "50.42");
-        charleroi.put("longitude", "4.43");
-        testPlaces.add(charleroi);
+        makeLongTour();
 
         Tour originalTour = new Tour(8000.0, testPlaces);
-	Tour sortedTour = Tour.sortTourByDistance(originalTour, 0, 0);
-	assertTrue(originalTour.size() == sortedTour.size());
-	assertTrue(originalTour.getTourDistance() > sortedTour.getTourDistance());
+	    Tour sortedTour = Tour.sortTourByDistance(originalTour, 0, 0);
+	    assertTrue(originalTour.size() == sortedTour.size());
+	    assertTrue(originalTour.getTourDistance() > sortedTour.getTourDistance());
+    }
+
+    @Test
+    @DisplayName("Testing reorderTour") 
+    public void testReorderTour() {
+        makeLongTour();
+
+        HashMap<String,String> startPlace = testPlaces.get(0);
+        Tour T = new Tour(8000.0,testPlaces);
+        T = Tour.sortTourByDistance(T,0,0);
+        Tour sortedUnorderedTour = T;
+        Tour sortedOrderedTour = Tour.reorderTour(T,startPlace);
+        assertTrue(sortedUnorderedTour.size() == sortedOrderedTour.size());
+        int unorderedDistance = sortedUnorderedTour.getTourDistance().intValue();
+        int orderedDistance = sortedOrderedTour.getTourDistance().intValue();
+        assertTrue(unorderedDistance == orderedDistance);
     }
 } 
