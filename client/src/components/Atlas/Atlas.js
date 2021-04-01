@@ -14,8 +14,7 @@ import { BsCursorFill } from "react-icons/bs"
 import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
-
-import ServerSettings from '../Margins/ServerSettings';
+import LoadTour from "./LoadTour";
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -68,9 +67,9 @@ export default class Atlas extends Component {
                         </Col>
                     </Row>
                     {this.renderCoordinatesInput()}
-                    <br></br>
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
+                            <div className="text-right">{this.renderLoadTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -84,6 +83,12 @@ export default class Atlas extends Component {
         return <CoordinatesInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}/>;
+    }
+
+    renderLoadTour() {
+        return (
+            <LoadTour/>
+        )
     }
 
     renderList() {
@@ -184,7 +189,6 @@ export default class Atlas extends Component {
         if (this.state.markerPosition) {
             return (
                 <Marker ref={(ref) => this.showMarkerPopup(ref)} position={this.state.markerPosition} icon={MARKER_ICON}>
-
                     <Popup offset={[0, -18]} className="font-weight-bold">
                         {this.getStringMarkerPosition(this.state.address)}
                     </Popup>
@@ -278,10 +282,8 @@ export default class Atlas extends Component {
     getStringMarkerPosition() {
         return (
           <div>  
-            {this.state.address}
-            <br/>
-            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} 
-            <br/>
+            {this.state.address} <br/>
+            {"Lat:  " + this.state.markerPosition.lat.toFixed(2) + ","} <br/>
             {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );

@@ -30,7 +30,7 @@ export default class CoordinatesInput extends Component {
 
     render() {
         return (
-            <Row className="mt-4">
+            <Row className="mt-4 mb-2">
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
                     <Form onSubmit={e => { e.preventDefault(); }}>
                         <FormGroup>
