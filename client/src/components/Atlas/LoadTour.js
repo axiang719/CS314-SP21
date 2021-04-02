@@ -46,6 +46,9 @@ export default class LoadTour extends Component {
                 <FormGroup>
                     <Label for="loadFile">File</Label>
                     <Input type="file" name="file" id="loadFile" accept=".json, .csv"/>
+                    <FormText color="muted">
+                        Choose a .json or .csv file
+                    </FormText>
                 </FormGroup>
             </Form>
         )
