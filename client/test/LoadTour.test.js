@@ -23,7 +23,7 @@ describe('LoadTour', () => {
     it('reads a file\'s type', () => {
         const testCSV = "C:/fakepath/processes.csv";
         const testJSON = "C:/fakepath/distances.json";
-        const testInvalid = "C:/fakepath/tour.docx";
+        const testInvalid = "C:/fakepath/tour.csv.docx";
 
         expect(loadTourWrapper.state().validFile).toEqual(false);
         expect(loadTourWrapper.state().fileType).toEqual("");
