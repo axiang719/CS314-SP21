@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Label } from 'reactstrap';
+import XLSX from "xlsx";
 
 export default class LoadTour extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class LoadTour extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.renderInput = this.renderInput.bind(this);
         this.processFile = this.processFile.bind(this);
-
+        this.upload = this.upload.bind(this);
         this.state = {
             modalOpen: false,
             validFile: false,
@@ -62,19 +63,31 @@ export default class LoadTour extends Component {
         )
     }
 
-    processFile(onChangeEvent) {
-        const fileType = onChangeEvent.target.value;
+    processFile(e) {
+        console.log(e.target);
+        const files = e.target.files, file = files[0];
+        const fileType = file.name;
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
-
-        if (fileType.includes(".json") && fileIsValid) {
+       if (fileType.includes(".json") && fileIsValid) {
             this.setState({validFile: true, fileType: ".json"})
         }
-        else if (fileType.includes(".csv") && fileIsValid) {
+       else if (fileType.includes(".csv") && fileIsValid) {
             this.setState({validFile: true, fileType: ".csv"})
-        }
+            this.upload(e);
+         }
+       
         else {
             this.setState({validFile: false, fileType: ""})
+        }
+    }
+
+    upload(e){
+          let jsonRows = [];
+           try {
+         
+        } catch (error) {
+            console.error(error);
         }
     }
 }
