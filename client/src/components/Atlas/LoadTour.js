@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Label } from 'reactstrap';
 
 export default class LoadTour extends Component {
     constructor(props) {
