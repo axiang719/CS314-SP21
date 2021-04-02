@@ -19,4 +19,31 @@ describe('LoadTour', () => {
         loadTourWrapper.instance().toggleModal();
         expect(loadTourWrapper.state().modalOpen).toEqual(true);
     });
+
+    it('reads a file\'s type', () => {
+        const testCSV = "C:/fakepath/processes.csv";
+        const testJSON = "C:/fakepath/distances.json";
+        const testInvalid = "C:/fakepath/tour.docx";
+
+        expect(loadTourWrapper.state().validFile).toEqual(false);
+        expect(loadTourWrapper.state().fileType).toEqual("");
+
+        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testCSV }});
+        loadTourWrapper.update();
+
+        expect(loadTourWrapper.state().validFile).toEqual(true);
+        expect(loadTourWrapper.state().fileType).toEqual(".csv");
+
+        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testJSON }});
+        loadTourWrapper.update();
+
+        expect(loadTourWrapper.state().validFile).toEqual(true);
+        expect(loadTourWrapper.state().fileType).toEqual(".json");
+
+        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testInvalid }});
+        loadTourWrapper.update();
+
+        expect(loadTourWrapper.state().validFile).toEqual(false);
+        expect(loadTourWrapper.state().fileType).toEqual("");
+    });
 });

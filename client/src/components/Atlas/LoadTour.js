@@ -54,7 +54,6 @@ export default class LoadTour extends Component {
                         name="file" 
                         id="loadFile" 
                         accept=".json, .csv"
-                        valid={this.state.validFile}
                         onChange={this.processFile}/>
                     <FormText color="muted">
                         Provide a .json or .csv file
@@ -66,16 +65,19 @@ export default class LoadTour extends Component {
 
     processFile(onChangeEvent) {
         const fileType = onChangeEvent.target.value;
-        console.log(fileType);
+        const regex = /^.*\.json|csv$/
+        const fileIsValid = fileType.match(regex);
 
-        if (fileType.includes(".json")) {
+        if (fileType.includes(".json") && fileIsValid) {
             this.setState({validFile: true, fileType: ".json"})
         }
-        else if (fileType.includes(".csv")) {
+        else if (fileType.includes(".csv") && fileIsValid) {
             this.setState({validFile: true, fileType: ".csv"})
         }
         else {
             this.setState({validFile: false, fileType: ""})
         }
+
+        console.log(fileType);
     }
 }
