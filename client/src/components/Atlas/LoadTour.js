@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, Label } from 'reactstrap';
 
 export default class LoadTour extends Component {
     constructor(props) {
@@ -42,8 +42,12 @@ export default class LoadTour extends Component {
 
     renderInput() {
         return (
-            <>
-            </>
+            <Form>
+                <FormGroup>
+                    <Label for="loadFile">File</Label>
+                    <Input type="file" name="file" id="loadFile" accept=".json, .csv"/>
+                </FormGroup>
+            </Form>
         )
     }
 
