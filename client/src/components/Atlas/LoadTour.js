@@ -7,9 +7,13 @@ export default class LoadTour extends Component {
 
         this.renderModal = this.renderModal.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.renderInput = this.renderInput.bind(this);
+        this.processFile = this.processFile.bind(this);
 
         this.state = {
-            modalOpen: false
+            modalOpen: false,
+            validFile: false,
+            fileType: ""
         }
     }
 
@@ -44,14 +48,34 @@ export default class LoadTour extends Component {
         return (
             <Form>
                 <FormGroup>
-                    <Label for="loadFile">File</Label>
-                    <Input type="file" name="file" id="loadFile" accept=".json, .csv"/>
+                    <Label for="loadFile">Load Tour</Label>
+                    <Input 
+                        type="file" 
+                        name="file" 
+                        id="loadFile" 
+                        accept=".json, .csv"
+                        valid={this.state.validFile}
+                        onChange={this.processFile}/>
                     <FormText color="muted">
-                        Choose a .json or .csv file
+                        Provide a .json or .csv file
                     </FormText>
                 </FormGroup>
             </Form>
         )
     }
 
+    processFile(onChangeEvent) {
+        const fileType = onChangeEvent.target.value;
+        console.log(fileType);
+
+        if (fileType.includes(".json")) {
+            this.setState({validFile: true, fileType: ".json"})
+        }
+        else if (fileType.includes(".csv")) {
+            this.setState({validFile: true, fileType: ".csv"})
+        }
+        else {
+            this.setState({validFile: false, fileType: ""})
+        }
+    }
 }
