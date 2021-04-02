@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Label } from 'reactstrap';
 
 export default class LoadTour extends Component {
     constructor(props) {
@@ -7,9 +7,13 @@ export default class LoadTour extends Component {
 
         this.renderModal = this.renderModal.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.renderInput = this.renderInput.bind(this);
+        this.processFile = this.processFile.bind(this);
 
         this.state = {
-            modalOpen: false
+            modalOpen: false,
+            validFile: false,
+            fileType: ""
         }
     }
 
@@ -42,9 +46,35 @@ export default class LoadTour extends Component {
 
     renderInput() {
         return (
-            <>
-            </>
+            <Form>
+                <FormGroup>
+                    <Input 
+                        type="file" 
+                        name="file" 
+                        id="loadFile" 
+                        accept=".json, .csv"
+                        onChange={this.processFile}/>
+                    <FormText color="muted">
+                        Provide a .json or .csv file
+                    </FormText>
+                </FormGroup>
+            </Form>
         )
     }
 
+    processFile(onChangeEvent) {
+        const fileType = onChangeEvent.target.value;
+        const regex = /^.*\.json|csv$/
+        const fileIsValid = fileType.match(regex);
+
+        if (fileType.includes(".json") && fileIsValid) {
+            this.setState({validFile: true, fileType: ".json"})
+        }
+        else if (fileType.includes(".csv") && fileIsValid) {
+            this.setState({validFile: true, fileType: ".csv"})
+        }
+        else {
+            this.setState({validFile: false, fileType: ""})
+        }
+    }
 }
