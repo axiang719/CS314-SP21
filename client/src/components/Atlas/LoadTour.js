@@ -48,7 +48,6 @@ export default class LoadTour extends Component {
         return (
             <Form>
                 <FormGroup>
-                    <Label for="loadFile">Load Tour</Label>
                     <Input 
                         type="file" 
                         name="file" 
@@ -77,7 +76,5 @@ export default class LoadTour extends Component {
         else {
             this.setState({validFile: false, fileType: ""})
         }
-
-        console.log(fileType);
     }
 }
