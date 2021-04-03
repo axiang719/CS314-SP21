@@ -77,4 +77,19 @@ export default class LoadTour extends Component {
             this.setState({validFile: false, fileType: ""})
         }
     }
+
+    isTourValid(tourArray) {
+        const LngRegex = /^[-+]?(?:180(?:(?:\.0+)?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]+)?))$/;
+        const LatRegex = /^[-+]?(?:90(?:(?:\.0+)?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]+)?))$/;
+        for (let i = 0; i < tourArray.length; i++) {
+            const place = tourArray[i];
+            const latitude = place.latitude;
+            const longitude = place.longitude;
+            if (latitude == null || longitude == null ||
+                !latitude.match(LatRegex) || !longitude.match(LngRegex)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
