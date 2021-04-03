@@ -85,7 +85,18 @@ export default class LoadTour extends Component {
     upload(e){
           let jsonRows = [];
            try {
-         
+            const files = e.target.files, file = files[0];
+            let reader = new FileReader();
+            reader.onload = function(e) {
+            let data = new Uint8Array(e.target.result);
+            let workbook = XLSX.read(data, {type: 'array'})
+            jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
+                defval: "",
+
+            });
+           console.log(jsonRows);
+        }
+        reader.readAsArrayBuffer(file);
         } catch (error) {
             console.error(error);
         }
