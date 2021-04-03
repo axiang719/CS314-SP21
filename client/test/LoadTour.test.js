@@ -46,4 +46,11 @@ describe('LoadTour', () => {
         expect(loadTourWrapper.state().validFile).toEqual(false);
         expect(loadTourWrapper.state().fileType).toEqual("");
     });
+
+    it('checks for valid tour', () => {
+        const validJson = [{"latitude" : "50.00", "longitude" : "50.00"}]
+        const invalidJson = [{"name" : "this is missing latLng"}]
+        expect(loadTourWrapper.instance().isTourValid(validJson)).toEqual(true);
+        expect(loadTourWrapper.instance().isTourValid(invalidJson)).toEqual(false);
+    });
 });
