@@ -48,9 +48,11 @@ describe('LoadTour', () => {
     });
 
     it('checks for valid tour', () => {
-        const validJson = [{"latitude" : "50.00", "longitude" : "50.00"}]
-        const invalidJson = [{"name" : "this is missing latLng"}]
+        const validJson = [{"latitude" : "50.00", "longitude" : "50.00"}];
+        const invalidJson = [{"name" : "this is missing latLng"}];
+        const almostValidJson = [{"latitude" : "50.00"}]
         expect(loadTourWrapper.instance().isTourValid(validJson)).toEqual(true);
         expect(loadTourWrapper.instance().isTourValid(invalidJson)).toEqual(false);
+        expect(loadTourWrapper.instance().isTourValid(almostValidJson)).toEqual(false);
     });
 });

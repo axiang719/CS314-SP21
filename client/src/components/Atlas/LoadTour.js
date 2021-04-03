@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Label } from 'reactstrap';
 
-import { isJsonResponseValid as isJsonValid } from "../../utils/restfulAPI";
-import * as tourSchema from "../../../schemas/TourResponse";
-import { LOG } from '../../utils/constants';
-
 export default class LoadTour extends Component {
     constructor(props) {
 		super(props);
