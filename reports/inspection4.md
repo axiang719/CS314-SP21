@@ -11,11 +11,11 @@
 | Name | Preparation Time |
 | ---- | ---- |
 | Ethan Seefried| 1 Hour  |
-|  |  |
+| Chad Minning | 45 Minutes |
 
 ### Problems found
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
 | Tour.java:99 | A new object gets instiantiated recursivley for getDistance leading to poor response times  | med | Ethan | 607 |
-|  | | | | |
+| Tour.java | An index out of bounds error is returned when sending an empty list of places | high | Chad | 608 |
