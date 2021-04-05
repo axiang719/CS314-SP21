@@ -4,7 +4,7 @@
 | ----- | ----- |
 | Subject | Tour.java |
 | Meeting | 04/05/21 |
-| Checklist | https://github.com/csucs314s21/t13/blob/552-Inspection3.md/reports/checklist.md |
+| Checklist | https://github.com/csucs314s21/t13/blob/main/reports/checklist.md |
 
 ### Roles
 
