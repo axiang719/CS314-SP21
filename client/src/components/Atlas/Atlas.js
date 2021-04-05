@@ -70,6 +70,7 @@ export default class Atlas extends Component {
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             <div className="text-right">{this.renderOptimizeTourButton()}</div>
+                            <br></br>
                             <div className="text-right">{this.renderLoadTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
