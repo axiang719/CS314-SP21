@@ -136,7 +136,7 @@ export default class Atlas extends Component {
 
     renderOptimizeTourButton() {
         return (
-            <Button color="secondary">Optimize Tour</Button>
+            <Button color="secondary">Shorter Tour</Button>
         );
     }
 
