@@ -4,7 +4,7 @@
 | ----- | ----- |
 | Subject | DistancesRequest.java |
 | Meeting | 03/29/2021 |
-| Checklist | https://github.com/csucs314s21/t13/blob/main/reports/checklist.md |
+| Checklist | https://github.com/csucs314s21/t13/tree/main/reports/checklist.md |
 
 ### Roles
 
