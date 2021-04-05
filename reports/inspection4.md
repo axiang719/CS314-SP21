@@ -20,3 +20,4 @@
 | --- | --- | :---: | :---: | --- |
 | Tour.java:99 | A new object gets instiantiated recursivley for getDistance leading to poor response times  | med | Ethan | 607 |
 | Tour.java | An index out of bounds error is returned when sending an empty list of places | high | Chad | 608 |
+| Tour.java:53 & 98 | findDistance and getDistance perform the same function | low | Michael | 607 |
