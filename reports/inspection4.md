@@ -14,6 +14,7 @@
 | Chad Minning | 45 Minutes |
 | Michael Young | 15 Minutes |
 | Anthony Xiang | 30 Minutes |
+| Andie Groeling | 30 Minutes |
 
 ### Problems found
 
@@ -24,3 +25,4 @@
 | Tour.java:53 & 98 | findDistance and getDistance perform the same function | low | Michael | 607 |
 | Tour.java:148 | findTourDistance creates distance objects and is called recursively which negatively impacts performance | med | Michael | 609 |
 | Tour.java | Tour.java is using some test from distancetest.java | med | Anthony | 610 |
+| Tour.java | sortTourByDistance can be made more readable by breaking out the minimum distance calculation elsewhere | med | Andie | 611 |
