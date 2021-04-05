@@ -10,12 +10,12 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-|  |  |
+| Ethan Seefried| 1 Hour  |
 |  |  |
 
 ### Problems found
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
-|  | | | | |
+| Tour.java:99 | A new object gets instiantiated recursivley for getDistance leading to poor response times  | med | Ethan | 607 |
 |  | | | | |
