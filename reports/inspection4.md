@@ -12,6 +12,7 @@
 | ---- | ---- |
 | Ethan Seefried| 1 Hour  |
 | Chad Minning | 45 Minutes |
+| Michael Young | 15 Minutes |
 
 ### Problems found
 
