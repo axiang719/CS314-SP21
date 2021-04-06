@@ -17,6 +17,7 @@ export default class LoadTour extends Component {
         this.renderUploadForm =this.renderUploadForm.bind(this);
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
+        this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
         this.checkTour = this.checkTour.bind(this);
@@ -29,8 +30,7 @@ export default class LoadTour extends Component {
             validFile: false,
             fileType: "",
             tourUpload: [],
-            validTour: null,
-            fileType: ""
+            validTour: null
         }
     }
     
@@ -103,11 +103,25 @@ export default class LoadTour extends Component {
             <div className="text-right">
                 <Button disabled={!validFile || !validTour} 
                         size="small" 
-                        color="primary">
+                        color="primary"
+                        onClick={this.addTourToMap}>
                         Add
                 </Button>
             </div>
         );
+    }
+
+    addTourToMap() {
+        const { tourUpload } = this.state;
+        const places = tourUpload.places;
+        this.props.clearList();
+        for(let i=0; i < places.length; i++) {
+            const place = places[i];
+            const latitude = parseFloat(place.latitude);
+            const longitude = parseFloat(place.longitude);
+            const latLng = {lat: latitude, lng: longitude}
+            this.props.setPlace(latLng);
+        }
     }
 
     processFile(e) {
