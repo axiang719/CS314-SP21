@@ -7,6 +7,7 @@ import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
 import * as tripSchema from "../../../schemas/TripFile";
 
 
+
 export default class LoadTour extends Component {
     constructor(props) {
 		super(props);
@@ -21,6 +22,8 @@ export default class LoadTour extends Component {
         this.checkTour = this.checkTour.bind(this);
         this.isTourValid = this.isTourValid.bind(this);
         this.uploadCsvFile = this.uploadCsvFile.bind(this);
+        this.csvOnload = this.csvOnload.bind(this);
+        this.jsonOnload = this.jsonOnload.bind(this);
         this.state = {
             modalOpen: false,
             validFile: false,
@@ -112,14 +115,14 @@ export default class LoadTour extends Component {
         const fileType = file.name;
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
-       if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"});
-            this.uploadJsonFile(e);
+        if (fileType.includes(".json") && fileIsValid) {
+                this.setState({validFile: true, fileType: ".json"});
+                this.uploadJsonFile(e);
         }
-       else if (fileType.includes(".csv") && fileIsValid) {
+        else if (fileType.includes(".csv") && fileIsValid) {
             this.setState({validFile: true, fileType: ".csv"});
             this.uploadCsvFile(e);
-         }
+        }
        
         else {
             this.setState({validFile: false, fileType: ""});
@@ -130,36 +133,40 @@ export default class LoadTour extends Component {
             try{
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
-                reader.onload = (e) => {
-                    let data = JSON.parse(e.target.result);
-                    
-                    this.checkTour(data);
-                };
+
+                reader.onload = (e) => this.jsonOnload(e);
                 reader.readAsText(file);
             }catch (error) {
                 console.error(error);
         }
     }
 
+    jsonOnload(e) {
+        let jsonData = JSON.parse(e.target.result);         
+        this.checkTour(jsonData);
+    }
+
 
     uploadCsvFile(e){
-            try {
-                const files = e.target.files, file = files[0];
-                let reader = new FileReader();
-                
-                reader.onload = (e) => {
-                    let data = new Uint8Array(e.target.result);
-                    let workbook = XLSX.read(data, {type: 'array'})
-                    let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
-                        defval: "",
-                    });
+        try {
+            const files = e.target.files, file = files[0];
+            let reader = new FileReader();
+        
+            reader.onload = (e) => this.csvOnload(e);
+            reader.readAsArrayBuffer(file);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-                    this.checkTour(json);
-                }
-                reader.readAsArrayBuffer(file);
-            } catch (error) {
-                console.error(error);
-            }
+    csvOnload(e) {
+        let data = new Uint8Array(e.target.result);
+        let workbook = XLSX.read(data, {type: 'array'})
+        let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
+            defval: "",
+        });
+
+        this.checkTour(json);
     }
 
     checkTour(tourObject) {
@@ -171,20 +178,7 @@ export default class LoadTour extends Component {
     }
 
     isTourValid(tourArray) {
-        console.error(tourArray);
         return isJsonFileValid(tourArray, tripSchema)
-        // const LngRegex = /^[-+]?(?:180(?:(?:\.0+)?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]+)?))$/;
-        // const LatRegex = /^[-+]?(?:90(?:(?:\.0+)?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]+)?))$/;
-        // for (let i = 0; i < tourArray.length; i++) {
-        //     const place = tourArray[i];
-        //     const latitude = place.latitude;
-        //     const longitude = place.longitude;
-        //     if ((latitude == null) || (longitude == null) ||
-        //         (!String(latitude).match(LatRegex)) || (!String(longitude).match(LngRegex))) {
-        //         return false;
-        //     }
-        // }
-        // return true;
     }
 }
     
