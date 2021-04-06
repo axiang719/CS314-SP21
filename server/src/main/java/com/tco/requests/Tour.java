@@ -72,15 +72,16 @@ public class Tour {
 		//base case
 		if(unvisitedPlaces.size() <= 2) { 
 			visitedPlaces.appendTour(unvisitedPlaces);
+		} else {
+			//recursion case
+			if(lookAheadLimit == 0 || lookAheadLimit > size()) {
+				lookAheadLimit = size();
+			}
+			HashMap<String, String> start = unvisitedPlaces.removePlace(startingIndex);
+			visitedPlaces.appendPlace(start);
+			int nearestNeighborIndex = unvisitedPlaces.getNearestNeighbor(start, startingIndex, lookAheadLimit);
+			travelingSalesman(unvisitedPlaces, visitedPlaces, nearestNeighborIndex, lookAheadLimit);
 		}
-		//recursion case
-		if(lookAheadLimit == 0 || lookAheadLimit > size()) {
-			lookAheadLimit = size();
-		}
-		HashMap<String, String> start = unvisitedPlaces.removePlace(startingIndex);
-		visitedPlaces.appendPlace(start);
-		int nearestNeighborIndex = unvisitedPlaces.getNearestNeighbor(start, startingIndex, lookAheadLimit);
-		travelingSalesman(unvisitedPlaces, visitedPlaces, nearestNeighborIndex, lookAheadLimit);
 	}
 	
 	private int getNearestNeighbor(HashMap<String, String> start, int startingIndex, int lookAheadLimit) {
@@ -88,10 +89,10 @@ public class Tour {
 		int i = startingIndex;
 		long shortestDistance = Integer.MAX_VALUE;
 		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++, i++) {
-			if(i == size()){
+			if(i == this.size()){
 				i = 0;
 			}
-			long distance = findDistance(start, getPlaces().get(i));
+			long distance = findDistance(start, this.getPlaces().get(i));
 			if(distance < shortestDistance) {
 				shortestDistance = distance;
 				nearestNeighborIndex = i;
