@@ -108,28 +108,30 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
        if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"})
+            this.setState({validFile: true, fileType: ".json"});
         }
        else if (fileType.includes(".csv") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".csv"})
+            this.setState({validFile: true, fileType: ".csv"});
             this.upload(e);
          }
        
         else {
-            this.setState({validFile: false, fileType: ""})
+            this.setState({validFile: false, fileType: ""});
         }
     }
 
     uploadJsonFile(e){
         let jsonRows =[];
+            try{
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
-
                 reader.onload = function(e) {
                     let data = JSON.parse(e.target.result);
                     console.log(data);
                 };
                 reader.readAsText(file);
+            }catch (error) {
+                console.error(error);
         }
     }
 
