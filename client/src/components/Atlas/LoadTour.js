@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Label } from 'reactstrap';
+
 import XLSX from "xlsx";
+
+import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+
 
 export default class LoadTour extends Component {
     constructor(props) {
@@ -8,14 +11,18 @@ export default class LoadTour extends Component {
 
         this.renderModal = this.renderModal.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.renderInput = this.renderInput.bind(this);
+        this.renderUploadForm =this.renderUploadForm.bind(this);
+        this.renderFormInput = this.renderFormInput.bind(this);
+        this.renderFormButton = this.renderFormButton.bind(this);
         this.processFile = this.processFile.bind(this);
         this.upload = this.upload.bind(this);
         this.state = {
             modalOpen: false,
             validFile: false,
             fileType: "",
-            tourUpload: []
+            tourUpload: [],
+            validTour: null,
+            fileType: ""
         }
     }
     
@@ -36,7 +43,7 @@ export default class LoadTour extends Component {
                     <div className="text-center">Load Tour</div>
                 </ModalHeader>
                 <ModalBody>
-                    {this.renderInput()}                    
+                    {this.renderUploadForm()}                    
                 </ModalBody>
             </Modal>
         );
@@ -47,22 +54,52 @@ export default class LoadTour extends Component {
         this.setState({ modalOpen: !modalOpen });
     }
 
-    renderInput() {
+    renderUploadForm() {
         return (
             <Form>
                 <FormGroup>
-                    <Input 
-                        type="file" 
-                        name="file" 
-                        id="loadFile" 
-                        accept=".json, .csv"
-                        onChange={this.processFile}/>
-                    <FormText color="muted">
-                        Provide a .json or .csv file
-                    </FormText>
+                    <Row xs="2">
+                        <Col xs="9">
+                            {this.renderFormInput()}
+                        </Col>
+                        <Col xs="3">
+                            {this.renderFormButton()}
+                        </Col>
+                    </Row>
                 </FormGroup>
             </Form>
         )
+    }
+
+    renderFormInput() {
+        const { validTour } = this.state;
+        return (
+            <>
+                <Input 
+                    type="file" 
+                    name="file" 
+                    id="loadFile" 
+                    accept=".json, .csv"
+                    onChange={this.processFile}/>
+                <FormText color={validTour === false ? "danger" : "muted"}>
+                    {validTour === false && "This file does not contain a valid tour!"}                       
+                    {validTour !== false && "Provide a .json or .csv file"}
+                </FormText>
+            </>
+        );
+    }
+
+    renderFormButton() {
+        const { validTour, validFile } = this.state;
+        return ( 
+            <div className="text-right">
+                <Button disabled={!validFile || !validTour} 
+                        size="small" 
+                        color="primary">
+                        Add
+                </Button>
+            </div>
+        );
     }
 
     processFile(e) {
@@ -82,6 +119,7 @@ export default class LoadTour extends Component {
             this.setState({validFile: false, fileType: ""})
         }
     }
+
 
     upload(e){
           let jsonRows = [];
@@ -103,4 +141,21 @@ export default class LoadTour extends Component {
             console.error(error);
         }
     }
+
+    isTourValid(tourArray) {
+        const LngRegex = /^[-+]?(?:180(?:(?:\.0+)?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]+)?))$/;
+        const LatRegex = /^[-+]?(?:90(?:(?:\.0+)?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]+)?))$/;
+        for (let i = 0; i < tourArray.length; i++) {
+            const place = tourArray[i];
+            const latitude = place.latitude;
+            const longitude = place.longitude;
+            if (latitude == null || longitude == null ||
+                !latitude.match(LatRegex) || !longitude.match(LngRegex)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
 }
+    
