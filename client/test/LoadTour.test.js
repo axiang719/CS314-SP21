@@ -7,6 +7,9 @@ import XLSX from "xlsx";
 
 describe('LoadTour', () => {
     let loadTourWrapper;
+    const testCSV = "C:\\fakepath\\processes.csv";
+    const testJSON = "C:\\fakepath\\distances.json";
+    const testInvalid = "C:\\fakepath\\tour.csv.docx";
     
     beforeEach(() => {
         loadTourWrapper = shallow(<LoadTour/>);
@@ -22,9 +25,7 @@ describe('LoadTour', () => {
     });
 
     it('reads a file\'s type', () => {
-        const testCSV = "C:\\fakepath\\processes.csv";
-        const testJSON = "C:\\fakepath\\distances.json";
-        const testInvalid = "C:\\fakepath\\tour.csv.docx";
+      
 
         loadTourWrapper.instance().processFile({ target: { files: [{name: "testCSV"}] }});
         
@@ -32,25 +33,27 @@ describe('LoadTour', () => {
         expect(loadTourWrapper.state().validFile).toEqual(false);
         expect(loadTourWrapper.state().fileType).toEqual("");
         
+     
+
+        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testJSON }});
+        loadTourWrapper.update();
+
+    
+        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testInvalid }});
+        loadTourWrapper.update();
+
+
+        expect(loadTourWrapper.state().validFile).toEqual(false);
+        expect(loadTourWrapper.state().fileType).toEqual("");
+    });
+
+    it('test to make sure else if hits csv in processFile' , () => {
         loadTourWrapper.instance().processFile({ target: { files: [{name: "processes.csv"}] }});
         loadTourWrapper.find('Input').at(0).simulate('e',{ target: { value: testCSV }});
         loadTourWrapper.update();
         
         expect(loadTourWrapper.state().fileType).toEqual(".csv");
         expect(loadTourWrapper.state().validFile).toEqual(true);
-
-        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testJSON }});
-        loadTourWrapper.update();
-
-        // expect(loadTourWrapper.state().validFile).toEqual(true);
-        // expect(loadTourWrapper.state().fileType).toEqual(".json");
-
-        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testInvalid }});
-        loadTourWrapper.update();
-
-
-        // expect(loadTourWrapper.state().validFile).toEqual(false);
-        // expect(loadTourWrapper.state().fileType).toEqual("");
     });
 
     it('upload csv file tour', () => {
@@ -68,7 +71,5 @@ describe('LoadTour', () => {
             csvContent += row + "\r\n";
         });
         loadTourWrapper.instance().upload({ target: { files: [csvContent] }});
-
-
     });
 });

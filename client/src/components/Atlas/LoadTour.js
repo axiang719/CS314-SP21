@@ -24,6 +24,7 @@ export default class LoadTour extends Component {
             <>
                 <Button color="primary" onClick={this.toggleModal}>Load</Button>
                 {this.renderModal()}
+                
             </>
         );
     }
@@ -87,20 +88,19 @@ export default class LoadTour extends Component {
            try {
             const files = e.target.files, file = files[0];
             let reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = (e) => {
             let data = new Uint8Array(e.target.result);
             let workbook = XLSX.read(data, {type: 'array'})
             jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
                 defval: "",
 
             });
-          
+        this.setState({tourUpload: jsonRows});
+        console.log(this.state.tourUpload);
         }
-       
         reader.readAsArrayBuffer(file);
         } catch (error) {
             console.error(error);
         }
-        this.setState({tourUpload: jsonRows});
     }
 }
