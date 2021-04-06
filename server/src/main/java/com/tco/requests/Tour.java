@@ -61,29 +61,28 @@ public class Tour {
 	}
 
 	public void sortTourByDistance(int startingIndex, int lookAheadLimit) {
+		Tour unvisitedPlaces = new Tour(getEarthRadius(), getPlaces());
+		Tour vistedPlaces = new Tour(getEarthRadius(), new ArrayList(this.size()));
+			travelingSalesman(unvisitedPlaces, visitedPlaces,startingIndex, lookAheadLimit);
+		places = visitedPlaces.getPlaces();
+	}
+
+	private void travelingSalesman(Tour unvistitedPlaces, Tour visitedPlaces, int startingIndex, int LookAheadLimit) {
 		//base case
 		if(tour.size() <= 2) { 
-			return tour;
+			return unvisitedPlaces;
 		}
 		//recursion case
-		Tour tempTour = new Tour(getEarthRadius(), getPlaces());
-		HashMap<String, String> start = tempTour.removePlace(startingIndex);
-		tempTour.getNearestNeighbor(start, startingIndex, lookAheadLimit);
-		Tour shortTour = new Tour(getEarthRadius(), new ArrayList());
-		shortTour.appendPlace(start);
-		shortTour.appendTour(sortTourByDistance(tempTour, closestNeighborIndex, lookAheadLimit));
-		if(getTourDistance() < shortTour.getTourDistance()) {
-			return tour;
-		}
-		else {
-			return shortTour;
-		}
-	}
-	
-	public int getNearestNeighbor(HashMap<String, String> start, int startingIndex, int lookAheadLimit) {
 		if(lookAheadLimit == 0 || lookAheadLimit > size()) {
 			lookAheadLimit = size();
 		}
+		HashMap<String, String> start = unvisitedPlaces.removePlace(startingIndex);
+		visitedPlaces.appendPlace(start);
+		int closestNeighborIndex = unvisitedPlaces.getNearestNeighbor(start, startingIndex, lookAheadLimit);
+		appendTour(sortTourByDistance(closestNeighborIndex, lookAheadLimit));
+	}
+	
+	private int getNearestNeighbor(HashMap<String, String> start, int startingIndex, int lookAheadLimit) {
 		int closestNeighborIndex = 0;
 		int i = startingIndex;
 		long shortestDistance = Integer.MAX_VALUE;
@@ -104,6 +103,7 @@ public class Tour {
 		for(HashMap<String, String> place:tour.getPlaces()) {
 			appendPlace(place);
 		}
+		tourDistanceIsDirty = true;
 	}
 
 	public void appendPlace(HashMap<String, String> place) {
