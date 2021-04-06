@@ -91,23 +91,13 @@ public class Tour {
 			if(i == size()){
 				i = 0;
 			}
-			long distance = getDistance(start, getPlaces().get(i));
+			long distance = findDistance(start, getPlaces().get(i));
 			if(distance < shortestDistance) {
 				shortestDistance = distance;
 				closestNeighborIndex = i;
 			}
 		}
 		return closestNeighorIndex;
-	}
-
-	private static long getDistance(HashMap<String, String> start, HashMap<String, String> end) {
-		DistancesRequest dr = new DistancesRequest();
-		dr.setRadius(earthRadius);
-		double startLatitude = Double.parseDouble(start.get("latitude"));
-		double startLongitude = Double.parseDouble(start.get("longitude"));
-		double endLatitude = Double.parseDouble(end.get("latitude"));
-		double endLongitude = Double.parseDouble(end.get("longitude"));
-		return dr.calculateDistance(startLatitude, startLongitude, endLatitude, endLongitude);
 	}
 
 	public void appendTour(Tour tour) {
