@@ -16,6 +16,7 @@ export default class LoadTour extends Component {
         this.renderFormButton = this.renderFormButton.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
+        this.isTourValid = this.isTourValid.bind(this);
         this.upload = this.upload.bind(this);
         this.state = {
             modalOpen: false,
@@ -106,10 +107,10 @@ export default class LoadTour extends Component {
     processFile(e) {
         const files = e.target.files, file = files[0];
         const fileType = file.name;
-        const regex = /^.*\.JSON|csv$/
+        const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
-       if (fileType.includes(".JSON") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".JSON"});
+       if (fileType.includes(".json") && fileIsValid) {
+            this.setState({validFile: true, fileType: ".json"});
             this.uploadJsonFile(e);
         }
        else if (fileType.includes(".csv") && fileIsValid) {
@@ -129,7 +130,6 @@ export default class LoadTour extends Component {
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     let data = JSON.parse(e.target.result);
-                    console.log(data);
                 };
                 reader.readAsText(file);
             }catch (error) {
