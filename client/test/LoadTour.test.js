@@ -48,7 +48,8 @@ describe('LoadTour', () => {
     });
 
 
-    it('test to make sure else if hits csv in processFile' , () => {
+    it('test to make sure else if hits processFile' , () => {
+        loadTourWrapper.instance().processFile({ target: { files: [{name: "processes.json"}] }});
         loadTourWrapper.instance().processFile({ target: { files: [{name: "processes.csv"}] }});
         loadTourWrapper.find('Input').at(0).simulate('e',{ target: { value: testCSV }});
         loadTourWrapper.update();
@@ -82,6 +83,18 @@ describe('LoadTour', () => {
         expect(loadTourWrapper.instance().isTourValid(invalidJson)).toEqual(false);
         expect(loadTourWrapper.instance().isTourValid(almostValidJson)).toEqual(false);
 
-     });
-  
+    });
+
+    it('uploads a JSON file', ()=>{
+        const rows = [
+            ["name","type","latitude","longitude"],
+            ["Total Rf Heliport","heliport","40.07080078125","-74.9336013793945"],
+            ["Lowell Field","small_airport","59.94919968","-151.695999146"],
+            ["Newport Hospital & Clinic Heliport","heliport","35.608699798584","-91.2548980712891"] 
+        ];
+        
+        let jsonContent = "data:text/JSON;charset=utf-8,";
+        loadTourWrapper.instance().uploadJsonFile(jsonContent);
+    });
+
 });

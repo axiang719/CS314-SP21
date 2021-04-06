@@ -15,6 +15,8 @@ export default class LoadTour extends Component {
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
         this.processFile = this.processFile.bind(this);
+        this.uploadJsonFile = this.uploadJsonFile.bind(this);
+        this.isTourValid = this.isTourValid.bind(this);
         this.upload = this.upload.bind(this);
         this.state = {
             modalOpen: false,
@@ -108,38 +110,52 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
        if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"})
+            this.setState({validFile: true, fileType: ".json"});
+            this.uploadJsonFile(e);
         }
        else if (fileType.includes(".csv") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".csv"})
+            this.setState({validFile: true, fileType: ".csv"});
             this.upload(e);
          }
        
         else {
-            this.setState({validFile: false, fileType: ""})
+            this.setState({validFile: false, fileType: ""});
+        }
+    }
+
+    uploadJsonFile(e){
+        let jsonRows =[];
+            try{
+                const files = e.target.files, file = files[0];
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let data = JSON.parse(e.target.result);
+                };
+                reader.readAsText(file);
+            }catch (error) {
+                console.error(error);
         }
     }
 
 
     upload(e){
-          let jsonRows = [];
-           try {
-            const files = e.target.files, file = files[0];
-            let reader = new FileReader();
-            reader.onload = (e) => {
-            let data = new Uint8Array(e.target.result);
-            let workbook = XLSX.read(data, {type: 'array'})
-            jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
-                defval: "",
-
-            });
-        this.setState({tourUpload: jsonRows});
-        console.log(this.state.tourUpload);
-        }
-        reader.readAsArrayBuffer(file);
-        } catch (error) {
-            console.error(error);
-        }
+        let jsonRows = [];
+            try {
+                const files = e.target.files, file = files[0];
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    let data = new Uint8Array(e.target.result);
+                    let workbook = XLSX.read(data, {type: 'array'})
+                    jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
+                        defval: "",
+                    });
+                    this.setState({tourUpload: jsonRows});
+                    console.log(this.state.tourUpload);
+                }
+                reader.readAsArrayBuffer(file);
+            } catch (error) {
+                console.error(error);
+            }
     }
 
     isTourValid(tourArray) {
@@ -155,7 +171,6 @@ export default class LoadTour extends Component {
             }
         }
         return true;
-
     }
 }
     
