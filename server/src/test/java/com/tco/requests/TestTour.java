@@ -113,9 +113,10 @@ public class TestTour {
         makeLongTour();
 
         Tour originalTour = new Tour(8000.0, testPlaces);
-	    Tour sortedTour = Tour.sortTourByDistance(originalTour, 0, 0);
-	    assertTrue(originalTour.size() == sortedTour.size());
-	    assertTrue(originalTour.getTourDistance() > sortedTour.getTourDistance());
+	Tour newTour = new Tour(originalTour.getEarthRadius(), originalTour.getPlaces());
+	newTour.sortTourByDistance(0, 0);
+	assertTrue(originalTour.size() == newTour.size());
+	assertTrue(originalTour.getTourDistance() > newTour.getTourDistance());
     }
 
     @Test
@@ -124,8 +125,8 @@ public class TestTour {
         makeLongTour();
 
         HashMap<String,String> startPlace = testPlaces.get(0);
-        Tour T = new Tour(8000.0,testPlaces);
-        T = Tour.sortTourByDistance(T,0,0);
+        Tour T = new Tour(8000.0, testPlaces);
+        T.sortTourByDistance(0,0);
         Tour sortedUnorderedTour = T;
         Tour sortedOrderedTour = Tour.reorderTour(T,startPlace);
         assertTrue(sortedUnorderedTour.size() == sortedOrderedTour.size());
