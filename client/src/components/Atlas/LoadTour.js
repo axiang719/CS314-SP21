@@ -128,8 +128,15 @@ export default class LoadTour extends Component {
             try{
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = (e) => {
                     let data = JSON.parse(e.target.result);
+                    jsonRows = data;
+                    
+                    if(this.isTourValid(jsonRows)){
+                        this.setState({tourUpload: jsonRows});
+                        console.log("this is in state");
+                        console.log(this.state.tourUpload);
+                    }
                 };
                 reader.readAsText(file);
             }catch (error) {
@@ -143,14 +150,17 @@ export default class LoadTour extends Component {
             try {
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
+                
                 reader.onload = (e) => {
                     let data = new Uint8Array(e.target.result);
                     let workbook = XLSX.read(data, {type: 'array'})
                     jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
                         defval: "",
                     });
+
+                    if(this.isTourValid(jsonRows)){
                     this.setState({tourUpload: jsonRows});
-                    console.log(this.state.tourUpload);
+                    }
                 }
                 reader.readAsArrayBuffer(file);
             } catch (error) {
@@ -165,8 +175,8 @@ export default class LoadTour extends Component {
             const place = tourArray[i];
             const latitude = place.latitude;
             const longitude = place.longitude;
-            if (latitude == null || longitude == null ||
-                !latitude.match(LatRegex) || !longitude.match(LngRegex)) {
+            if ((latitude == null) || (longitude == null) ||
+                (!String(latitude).match(LatRegex)) || (!String(longitude).match(LngRegex))) {
                 return false;
             }
         }
