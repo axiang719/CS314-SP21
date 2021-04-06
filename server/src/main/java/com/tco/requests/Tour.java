@@ -70,18 +70,23 @@ public class Tour {
 	// heuristic traveling salesman solver
 	private void travelingSalesman(Tour unvisitedPlaces, Tour visitedPlaces, int startingIndex, int lookAheadLimit) {
 		//base case
-		if(unvisitedPlaces.size() <= 2) { 
+		if(unvisitedPlaces.size() <= 3) { 
 			visitedPlaces.appendTour(unvisitedPlaces);
 		} else {
 			//recursion case
-			if(lookAheadLimit == 0 || lookAheadLimit > size()) {
-				lookAheadLimit = size();
-			}
 			HashMap<String, String> start = unvisitedPlaces.removePlace(startingIndex);
 			visitedPlaces.appendPlace(start);
+			lookAheadLimit = boundLookAheadLimit(lookAheadLimit);
 			int nearestNeighborIndex = unvisitedPlaces.getNearestNeighbor(start, startingIndex, lookAheadLimit);
 			travelingSalesman(unvisitedPlaces, visitedPlaces, nearestNeighborIndex, lookAheadLimit);
 		}
+	}
+
+	private int boundLookAheadLimit(int lookAheadLimit) {
+		if(lookAheadLimit == 0 || lookAheadLimit > size()) {
+			lookAheadLimit = size();
+		}
+		return lookAheadLimit;
 	}
 	
 	private int getNearestNeighbor(HashMap<String, String> start, int startingIndex, int lookAheadLimit) {
