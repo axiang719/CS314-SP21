@@ -13,30 +13,29 @@ describe('Tour Request', () => {
             places: []
     };
 
-
     beforeEach(() => {
         mockTourResponse();
     });
 
     it('Sends request to api', () => {
-        setTimeout( () => {
-            const actualDistances = distancesSearchWrapper.state().distances;
-            expect(actualDistances).toEqual([500]);}, 10);
-
+	    const response = TourRequest.sendRequest(request);
+	    expect(response.requestType).toEqual(request.requestType);
+	    expect(response.earthRadius).toEqual(request.earthRadius);
+	    expect(response.response).toEqual(request.response);
+	    expect(response.places).toEqual(request.places);
     });
 
     it('Sends fails with bad api request', () => {
-        distancesSearchWrapper.instance().sendDistancesRequest({"name": "and nothing else"});
-        const actualDistances = distancesSearchWrapper.state().distances;
-        expect(actualDistances).toEqual([]);
+        const response = TourRequest.sendRequest({"name": "and nothing else"});
+        expect(response).toEqual(null);
     });
 
     function mockTourResponse() {
         const responseData = {
-            requestType: "distances",
-            places: [],
-            distances: [500],
-            earthRadius: 5000
+            requestType: "tour",
+            earthRadius: 3959.0,
+	    response: 1,
+            places: []
         };
         fetch.mockResponse(JSON.stringify(responseData));
     }
