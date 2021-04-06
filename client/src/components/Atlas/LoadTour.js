@@ -14,10 +14,11 @@ export default class LoadTour extends Component {
         this.state = {
             modalOpen: false,
             validFile: false,
-            fileType: ""
+            fileType: "",
+            tourUpload: []
         }
     }
-
+    
     render() {
         return ( 
             <>
@@ -26,7 +27,7 @@ export default class LoadTour extends Component {
             </>
         );
     }
-
+    
     renderModal() {
         return (
             <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
@@ -64,7 +65,6 @@ export default class LoadTour extends Component {
     }
 
     processFile(e) {
-        console.log(e.target);
         const files = e.target.files, file = files[0];
         const fileType = file.name;
         const regex = /^.*\.json|csv$/
@@ -94,11 +94,13 @@ export default class LoadTour extends Component {
                 defval: "",
 
             });
-           console.log(jsonRows);
+          
         }
+       
         reader.readAsArrayBuffer(file);
         } catch (error) {
             console.error(error);
         }
+        this.setState({tourUpload: jsonRows});
     }
 }
