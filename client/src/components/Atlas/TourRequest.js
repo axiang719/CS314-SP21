@@ -1,5 +1,5 @@
 import {LOG} from "../../utils/constants";
-import * as tourSchema from "../../../schemas/TourResponse";
+import * as schema from "../../../schemas/TourResponse";
 import { isJsonResponseValid, sendServerRequest, getOriginalServerPort } from "../../utils/restfulAPI";
 
 export default class TourRequest {
@@ -11,26 +11,24 @@ export default class TourRequest {
 	    response: 1,
             places: places
         };
-        this.response = null;
     }
 
     sendRequest() {
-	    return sendServerRequest(this.request)
-		    .then(response => {
-			    if (response) {
-				    this.processResponse(response);
-				} else {
-					LOG.error("Request To The Server Failed.");
-				}
-		    });
-	}
+        return sendServerRequest(this.request)
+	    .then(response => { 
+		if (response) {
+		    this.processResponse(response);
+		} else {
+		    LOG.error("Request To The Server Failed.");
+		}
+	});
+    }
 
     processResponse(response) {
-        if (!isJsonResponseValid(distancesResponse, distancesSchema)) {
+        if (!isJsonResponseValid(response, schema)) {
 	    LOG.error("Response Not Valid. Check The Server.");
 	} else {
 	    LOG.info("Receiving response from:", getOriginalServerPort());
-	    this.response = response;
 	}
    }
 } 
