@@ -6,5 +6,8 @@ import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText
 
 export default class SaveTour extends Component {
 
-
+    constructor(props){
+        super(props);
+    }
+    
 }
