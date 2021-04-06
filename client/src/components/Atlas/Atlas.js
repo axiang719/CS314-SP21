@@ -15,6 +15,7 @@ import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
+import TourRequest from "./TourRequest";
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -136,8 +137,12 @@ export default class Atlas extends Component {
 
     renderOptimizeTourButton() {
         return (
-            <Button id="shortTour" color="secondary">Shorter Tour</Button>
+            <Button id="shortTour" onClick={this.handleOptTourClick} color="secondary">Shorter Tour</Button>
         );
+    }
+
+    handleOptTourClick() {
+        
     }
 
     showMarkerPopup(ref) {
