@@ -128,8 +128,11 @@ export default class LoadTour extends Component {
             try{
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = (e) => {
                     let data = JSON.parse(e.target.result);
+                       jsonRows = data;
+                    console.log(jsonRows);
+                    console.log(this.isTourValid(jsonRows));
                 };
                 reader.readAsText(file);
             }catch (error) {
