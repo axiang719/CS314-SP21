@@ -142,7 +142,7 @@ export default class Atlas extends Component {
     }
 
     handleOptTourClick() {
-        
+        const i = new TourRequest(this.getPlaces,3539);
     }
 
     showMarkerPopup(ref) {
