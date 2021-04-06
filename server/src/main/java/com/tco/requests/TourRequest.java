@@ -42,14 +42,16 @@ public class TourRequest extends RequestHeader {
         }
       };
       t.schedule(task,time);
-      int i = 0;
-      HashMap<String,String> startPlace = places.get(0);
-      while(sort) {
-        T.sortTourByDistance(i,0);
-        i += 1;
-        if (i >= places.size()) break;
+      if (places.size() >= 1) {
+        int i = 0;
+        HashMap<String,String> startPlace = places.get(0);
+        while(sort) {
+          T.sortTourByDistance(i,0);
+          i += 1;
+          if (i >= places.size()) break;
+        }
+        T = T.reorderTour(T,startPlace);
       }
-      T = T.reorderTour(T,startPlace);
       return T;
     }
     
