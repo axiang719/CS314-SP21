@@ -11,4 +11,9 @@ describe('SaveTour', () => {
     beforeEach(() => {
         saveTourWrapper = shallow(<SaveTour/>);
     });
+
+    it('is a placeholder test', () =>{
+       
+    });
+    
 });
