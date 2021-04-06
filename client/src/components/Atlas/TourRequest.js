@@ -11,10 +11,15 @@ export default class TourRequest {
 	    response: 1,
             places: places
         };
+	this.response = null;
+    }
+
+    getResponse() {
+	return this.response;
     }
 
     sendRequest() {
-        return sendServerRequest(this.request)
+        sendServerRequest(this.request)
 	    .then(response => { 
 		if (response) {
 		    this.processResponse(response);
@@ -29,6 +34,7 @@ export default class TourRequest {
 	    LOG.error("Response Not Valid. Check The Server.");
 	} else {
 	    LOG.info("Receiving response from:", getOriginalServerPort());
+	    this.response = response;
 	}
    }
 } 

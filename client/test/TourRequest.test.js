@@ -13,21 +13,20 @@ describe('Tour Request', () => {
     };
 
     beforeEach(() => {
-	tourRequest = TourRequest(request.places, request.earthRadius);
+	tourRequest = new TourRequest(request.places, request.earthRadius);
+	tourRequest.sendRequest();
     });
 
     it('Sends request to api', () => {
         mockTourResponse();
-	const response = tourRequest.sendRequest();
-	    
-	expect(response.requestType).toEqual(request.requestType);
+	const response = tourRequest.getResponse();  
+	expect(response).toEqual(request.requestType);
 	expect(response.earthRadius).toEqual(request.earthRadius);
 	expect(response.response).toEqual(request.response);
-	expect(response.places).toEqual(request.places);
     });
 
     it('Appropriately handles missing response', () => {
-        const response = tourRequest.sendRequest();
+	const response = tourRequest.getResponse();  
         expect(response).toEqual(null);
     });
 
