@@ -14,20 +14,23 @@ describe('Tour Request', () => {
 
     beforeEach(() => {
 	tourRequest = new TourRequest(request.places, request.earthRadius);
-	tourRequest.sendRequest();
     });
 
     it('Sends request to api', () => {
         mockTourResponse();
-	const response = tourRequest.getResponse();  
-	expect(response).toEqual(request.requestType);
-	expect(response.earthRadius).toEqual(request.earthRadius);
-	expect(response.response).toEqual(request.response);
+	setTimeout( () => {
+	    const response = tourRequest.sendRequest();  
+	    expect(response).toEqual(request.requestType);
+	    expect(response.earthRadius).toEqual(request.earthRadius);
+	    expect(response.response).toEqual(request.response);
+    	});
     });
 
     it('Appropriately handles missing response', () => {
-	const response = tourRequest.getResponse();  
-        expect(response).toEqual(null);
+	setTimeout( () => {
+	    const response = tourRequest.sendRequest();
+            expect(response).toEqual({});
+    	});
     });
 
     function mockTourResponse() {

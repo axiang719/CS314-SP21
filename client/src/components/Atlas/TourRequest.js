@@ -11,15 +11,10 @@ export default class TourRequest {
 	    response: 1,
             places: places
         };
-	this.response = null;
-    }
-
-    getResponse() {
-	return this.response;
     }
 
     sendRequest() {
-        sendServerRequest(this.request)
+        return sendServerRequest(this.request)
 	    .then(response => { 
 		if (response) {
 		    this.processResponse(response);
