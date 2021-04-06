@@ -68,12 +68,25 @@ public class Tour {
 		//recursion case
 		Tour tempTour = new Tour(tour.getEarthRadius(), tour.getPlaces());
 		HashMap<String, String> start = tempTour.removePlace(startingIndex);
+		tempTour.getNearestNeighbor(start, lookAheadLimit);
+		Tour shortTour = new Tour(tour.getEarthRadius(), new ArrayList());
+		shortTour.appendPlace(start);
+		shortTour.appendTour(sortTourByDistance(tempTour, closestNeighborIndex, lookAheadLimit));
+		if(tour.getTourDistance() < shortTour.getTourDistance()) {
+			return tour;
+		}
+		else {
+			return shortTour;
+		}
+	}
+	
+	public int getNearestNeighbor(HashMap<String, String> start, int lookAheadLimit) {
 		if(lookAheadLimit == 0 || lookAheadLimit > tempTour.size()) {
 			lookAheadLimit = tempTour.size();
 		}
-		long shortestDistance = Integer.MAX_VALUE;
 		int closestNeighborIndex = 0;
 		int i = startingIndex;
+		long shortestDistance = Integer.MAX_VALUE;
 		for(int neighborIndexDistance = 0; neighborIndexDistance < lookAheadLimit; neighborIndexDistance++, i++) {
 			if(i == tempTour.size()){
 				i = 0;
@@ -84,15 +97,7 @@ public class Tour {
 				closestNeighborIndex = i;
 			}
 		}
-		Tour shortTour = new Tour(tour.getEarthRadius(), new ArrayList());
-		shortTour.appendPlace(start);
-		shortTour.appendTour(sortTourByDistance(tempTour, closestNeighborIndex, lookAheadLimit));
-		if(tour.getTourDistance() < shortTour.getTourDistance()) {
-			return tour;
-		}
-		else {
-			return shortTour;
-		}
+		return closestNeighorIndex;
 	}
 
 	private static long getDistance(HashMap<String, String> start, HashMap<String, String> end) {
