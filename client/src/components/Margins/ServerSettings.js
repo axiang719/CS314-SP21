@@ -116,6 +116,7 @@ export default class ServerSettings extends Component {
     }
 
     processConfigResponse(configResponse) {
+        console.log(configResponse);
         if (!isJsonResponseValid(configResponse, configSchema)) {
             this.setState({validServer: false, config: false});
         } else {
