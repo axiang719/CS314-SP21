@@ -3,9 +3,13 @@ import {shallow} from 'enzyme';
 import React, { Component } from 'react';
 import LoadTour from '../src/components/Atlas/LoadTour';
 import { expect, it, toHaveBeenCalled } from '@jest/globals';
+import XLSX from "xlsx";
 
 describe('LoadTour', () => {
     let loadTourWrapper;
+    const testCSV = "C:\\fakepath\\processes.csv";
+    const testJSON = "C:\\fakepath\\distances.json";
+    const testInvalid = "C:\\fakepath\\tour.csv.docx";
     
     beforeEach(() => {
         loadTourWrapper = shallow(<LoadTour/>);
@@ -21,30 +25,54 @@ describe('LoadTour', () => {
     });
 
     it('reads a file\'s type', () => {
-        const testCSV = "C:\\fakepath\\processes.csv";
-        const testJSON = "C:\\fakepath\\distances.json";
-        const testInvalid = "C:\\fakepath\\tour.csv.docx";
+      
+
+        loadTourWrapper.instance().processFile({ target: { files: [{name: "testCSV"}] }});
+        
+        
+        expect(loadTourWrapper.state().validFile).toEqual(false);
+        expect(loadTourWrapper.state().fileType).toEqual("");
+        
+     
+
+        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testJSON }});
+        loadTourWrapper.update();
+
+    
+        loadTourWrapper.find('Input').at(0).simulate('e', { target: { value: testInvalid }});
+        loadTourWrapper.update();
+
 
         expect(loadTourWrapper.state().validFile).toEqual(false);
         expect(loadTourWrapper.state().fileType).toEqual("");
+    });
 
-        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testCSV }});
+
+    it('test to make sure else if hits processFile' , () => {
+        loadTourWrapper.instance().processFile({ target: { files: [{name: "processes.json"}] }});
+        loadTourWrapper.instance().processFile({ target: { files: [{name: "processes.csv"}] }});
+        loadTourWrapper.find('Input').at(0).simulate('e',{ target: { value: testCSV }});
         loadTourWrapper.update();
-
-        expect(loadTourWrapper.state().validFile).toEqual(true);
+        
         expect(loadTourWrapper.state().fileType).toEqual(".csv");
-
-        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testJSON }});
-        loadTourWrapper.update();
-
         expect(loadTourWrapper.state().validFile).toEqual(true);
-        expect(loadTourWrapper.state().fileType).toEqual(".json");
+    });
 
-        loadTourWrapper.find('Input').at(0).simulate('change', { target: { value: testInvalid }});
-        loadTourWrapper.update();
-
-        expect(loadTourWrapper.state().validFile).toEqual(false);
-        expect(loadTourWrapper.state().fileType).toEqual("");
+    it('upload csv file tour', () => {
+        const rows = [
+            ["name","type","latitude","longitude"],
+            ["Total Rf Heliport","heliport","40.07080078125","-74.9336013793945"],
+            ["Lowell Field","small_airport","59.94919968","-151.695999146"],
+            ["Newport Hospital & Clinic Heliport","heliport","35.608699798584","-91.2548980712891"] 
+        ];
+        
+        let csvContent = "data:text/csv;charset=utf-8,";
+        
+        rows.forEach(function(rowArray) {
+            let row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+        loadTourWrapper.instance().upload({ target: { files: [csvContent] }});
     });
 
     it('checks for valid tour', () => {
@@ -54,5 +82,19 @@ describe('LoadTour', () => {
         expect(loadTourWrapper.instance().isTourValid(validJson)).toEqual(true);
         expect(loadTourWrapper.instance().isTourValid(invalidJson)).toEqual(false);
         expect(loadTourWrapper.instance().isTourValid(almostValidJson)).toEqual(false);
+
     });
+
+    it('uploads a JSON file', ()=>{
+        const rows = [
+            ["name","type","latitude","longitude"],
+            ["Total Rf Heliport","heliport","40.07080078125","-74.9336013793945"],
+            ["Lowell Field","small_airport","59.94919968","-151.695999146"],
+            ["Newport Hospital & Clinic Heliport","heliport","35.608699798584","-91.2548980712891"] 
+        ];
+        
+        let jsonContent = "data:text/JSON;charset=utf-8,";
+        loadTourWrapper.instance().uploadJsonFile(jsonContent);
+    });
+
 });

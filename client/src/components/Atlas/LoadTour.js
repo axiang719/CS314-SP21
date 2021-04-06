@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
+import XLSX from "xlsx";
+
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+
 
 export default class LoadTour extends Component {
     constructor(props) {
@@ -11,24 +15,29 @@ export default class LoadTour extends Component {
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
         this.processFile = this.processFile.bind(this);
-
+        this.uploadJsonFile = this.uploadJsonFile.bind(this);
+        this.isTourValid = this.isTourValid.bind(this);
+        this.upload = this.upload.bind(this);
         this.state = {
             modalOpen: false,
             validFile: false,
+            fileType: "",
+            tourUpload: [],
             validTour: null,
             fileType: ""
         }
     }
-
+    
     render() {
         return ( 
             <>
                 <Button color="primary" onClick={this.toggleModal}>Load</Button>
                 {this.renderModal()}
+                
             </>
         );
     }
-
+    
     renderModal() {
         return (
             <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
@@ -95,20 +104,68 @@ export default class LoadTour extends Component {
         );
     }
 
-    processFile(onChangeEvent) {
-        const fileType = onChangeEvent.target.value;
+    processFile(e) {
+        const files = e.target.files, file = files[0];
+        const fileType = file.name;
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
-
-        if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"})
+       if (fileType.includes(".json") && fileIsValid) {
+            this.setState({validFile: true, fileType: ".json"});
+            this.uploadJsonFile(e);
         }
-        else if (fileType.includes(".csv") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".csv"})
-        }
+       else if (fileType.includes(".csv") && fileIsValid) {
+            this.setState({validFile: true, fileType: ".csv"});
+            this.upload(e);
+         }
+       
         else {
-            this.setState({validFile: false, fileType: ""})
+            this.setState({validFile: false, fileType: ""});
         }
+    }
+
+    uploadJsonFile(e){
+        let jsonRows =[];
+            try{
+                const files = e.target.files, file = files[0];
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    let data = JSON.parse(e.target.result);
+                    jsonRows = data;
+                    
+                    if(this.isTourValid(jsonRows)){
+                        this.setState({tourUpload: jsonRows});
+                        console.log("this is in state");
+                        console.log(this.state.tourUpload);
+                    }
+                };
+                reader.readAsText(file);
+            }catch (error) {
+                console.error(error);
+        }
+    }
+
+
+    upload(e){
+        let jsonRows = [];
+            try {
+                const files = e.target.files, file = files[0];
+                let reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    let data = new Uint8Array(e.target.result);
+                    let workbook = XLSX.read(data, {type: 'array'})
+                    jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
+                        defval: "",
+                    });
+
+                    if(this.isTourValid(jsonRows)){
+                    this.setState({tourUpload: jsonRows});
+                    }
+                }
+                reader.readAsArrayBuffer(file);
+            } catch (error) {
+                console.error(error);
+            }
     }
 
     isTourValid(tourArray) {
@@ -118,11 +175,12 @@ export default class LoadTour extends Component {
             const place = tourArray[i];
             const latitude = place.latitude;
             const longitude = place.longitude;
-            if (latitude == null || longitude == null ||
-                !latitude.match(LatRegex) || !longitude.match(LngRegex)) {
+            if ((latitude == null) || (longitude == null) ||
+                (!String(latitude).match(LatRegex)) || (!String(longitude).match(LngRegex))) {
                 return false;
             }
         }
         return true;
     }
 }
+    

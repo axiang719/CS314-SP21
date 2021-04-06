@@ -69,6 +69,8 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
+                            <div className="text-right">{this.renderOptimizeTourButton()}</div>
+                            <br></br>
                             <div className="text-right">{this.renderLoadTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
@@ -129,6 +131,12 @@ export default class Atlas extends Component {
     renderFindMeButton() {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
+        );
+    }
+
+    renderOptimizeTourButton() {
+        return (
+            <Button id="shortTour" color="secondary">Shorter Tour</Button>
         );
     }
 
