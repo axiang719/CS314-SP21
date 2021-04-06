@@ -6,14 +6,15 @@ export default class TourRequest {
 
     constructor(places, earthRadius) {
         this.request = {
-            requestType: "distances",
-            places: places,
+            requestType: "tour",
             earthRadius: earthRadius,
+	    response: 1,
+            places: places
         };
         this.response = null;
     }
 
-    sendDistancesRequest() {
+    sendRequest() {
 	    return sendServerRequest(this.request)
 		    .then(response => {
 			    if (response) {
@@ -26,9 +27,9 @@ export default class TourRequest {
 
     processResponse(response) {
         if (!isJsonResponseValid(distancesResponse, distancesSchema)) {
-	    LOG.error("Distances Response Not Valid. Check The Server.");
+	    LOG.error("Response Not Valid. Check The Server.");
 	} else {
-	    LOG.info("Receiving distances response from:", getOriginalServerPort());
+	    LOG.info("Receiving response from:", getOriginalServerPort());
 	    this.response = response;
 	}
    }
