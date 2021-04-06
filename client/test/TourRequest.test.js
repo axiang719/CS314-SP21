@@ -6,8 +6,6 @@ import TourRequest from '../src/components/Atlas/TourRequest.js';
 
 describe('Tour Request', () => {
 
-    let tourRequestWrapper;
-    
     const showMessage = jest.fn();
     const request = { requestType: 'tour',
             earthRadius: 3959.0,
@@ -17,30 +15,15 @@ describe('Tour Request', () => {
 
 
     beforeEach(() => {
-        mockDistancesResponse();
-        distancesSearchWrapper = shallow(<DistancesSearch
-                                            showMessage = {showMessage}
-                                        />);
-        console.log(distancesSearchWrapper);
+        mockTourResponse();
     });
-
-
-    it('initializes as expected', () => {
-        const actualRequestType = distancesSearchWrapper.state().distancesRequest.requestType;
-        const expectedRequestType = "distances";
-
-        expect(actualRequestType).toEqual(expectedRequestType);
-    });
-
 
     it('Sends request to api', () => {
-        distancesSearchWrapper.instance().sendDistancesRequest(request);
         setTimeout( () => {
             const actualDistances = distancesSearchWrapper.state().distances;
             expect(actualDistances).toEqual([500]);}, 10);
 
     });
-
 
     it('Sends fails with bad api request', () => {
         distancesSearchWrapper.instance().sendDistancesRequest({"name": "and nothing else"});
@@ -57,6 +40,4 @@ describe('Tour Request', () => {
         };
         fetch.mockResponse(JSON.stringify(responseData));
     }
-
-
 });
