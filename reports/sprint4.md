@@ -70,6 +70,7 @@ Epic five will introduce a user interface element that allows them to reorder th
 | 4/1/21 | #506 | #497, #498, #558, #592, #593 | None |
 | 4/2/21 | #593 | #497, #498, #510 | None |
 | 4/5/21 | #601, #602 | #497, #498, #510, #600 | Andie had issues with Docker |
+| 4/6/21 | #497, #498, #510, #558, #587, #600, #608, #611, #619 | #622, #625 | None |
 
 
 ## Review
