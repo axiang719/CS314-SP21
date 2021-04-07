@@ -98,7 +98,17 @@ describe('LoadTour', () => {
         }  
         loadTourWrapper.instance().jsonOnload(event);
     });
+    
+    it('test coverage for csvToJsonFormat', () => {
+        const validJson = {places: [{"latitude" : "50.00", "longitude" : "50.00"}]};
+        const distance = [{distances :["1034","785"]}];
+        const validJson2 = {places: [{"latitude" : "50.00", "longitude" : "50.00"}]};
+        loadTourWrapper.instance().parsePlace(validJson,distance,validJson2 );
+        loadTourWrapper.instance().csvToJsonFormat(validJson);
+        loadTourWrapper.instance().csvToJsonFormat(distance);
 
+    });
+    
     it('adds a tour to the map', ()=>{
         loadTourWrapper.state().tourUpload = {places: [{latitude: "50.00", longitude: "50.00"}]}   
         loadTourWrapper.instance().addTourToMap();
