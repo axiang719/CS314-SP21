@@ -6,14 +6,14 @@ import { expect, it, toHaveBeenCalled } from '@jest/globals';
 import XLSX from "xlsx";
 
 describe('SaveTour', () => {
-    let saveTourWrapper;
+    let saveWrapper;
     
     beforeEach(() => {
-        saveTourWrapper = shallow(<SaveTour/>);
+        saveWrapper = shallow(<SaveTour/>);
     });
 
-    it('is a placeholder test', () =>{
-       
+    it('tests the save button gets rendered', () =>{
+        expect(saveWrapper.find("Button")).toHaveLength(2);
     });
     
 });
