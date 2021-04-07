@@ -17,6 +17,7 @@ import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 
+
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
 const MAP_ZOOM_DEFAULT = 15;
@@ -211,20 +212,22 @@ export default class Atlas extends Component {
         });
     }
 
-    setTour(newTour) {
+    async setTour(newTour) {
         let places = newTour.places;
         for(let i = 0; i < places.length; i++) {
             let place = places[i];
+
             if (place["name"] == null) {
-                const latLng = {lat: place.latitude, lng:place.longitude};
-                this.reverseGeoCoding(latLng).then((name) => {
-                    place["name"] = name;
-                });
-                places[i] = place;
+                const latLng = {lat: place.latitude, lng: place.longitude};
+                place["name"] = await this.reverseGeoCoding(latLng);
             }
+
+            place["latitude"] = parseFloat(place["latitude"]);
+            place["longitude"] = parseFloat(place["longitude"]);
+            places[i] = place;
         };
 
-        this.setState({listOfClicks: newTour}, this.handleDistances);
+        this.setState({listOfClicks: places}, this.handleDistances);
     }
 
     getMarker() {
@@ -292,7 +295,7 @@ export default class Atlas extends Component {
         const {listOfClicks} = this.state;
         const location = listOfClicks[index]
         const latlng = {lat: location.latitude, lng: location.longitude}
-        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
+        this.setState({markerPosition: latlng, mapCenter: latlng, address: location.name});
     }
 
     clearList() {
@@ -312,7 +315,7 @@ export default class Atlas extends Component {
         var places = [];
         for(var i = 0; i < this.state.listOfClicks.length; i++) {
             const place = {
-                name: this.state.listOfClicks[i].address,
+                name: this.state.listOfClicks[i].name,
                 latitude: this.state.listOfClicks[i].latitude.toString(),
                 longitude: this.state.listOfClicks[i].longitude.toString()
             }

@@ -6,7 +6,6 @@ import {Marker, Polyline} from 'react-leaflet';
 import Atlas from '../src/components/Atlas/Atlas';
 import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 
-
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
     let atlasWrapper;
@@ -71,11 +70,11 @@ describe('Atlas', () => {
     });
 
     it('tests center map', ()=>{
-        const place  = {address: "tokyo", latitude: 10.123456, longitude: 20.123456};
+        const place  = {name: "tokyo", latitude: 10.123456, longitude: 20.123456};
         atlasWrapper.setState({listOfClicks: [place]});
         atlasWrapper.instance().centerMapToIndex(0);
 
-        expect(atlasWrapper.state().address).toEqual(place.address);
+        expect(atlasWrapper.state().address).toEqual(place.name);
     })
     it('tests the geolocation error', ()=>{
         atlasWrapper.instance().handleGeolocationError();
@@ -123,6 +122,15 @@ describe('Atlas', () => {
         const actualLength = atlasWrapper.find('SaveTour').length;
 
         expect(expectedLength).toEqual(actualLength);
+    });
+
+    it('renders the save tour button', () => {
+        const testJson = {
+            places: [{latitude: "50.00", longitude: "50.00"}]
+        }
+
+        atlasWrapper.instance().setTour(testJson);
+        expect(atlasWrapper.state().listOfClicks).toEqual(testJson.places);
     });
 
 
