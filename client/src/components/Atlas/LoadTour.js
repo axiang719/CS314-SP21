@@ -185,8 +185,23 @@ export default class LoadTour extends Component {
         this.checkTour(jsonObj);
     }
 
-    csvToJsonFormat(){
+    csvToJsonFormat(jsonArr){
+        let jsonObj ={};
+        for(let i = 0; i < jsonArr.length; i++){
+            const place = jsonArr[i];
+        }
+            
 
+    }
+
+    parsePlace(jsonObj){
+        let placeDetails ={};
+        for(let key in place){
+            const value = place[key];
+            if(key == "earthRadius"){
+                jsonObj[key] = value;
+            }
+        }
     }
     
 
