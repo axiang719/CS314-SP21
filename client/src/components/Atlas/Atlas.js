@@ -15,6 +15,7 @@ import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
+import SaveTour from "./SaveTour";
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -70,9 +71,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderOptimizeTourButton()}</div>
-                            <br></br>
-                            <div className="text-right">{this.renderLoadTour()}</div>
+                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOptimizeTourButton()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -95,6 +94,14 @@ export default class Atlas extends Component {
             setPlace = { this.setPlace }
             />
         )
+    }
+
+    renderSaveTour(){
+      return(
+          <SaveTour 
+
+          />
+      )  
     }
 
     renderList() {
@@ -140,7 +147,7 @@ export default class Atlas extends Component {
 
     renderOptimizeTourButton() {
         return (
-            <Button id="shortTour" color="secondary">Shorter Tour</Button>
+            <Button id="shortTour" color="primary">Optimize</Button>
         );
     }
 
