@@ -13,7 +13,7 @@ export default class SaveTour extends Component {
     render() {
         return ( 
             <>
-                <Button id = "Save" color="primary" >Save</Button>  
+                <Button id="Save" color="primary" >Save</Button>  
             </>
         );
     }
