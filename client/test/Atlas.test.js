@@ -111,6 +111,14 @@ describe('Atlas', () => {
         expect(actualArray).toEqual(expectedArray);
     });
 
+
+    it('renders the save tour button', () => {
+        const expectedLength = 1;
+        const actualLength = atlasWrapper.find('SaveTour').length;
+
+        expect(expectedLength).toEqual(actualLength);
+    });
+
     function mockGeoLocateResponse() {
         const geoResponseData = {
             address: {

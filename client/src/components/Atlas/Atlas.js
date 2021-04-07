@@ -15,6 +15,7 @@ import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
+import SaveTour from "./SaveTour";
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -70,7 +71,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderLoadTour()}</div>
+                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -94,6 +95,14 @@ export default class Atlas extends Component {
             listOfClicks = { this.state.listOfClicks }
             />
         )
+    }
+
+    renderSaveTour(){
+      return(
+          <SaveTour 
+
+          />
+      )  
     }
 
     renderList() {
@@ -145,11 +154,8 @@ export default class Atlas extends Component {
 
     async reverseGeoCoding(coordinates) {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
-        const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
-        const listOfClicks = this.state.listOfClicks;
-        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
-        listOfClicks.unshift(place);
-        this.setState({listOfClicks, address: addressLabel}, this.handleDistances);
+        const address = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
+        return address;
     }
 
     handleGeolocation(position) {
@@ -181,16 +187,21 @@ export default class Atlas extends Component {
         this.setMarker(mapClickInfo.latlng);
     }
 
-    setMarker(latlng) {
-        if (latlng != null) {
-            this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, 
-                           mapCenter: latlng});
+    setMarker(latLng) {
+        if (latLng != null) {
+            this.setPlace(latLng);
+            this.setState({markerPosition: latLng, 
+                           mapCenter: latLng});
         }
     }
 
     setPlace(latLng) {
-        this.reverseGeoCoding(latLng).then();
+        const { listOfClicks } = this.state;
+        this.reverseGeoCoding(latLng).then((address) => {
+            const place = { latitude: latLng.lat, longitude: latLng.lng, address };
+            listOfClicks.unshift(place);
+            this.setState({ listOfClicks, address }, this.handleDistances);
+        });
     }
 
     getMarker() {
