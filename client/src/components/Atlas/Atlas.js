@@ -42,6 +42,7 @@ export default class Atlas extends Component {
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
+        this.handleOptTourClick = this.handleOptTourClick.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -146,7 +147,10 @@ export default class Atlas extends Component {
     }
 
     handleOptTourClick() {
-        const i = new TourRequest(this.getPlaces,3539);
+        if (this.state.listOfClicks.length >= 2) {
+            const i = new TourRequest(this.getPlaces(),3539);
+            i.sendRequest();
+        }
     }
 
     showMarkerPopup(ref) {
