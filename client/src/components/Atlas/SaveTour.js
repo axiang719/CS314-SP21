@@ -10,5 +10,13 @@ export default class SaveTour extends Component {
     constructor(props){
         super(props);
     }
+
+    render() {
+        return ( 
+            <>
+                
+            </>
+        );
+    }
     
 }
