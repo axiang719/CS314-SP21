@@ -124,7 +124,7 @@ export default class LoadTour extends Component {
     async handleShortTourClick() {
         const length = this.props.listOfClicks.length
         if (length >= 2) {
-            var oldList = [];
+            const oldList = [];
             for (let i = 0; i < length; i++) {
                 const place = {
                     name: this.props.listOfClicks[i].address,

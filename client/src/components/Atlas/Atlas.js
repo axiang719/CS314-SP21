@@ -91,7 +91,6 @@ export default class Atlas extends Component {
             <LoadTour
             clearList = { this.clearList }
             setPlace = { this.setPlace }
-            getPlaces = { this.getPlaces }
             listOfClicks = { this.state.listOfClicks }
             />
         )
