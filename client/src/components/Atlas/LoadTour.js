@@ -125,6 +125,7 @@ export default class LoadTour extends Component {
             const latLng = {lat: latitude, lng: longitude}
             this.props.setPlace(latLng);
         }
+        this.toggleModal();
     }
 
     processFile(e) {
@@ -133,8 +134,8 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
         if (fileType.includes(".json") && fileIsValid) {
-                this.setState({validFile: true, fileType: ".json"});
-                this.uploadJsonFile(e);
+            this.setState({validFile: true, fileType: ".json"});
+            this.uploadJsonFile(e);
         }
         else if (fileType.includes(".csv") && fileIsValid) {
             this.setState({validFile: true, fileType: ".csv"});

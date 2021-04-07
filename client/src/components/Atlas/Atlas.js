@@ -152,11 +152,8 @@ export default class Atlas extends Component {
 
     async reverseGeoCoding(coordinates) {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
-        const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
-        const listOfClicks = this.state.listOfClicks;
-        const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
-        listOfClicks.unshift(place);
-        this.setState({listOfClicks, address: addressLabel}, this.handleDistances);
+        const address = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
+        return address;
     }
 
     handleGeolocation(position) {
@@ -188,16 +185,21 @@ export default class Atlas extends Component {
         this.setMarker(mapClickInfo.latlng);
     }
 
-    setMarker(latlng) {
-        if (latlng != null) {
-            this.reverseGeoCoding(latlng).then();
-            this.setState({markerPosition: latlng, 
-                           mapCenter: latlng});
+    setMarker(latLng) {
+        if (latLng != null) {
+            this.setPlace(latLng);
+            this.setState({markerPosition: latLng, 
+                           mapCenter: latLng});
         }
     }
 
     setPlace(latLng) {
-        this.reverseGeoCoding(latLng).then();
+        const { listOfClicks } = this.state;
+        this.reverseGeoCoding(latLng).then((address) => {
+            const place = { latitude: latLng.lat, longitude: latLng.lng, address };
+            listOfClicks.unshift(place);
+            this.setState({ listOfClicks, address }, this.handleDistances);
+        });
     }
 
     getMarker() {
