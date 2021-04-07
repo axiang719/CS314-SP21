@@ -9,16 +9,15 @@ describe('LoadTour', () => {
     let loadTourWrapper;
     const jsonMock = jest.fn();
     const csvMock = jest.fn();
-    const clearList = jest.fn();
-    const setPlace = jest.fn();
+    const setTour = jest.fn();
     const testCSV = "C:\\fakepath\\processes.csv";
     const testJSON = "C:\\fakepath\\distances.json";
     const testInvalid = "C:\\fakepath\\tour.csv.docx";
     
     beforeEach(() => {
         loadTourWrapper = shallow(<LoadTour
-                                    clearList = {clearList}
-                                    setPlace = {setPlace}/>);
+                                    setTour = {setTour}
+                                />);
     });
 
     it('initializes as expected', () => {
@@ -112,8 +111,7 @@ describe('LoadTour', () => {
     it('adds a tour to the map', ()=>{
         loadTourWrapper.state().tourUpload = {places: [{latitude: "50.00", longitude: "50.00"}]}   
         loadTourWrapper.instance().addTourToMap();
-        expect(clearList).toHaveBeenCalled();
-        expect(setPlace).toHaveBeenCalled();
+        expect(setTour).toHaveBeenCalled();
     });
     
 

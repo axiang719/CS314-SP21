@@ -39,7 +39,7 @@ export default class ListOfClicks extends Component {
                             <Container className='text-center'>
                                 <Row onClick={()=>{this.toggleHandler(index)}}>
                                     <Col sm={12} md={11}>
-                                        {place.address}
+                                        {place.name}
                                     </Col>
                                     <Col>
                                         {toggleRow == index ? <BsChevronDown/> : <BsChevronUp/>}

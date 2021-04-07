@@ -116,15 +116,16 @@ export default class LoadTour extends Component {
 
     addTourToMap() {
         const { tourUpload } = this.state;
-        const places = tourUpload.places;
-        this.props.clearList();
-        for(let i=0; i < places.length; i++) {
-            const place = places[i];
-            const latitude = parseFloat(place.latitude);
-            const longitude = parseFloat(place.longitude);
-            const latLng = {lat: latitude, lng: longitude}
-            this.props.setPlace(latLng);
-        }
+        this.props.setTour(tourUpload);
+
+        // this.props.clearList();
+        // for(let i=0; i < places.length; i++) {
+        //     const place = places[i];
+        //     const latitude = parseFloat(place.latitude);
+        //     const longitude = parseFloat(place.longitude);
+        //     const latLng = {lat: latitude, lng: longitude}
+        //     this.props.setPlace(latLng);
+        // }
         this.toggleModal();
     }
 

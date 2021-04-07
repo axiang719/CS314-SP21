@@ -36,6 +36,7 @@ export default class Atlas extends Component {
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.setPlace = this.setPlace.bind(this);
+        this.setTour = this.setTour.bind(this);
         this.clearList = this.clearList.bind(this);
         this.removePlace = this.removePlace.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
@@ -90,6 +91,7 @@ export default class Atlas extends Component {
     renderLoadTour() {
         return (
             <LoadTour
+            setTour = { this.setTour }
             clearList = { this.clearList }
             setPlace = { this.setPlace }
             />
@@ -202,11 +204,27 @@ export default class Atlas extends Component {
 
     setPlace(latLng) {
         const { listOfClicks } = this.state;
-        this.reverseGeoCoding(latLng).then((address) => {
-            const place = { latitude: latLng.lat, longitude: latLng.lng, address };
+        this.reverseGeoCoding(latLng).then((name) => {
+            const place = { latitude: latLng.lat, longitude: latLng.lng, name };
             listOfClicks.unshift(place);
-            this.setState({ listOfClicks, address }, this.handleDistances);
+            this.setState({ listOfClicks, address: name }, this.handleDistances);
         });
+    }
+
+    setTour(newTour) {
+        let places = newTour.places;
+        for(let i = 0; i < places.length; i++) {
+            let place = places[i];
+            if (place["name"] == null) {
+                const latLng = {lat: place.latitude, lng:place.longitude};
+                this.reverseGeoCoding(latLng).then((name) => {
+                    place["name"] = name;
+                });
+                places[i] = place;
+            }
+        };
+
+        this.setState({listOfClicks: newTour}, this.handleDistances);
     }
 
     getMarker() {
