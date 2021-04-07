@@ -71,7 +71,6 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <br></br>
                             <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOptimizeTourButton()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
