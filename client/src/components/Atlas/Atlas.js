@@ -35,6 +35,7 @@ export default class Atlas extends Component {
         
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
+        this.setPlace = this.setPlace.bind(this);
         this.clearList = this.clearList.bind(this);
         this.removePlace = this.removePlace.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
@@ -90,7 +91,10 @@ export default class Atlas extends Component {
 
     renderLoadTour() {
         return (
-            <LoadTour/>
+            <LoadTour
+            clearList = { this.clearList }
+            setPlace = { this.setPlace }
+            />
         )
     }
 
@@ -153,12 +157,11 @@ export default class Atlas extends Component {
 
     async reverseGeoCoding(coordinates) {
         const data = await ( await fetch(GEOCODE_URL+`${coordinates.lng},${coordinates.lat}`)).json();
-        console.log(data);
         const addressLabel = (data.address !== undefined) ? data.address.LongLabel : "Unknown";
         const listOfClicks = this.state.listOfClicks;
         const place = {address: addressLabel, latitude: coordinates.lat, longitude: coordinates.lng, distance: 0};
         listOfClicks.unshift(place);
-        this.setState({listOfClicks: listOfClicks, address: addressLabel}, this.handleDistances);
+        this.setState({listOfClicks, address: addressLabel}, this.handleDistances);
     }
 
     handleGeolocation(position) {
@@ -196,6 +199,10 @@ export default class Atlas extends Component {
             this.setState({markerPosition: latlng, 
                            mapCenter: latlng});
         }
+    }
+
+    setPlace(latLng) {
+        this.reverseGeoCoding(latLng).then();
     }
 
     getMarker() {

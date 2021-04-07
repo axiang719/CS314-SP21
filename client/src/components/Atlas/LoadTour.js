@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import XLSX from "xlsx";
 
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
+import * as tripSchema from "../../../schemas/TripFile";
+
 
 
 export default class LoadTour extends Component {
@@ -14,17 +17,23 @@ export default class LoadTour extends Component {
         this.renderUploadForm =this.renderUploadForm.bind(this);
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
+        this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
+        this.checkTour = this.checkTour.bind(this);
         this.isTourValid = this.isTourValid.bind(this);
-        this.upload = this.upload.bind(this);
+        this.uploadCsvFile = this.uploadCsvFile.bind(this);
+        this.csvOnload = this.csvOnload.bind(this);
+        this.jsonOnload = this.jsonOnload.bind(this);
+        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
+        this.parsePlace = this.parsePlace.bind(this);
+       
         this.state = {
             modalOpen: false,
             validFile: false,
             fileType: "",
             tourUpload: [],
-            validTour: null,
-            fileType: ""
+            validTour: null
         }
     }
     
@@ -53,7 +62,7 @@ export default class LoadTour extends Component {
 
     toggleModal() {
         const { modalOpen } = this.state;
-        this.setState({ modalOpen: !modalOpen });
+        this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 
     renderUploadForm() {
@@ -97,11 +106,25 @@ export default class LoadTour extends Component {
             <div className="text-right">
                 <Button disabled={!validFile || !validTour} 
                         size="small" 
-                        color="primary">
+                        color="primary"
+                        onClick={this.addTourToMap}>
                         Add
                 </Button>
             </div>
         );
+    }
+
+    addTourToMap() {
+        const { tourUpload } = this.state;
+        const places = tourUpload.places;
+        this.props.clearList();
+        for(let i=0; i < places.length; i++) {
+            const place = places[i];
+            const latitude = parseFloat(place.latitude);
+            const longitude = parseFloat(place.longitude);
+            const latLng = {lat: latitude, lng: longitude}
+            this.props.setPlace(latLng);
+        }
     }
 
     processFile(e) {
@@ -109,14 +132,14 @@ export default class LoadTour extends Component {
         const fileType = file.name;
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
-       if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"});
-            this.uploadJsonFile(e);
+        if (fileType.includes(".json") && fileIsValid) {
+                this.setState({validFile: true, fileType: ".json"});
+                this.uploadJsonFile(e);
         }
-       else if (fileType.includes(".csv") && fileIsValid) {
+        else if (fileType.includes(".csv") && fileIsValid) {
             this.setState({validFile: true, fileType: ".csv"});
-            this.upload(e);
-         }
+            this.uploadCsvFile(e);
+        }
        
         else {
             this.setState({validFile: false, fileType: ""});
@@ -124,63 +147,92 @@ export default class LoadTour extends Component {
     }
 
     uploadJsonFile(e){
-        let jsonRows =[];
             try{
                 const files = e.target.files, file = files[0];
                 let reader = new FileReader();
-                reader.onload = (e) => {
-                    let data = JSON.parse(e.target.result);
-                    jsonRows = data;
-                    
-                    if(this.isTourValid(jsonRows)){
-                        this.setState({tourUpload: jsonRows});
-                        console.log("this is in state");
-                        console.log(this.state.tourUpload);
-                    }
-                };
+
+                reader.onload = (e) => this.jsonOnload(e);
                 reader.readAsText(file);
             }catch (error) {
                 console.error(error);
         }
     }
 
+    jsonOnload(e) {
+        let jsonData = JSON.parse(e.target.result);         
+        this.checkTour(jsonData);
+    }
 
-    upload(e){
-        let jsonRows = [];
-            try {
-                const files = e.target.files, file = files[0];
-                let reader = new FileReader();
-                
-                reader.onload = (e) => {
-                    let data = new Uint8Array(e.target.result);
-                    let workbook = XLSX.read(data, {type: 'array'})
-                    jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
-                        defval: "",
-                    });
 
-                    if(this.isTourValid(jsonRows)){
-                    this.setState({tourUpload: jsonRows});
-                    }
-                }
-                reader.readAsArrayBuffer(file);
-            } catch (error) {
-                console.error(error);
+    uploadCsvFile(e){
+        try {
+            const files = e.target.files, file = files[0];
+            let reader = new FileReader();
+        
+            reader.onload = (e) => this.csvOnload(e);
+            reader.readAsArrayBuffer(file);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    csvOnload(e) {
+        let data = new Uint8Array(e.target.result);
+        let workbook = XLSX.read(data, {type: 'array'})
+        let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
+            defval: "",
+        });
+        let jsonObj = this.csvToJsonFormat(json); 
+        this.checkTour(jsonObj);
+    }
+
+    csvToJsonFormat(jsonArr){
+        let jsonObj ={};
+        jsonObj["places"] = [];
+        let distances = [];
+        for(let i = 0; i < jsonArr.length; i++){
+            const place = jsonArr[i];
+            this.parsePlace(jsonObj, place, distances);
+        }
+        if(distances.length){
+            jsonObj["distances"] = distances;
+
+        }
+        return jsonObj;       
+    }
+
+    parsePlace(jsonObj, place, distances){
+        let placeDetails ={};
+        for(let key in place){
+            const value = place[key];
+            if(key == "earthRadius"){
+                jsonObj[key] = value;
             }
+            else if(key == "distances"){
+                distances.push(value);
+            }
+            else if(key == "units"){
+                jsonObj[key] = value;
+            }
+            else if(key == "latitude" || key == "longitude"){
+                placeDetails[key] = value.toString();
+            } else{
+                placeDetails[key] = value; 
+            }
+        }
+        jsonObj["places"].push(placeDetails);
+    }
+    
+    checkTour(tourObject) {
+        if (this.isTourValid(tourObject)) {
+            this.setState({tourUpload: tourObject, validTour: true});
+        } else {
+            this.setState({validTour: false})
+        }
     }
 
     isTourValid(tourArray) {
-        const LngRegex = /^[-+]?(?:180(?:(?:\.0+)?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]+)?))$/;
-        const LatRegex = /^[-+]?(?:90(?:(?:\.0+)?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]+)?))$/;
-        for (let i = 0; i < tourArray.length; i++) {
-            const place = tourArray[i];
-            const latitude = place.latitude;
-            const longitude = place.longitude;
-            if ((latitude == null) || (longitude == null) ||
-                (!String(latitude).match(LatRegex)) || (!String(longitude).match(LngRegex))) {
-                return false;
-            }
-        }
-        return true;
+        return isJsonFileValid(tourArray, tripSchema)
     }
 }
     
