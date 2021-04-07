@@ -105,5 +105,6 @@ describe('LoadTour', () => {
         expect(clearList).toHaveBeenCalled();
         expect(setPlace).toHaveBeenCalled();
     });
+    
 
 });

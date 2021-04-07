@@ -25,6 +25,8 @@ export default class LoadTour extends Component {
         this.uploadCsvFile = this.uploadCsvFile.bind(this);
         this.csvOnload = this.csvOnload.bind(this);
         this.jsonOnload = this.jsonOnload.bind(this);
+        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
+       
         this.state = {
             modalOpen: false,
             validFile: false,
@@ -179,9 +181,16 @@ export default class LoadTour extends Component {
         let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
             defval: "",
         });
-
-        this.checkTour(json);
+        let jsonObj = this.csvToJsonFormat(json); 
+        this.checkTour(jsonObj);
     }
+
+    csvToJsonFormat(){
+
+    }
+    
+
+   
 
     checkTour(tourObject) {
         if (this.isTourValid(tourObject)) {
