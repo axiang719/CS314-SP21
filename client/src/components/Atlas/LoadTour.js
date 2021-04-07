@@ -194,8 +194,11 @@ export default class LoadTour extends Component {
             const place = jsonArr[i];
             this.parsePlace(jsonObj, place, distances);
         }
-            
+        if(distances.length){
+            jsonObj["distances"] = distances;
 
+        }
+        return jsonObj;       
     }
 
     parsePlace(jsonObj, place, distances){
@@ -211,7 +214,7 @@ export default class LoadTour extends Component {
             else if(key == "units"){
                 jsonObj[key] = value;
             }
-            else if((key == "latitude" || key == "longitude")){
+            else if(key == "latitude" || key == "longitude"){
                 placeDetails[key] = value.toString();
             } else{
                 placeDetails[key] = value; 
