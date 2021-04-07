@@ -11,4 +11,7 @@ export default class SaveTour extends Component {
     constructor(props){
         super(props);
     }
+
+    //JSON.stringify
+    //downloadFile();
 }  
