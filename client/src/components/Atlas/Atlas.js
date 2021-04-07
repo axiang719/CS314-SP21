@@ -15,7 +15,6 @@ import CoordinatesInput from "./CoordinatesInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
-import TourRequest from "./TourRequest";
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -42,7 +41,6 @@ export default class Atlas extends Component {
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
-        this.handleOptTourClick = this.handleOptTourClick.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -72,8 +70,6 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderOptimizeTourButton()}</div>
-                            <br></br>
                             <div className="text-right">{this.renderLoadTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
@@ -95,6 +91,8 @@ export default class Atlas extends Component {
             <LoadTour
             clearList = { this.clearList }
             setPlace = { this.setPlace }
+            getPlaces = { this.getPlaces }
+            listOfClicks = { this.state.listOfClicks }
             />
         )
     }
@@ -138,26 +136,6 @@ export default class Atlas extends Component {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
-    }
-
-    renderOptimizeTourButton() {
-        return (
-            <Button id="shortTour" onClick={this.handleOptTourClick} color="secondary">Shorter Tour</Button>
-        );
-    }
-
-    async handleOptTourClick() {
-        if (this.state.listOfClicks.length >= 2) {
-            const i = new TourRequest(this.getPlaces(),3539);
-            await i.sendRequest();
-            const newList = i.getPlaces()
-            this.clearList()
-            for (let i = 0; i < newList.length; i++) {
-                const place = newList[i]
-                const latlng = {lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)}
-                this.setPlace(latlng)
-            }
-        }
     }
 
     showMarkerPopup(ref) {

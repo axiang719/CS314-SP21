@@ -22,7 +22,7 @@ describe('LoadTour', () => {
     });
 
     it('initializes as expected', () => {
-        expect(loadTourWrapper.find("Button")).toHaveLength(2);
+        expect(loadTourWrapper.find("Button")).toHaveLength(3);
     });
 
     it('toggles the modal', () => {
@@ -115,6 +115,4 @@ describe('LoadTour', () => {
         expect(clearList).toHaveBeenCalled();
         expect(setPlace).toHaveBeenCalled();
     });
-    
-
 });

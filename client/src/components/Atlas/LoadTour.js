@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import XLSX from "xlsx";
 
+import TourRequest from "./TourRequest"
+
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
 import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
 import * as tripSchema from "../../../schemas/TripFile";
@@ -40,11 +42,22 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
+                <Button id="shortTour" onClick={this.handleShortTourClick} color="secondary">Shorter Tour</Button>
+                <br></br>
+                <br></br>
                 <Button color="primary" onClick={this.toggleModal}>Load</Button>
                 {this.renderModal()}
                 
             </>
         );
+    }
+
+    async handleShortTourClick() {
+        if (this.props.listOfClicks.length >= 2) {
+            const i = new TourRequest(this.props.getPlaces(),3539);
+            await i.sendRequest();
+            const newList = i.getPlaces();
+        }
     }
     
     renderModal() {
