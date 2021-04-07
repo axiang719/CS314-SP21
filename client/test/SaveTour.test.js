@@ -11,9 +11,4 @@ describe('SaveTour', () => {
     beforeEach(() => {
         saveWrapper = shallow(<SaveTour/>);
     });
-
-    it('tests the save button gets rendered', () =>{
-        expect(saveWrapper.find("Button")).toHaveLength(2);
-    });
-    
 });
