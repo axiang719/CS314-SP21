@@ -146,10 +146,17 @@ export default class Atlas extends Component {
         );
     }
 
-    handleOptTourClick() {
+    async handleOptTourClick() {
         if (this.state.listOfClicks.length >= 2) {
             const i = new TourRequest(this.getPlaces(),3539);
-            i.sendRequest();
+            await i.sendRequest();
+            const newList = i.getPlaces()
+            this.clearList()
+            for (let i = 0; i < newList.length; i++) {
+                const place = newList[i]
+                const latlng = {lat: parseFloat(place.latitude), lng: parseFloat(place.longitude)}
+                this.setPlace(latlng)
+            }
         }
     }
 
