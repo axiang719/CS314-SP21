@@ -19,7 +19,9 @@ export default class LoadTour extends Component {
         this.renderUploadForm =this.renderUploadForm.bind(this);
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
+        this.handleShortTourClick = this.handleShortTourClick.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
+        this.fillPlacesList = this.fillPlacesList.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
         this.checkTour = this.checkTour.bind(this);
@@ -50,14 +52,6 @@ export default class LoadTour extends Component {
                 
             </>
         );
-    }
-
-    async handleShortTourClick() {
-        if (this.props.listOfClicks.length >= 2) {
-            const i = new TourRequest(this.props.getPlaces(),3539);
-            await i.sendRequest();
-            const newList = i.getPlaces();
-        }
     }
     
     renderModal() {
@@ -127,9 +121,32 @@ export default class LoadTour extends Component {
         );
     }
 
+    async handleShortTourClick() {
+        const length = this.props.listOfClicks.length
+        if (length >= 2) {
+            var oldList = [];
+            for (let i = 0; i < length; i++) {
+                const place = {
+                    name: this.props.listOfClicks[i].address,
+                    latitude: this.props.listOfClicks[i].latitude.toString(),
+                    longitude: this.props.listOfClicks[i].longitude.toString()
+                }
+                oldList.unshift(place)
+            }
+            const i = new TourRequest(oldList,3539);
+            await i.sendRequest();
+            const newList = i.getPlaces();
+            this.fillPlacesList(newList);
+        }
+    }
+
     addTourToMap() {
         const { tourUpload } = this.state;
         const places = tourUpload.places;
+        this.fillPlacesList(places)
+    }
+
+    fillPlacesList(places) {
         this.props.clearList();
         for(let i=0; i < places.length; i++) {
             const place = places[i];
