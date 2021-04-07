@@ -44,10 +44,8 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <Button id="shortTour" onClick={this.handleShortTourClick} color="secondary">Shorter Tour</Button>
-                <br></br>
-                <br></br>
-                <Button color="primary" onClick={this.toggleModal}>Load</Button>
+                <Button className="mr-1" color="primary" onClick={this.toggleModal}>Load</Button>
+                <Button id="shortTour" onClick={this.handleShortTourClick} color="primary">Order</Button>
                 {this.renderModal()}
                 
             </>
