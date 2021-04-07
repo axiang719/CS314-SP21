@@ -144,6 +144,7 @@ export default class LoadTour extends Component {
         const { tourUpload } = this.state;
         const places = tourUpload.places;
         this.fillPlacesList(places)
+        this.toggleModal();
     }
 
     fillPlacesList(places) {
@@ -155,7 +156,6 @@ export default class LoadTour extends Component {
             const latLng = {lat: latitude, lng: longitude}
             this.props.setPlace(latLng);
         }
-        this.toggleModal();
     }
 
     processFile(e) {

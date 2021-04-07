@@ -11,4 +11,8 @@ describe('SaveTour', () => {
     beforeEach(() => {
         saveWrapper = shallow(<SaveTour/>);
     });
+
+    it('initializes as expected', () => {
+        expect(saveWrapper.find('Button').at(0).length).toEqual(1);
+    });
 });
