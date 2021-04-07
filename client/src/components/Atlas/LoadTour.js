@@ -25,6 +25,9 @@ export default class LoadTour extends Component {
         this.uploadCsvFile = this.uploadCsvFile.bind(this);
         this.csvOnload = this.csvOnload.bind(this);
         this.jsonOnload = this.jsonOnload.bind(this);
+        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
+        this.parsePlace = this.parsePlace.bind(this);
+       
         this.state = {
             modalOpen: false,
             validFile: false,
@@ -179,10 +182,47 @@ export default class LoadTour extends Component {
         let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
             defval: "",
         });
-
-        this.checkTour(json);
+        let jsonObj = this.csvToJsonFormat(json); 
+        this.checkTour(jsonObj);
     }
 
+    csvToJsonFormat(jsonArr){
+        let jsonObj ={};
+        jsonObj["places"] = [];
+        let distances = [];
+        for(let i = 0; i < jsonArr.length; i++){
+            const place = jsonArr[i];
+            this.parsePlace(jsonObj, place, distances);
+        }
+        if(distances.length){
+            jsonObj["distances"] = distances;
+
+        }
+        return jsonObj;       
+    }
+
+    parsePlace(jsonObj, place, distances){
+        let placeDetails ={};
+        for(let key in place){
+            const value = place[key];
+            if(key == "earthRadius"){
+                jsonObj[key] = value;
+            }
+            else if(key == "distances"){
+                distances.push(value);
+            }
+            else if(key == "units"){
+                jsonObj[key] = value;
+            }
+            else if(key == "latitude" || key == "longitude"){
+                placeDetails[key] = value.toString();
+            } else{
+                placeDetails[key] = value; 
+            }
+        }
+        jsonObj["places"].push(placeDetails);
+    }
+    
     checkTour(tourObject) {
         if (this.isTourValid(tourObject)) {
             this.setState({tourUpload: tourObject, validTour: true});
