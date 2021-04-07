@@ -14,15 +14,23 @@ describe('LoadTour', () => {
     const testCSV = "C:\\fakepath\\processes.csv";
     const testJSON = "C:\\fakepath\\distances.json";
     const testInvalid = "C:\\fakepath\\tour.csv.docx";
+    const list = [
+        {"name":"Fort Collins", "latitude": "40.55", "longitude": "-105.06", "notes":"Place 1"},
+        {"name":"China",        "latitude": "37.77", "longitude": "106.32",  "notes":"Place 2"},
+        {"name":"Denver",       "latitude": "39.74", "longitude": "-104.99", "notes":"Place 3"},
+        {"name":"Also China",   "latitude": "37.71", "longitude": "106.33",  "notes":"Place 4"},
+        {"name":"Wyoming",      "latitude": "43.07", "longitude": "107.29",  "notes":"Place 5"}
+    ];
     
     beforeEach(() => {
         loadTourWrapper = shallow(<LoadTour
                                     clearList = {clearList}
-                                    setPlace = {setPlace}/>);
+                                    setPlace = {setPlace}
+                                    listOfCLicks = {list}/>);
     });
 
     it('initializes as expected', () => {
-        expect(loadTourWrapper.find("Button")).toHaveLength(2);
+        expect(loadTourWrapper.find("Button")).toHaveLength(3);
     });
 
     it('toggles the modal', () => {
@@ -115,6 +123,11 @@ describe('LoadTour', () => {
         expect(clearList).toHaveBeenCalled();
         expect(setPlace).toHaveBeenCalled();
     });
-    
 
+    it('shortens the tour on button click', () => {
+        loadTourWrapper.find('#shortTour').simulate('click');
+
+        expect(clearList).toHaveBeenCalled();
+        expect(setPlace).toHaveBeenCalled();
+    });
 });

@@ -12,8 +12,7 @@ describe('SaveTour', () => {
         saveWrapper = shallow(<SaveTour/>);
     });
 
-    it('tests the save button gets rendered', () =>{
-        expect(saveWrapper.find("Button")).toHaveLength(2);
+    it('initializes as expected', () => {
+        expect(saveWrapper.find('Button').at(0).length).toEqual(1);
     });
-    
 });
