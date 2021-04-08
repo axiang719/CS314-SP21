@@ -24,9 +24,7 @@ export default class SaveTour extends Component {
         let data = [];
         data = this.props.getPlaces();
         this.exportCSV(data);
-        console.log(data);
-     
-        }
+    }
 
         exportCSV(csvExport){
             const wb = XLSX.utils.book_new();
