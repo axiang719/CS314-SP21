@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import XLSX from "xlsx";
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+import { downloadFile } from '../../utils/restfulAPI';
 
 export default class SaveTour extends Component {
     constructor(props){
         super(props);
         this.convertListOfClicksToString = this.convertListOfClicksToString.bind(this);
         this.exportCSV = this.exportCSV.bind(this);
-	this.toggleModal = this.toggleModal.bind(this);
+
+        this.exportJSON = this.exportJSON.bind(this);
+	      this.toggleModal = this.toggleModal.bind(this);
+
       
 	this.state = {
 	    modalOpen: false
@@ -17,6 +21,8 @@ export default class SaveTour extends Component {
     render() {
         return (
             <>
+
+                <Button id="Save" color="primary" onClick = {this.exportJSON} >Save</Button>  
                 <Button id="Save" color="primary" onClick={this.toggleModal}>Save</Button>
                 {this.renderModal()}
             </>
@@ -45,12 +51,14 @@ export default class SaveTour extends Component {
     convertListOfClicksToString(){
         let data = [];
         data = this.props.getPlaces();
-        this.exportCSV(data);
+        return data;
     }
 
-    exportCSV(csvExport){
+
+    exportCSV(){
+        let data = this.convertListOfClicksToString();
         const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.json_to_sheet(csvExport)
+        const ws = XLSX.utils.json_to_sheet(data)
         XLSX.utils.book_append_sheet(wb, ws, "info")
         const wopts = {
             bookType: 'csv',
@@ -58,6 +66,11 @@ export default class SaveTour extends Component {
             type: 'buffer'
         };
         const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
+    }
+    exportJSON(){
+        let data = {places: this.convertListOfClicksToString()};
+        data = JSON.stringify(data);
+        downloadFile(data, 'file.json','application/json');
     }
 }
 
