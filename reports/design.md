@@ -178,7 +178,7 @@ Sprint 4 will add buttons that allow for the user to order the current trip list
 ![sprint 4 UI diagram](images/Sprint4UI.png)
 
 ### Component Hierarchy
-This sprint will focus on adding tour functionality to the Atlas comoonent. This will include a component that forms a tour from a list of places visited in index order. Additionally, two new components were implemented that allow users to save and load tours. 
+This sprint will focus on adding additional functionality to the tour inside of the Atlas component. This will include a component that allows the user to save the current tour into a json or csv file, a component that loads a previously saved tour file, and a component the will optimize the current tour to be shorter in total distance. 
 ![sprint 4 component hierarchy](images/Sprint4Diagram.png)
 
 ### Classes
