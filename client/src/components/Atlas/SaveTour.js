@@ -35,6 +35,7 @@ export default class SaveTour extends Component {
                 </ModalHeader>
                 <ModalBody>
                 	<Button id="SaveCSV" color="primary" onClick={this.exportCSV}>Save as CSV</Button>  
+                    <Button id="SaveJSON" color="primary" onClick={this.exportJSON}>Save as JSON</Button> 
                 </ModalBody>
             </Modal>
         );
