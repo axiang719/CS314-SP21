@@ -10,19 +10,17 @@ export default class SaveTour extends Component {
         this.exportCSV = this.exportCSV.bind(this);
 
         this.exportJSON = this.exportJSON.bind(this);
-	      this.toggleModal = this.toggleModal.bind(this);
+	    this.toggleModal = this.toggleModal.bind(this);
 
       
-	this.state = {
-	    modalOpen: false
-	}
+	    this.state = {
+	        modalOpen: false
+	    }
     }   
         
     render() {
         return (
             <>
-
-                <Button id="Save" color="primary" onClick = {this.exportJSON} >Save</Button>  
                 <Button id="Save" color="primary" onClick={this.toggleModal}>Save</Button>
                 {this.renderModal()}
             </>
@@ -36,7 +34,8 @@ export default class SaveTour extends Component {
                     <div className="text-center">Save Tour</div>
                 </ModalHeader>
                 <ModalBody>
-                	<Button id="SaveCSV" color="primary" onClick={this.convertListOfClicksToString}>Save as CSV</Button>  
+                	<Button id="SaveCSV" color="primary" className = 'mr-1' onClick={this.exportCSV}>Save as CSV</Button>  
+                    <Button id="SaveJSON" color="primary" onClick={this.exportJSON}>Save as JSON</Button> 
                 </ModalBody>
             </Modal>
         );
@@ -65,12 +64,12 @@ export default class SaveTour extends Component {
             bookSST: false,
             type: 'buffer'
         };
-        const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
+        const wbout = XLSX.writeFile(wb, "trip.csv" ,wopts);
     }
     exportJSON(){
         let data = {places: this.convertListOfClicksToString()};
         data = JSON.stringify(data);
-        downloadFile(data, 'file.json','application/json');
+        downloadFile(data, 'trip.json','application/json');
     }
 }
 
