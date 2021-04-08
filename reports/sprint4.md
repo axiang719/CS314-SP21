@@ -83,6 +83,7 @@ Epic five will introduce a user interface element that allows them to reorder th
 ## Retrospective
 
 ### Things that went well
+Work was distributed much better, with each teammate always having a task to work on. No teammember was left with unnessary work because contributions across the team were high. Another thing that went welll was planning. The epic gamers were able to successfully plan each epic at the beginning of the sprint, allowing indivdual members to easily work out what needed to be done on a timely manner.
 
 ### Things we need to improve
 
