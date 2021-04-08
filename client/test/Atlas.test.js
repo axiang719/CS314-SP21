@@ -110,13 +110,13 @@ describe('Atlas', () => {
         expect(actualArray).toEqual(expectedArray);
     });
 
-    // it('sets a new tour', () => {
-    //     const testJson = [{latitude: "50.00", longitude: "50.00"}];
-    //     atlasWrapper.instance().setTour(testJson);
-    //     atlasWrapper.update();
-    //     console.error(atlasWrapper.state().listOfClicks)
-    //     expect(atlasWrapper.state().listOfClicks).toEqual(testJson);
-    // });
+    it('sets a new tour', async () => { 
+        const testJson = [{ latitude: "50.00", longitude: "50.00" }];
+        const expectedJson = [{ latitude: 50, longitude: 50, name: "Unknown" }];
+        await atlasWrapper.instance().setTour(testJson);
+        await atlasWrapper.instance().setTour(expectedJson);
+        expect(atlasWrapper.state().listOfClicks).toEqual(expectedJson);
+    });
 
     it('renders the save tour button', () => {
         const expectedLength = 1;
