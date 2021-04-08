@@ -17,7 +17,7 @@ describe('LoadTour', () => {
     beforeEach(() => {
         loadTourWrapper = shallow(<LoadTour
                                     setTour = {setTour}
-                                />);
+                                    />);
     });
 
     it('initializes as expected', () => {
@@ -113,6 +113,4 @@ describe('LoadTour', () => {
         loadTourWrapper.instance().addTourToMap();
         expect(setTour).toHaveBeenCalled();
     });
-    
-
 });

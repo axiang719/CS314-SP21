@@ -110,12 +110,13 @@ describe('Atlas', () => {
         expect(actualArray).toEqual(expectedArray);
     });
 
-    it('renders the shorter tour button', () => {
-        const expectedLength = 1;
-        const actualLength = atlasWrapper.find('#shortTour').length;
-
-        expect(expectedLength).toEqual(actualLength);
-    });
+    // it('sets a new tour', () => {
+    //     const testJson = [{latitude: "50.00", longitude: "50.00"}];
+    //     atlasWrapper.instance().setTour(testJson);
+    //     atlasWrapper.update();
+    //     console.error(atlasWrapper.state().listOfClicks)
+    //     expect(atlasWrapper.state().listOfClicks).toEqual(testJson);
+    // });
 
     it('renders the save tour button', () => {
         const expectedLength = 1;
@@ -123,16 +124,6 @@ describe('Atlas', () => {
 
         expect(expectedLength).toEqual(actualLength);
     });
-
-    it('renders the save tour button', () => {
-        const testJson = {
-            places: [{latitude: "50.00", longitude: "50.00"}]
-        }
-
-        atlasWrapper.instance().setTour(testJson);
-        expect(atlasWrapper.state().listOfClicks).toEqual(testJson.places);
-    });
-
 
     function mockGeoLocateResponse() {
         const geoResponseData = {

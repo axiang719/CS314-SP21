@@ -8,9 +8,14 @@ export default class TourRequest {
         this.request = {
             requestType: "tour",
             earthRadius: earthRadius,
-	    response: 1,
+	        response: 1,
             places: places
         };
+        this.betterTour = []
+    }
+
+    getPlaces() {
+        return this.betterTour;
     }
 
     sendRequest() {
@@ -26,10 +31,10 @@ export default class TourRequest {
 
     processResponse(response) {
         if (!isJsonResponseValid(response, schema)) {
-	    LOG.error("Response Not Valid. Check The Server.");
+	    LOG.error("Tour Response Not Valid. Check The Server.");
 	} else {
-	    LOG.info("Receiving response from:", getOriginalServerPort());
-	    this.response = response;
+	    LOG.info("Receiving tour response from:", getOriginalServerPort());
+	    this.betterTour = response.places;
 	}
    }
 } 

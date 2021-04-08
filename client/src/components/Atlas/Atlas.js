@@ -16,6 +16,7 @@ import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
+import OrderTour from './OrderTour';
 
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -73,7 +74,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOptimizeTourButton()}</div>
+                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOrderTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -95,6 +96,7 @@ export default class Atlas extends Component {
             setTour = { this.setTour }
             clearList = { this.clearList }
             setPlace = { this.setPlace }
+            listOfClicks = { this.state.listOfClicks }
             />
         )
     }
@@ -105,6 +107,15 @@ export default class Atlas extends Component {
 
           />
       )  
+    }
+
+    renderOrderTour(){
+        return (
+            <OrderTour
+                listOfClicks = {this.state.listOfClicks}
+                setTour = {this.setTour}
+            />
+        )
     }
 
     renderList() {
@@ -145,12 +156,6 @@ export default class Atlas extends Component {
     renderFindMeButton() {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
-        );
-    }
-
-    renderOptimizeTourButton() {
-        return (
-            <Button id="shortTour" color="primary">Optimize</Button>
         );
     }
 
@@ -212,8 +217,7 @@ export default class Atlas extends Component {
         });
     }
 
-    async setTour(newTour) {
-        let places = newTour.places;
+    async setTour(places) {
         for(let i = 0; i < places.length; i++) {
             let place = places[i];
 
@@ -226,7 +230,6 @@ export default class Atlas extends Component {
             place["longitude"] = parseFloat(place["longitude"]);
             places[i] = place;
         };
-
         this.setState({listOfClicks: places}, this.handleDistances);
     }
 
