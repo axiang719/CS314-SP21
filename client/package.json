@@ -12,6 +12,7 @@
     "ajv": "^6.12.2",
     "bootstrap": "^4.5.0",
     "coordinate-parser": "^1.0.7",
+    "json2csv": "^5.0.6",
     "leaflet": "^1.6.0",
     "newman": "^5.1.2",
     "node-sass": "^4.14.1",
