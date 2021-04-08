@@ -34,7 +34,7 @@ export default class SaveTour extends Component {
                     <div className="text-center">Save Tour</div>
                 </ModalHeader>
                 <ModalBody>
-                	<Button id="SaveCSV" color="primary" onClick={this.convertListOfClicksToString}>Save as CSV</Button>  
+                	<Button id="SaveCSV" color="primary" onClick={this.exportCSV}>Save as CSV</Button>  
                 </ModalBody>
             </Modal>
         );
