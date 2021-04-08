@@ -21,8 +21,6 @@ export default class SaveTour extends Component {
     render() {
         return (
             <>
-
-                <Button id="Save" color="primary" onClick = {this.exportJSON} >Save</Button>  
                 <Button id="Save" color="primary" onClick={this.toggleModal}>Save</Button>
                 {this.renderModal()}
             </>
