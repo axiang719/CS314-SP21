@@ -26,17 +26,17 @@ export default class SaveTour extends Component {
         this.exportCSV(data);
     }
 
-        exportCSV(csvExport){
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.json_to_sheet(csvExport)
-            XLSX.utils.book_append_sheet(wb, ws, "info")
-            const wopts = {
-                bookType: 'csv',
-                bookSST: false,
-                type: 'buffer'
-            };
-            const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
-        }
+    exportCSV(csvExport){
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(csvExport)
+        XLSX.utils.book_append_sheet(wb, ws, "info")
+        const wopts = {
+            bookType: 'csv',
+            bookSST: false,
+            type: 'buffer'
+        };
+        const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
+    }
 }
 
  
