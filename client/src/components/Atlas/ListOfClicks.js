@@ -10,7 +10,7 @@ export default class ListOfClicks extends Component {
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
         this.state = {
-            toggleRow: null
+            toggleRow: []
         }
     }
 
@@ -42,7 +42,7 @@ export default class ListOfClicks extends Component {
                                         {place.name}
                                     </Col>
                                     <Col>
-                                        {toggleRow == index ? <BsChevronDown/> : <BsChevronUp/>}
+                                        {toggleRow[index] ? <BsChevronDown/> : <BsChevronUp/>}
                                     </Col>
                                 </Row>
                                 {this.getRowInfo(place, index)}
@@ -56,11 +56,13 @@ export default class ListOfClicks extends Component {
 
     getRowInfo(place, index) {
         let {toggleRow} = this.state
+        const listSize = this.props.listOfClicks.length;
+        const isLastPlace = index == listSize - 1 && index != 0; 
         return(
-            <Collapse isOpen={toggleRow == index}>
+            <Collapse isOpen={toggleRow[index]}>
                 <Row className="mt-2" noGutters={true}>
                     <Col xs="4" className="float-right">Latitude:  {place.latitude.toFixed(2)}<br/>Longitude: {place.longitude.toFixed(2)}</Col>
-                    <Col xs="4">Distance to next: {place.distance} mi.</Col>
+                    <Col xs="4">{isLastPlace ? "Distance back to start: " : "Distance to next:"} {place.distance} mi.</Col>
                     <Col xs="2" className="text-right">
                         <Button color="primary" size="md" onClick={this.props.centerMapToIndex.bind(this.props, index)}>
                             <BsGeoAlt/>
@@ -74,22 +76,26 @@ export default class ListOfClicks extends Component {
         )
     }
 
-    toggleHandler(toggleRow) {
-        if (this.state.toggleRow == toggleRow) {
-            this.setState({toggleRow: null})
+    toggleHandler(index) {
+        const { toggleRow } = this.state;
+        if (toggleRow[index] == true) {
+            toggleRow[index] = false;
         }
         else {
-            this.setState({toggleRow})
+            toggleRow[index] = true;
         }
+        this.setState({toggleRow});
     }
 
     deleteHandler(index) {
-        this.setState({toggleRow: null})
-        this.props.removePlace(index)
+        const { toggleRow } = this.state;
+        toggleRow.splice(index, 1);
+        this.setState({toggleRow});
+        this.props.removePlace(index);
     }
 
     clearHandler() {
-        this.setState({toggleRow: null})
+        this.setState({toggleRow: []})
         this.props.clearList();
     }
 }

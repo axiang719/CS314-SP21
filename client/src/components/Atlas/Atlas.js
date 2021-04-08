@@ -276,14 +276,14 @@ export default class Atlas extends Component {
     }
 
     handleDistancesResponse(distances) {
-        var newList = this.state.listOfClicks;
-        var distanceSum = 0;
-        var numPlaces = newList.length;
+        const { listOfClicks } = this.state;
+        var totalDistance = 0;
+        var numPlaces = listOfClicks.length;
         for(var i = 0; i < numPlaces; i++) {
-            newList[i].distance = distances[(numPlaces - 1) - i];
-            distanceSum += distances[i];
+            listOfClicks[i].distance = distances[i];
+            totalDistance += distances[i];
         }
-        this.setState({listOfClicks: newList, totalDistance: distanceSum});
+        this.setState({listOfClicks, totalDistance});
     }
 
     async handleDistances() {
