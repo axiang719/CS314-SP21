@@ -10,12 +10,12 @@ export default class SaveTour extends Component {
         this.exportCSV = this.exportCSV.bind(this);
 
         this.exportJSON = this.exportJSON.bind(this);
-	      this.toggleModal = this.toggleModal.bind(this);
+	    this.toggleModal = this.toggleModal.bind(this);
 
       
-	this.state = {
-	    modalOpen: false
-	}
+	    this.state = {
+	        modalOpen: false
+	    }
     }   
         
     render() {
