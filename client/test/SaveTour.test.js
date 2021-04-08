@@ -19,10 +19,12 @@ describe('SaveTour', () => {
         expect(saveWrapper.find('Button').at(0).length).toEqual(1);
     });
 
-    it('testing convert to string', () =>  {
-        
-        saveWrapper.instance().convertListOfClicksToString();
+    it('toggles the modal', () => {
+        saveWrapper.instance().toggleModal();
+        expect(saveWrapper.state().modalOpen).toEqual(true);
+    });
 
-        
+    it('testing convert to string', () =>  {
+        saveWrapper.instance().convertListOfClicksToString();
     });
 });
