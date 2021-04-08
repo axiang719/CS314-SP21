@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import XLSX from "xlsx";
 
-import TourRequest from "./TourRequest"
-
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
 import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
 import * as tripSchema from "../../../schemas/TripFile";
@@ -19,9 +17,7 @@ export default class LoadTour extends Component {
         this.renderUploadForm =this.renderUploadForm.bind(this);
         this.renderFormInput = this.renderFormInput.bind(this);
         this.renderFormButton = this.renderFormButton.bind(this);
-        this.handleShortTourClick = this.handleShortTourClick.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
-        this.fillPlacesList = this.fillPlacesList.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
         this.checkTour = this.checkTour.bind(this);
@@ -44,10 +40,8 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <Button className="mr-1" color="primary" onClick={this.toggleModal}>Load</Button>
-                <Button id="shortTour" onClick={this.handleShortTourClick} color="primary">Order</Button>
+                <Button color="primary" onClick={this.toggleModal}>Load</Button>
                 {this.renderModal()}
-                
             </>
         );
     }
@@ -119,42 +113,13 @@ export default class LoadTour extends Component {
         );
     }
 
-    async handleShortTourClick() {
-        const length = this.props.listOfClicks.length
-        if (length >= 2) {
-            const oldList = [];
-            for (let i = 0; i < length; i++) {
-                const place = {
-                    name: this.props.listOfClicks[i].address,
-                    latitude: this.props.listOfClicks[i].latitude.toString(),
-                    longitude: this.props.listOfClicks[i].longitude.toString()
-                }
-                oldList.unshift(place)
-            }
-            const i = new TourRequest(oldList,3539);
-            await i.sendRequest();
-            const newList = i.getPlaces();
-            this.fillPlacesList(newList);
-        }
-    }
-
     addTourToMap() {
         const { tourUpload } = this.state;
         const places = tourUpload.places;
-        this.fillPlacesList(places)
+        this.props.setTour(places);
         this.toggleModal();
     }
 
-    fillPlacesList(places) {
-        this.props.clearList();
-        for(let i=0; i < places.length; i++) {
-            const place = places[i];
-            const latitude = parseFloat(place.latitude);
-            const longitude = parseFloat(place.longitude);
-            const latLng = {lat: latitude, lng: longitude}
-            this.props.setPlace(latLng);
-        }
-    }
 
     processFile(e) {
         const files = e.target.files, file = files[0];
