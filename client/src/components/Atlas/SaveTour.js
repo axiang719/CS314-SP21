@@ -10,7 +10,7 @@ export default class SaveTour extends Component {
         super(props);
         this.convertListOfClicksToString = this.convertListOfClicksToString.bind(this);
         this.exportCSV = this.exportCSV.bind(this);
-        // this.exportJSON = this.exportJSON.bind(this);
+        this.exportJSON = this.exportJSON.bind(this);
       
     }   
 
@@ -26,7 +26,6 @@ export default class SaveTour extends Component {
         let data = [];
         data = this.props.getPlaces();
         return data;
-        // this.exportCSV(data);
     }
 
     exportCSV(){
@@ -42,6 +41,11 @@ export default class SaveTour extends Component {
         const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
     }
 
+    exportJSON(){
+        let data = {places: this.convertListOfClicksToString()};
+        data = JSON.stringify(data);
+        downloadFile(data, 'file.json','application/json');
+    }
 }
 
  
