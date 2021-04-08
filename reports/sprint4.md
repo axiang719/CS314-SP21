@@ -86,8 +86,14 @@ Epic Two allowed our server to recieve a tour request, which would allow users t
 ### Epic Three 
 Epic three allowed users to load a tour to the map in either a JSON or CSV format. The users will see thier loaded tour appear on the map, in the order that was provided in the file. Users will load the file using a "load" button which pops out a window allowing users to browse thier PC for a valid format. Users will be promted with an invalid file message if they attempt to upload a non CSV or JSON file.
 
+### Epic Four
+Epic four added a new "optimization" button to the website, allowing users to find a shorter tour using the same places they've chosen. This button will keep the starting location the same, while re-ordering thier tour to take the least amount of miles to complete.
+
+### Epic Five
+Epic five allows users to save trips in either a JSON or CSV file. A new "Save" button was implemented that will popout a window promting users to either save as JSON or as CSV. Once selcted, the users will download thier trip into the said file format.
 
 ### Epics not completed 
+All epics were completed, with the exception of downloading maps in the save tour epic.
 
 ## Retrospective
 An additional epic was planned for the sprint and the epic gamers were able to complete all epics planned. While most of the work was completed, the team fell behind early, leaving members stressed to ensure the product was ready.
