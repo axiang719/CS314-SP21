@@ -77,6 +77,11 @@ Epic five will introduce a user interface element that allows them to reorder th
 ## Review
 
 ### Epics completed  
+### Epic One 
+The first epic allowed users to search for an airport code or partial city name using the search bar. Users were returned a list matching any of the requirements passed in that they could then add to thier tour. 
+
+### Epic Two
+Epic Two allowed our server to recieve a tour request, which would allow users to form a tour from the list of places they've visited. The tour response organizes the trip in order of index until the last place comes back to the first place, forming a complete tour.
 
 ### Epics not completed 
 
