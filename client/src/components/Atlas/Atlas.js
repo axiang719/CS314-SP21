@@ -106,6 +106,7 @@ export default class Atlas extends Component {
     renderSaveTour(){
       return(
           <SaveTour 
+            getPlaces = {this.getPlaces}
 
           />
       )  

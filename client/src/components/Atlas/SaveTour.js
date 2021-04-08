@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import json2csv, { Parser } from 'json2csv';
+import XLSX from "xlsx";
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
 
 
@@ -8,7 +8,7 @@ export default class SaveTour extends Component {
     constructor(props){
         super(props);
         this.convertListOfClicksToString = this.convertListOfClicksToString.bind(this);
-        this.jsonToCSV = this.jsonToCSV.bind(this);
+        this.exportCSV = this.exportCSV.bind(this);
       
     }   
 
@@ -23,20 +23,23 @@ export default class SaveTour extends Component {
     convertListOfClicksToString(){
         let data = [];
         data = this.props.getPlaces();
+        this.exportCSV(data);
         console.log(data);
-        return data; 
-    }
-
-    jsonToCSV(dataArr){
-        const fields = dataArr
-        const opts = {fields};
-        try{
-            const parser = new Parser(opts);
-            const csv = parser.parse(dataArr);
-            console.log(csv);
-
-        } catch(err){
-            console.error(err);
+     
         }
-    }
- }
+
+        exportCSV(csvExport){
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet(csvExport)
+            XLSX.utils.book_append_sheet(wb, ws, "info")
+            const wopts = {
+                bookType: 'csv',
+                bookSST: false,
+                type: 'buffer'
+            };
+            const wbout = XLSX.writeFile(wb, "output.csv" ,wopts);
+        }
+}
+
+ 
+ 
