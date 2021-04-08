@@ -6,6 +6,7 @@ import { expect, it, toHaveBeenCalled } from '@jest/globals';
 
 let orderTourWrapper;
 const setTour = jest.fn();
+const getPlaces = jest.fn();
 let list = [
     {"name":"Fort Collins", "latitude": "40.55", "longitude": "-105.06", "notes":"Place 1"},
     {"name":"China",        "latitude": "37.77", "longitude": "106.32",  "notes":"Place 2"},
@@ -18,6 +19,7 @@ beforeEach(() => {
     orderTourWrapper = shallow(<OrderTour
                                     setTour = {setTour()}
                                     listOfClicks = {list}
+                                    getPlaces = {getPlaces}
                                 />);
 });
 
@@ -28,6 +30,7 @@ it('shortens the tour on button click', () => {
     orderTourWrapper.setProps({ listOfClicks: shorterList }) 
     orderTourWrapper.find('Button').simulate('click');
     expect(setTour).toHaveBeenCalled();
+    expect(getPlaces).toHaveBeenCalled();
 });
 
 function mockTourResponse() {

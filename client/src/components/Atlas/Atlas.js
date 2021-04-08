@@ -36,6 +36,7 @@ export default class Atlas extends Component {
         super(props);
         
         this.handleMapClick = this.handleMapClick.bind(this);
+        this.getPlaces = this.getPlaces.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.setPlace = this.setPlace.bind(this);
         this.setTour = this.setTour.bind(this);
@@ -114,6 +115,7 @@ export default class Atlas extends Component {
             <OrderTour
                 listOfClicks = {this.state.listOfClicks}
                 setTour = {this.setTour}
+                getPlaces = {this.getPlaces}
             />
         )
     }

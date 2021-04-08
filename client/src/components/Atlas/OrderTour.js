@@ -25,15 +25,7 @@ export default class OrderTour extends Component {
      async handleShortTourClick() {
         const length = this.props.listOfClicks.length
         if (length >= 2) {
-            const oldList = [];
-            for (let i = 0; i < length; i++) {
-                const place = {
-                    name: this.props.listOfClicks[i].name,
-                    latitude: this.props.listOfClicks[i].latitude.toString(),
-                    longitude: this.props.listOfClicks[i].longitude.toString()
-                }
-                oldList.unshift(place)
-            }
+            const oldList = this.props.getPlaces();
             const i = new TourRequest(oldList,3539);
             await i.sendRequest();
             const newList = i.getPlaces();
