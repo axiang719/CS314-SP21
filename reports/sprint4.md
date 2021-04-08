@@ -101,5 +101,6 @@ An additional epic was planned for the sprint and the epic gamers were able to c
 Work was distributed much better, with each teammate always having a task to work on. No teammember was left with unnessary work because contributions across the team were high. Another thing that went welll was planning. The epic gamers were able to successfully plan each epic at the beginning of the sprint, allowing indivdual members to easily work out what needed to be done on a timely manner.
 
 ### Things we need to improve
-
+Communication needs to improve within the team. Teammembers got hung up on tasks due to poor communication, with the entire team being at fault. Slack needs to be used more for communcation so that all teammembers are on the same page. 
 ### One thing we will change next time
+Slack will improve team communication and teammembers will reach out to others if they have indivdual questions. 
