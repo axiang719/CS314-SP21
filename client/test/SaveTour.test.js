@@ -8,11 +8,13 @@ import XLSX from "xlsx";
 describe('SaveTour', () => {
     let saveWrapper;
     let mock = () => {return [{name:"test name", latitude: 50.0, longitude: 50.0}]};
+    global.URL.createObjectURL = jest.fn()
     
     
     beforeEach(() => {
         saveWrapper = shallow(<SaveTour
-                                getPlaces = {mock}/>);
+                                getPlaces = {mock}
+                                downloadFile = {mock}/>);
         saveWrapper.setState({modalOpen : true});
     });
 
@@ -30,8 +32,8 @@ describe('SaveTour', () => {
     });
 
     it('checks the where button works', () => {
-        saveWrapper.find('Button').at(0).simulate('click');
+        saveWrapper.find('Button').at(1).simulate('click');
+        saveWrapper.find('Button').at(2).simulate('click');
         saveWrapper.update();
-        // expect(saveWrapper.state().show).toEqual(false);
     });
 });
