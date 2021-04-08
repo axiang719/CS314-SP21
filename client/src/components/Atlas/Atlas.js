@@ -35,6 +35,7 @@ export default class Atlas extends Component {
         
         this.handleMapClick = this.handleMapClick.bind(this);
         this.setMarker = this.setMarker.bind(this);
+        this.getPlaces = this.getPlaces.bind(this);
         this.setPlace = this.setPlace.bind(this);
         this.clearList = this.clearList.bind(this);
         this.removePlace = this.removePlace.bind(this);
