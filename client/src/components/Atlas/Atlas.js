@@ -16,6 +16,8 @@ import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
+import OrderTour from './OrderTour';
+
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
@@ -34,9 +36,11 @@ export default class Atlas extends Component {
         super(props);
         
         this.handleMapClick = this.handleMapClick.bind(this);
+        this.getPlaces = this.getPlaces.bind(this);
         this.setMarker = this.setMarker.bind(this);
         this.getPlaces = this.getPlaces.bind(this);
         this.setPlace = this.setPlace.bind(this);
+        this.setTour = this.setTour.bind(this);
         this.clearList = this.clearList.bind(this);
         this.removePlace = this.removePlace.bind(this);
         this.handleGeolocation = this.handleGeolocation.bind(this);
@@ -72,7 +76,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()}</div>
+                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOrderTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -91,6 +95,7 @@ export default class Atlas extends Component {
     renderLoadTour() {
         return (
             <LoadTour
+            setTour = { this.setTour }
             clearList = { this.clearList }
             setPlace = { this.setPlace }
             listOfClicks = { this.state.listOfClicks }
@@ -104,6 +109,16 @@ export default class Atlas extends Component {
 
           />
       )  
+    }
+
+    renderOrderTour(){
+        return (
+            <OrderTour
+                listOfClicks = {this.state.listOfClicks}
+                setTour = {this.setTour}
+                getPlaces = {this.getPlaces}
+            />
+        )
     }
 
     renderList() {
@@ -198,11 +213,27 @@ export default class Atlas extends Component {
 
     setPlace(latLng) {
         const { listOfClicks } = this.state;
-        this.reverseGeoCoding(latLng).then((address) => {
-            const place = { latitude: latLng.lat, longitude: latLng.lng, address };
+        this.reverseGeoCoding(latLng).then((name) => {
+            const place = { latitude: latLng.lat, longitude: latLng.lng, name };
             listOfClicks.unshift(place);
-            this.setState({ listOfClicks, address }, this.handleDistances);
+            this.setState({ listOfClicks, address: name }, this.handleDistances);
         });
+    }
+
+    async setTour(places) {
+        for(let i = 0; i < places.length; i++) {
+            let place = places[i];
+
+            if (place["name"] == null) {
+                const latLng = {lat: place.latitude, lng: place.longitude};
+                place["name"] = await this.reverseGeoCoding(latLng);
+            }
+
+            place["latitude"] = parseFloat(place["latitude"]);
+            place["longitude"] = parseFloat(place["longitude"]);
+            places[i] = place;
+        };
+        this.setState({listOfClicks: places}, this.handleDistances);
     }
 
     getMarker() {
@@ -270,7 +301,7 @@ export default class Atlas extends Component {
         const {listOfClicks} = this.state;
         const location = listOfClicks[index]
         const latlng = {lat: location.latitude, lng: location.longitude}
-        this.setState({markerPosition: latlng, mapCenter:latlng, address: location.address});
+        this.setState({markerPosition: latlng, mapCenter: latlng, address: location.name});
     }
 
     clearList() {
@@ -290,7 +321,7 @@ export default class Atlas extends Component {
         var places = [];
         for(var i = 0; i < this.state.listOfClicks.length; i++) {
             const place = {
-                name: this.state.listOfClicks[i].address,
+                name: this.state.listOfClicks[i].name,
                 latitude: this.state.listOfClicks[i].latitude.toString(),
                 longitude: this.state.listOfClicks[i].longitude.toString()
             }
