@@ -83,6 +83,10 @@ The first epic allowed users to search for an airport code or partial city name 
 ### Epic Two
 Epic Two allowed our server to recieve a tour request, which would allow users to form a tour from the list of places they've visited. The tour response organizes the trip in order of index until the last place comes back to the first place, forming a complete tour.
 
+### Epic Three 
+Epic three allowed users to load a tour to the map in either a JSON or CSV format. The users will see thier loaded tour appear on the map, in the order that was provided in the file. Users will load the file using a "load" button which pops out a window allowing users to browse thier PC for a valid format. Users will be promted with an invalid file message if they attempt to upload a non CSV or JSON file.
+
+
 ### Epics not completed 
 
 ## Retrospective
