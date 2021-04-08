@@ -7,7 +7,11 @@ export default class SaveTour extends Component {
         super(props);
         this.convertListOfClicksToString = this.convertListOfClicksToString.bind(this);
         this.exportCSV = this.exportCSV.bind(this);
+	this.toggleModal = this.toggleModal.bind(this);
       
+	this.state = {
+	    modalOpen: false
+	}
     }   
         
     render() {
