@@ -81,7 +81,7 @@ Epic five will introduce a user interface element that allows them to reorder th
 ### Epics not completed 
 
 ## Retrospective
-
+An additional epic was planned for the sprint and the epic gamers were able to complete all epics planned. While most of the work was completed, the team fell behind early, leaving members stressed to ensure the product was ready.
 ### Things that went well
 Work was distributed much better, with each teammate always having a task to work on. No teammember was left with unnessary work because contributions across the team were high. Another thing that went welll was planning. The epic gamers were able to successfully plan each epic at the beginning of the sprint, allowing indivdual members to easily work out what needed to be done on a timely manner.
 
