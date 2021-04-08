@@ -50,9 +50,9 @@ Epic five will introduce a user interface element that allows them to reorder th
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | 5 | *count* |
-| Tasks |  42   | *count* | 
-| Story Points |  39  | *sum* | 
+| Epics | 5 | 5|
+| Tasks |  42   | 66 | 
+| Story Points |  39  | 65 | 
 
 
 ## Scrums
