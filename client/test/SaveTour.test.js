@@ -13,6 +13,7 @@ describe('SaveTour', () => {
     beforeEach(() => {
         saveWrapper = shallow(<SaveTour
                                 getPlaces = {mock}/>);
+        saveWrapper.setState({modalOpen : true});
     });
 
     it('initializes as expected', () => {
@@ -21,10 +22,16 @@ describe('SaveTour', () => {
 
     it('toggles the modal', () => {
         saveWrapper.instance().toggleModal();
-        expect(saveWrapper.state().modalOpen).toEqual(true);
+        expect(saveWrapper.state().modalOpen).toEqual(false);
     });
 
     it('testing convert to string', () =>  {
         saveWrapper.instance().convertListOfClicksToString();
+    });
+
+    it('checks the where button works', () => {
+        saveWrapper.find('Button').at(0).simulate('click');
+        saveWrapper.update();
+        // expect(saveWrapper.state().show).toEqual(false);
     });
 });
