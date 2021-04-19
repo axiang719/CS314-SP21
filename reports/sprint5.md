@@ -71,7 +71,7 @@ Epic seven will allow users to customize the lines that connect the places in a 
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *4/19* | *#665* | *#702, ...* | None | 
+| *4/19* | *#665* | *#702* | None | 
 
 
 ## Review
