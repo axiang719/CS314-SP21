@@ -1,10 +1,10 @@
-# Sprint 5 - *your team number* - *your team name*
+# Sprint 5 - *13* - *The Epic Gamers*
 
 ## Goal
 ### *User Experience!*
 
 ## Sprint Leader: 
-### *firstname lastname*
+### *Andie Groeling*
 
 ## Definition of Done
 
