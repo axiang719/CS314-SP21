@@ -190,3 +190,5 @@ Sprint 4 will introduce the TourRequest class, which will allow the server to re
 ### Component Hierarchy
 Sprint 5 will add functionality for users to change map settings within the Atlas component. This will include a new component on the map allowing users to change lines markers and map backgrounds. 
 
+![sprint 5 class diagram](images/Sprint5Diagram.png)
+
