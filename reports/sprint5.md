@@ -37,6 +37,8 @@
 
 ## Planned Epics
 
+### Epic Two
+Epic Two will focus on ensuring that our client works properly when paired with another team's sever, and vice versa. We will check if features are supported by the server and not render them on the client if they are not supported. 
 
 ## Metrics
 
