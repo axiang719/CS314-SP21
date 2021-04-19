@@ -46,6 +46,9 @@ Epic Two will focus on ensuring that our client works properly when paired with 
 ### Epic Three
 Epic three will focus on user experince. We will reduce the amount of button on our web site so it is easier to use for the user. We will also streamline or search bar to be more streamlined and dynamic.
 
+### Epic Four 
+Epic four will allow users to modify thier tour. Using thier current tour list, users will be able to choose a new starting location while preserving the rest of the tour. Along with this addition, users will now be able to reverse the order of thier tour and re-order individual locations. Users may also now choose to remove a single destination from thier tour. For each individual location, users may now leave personal notes, which they will be able to save as a file. 
+
 ## Metrics
 
 | Statistic | # Planned | # Completed |
