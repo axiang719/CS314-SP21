@@ -44,13 +44,16 @@ Epic one will focus on displaying the supported features of a server that the cl
 Epic Two will focus on ensuring that our client works properly when paired with another team's sever, and vice versa. We will check if features are supported by the server and not render them on the client if they are not supported. 
 
 ### Epic Three
-Epic three will focus on user experince. We will reduce the amount of button on our web site so it is easier to use for the user. We will also streamline or search bar to be more streamlined and dynamic.
+Epic three will focus on user experince. We will reduce the amount of buttons on our web site so it is easier to use for the user. We will also streamline or search bar to be more streamlined and dynamic.
 
 ### Epic Four 
-Epic four will allow users to modify thier tour. Using thier current tour list, users will be able to choose a new starting location while preserving the rest of the tour. Along with this addition, users will now be able to reverse the order of thier tour and re-order individual locations. Users may also now choose to remove a single destination from thier tour. For each individual location, users may now leave personal notes, which they will be able to save as a file. 
+Epic four will allow users to modify thier tour. Using their current tour list, users will be able to choose a new starting location while preserving the rest of the tour. Along with this addition, users will now be able to reverse the order of thier tour and re-order individual locations. Users may also now choose to remove a single destination from thier tour. For each individual location, users may now leave personal notes, which they will be able to save as a file. 
 
 ### Epic Five
 Epic five will allow users to filter the tour in several ways. The tour will be made searchable, as well as filterable by Type. This will be done by conditionally rendering Tour places in the list. A list of checkboxes will be added to the UI to select Types.
+
+### Epic Seven
+Epic seven will allow users to customize the lines that connect the places in a tour. They will be able to change the color, width, and style of the lines.
 
 ## Metrics
 
