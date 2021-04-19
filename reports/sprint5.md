@@ -63,8 +63,8 @@ Epic seven will allow users to customize the lines that connect the places in a 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
 | Epics | *7* | *count* |
-| Tasks |  *28*   | *count* | 
-| Story Points |  *32*  | *sum* | 
+| Tasks |  *34*   | *count* | 
+| Story Points |  *37*  | *sum* | 
 
 
 ## Scrums
