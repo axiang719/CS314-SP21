@@ -53,7 +53,7 @@ Epic four will allow users to modify thier tour. Using their current tour list, 
 Epic five will allow users to filter the tour in several ways. The tour will be made searchable, as well as filterable by Type. This will be done by conditionally rendering Tour places in the list. A list of checkboxes will be added to the UI to select Types.
 
 ### Epic Six
-Epic six will let users make a search for a random list of place based on the 'type' and 'where' constraints if any are selected. The user will be able to add any of the random search results to their tour.
+Epic six will let users make a search for a random list of places based on the 'type' and 'where' constraints if any are selected. The user will be able to add any of the random search results to their tour.
 
 ### Epic Seven
 Epic seven will allow users to customize the lines that connect the places in a tour. They will be able to change the color, width, and style of the lines.
