@@ -187,6 +187,11 @@ Sprint 4 will introduce the TourRequest class, which will allow the server to re
 ![sprint 4 class diagram](images/Sp4ClassDiagram.png)
 
 # Sprint 5
+### User Interface
+Sprint 5 will work on cleaning up the user interface to reduce clutter by making more progressive disclosure. We will also create a map settings button that allows the user to make changes to the style of the lines and location markers. The server settings modal will also include details about the supported features in the server.
+
+![sprint 5 UI diagram](images/Sprint5UI.png)
+
 ### Component Hierarchy
 Sprint 5 will add functionality for users to change map settings within the Atlas component. This will include a new component on the map allowing users to change lines markers and map backgrounds. 
 
