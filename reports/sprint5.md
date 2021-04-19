@@ -43,6 +43,9 @@ Epic one will focus on displaying the supported features of a server that the cl
 ### Epic Two
 Epic Two will focus on ensuring that our client works properly when paired with another team's sever, and vice versa. We will check if features are supported by the server and not render them on the client if they are not supported. 
 
+### Epic Three
+Epic three will focus on user experince. We will reduce the amount of button on our web site so it is easier to use for the user. We will also streamline or search bar to be more streamlined and dynamic.
+
 ## Metrics
 
 | Statistic | # Planned | # Completed |
