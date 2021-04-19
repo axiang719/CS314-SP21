@@ -62,7 +62,4 @@ public class TourRequest extends RequestHeader {
       this.requestType = "tour";
     }
 
-    public ArrayList<HashMap<String, String>>  getPlaces(){
-      return this.places;
-    }
 }

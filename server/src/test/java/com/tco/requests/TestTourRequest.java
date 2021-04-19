@@ -2,8 +2,6 @@ package com.tco.requests;
 
 import org.junit.jupiter.api.Test;
 
-import jdk.jfr.Timestamp;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -23,13 +21,6 @@ public class TestTourRequest {
     public void testType() {
         String type = tourRequest.getRequestType();
         assertEquals("tour", type);
-    }
-
-    @Test
-    @DisplayName("Timer works")
-    public void testTimer(){
-        tourRequest.setTimer();
-        assertEquals(null,tourRequest.getPlaces());
     }
 
 }
