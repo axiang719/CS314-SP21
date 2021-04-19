@@ -49,6 +49,9 @@ Epic three will focus on user experince. We will reduce the amount of button on 
 ### Epic Four 
 Epic four will allow users to modify thier tour. Using thier current tour list, users will be able to choose a new starting location while preserving the rest of the tour. Along with this addition, users will now be able to reverse the order of thier tour and re-order individual locations. Users may also now choose to remove a single destination from thier tour. For each individual location, users may now leave personal notes, which they will be able to save as a file. 
 
+### Epic Five
+Epic five will allow users to filter the tour in several ways. The tour will be made searchable, as well as filterable by Type. This will be done by conditionally rendering Tour places in the list. A list of checkboxes will be added to the UI to select Types.
+
 ## Metrics
 
 | Statistic | # Planned | # Completed |
