@@ -197,3 +197,7 @@ Sprint 5 will add functionality for users to change map settings within the Atla
 
 ![sprint 5 class diagram](images/Sprint5Diagram.png)
 
+### Classes
+Sprint 5 will have no planned class changes
+
+![sprint 4 class diagram](images/Sp4ClassDiagram.png)
