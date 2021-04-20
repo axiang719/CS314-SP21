@@ -14,7 +14,7 @@ export default class ServerSettings extends Component {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
             config: {},
-            features: ['']
+            features: ['config','find','type','where','distances','tour']
         };
 
         this.saveInputText = this.state.inputText;
@@ -83,11 +83,12 @@ export default class ServerSettings extends Component {
     }
 
     renderFeatureList(config) {
+        const {features} = this.state;
         return(
             <ListGroup>
                 {config.features.map((feature, index) =>
                     <ListGroupItem key={index}>
-                        {feature}
+                        {feature} {features.includes(feature) ? 'Checkmark' : 'Nah'}
                     </ListGroupItem>
                 )}
             </ListGroup>
