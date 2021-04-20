@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem } from "reactstrap";
 
 import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
 
@@ -13,7 +13,8 @@ export default class ServerSettings extends Component {
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
-            config: {}
+            config: {},
+            supportedFeatures: ['config','find','type','where','distances','tour']
         };
 
         this.saveInputText = this.state.inputText;
@@ -45,6 +46,7 @@ export default class ServerSettings extends Component {
                         {this.renderInputField()}
                     </Col>
                 </Row>
+                {this.renderServerFeatures()}
             </ModalBody>
         );
     }
@@ -61,6 +63,40 @@ export default class ServerSettings extends Component {
                    valid={this.state.validServer}
                    invalid={!this.state.validServer && this.state.validServer !== null}
             />
+        );
+    }
+
+    renderServerFeatures() {
+        let { config, validServer } = this.state;
+        if (validServer && config.features) {
+            return (
+                <>
+                    <Row className="m-2">
+                        <Col>
+                            {"Proposed Server Features:"}
+                        </Col>
+                    </Row>
+                    <Row className="m-2">
+                        <Col>
+                            {this.renderFeatureList(config)}
+                        </Col>
+                    </Row>    
+                </>
+            );
+        };
+    }
+
+    renderFeatureList(config) {
+        const {supportedFeatures} = this.state;
+        return(
+            <ListGroup>
+                {config.features.map((feature, index) =>
+                    <ListGroupItem key={index}>
+                        {feature} {supportedFeatures.includes(feature) ? <span className = "text-primary"> <small><i>Supported</i></small> </span> : 
+                                                                         <span className = "text-danger"> <small><i>Unsupported</i></small> </span>}
+                    </ListGroupItem>
+                )}
+            </ListGroup>
         );
     }
 

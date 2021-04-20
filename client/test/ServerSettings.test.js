@@ -62,6 +62,11 @@ describe('Server Settings Modal', () => {
         expect(settingsWrapper.state().inputText).toEqual(newInput);
     });
 
+    it('shows proposed features following onChange event from the server input', () => {
+        settingsWrapper.setState({validServer: true, config: {'serverName': 'test', 'requestType': 'config', 'features': ['feature1']}});
+        expect(settingsWrapper.find('ListGroup')).toHaveLength(1);
+    });
+
     it('correctly handles an invalid Config response', () => {
         settingsWrapper.setState({validServer: true, config: {'serverName': '', 'requestType': 'config'}});
 
@@ -76,7 +81,6 @@ describe('Server Settings Modal', () => {
         mockConfigResponse();
 
         const pageWrapper = shallow(<Page />);
-
         const pageConfigSuccess = (value, config) => pageWrapper.instance().processServerConfigSuccess(value, config);
         settingsWrapper.setProps({processServerConfigSuccess: pageConfigSuccess});
 

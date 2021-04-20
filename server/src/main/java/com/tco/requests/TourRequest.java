@@ -61,4 +61,5 @@ public class TourRequest extends RequestHeader {
     public TourRequest() {
       this.requestType = "tour";
     }
+
 }
