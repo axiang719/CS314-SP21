@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem } from "reactstrap";
 
 import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
 
@@ -45,6 +45,7 @@ export default class ServerSettings extends Component {
                         {this.renderInputField()}
                     </Col>
                 </Row>
+                {this.renderServerFeatures()}
             </ModalBody>
         );
     }
@@ -57,6 +58,38 @@ export default class ServerSettings extends Component {
                    valid={this.state.validServer}
                    invalid={!this.state.validServer && this.state.validServer !== null}
             />
+        );
+    }
+
+    renderServerFeatures() {
+        let { config, validServer } = this.state;
+        if (validServer && config.features) {
+            return (
+                <>
+                    <Row className="m-2">
+                        <Col>
+                            {"Proposed Server Features:"}
+                        </Col>
+                    </Row>
+                    <Row className="m-2">
+                        <Col>
+                            {this.renderFeatureList(config)}
+                        </Col>
+                    </Row>    
+                </>
+            );
+        };
+    }
+
+    renderFeatureList(config) {
+        return(
+            <ListGroup>
+                {config.features.map((place, index) =>
+                    <ListGroupItem key={index}>
+                        {place}
+                    </ListGroupItem>
+                )}
+            </ListGroup>
         );
     }
 
