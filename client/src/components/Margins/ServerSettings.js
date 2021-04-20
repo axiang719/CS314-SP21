@@ -49,6 +49,10 @@ export default class ServerSettings extends Component {
         );
     }
 
+    renderTypeWhereDomain(){
+
+    }
+
     renderInputField() {
         return(
             <Input onChange={(e) => this.updateInput(e.target.value)}
