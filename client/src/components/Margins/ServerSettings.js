@@ -13,7 +13,8 @@ export default class ServerSettings extends Component {
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
-            config: {}
+            config: {},
+            features: ['']
         };
 
         this.saveInputText = this.state.inputText;
@@ -84,9 +85,9 @@ export default class ServerSettings extends Component {
     renderFeatureList(config) {
         return(
             <ListGroup>
-                {config.features.map((place, index) =>
+                {config.features.map((feature, index) =>
                     <ListGroupItem key={index}>
-                        {place}
+                        {feature}
                     </ListGroupItem>
                 )}
             </ListGroup>
