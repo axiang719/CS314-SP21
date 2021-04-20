@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem } from "reactstrap";
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem, Collapse } from "reactstrap";
 
 import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
 
@@ -9,12 +9,13 @@ export default class ServerSettings extends Component {
 
     constructor(props) {
         super(props);
-
+            this.renderTypeDomain = this.renderTypeDomain.bind(this);
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
             config: {},
-            supportedFeatures: ['config','find','type','where','distances','tour']
+            supportedFeatures: ['config','find','type','where','distances','tour'],
+            toggleRow: false
         };
 
         this.saveInputText = this.state.inputText;
@@ -51,10 +52,6 @@ export default class ServerSettings extends Component {
         );
     }
 
-    renderTypeWhereDomain(){
-
-    }
-
     renderInputField() {
         return(
             <Input onChange={(e) => this.updateInput(e.target.value)}
@@ -86,6 +83,23 @@ export default class ServerSettings extends Component {
         };
     }
 
+    renderTypeDomain(config){
+        const{toggleRow} = this.state;
+        return(
+            <div className= "container">
+           <Button className="btn" onClick={!toggleRow}>
+               Collapse Div
+           </Button>
+            <Collapse in={toggleRow}>
+                <div>
+                    {config.type}
+                </div>
+            </Collapse>
+            </div>
+            
+        );
+    }
+
     renderFeatureList(config) {
         const {supportedFeatures} = this.state;
         return(
@@ -94,6 +108,8 @@ export default class ServerSettings extends Component {
                     <ListGroupItem key={index}>
                         {feature} {supportedFeatures.includes(feature) ? <span className = "text-primary"> <small><i>Supported</i></small> </span> : 
                                                                          <span className = "text-danger"> <small><i>Unsupported</i></small> </span>}
+                        {(feature == "type") && this.renderTypeDomain(config)}
+                        {console.log(config)}
                     </ListGroupItem>
                 )}
             </ListGroup>
