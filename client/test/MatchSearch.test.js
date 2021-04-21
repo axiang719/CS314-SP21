@@ -23,6 +23,7 @@ describe('MatchSearch', () => {
         matchSearchWrapper = shallow(<MatchSearch 
                                                 setType={["airport"]}
                                                 setWhere={["United States"]}
+                                                checkForFeature={snacks}
                                                 renderDropdown={snacks} 
                                                 setMarker={snacks}
                                                 showMessage={snacks}
