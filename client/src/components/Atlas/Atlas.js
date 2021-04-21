@@ -19,6 +19,7 @@ import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
 
 
+
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
 const MAP_ZOOM_DEFAULT = 15;
@@ -47,6 +48,7 @@ export default class Atlas extends Component {
         this.reverseGeoCoding = this.reverseGeoCoding.bind(this);
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
+        this.checkForFeature = this.checkForFeature.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -65,8 +67,11 @@ export default class Atlas extends Component {
     }
 
     render() {
+     
         return (
+            
             <div>
+       
                 <Container>
                     <Row>
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
@@ -76,7 +81,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()} {this.renderLoadTour()} {this.renderOrderTour()}</div>
+                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -86,10 +91,20 @@ export default class Atlas extends Component {
         );
     }
 
+    checkForFeature(feature){
+        if(this.props.serverSettings.serverConfig == null){
+            return false;
+        } else {
+            return this.props.serverSettings.serverConfig.features.includes(feature);
+        }
+    }
+
     renderCoordinatesInput() {
         return <CoordinatesInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
-                serverSettings={this.props.serverSettings}/>;
+                serverSettings={this.props.serverSettings.serverConfig}
+         />
+                
     }
 
     renderLoadTour() {
@@ -99,6 +114,8 @@ export default class Atlas extends Component {
             clearList = { this.clearList }
             setPlace = { this.setPlace }
             listOfClicks = { this.state.listOfClicks }
+      
+           
             />
         )
     }

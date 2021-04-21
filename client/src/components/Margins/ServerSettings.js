@@ -9,7 +9,7 @@ export default class ServerSettings extends Component {
 
     constructor(props) {
         super(props);
-            this.renderTypeDomain = this.renderTypeDomain.bind(this);
+           
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
@@ -83,23 +83,6 @@ export default class ServerSettings extends Component {
         };
     }
 
-    renderTypeDomain(config){
-        const{toggleRow} = this.state;
-        return(
-            <div className= "container">
-           <Button className="btn" onClick={!toggleRow}>
-               Collapse Div
-           </Button>
-            <Collapse in={toggleRow}>
-                <div>
-                    {config.type}
-                </div>
-            </Collapse>
-            </div>
-            
-        );
-    }
-
     renderFeatureList(config) {
         const {supportedFeatures} = this.state;
         return(
@@ -108,8 +91,7 @@ export default class ServerSettings extends Component {
                     <ListGroupItem key={index}>
                         {feature} {supportedFeatures.includes(feature) ? <span className = "text-primary"> <small><i>Supported</i></small> </span> : 
                                                                          <span className = "text-danger"> <small><i>Unsupported</i></small> </span>}
-                        {(feature == "type") && this.renderTypeDomain(config)}
-                        {console.log(config)}
+                        
                     </ListGroupItem>
                 )}
             </ListGroup>
