@@ -65,23 +65,44 @@ export default class MatchSearch extends Component {
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					<Row className="mt-1">
-						<TypeSearch type={this.state.findRequest.type}
-				        	setType={this.setType}
-							serverSettings={this.props.serverSettings}/>
-						<WhereSearch where = {this.state.findRequest.where}
-							processFocus = {this.processFocus}
-							focus = {this.state.focus}
-							setWhere = {this.setWhere}
-							serverSettings={this.props.serverSettings}/>
-					</Row>	
+					{this.handleTypeAndWhere()}
 				</Container>	
 			</div>
 		);
 	}
-    
 
-   processKeywordInput(onChangeEvent) {
+
+	handleTypeAndWhere() {
+		const typeIsSupported = this.props.checkForFeature('type');
+		const whereIsSupported = this.props.checkForFeature('where');
+
+		return (
+			<Row className="mt-1">
+				{ typeIsSupported && this.renderTypeSearch() }
+				{ whereIsSupported && this.renderWhereSearch() }
+			</Row>
+		);
+	}
+
+	renderTypeSearch() {
+		return (
+			<TypeSearch type={this.state.findRequest.type}
+				setType={this.setType}
+				serverSettings={this.props.serverSettings}/>
+		);
+	}
+
+	renderWhereSearch() {
+		return (
+			<WhereSearch where = {this.state.findRequest.where}
+				processFocus = {this.processFocus}
+				focus = {this.state.focus}
+				setWhere = {this.setWhere}
+				serverSettings={this.props.serverSettings}/>
+		);
+	}
+    
+    processKeywordInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
         
 		this.getMatchOrNull(inputText);
