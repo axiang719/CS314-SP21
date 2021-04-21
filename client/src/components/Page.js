@@ -20,6 +20,7 @@ export default class Page extends Component {
 		this.state = {
 			showAbout: false,
 			serverSettings: {serverPort: getOriginalServerPort(), serverConfig: null},
+			supportedFeatures: ['config','find','type','where','distances','tour']
 		};
 
 		this.toggleAbout = this.toggleAbout.bind(this);
@@ -61,7 +62,11 @@ export default class Page extends Component {
 	renderAtlas() {
 		return (
 			<Collapse isOpen={!this.state.showAbout}>
-				<Atlas showMessage={this.props.showMessage} serverSettings={this.state.serverSettings}/>
+				<Atlas 
+					showMessage={this.props.showMessage} 
+					serverSettings={this.state.serverSettings} 
+					supportedFeatures = {this.state.supportedFeatures}  
+				/>
 			</Collapse>
 		);
 	}

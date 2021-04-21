@@ -3,7 +3,7 @@ import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, Li
 import Select from 'react-select-virtualized'
 import { BsSearch, BsCheck, BsX } from "react-icons/bs"
 
-import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
+import { sendServerRequest, isJsonResponseValid, isSupportedFeature } from "../../utils/restfulAPI";
 
 import * as configSchema from "../../../schemas/ConfigResponse";
 
@@ -60,6 +60,7 @@ export default class ServerSettings extends Component {
             </ModalBody>
         );
     }
+    
 
     renderInputField() {
         return(
