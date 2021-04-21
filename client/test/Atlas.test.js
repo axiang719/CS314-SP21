@@ -9,13 +9,15 @@ import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
     let atlasWrapper;
+    const serverSettings = {serverConfig: {features: ['config','find','type','where','distances','tour']}};
 
 
     beforeEach(() => {
         mockGeoLocateResponse();
         mockDistanceResponse();
         atlasWrapper = shallow(<Atlas createSnackBar={createSnackBar}
-                                      getCurrentPosition = {createSnackBar}/>);
+                                      getCurrentPosition = {createSnackBar}
+                                      serverSettings = {serverSettings}/>);
         atlasWrapper.setState({listOfClicks: ["osaka","tokyo"]});
     });
 
