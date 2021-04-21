@@ -169,17 +169,14 @@ export default class ServerSettings extends Component {
             });
     }
 
-    
-
     checkForFeature(feature){
         if(this.props.serverSettings.serverConfig == null){
             return false;
         } else {
-            isSupportedFeature(config,feature,supportedFeatures);
+            isSupportedFeature(serverConfig,feature,this.state.supportedFeatures);
             return this.props.serverSettings.serverConfig.features.includes(feature);
         }
     }
-
 
     shouldAttemptConfigRequest(resource) {
         const urlRegex = /https?:\/\/.+/;
