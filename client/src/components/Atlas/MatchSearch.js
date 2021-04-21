@@ -44,8 +44,6 @@ export default class MatchSearch extends Component {
 		const keyword = this.state.keyword;
 		const validMatch = this.state.findRequest.match != null;
 		const inputBoxEmpty = !keyword;
-		const {serverSettings} = this.props;
-		const features = serverSettings.serverConfig.features;
 
 		return (
 			<div>
@@ -67,12 +65,22 @@ export default class MatchSearch extends Component {
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					<Row className="mt-1">
-						{ features.includes("type") && this.renderTypeSearch() }
-						{ features.includes("where") && this.renderWhereSearch() }
-					</Row>	
+					{this.handleTypeAndWhere()}
 				</Container>	
 			</div>
+		);
+	}
+
+
+	handleTypeAndWhere() {
+		const typeIsSupported = this.props.checkForFeature('type');
+		const whereIsSupported = this.props.checkForFeature('where');
+
+		return (
+			<Row className="mt-1">
+				{ typeIsSupported && this.renderTypeSearch() }
+				{ whereIsSupported && this.renderWhereSearch() }
+			</Row>
 		);
 	}
 
