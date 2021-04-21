@@ -60,7 +60,8 @@ export default class CoordinatesInput extends Component {
             showMessage={this.props.showMessage}
             setMarker={this.props.setMarker}
             toggle={this.changeModalOpen}
-            serverSettings={this.props.serverSettings}/>
+            serverSettings={this.props.serverSettings}
+            checkForFeature={this.props.checkForFeature}/>
         );
     }
     

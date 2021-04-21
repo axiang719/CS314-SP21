@@ -36,6 +36,7 @@ export default class Atlas extends Component {
 
         super(props);
         
+        this.checkForFeature = this.checkForFeature.bind(this);
         this.handleMapClick = this.handleMapClick.bind(this);
         this.getPlaces = this.getPlaces.bind(this);
         this.setMarker = this.setMarker.bind(this);
@@ -103,8 +104,7 @@ export default class Atlas extends Component {
         return <CoordinatesInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}
-         />
-                
+                checkForFeature={this.checkForFeature}/>;
     }
 
     renderLoadTour() {
@@ -178,6 +178,14 @@ export default class Atlas extends Component {
         return (
           <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
         );
+    }
+
+    checkForFeature(feature){
+        if(this.props.serverSettings.serverConfig == null){
+            return false;
+        } else {
+            return this.props.serverSettings.serverConfig.features.includes(feature);
+        }
     }
 
     showMarkerPopup(ref) {
