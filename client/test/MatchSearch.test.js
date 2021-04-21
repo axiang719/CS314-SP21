@@ -28,8 +28,15 @@ describe('MatchSearch', () => {
                                                 showMessage={snacks}
                                                 focus={"match"}
                                                 match={"dave"}
-                                               
-                                                
+                                                serverSettings={{'serverConfig': {'requestType': 'config', 
+                                                                                  'serverName': 't99',
+                                                                                  "features"  : ['config', 
+                                                                                                 'find', 
+                                                                                                 'distances', 
+                                                                                                 'tour', 
+                                                                                                 'type', 
+                                                                                                 'where']},
+                                                'serverPort': 'http://localhost:8000'}}
                                                 />);
     });
     

@@ -68,8 +68,8 @@ export default class MatchSearch extends Component {
 							setMarker={this.props.setMarker}/>
 				<Container>	
 					<Row className="mt-1">
-						{ features.includes("type") && this.renderTypeSearch }
-						{ features.includes("where") && this.renderWhereSearch }
+						{ features.includes("type") && this.renderTypeSearch() }
+						{ features.includes("where") && this.renderWhereSearch() }
 					</Row>	
 				</Container>	
 			</div>

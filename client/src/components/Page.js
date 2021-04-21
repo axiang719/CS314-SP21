@@ -59,9 +59,11 @@ export default class Page extends Component {
 	}
 
 	renderAtlas() {
+		const {serverSettings} = this.state;
+
 		return (
 			<Collapse isOpen={!this.state.showAbout}>
-				<Atlas showMessage={this.props.showMessage} serverSettings={this.state.serverSettings}/>
+				<Atlas showMessage={this.props.showMessage} serverSettings={serverSettings}/>
 			</Collapse>
 		);
 	}
