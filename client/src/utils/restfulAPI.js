@@ -44,3 +44,15 @@ export function downloadFile(fileText, fileName, fileType) {
       window.URL.revokeObjectURL(url);
     }, 0);
   }
+
+  
+  export function isSupportedFeature(config, feature,supportedFeatures) {
+    if (supportedFeatures.includes(feature)) {
+        if(feature == 'type' || feature == 'where') {
+            return config[feature] != null;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}

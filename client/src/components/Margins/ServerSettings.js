@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem, Table } from "reactstrap";
 
-import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
+import { sendServerRequest, isJsonResponseValid, isSupportedFeature } from "../../utils/restfulAPI";
 
 import * as configSchema from "../../../schemas/ConfigResponse";
 
@@ -168,6 +168,18 @@ export default class ServerSettings extends Component {
                 }
             });
     }
+
+    
+
+    checkForFeature(feature){
+        if(this.props.serverSettings.serverConfig == null){
+            return false;
+        } else {
+            isSupportedFeature(config,feature,supportedFeatures);
+            return this.props.serverSettings.serverConfig.features.includes(feature);
+        }
+    }
+
 
     shouldAttemptConfigRequest(resource) {
         const urlRegex = /https?:\/\/.+/;

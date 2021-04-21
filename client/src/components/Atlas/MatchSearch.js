@@ -101,6 +101,12 @@ export default class MatchSearch extends Component {
 				serverSettings={this.props.serverSettings}/>
 		);
 	}
+
+	checkValidDomains(){
+        if(configserver.type !== null && configserver.where !== null){
+            //then render
+        } 
+    }
     
     processKeywordInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
