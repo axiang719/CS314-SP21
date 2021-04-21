@@ -99,6 +99,14 @@ export default class Atlas extends Component {
         }
     }
 
+    checkForFeature(feature){
+        if(this.props.serverSettings.serverConfig == null){
+            return false;
+        } else {
+            return this.props.serverSettings.serverConfig.features.includes(feature);
+        }
+    }
+
     renderCoordinatesInput() {
         return <CoordinatesInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
