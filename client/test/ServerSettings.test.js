@@ -14,6 +14,7 @@ describe('Server Settings Modal', () => {
     const serverSettings = {'serverPort': 'black-bottle.cs.colostate.edu:31400', 'serverConfig': {}};
     const toggleOpen = () => isOpen = !isOpen;
     const processServerConfigSuccess = jest.fn();
+    const testConfig = {'serverName': 'test', 'requestType': 'config', 'features': ['feature1']};
 
     beforeEach(() => {
         isOpen = true;
@@ -63,8 +64,8 @@ describe('Server Settings Modal', () => {
     });
 
     it('shows proposed features following onChange event from the server input', () => {
-        settingsWrapper.setState({validServer: true, config: {'serverName': 'test', 'requestType': 'config', 'features': ['feature1']}});
-        expect(settingsWrapper.find('ListGroup')).toHaveLength(1);
+        settingsWrapper.setState({validServer: true, currentConfig: testConfig, config: testConfig});
+        expect(settingsWrapper.find('Table')).toHaveLength(1);
     });
 
     it('correctly handles an invalid Config response', () => {
@@ -79,6 +80,7 @@ describe('Server Settings Modal', () => {
 
     it('updates the server port in the Page component on Save button click', () => {
         mockConfigResponse();
+        settingsWrapper.instance().renderFeatureList = jest.fn();
 
         const pageWrapper = shallow(<Page />);
         const pageConfigSuccess = (value, config) => pageWrapper.instance().processServerConfigSuccess(value, config);

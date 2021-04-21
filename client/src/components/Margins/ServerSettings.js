@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem } from "reactstrap";
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem, Table } from "reactstrap";
 
 import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
 
@@ -13,11 +13,16 @@ export default class ServerSettings extends Component {
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
-            config: {},
-            supportedFeatures: ['config','find','type','where','distances','tour']
+            supportedFeatures: ['config','find','type','where','distances','tour'],
+            currentConfig: null,
+            config: {}
         };
 
         this.saveInputText = this.state.inputText;
+    }
+
+    componentDidMount() {
+        this.sendConfigRequest(this.props.serverSettings.serverPort);
     }
 
     render() {
@@ -63,23 +68,39 @@ export default class ServerSettings extends Component {
     }
 
     renderServerFeatures() {
-        let { config, validServer } = this.state;
-        if (validServer && config.features) {
+        const { config, currentConfig, validServer } = this.state;
+        if (currentConfig) {
             return (
                 <>
                     <Row className="m-2">
                         <Col>
-                            {"Proposed Server Features:"}
+                            {"Server Features:"}
                         </Col>
                     </Row>
-                    <Row className="m-2">
-                        <Col>
-                            {this.renderFeatureList(config)}
-                        </Col>
-                    </Row>    
+                    {this.renderFeatureTable(config, currentConfig, validServer)}
                 </>
             );
         };
+    }
+
+    renderFeatureTable(config, currentConfig, validServer) {
+        const differentServers = validServer && currentConfig != config;
+        return (
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Current Server</th>
+                        { differentServers && <th>New Server</th> }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{this.renderFeatureList(currentConfig)}</td>
+                        { differentServers && <td>{this.renderFeatureList(config)}</td> }
+                    </tr>
+                </tbody>
+            </Table>
+        );
     }
 
     renderFeatureList(config) {
@@ -103,6 +124,7 @@ export default class ServerSettings extends Component {
                 <Button color="primary" onClick={() =>
                 {
                     this.props.processServerConfigSuccess(this.state.config, this.state.inputText);
+                    this.setState({ currentConfig: this.state.config });
                     this.resetServerSettingsState(this.state.inputText);
                 }}
                         disabled={!this.state.validServer}
@@ -152,11 +174,15 @@ export default class ServerSettings extends Component {
     }
 
     processConfigResponse(configResponse) {
+        let { currentConfig } = this.state
         console.log(configResponse);
         if (!isJsonResponseValid(configResponse, configSchema)) {
             this.setState({validServer: false, config: false});
         } else {
-            this.setState({validServer: true, config: configResponse});
+            if (!currentConfig) {
+                currentConfig = configResponse;
+            }
+            this.setState({validServer: true, config: configResponse, currentConfig});
         }
     }
 
