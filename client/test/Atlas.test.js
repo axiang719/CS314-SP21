@@ -9,9 +9,8 @@ import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
     let atlasWrapper;
-    const serverSettings = {serverConfig: {features: ['config','find','type','where','distances','tour']}};
-
-
+    let serverSettings = {serverConfig: {features: ['config','find','type','where','distances','tour']}};
+    
     beforeEach(() => {
         mockGeoLocateResponse();
         mockDistanceResponse();
@@ -127,6 +126,11 @@ describe('Atlas', () => {
         expect(expectedLength).toEqual(actualLength);
     });
 
+    it('tests checkForFeature null conditional', ()=>{
+        serverSettings.serverConfig = null;
+        expect(atlasWrapper.instance().checkForFeature('type')).toEqual(false);
+    });
+    
     function mockGeoLocateResponse() {
         const geoResponseData = {
             address: {
