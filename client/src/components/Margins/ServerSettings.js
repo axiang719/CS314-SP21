@@ -69,7 +69,6 @@ export default class ServerSettings extends Component {
 
     renderServerFeatures() {
         const { config, currentConfig, validServer } = this.state;
-        const differentServers = validServer && currentConfig != config;
         if (currentConfig) {
             return (
                 <>
@@ -78,23 +77,30 @@ export default class ServerSettings extends Component {
                             {"Server Features:"}
                         </Col>
                     </Row>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Current Server</th>
-                                { differentServers && <th>New Server</th> }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{this.renderFeatureList(currentConfig)}</td>
-                                { differentServers && <td>{this.renderFeatureList(config)}</td> }
-                            </tr>
-                        </tbody>
-                    </Table>
+                    {this.renderFeatureTable(config, currentConfig, validServer)}
                 </>
             );
         };
+    }
+
+    renderFeatureTable(config, currentConfig, validServer) {
+        const differentServers = validServer && currentConfig != config;
+        return (
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Current Server</th>
+                        { differentServers && <th>New Server</th> }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{this.renderFeatureList(currentConfig)}</td>
+                        { differentServers && <td>{this.renderFeatureList(config)}</td> }
+                    </tr>
+                </tbody>
+            </Table>
+        );
     }
 
     renderFeatureList(config) {
