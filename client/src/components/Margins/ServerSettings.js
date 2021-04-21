@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem, Table } from "reactstrap";
+import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row, ListGroup, ListGroupItem, Table} from "reactstrap";
+import Select from 'react-select-virtualized'
+import { BsSearch, BsCheck, BsX } from "react-icons/bs"
 
 import { sendServerRequest, isJsonResponseValid } from "../../utils/restfulAPI";
 
@@ -10,12 +12,15 @@ export default class ServerSettings extends Component {
     constructor(props) {
         super(props);
 
+        this.toggleDomain = this.toggleDomain.bind(this);
+        
         this.state = {
             inputText: this.props.serverSettings.serverPort,
             validServer: null,
             supportedFeatures: ['config','find','type','where','distances','tour'],
             currentConfig: null,
-            config: {}
+            config: {},
+            domainToggle: ""
         };
 
         this.saveInputText = this.state.inputText;
@@ -72,7 +77,7 @@ export default class ServerSettings extends Component {
         if (currentConfig) {
             return (
                 <>
-                    <Row className="m-2">
+                    <Row className="ml-1 mb-2">
                         <Col>
                             {"Server Features:"}
                         </Col>
@@ -89,8 +94,8 @@ export default class ServerSettings extends Component {
             <Table>
                 <thead>
                     <tr>
-                        <th>Current Server</th>
-                        { differentServers && <th>New Server</th> }
+                        <th className="text-center">Current Server</th>
+                        { differentServers && <th className="text-center">New Server</th> }
                     </tr>
                 </thead>
                 <tbody>
@@ -105,16 +110,80 @@ export default class ServerSettings extends Component {
 
     renderFeatureList(config) {
         const {supportedFeatures} = this.state;
+        let isSupported;
+        let hasDomain;
+        const supported = <Col className="text-success text-right"> <BsCheck/></Col>;
+        const unsupported = <Col className ="text-danger text-right"> <BsX/> </Col>;
+        config.features.sort();
         return(
             <ListGroup>
                 {config.features.map((feature, index) =>
                     <ListGroupItem key={index}>
-                        {feature} {supportedFeatures.includes(feature) ? <span className = "text-primary"> <small><i>Supported</i></small> </span> : 
-                                                                         <span className = "text-danger"> <small><i>Unsupported</i></small> </span>}
+                        {isSupported = this.isSupportedFeature(config, feature, supportedFeatures)}
+                        {hasDomain = (feature == 'type' || feature == 'where' && isSupported)}
+                        <Row noGutters={true}>
+                            <Col>{feature}</Col>
+                            {isSupported ? supported : unsupported}
+                        </Row>
+                        {(hasDomain && isSupported) && this.renderDomain(config, feature)}
                     </ListGroupItem>
                 )}
             </ListGroup>
         );
+    }
+
+    isSupportedFeature(config, feature, supportedFeatures) {
+        if (supportedFeatures.includes(feature)) {
+            if(feature == 'type' || feature == 'where') {
+                return config[feature] != null;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    renderDomain(config, feature) {
+        const toggleValue = config.serverName + feature;
+        return (
+            <Row onClick={ () => this.toggleDomain(toggleValue) }>
+                <Col>
+                    <small>({config[feature].length}) items <BsSearch/></small>
+                    {this.renderDomainModal(config, feature, toggleValue)}
+                </Col>
+            </Row>
+        );
+    }
+
+    renderDomainModal(config, feature, toggleValue) {
+        const { domainToggle } = this.state;
+        return (
+            <Modal isOpen={ domainToggle === toggleValue } toggle={ () => this.toggleDomain(toggleValue) }> 
+                <ModalHeader toggle={ () => this.toggleDomain(toggleValue) }> 
+                    Valid '{feature}' domain
+                </ModalHeader>
+                <ModalBody>
+                    <Select 
+                        placeholder="Domain value..."
+                        options={this.generateOptions(config, feature)}
+                    />
+                </ModalBody>
+            </Modal>
+        );
+    }
+
+    generateOptions(config, feature) {
+        const optionValues = config[feature];
+        let options = [];
+        optionValues.forEach(value => options.push({value: value, label: value}))
+        return options;
+    }
+
+    toggleDomain(toggleValue) {
+        console.log(toggleValue)
+        let { domainToggle } = this.state;
+        domainToggle === toggleValue ? domainToggle = "" : domainToggle = toggleValue;
+        this.setState({ domainToggle });
     }
 
     renderFooterActions() {

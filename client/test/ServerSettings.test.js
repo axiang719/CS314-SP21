@@ -6,6 +6,7 @@ import {ModalHeader} from 'reactstrap';
 import Page from '../src/components/Page';
 import Footer from '../src/components/Margins/Footer';
 import ServerSettings from '../src/components/Margins/ServerSettings';
+import { isJsonResponseValid } from '../src/utils/restfulAPI.js';
 
 describe('Server Settings Modal', () => {
     let settingsWrapper;
@@ -14,7 +15,7 @@ describe('Server Settings Modal', () => {
     const serverSettings = {'serverPort': 'black-bottle.cs.colostate.edu:31400', 'serverConfig': {}};
     const toggleOpen = () => isOpen = !isOpen;
     const processServerConfigSuccess = jest.fn();
-    const testConfig = {'serverName': 'test', 'requestType': 'config', 'features': ['feature1']};
+    const testConfig = {'serverName': 'test', 'requestType': 'config', 'features': ['type'], 'type': ['type1']};
 
     beforeEach(() => {
         isOpen = true;
@@ -97,6 +98,21 @@ describe('Server Settings Modal', () => {
 
         expect(actualBeforeServerPort).toEqual(expectedBeforeServerPort);
         expect(actualAfterServerPort).toEqual(inputText);
+    });
+
+    it('changes the domain toggle', () => {
+        expect(settingsWrapper.state().domainToggle).toEqual("");
+        settingsWrapper.instance().toggleDomain("someValue");
+        expect(settingsWrapper.state().domainToggle).toEqual("someValue");
+        settingsWrapper.instance().toggleDomain("someValue");
+        expect(settingsWrapper.state().domainToggle).toEqual("");
+    });
+
+    it('generates options when called', () => {
+        const config = {feature: ['domainValue']};
+        const feature = "feature";
+        const options = settingsWrapper.instance().generateOptions(config, feature);
+        expect(options).toEqual([{value: 'domainValue', label: 'domainValue'}]);
     });
 
     function simulateServerPortInputChange(wrapper, event) {
