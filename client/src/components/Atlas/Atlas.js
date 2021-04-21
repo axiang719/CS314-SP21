@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
 import { BsCursorFill } from "react-icons/bs"
+import { isSupportedFeature } from "../../utils/restfulAPI";
 
 
 import CoordinatesInput from "./CoordinatesInput";
@@ -93,10 +94,11 @@ export default class Atlas extends Component {
     }
 
     checkForFeature(feature){
-        if(this.props.serverSettings.serverConfig == null){
+        const config = this.props.serverSettings.serverConfig;
+        if(config == null){
             return false;
         } else {
-            return this.props.serverSettings.serverConfig.features.includes(feature);
+            return isSupportedFeature(config, feature, config.features);
         }
     }
 

@@ -47,6 +47,7 @@ export function downloadFile(fileText, fileName, fileType) {
 
   
   export function isSupportedFeature(config, feature, supportedFeatures) {
+
     if (supportedFeatures.includes(feature)) {
         if(feature == 'type' || feature == 'where') {
             return config[feature] != null;
