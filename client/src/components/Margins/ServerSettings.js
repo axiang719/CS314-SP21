@@ -55,6 +55,7 @@ export default class ServerSettings extends Component {
             </ModalBody>
         );
     }
+    
 
     renderInputField() {
         return(
