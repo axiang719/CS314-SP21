@@ -102,7 +102,7 @@ export default class Atlas extends Component {
     renderCoordinatesInput() {
         return <CoordinatesInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
-                serverSettings={this.props.serverSettings.serverConfig}
+                serverSettings={this.props.serverSettings}
          />
                 
     }
