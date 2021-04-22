@@ -126,6 +126,13 @@ describe('Atlas', () => {
         expect(expectedLength).toEqual(actualLength);
     });
 
+    it('renders the filter tour button', () => {
+        const expectedLength = 1;
+        const actualLength = atlasWrapper.find('TypeSearch').length;
+
+        expect(expectedLength).toEqual(actualLength);
+    });
+
     it('tests checkForFeature null conditional', ()=>{
         serverSettings.serverConfig = null;
         expect(atlasWrapper.instance().checkForFeature('type')).toEqual(false);
