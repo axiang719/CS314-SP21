@@ -148,6 +148,7 @@ export default class Atlas extends Component {
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
+                checkForFeature = { this.checkForFeature }
             />
         );
     }

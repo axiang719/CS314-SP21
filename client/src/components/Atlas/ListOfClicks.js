@@ -58,11 +58,12 @@ export default class ListOfClicks extends Component {
         let {toggleRow} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
+        const isDistancesSupported = this.props.checkForFeature('distances');
         return(
             <Collapse isOpen={toggleRow[index]}>
                 <Row className="mt-2" noGutters={true}>
                     <Col xs="4" className="float-right">Latitude:  {place.latitude.toFixed(2)}<br/>Longitude: {place.longitude.toFixed(2)}</Col>
-                    <Col xs="4">{isLastPlace ? "Distance back to start: " : "Distance to next:"} {place.distance} mi.</Col>
+                    {isDistancesSupported && <Col xs="4">{isLastPlace ? "Distance back to start: " : "Distance to next:"} {place.distance} mi.</Col>}
                     <Col xs="2" className="text-right">
                         <Button color="primary" size="md" onClick={this.props.centerMapToIndex.bind(this.props, index)}>
                             <BsGeoAlt/>
