@@ -18,6 +18,7 @@ import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
+import TourSearch from './TourSearch';
 
 
 
@@ -83,7 +84,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
+                            <div className="text-right">{this.renderTourFilter()} {this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -107,6 +108,12 @@ export default class Atlas extends Component {
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}
                 checkForFeature={this.checkForFeature}/>;
+    }
+
+    renderTourFilter(){
+      return(
+          <TourSearch/>
+      )  
     }
 
     renderLoadTour() {
