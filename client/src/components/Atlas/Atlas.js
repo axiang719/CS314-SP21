@@ -18,7 +18,7 @@ import DistancesSearch from "./DistancesSearch";
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
-import TourSearch from './TourSearch';
+import TypeSearch from './TypeSearch';
 
 
 
@@ -112,7 +112,7 @@ export default class Atlas extends Component {
 
     renderTourFilter(){
       return(
-          <TourSearch/>
+          <TypeSearch/>
       )  
     }
 
