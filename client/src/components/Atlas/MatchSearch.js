@@ -137,7 +137,7 @@ export default class MatchSearch extends Component {
     }
   	
 	sendFindRequest(request) {
-		sendServerRequest(request)
+		sendServerRequest(request, this.props.serverSettings.serverPort)
 			.then(findResponse => {
 				if (findResponse) {
 					this.processFindResponse(findResponse);
