@@ -57,6 +57,7 @@ export default class Atlas extends Component {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
             listOfClicks: [],
+	    typeFilter: [],
             address: "",
             totalDistance: 0,
             userLocation: null,
@@ -112,7 +113,9 @@ export default class Atlas extends Component {
 
     renderTourFilter(){
       return(
-          <TypeSearch/>
+          <TypeSearch type={this.typeFilter}
+	      serverSettings={this.props.serverSettings}
+	      setType={(type) => {}}/>
       )  
     }
 
