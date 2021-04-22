@@ -307,7 +307,7 @@ export default class Atlas extends Component {
     }
 
     async handleDistances() {
-        if(this.state.listOfClicks.length >= 2) {
+        if(this.state.listOfClicks.length >= 2 && this.checkForFeature('distances')) {
             const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
             await distanceRequest.sendDistancesRequest();
             const distances = distanceRequest.getDistances();
