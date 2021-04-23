@@ -74,6 +74,7 @@ Epic seven will allow users to customize the lines that connect the places in a 
 | *4/19* | *#665* | *#702* | None | 
 | *4/20* | *#676, #680, #702* | *#586, #687, #708, #712* | None |
 | *4/21* | *#712* | *#586, #687, #708, #712, #688* | None |
+| *4/22* | *#707, #708, #687, #674, #586* | *#709, #701, #706, #688* | None |
 
 
 ## Review
