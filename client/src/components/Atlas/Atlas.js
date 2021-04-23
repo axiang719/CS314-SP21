@@ -115,7 +115,7 @@ export default class Atlas extends Component {
 	if(this.props.serverSettings.serverConfig != null) {
 		return <TypeSearch type={this.state.typeFilter}
 	        	serverSettings={this.props.serverSettings}
-	      		setType={(type) => {this.state.typeFilter = type}}/>
+	      		setType={(type) => {this.setState({typeFilter: type})}}/>
 			
 	}
     }
