@@ -130,6 +130,17 @@ describe('Atlas', () => {
         serverSettings.serverConfig = null;
         expect(atlasWrapper.instance().checkForFeature('type')).toEqual(false);
     });
+
+    it('only sends distance request if  supported', async () => {
+        atlasWrapper.setState( {totalDistance: 100} );
+        serverSettings = {serverConfig: {features: ['config','find','type','where','tour']}};
+        await atlasWrapper.instance().handleDistances();
+
+        const actualDist = atlasWrapper.state().totalDistance;
+        const expectedDist = 0;
+
+        expect(actualDist).toEqual(expectedDist);
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {

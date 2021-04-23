@@ -19,23 +19,23 @@ export default class TourRequest {
         return this.betterTour;
     }
 
-    sendRequest(severPort) {
-        console.log(severPort);
-        return sendServerRequest(this.request,severPort)
+    sendRequest(serverPort) {
+        console.log(serverPort);
+        return sendServerRequest(this.request,serverPort)
 	    .then(response => { 
 		if (response) {
-		    this.processResponse(response);
+		    this.processResponse(response, serverPort);
 		} else {
 		    LOG.error("Request To The Server Failed.");
 		}
 	});
     }
 
-    processResponse(response) {
+    processResponse(response,serverPort) {
         if (!isJsonResponseValid(response, schema)) {
 	    LOG.error("Tour Response Not Valid. Check The Server.");
 	} else {
-	    LOG.info("Receiving tour response from:", getOriginalServerPort());
+	    LOG.info("Receiving tour response from:",serverPort);
 	    this.betterTour = response.places;
 	}
    }

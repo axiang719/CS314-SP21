@@ -28,7 +28,7 @@ export default class OrderTour extends Component {
         if (length >= 2) {
             const oldList = this.props.getPlaces();
             const i = new TourRequest(oldList,3539);
-            await i.sendRequest(this.props.severSettings.severPort);
+            await i.sendRequest(this.props.serverSettings.serverPort);
             const newList = i.getPlaces();
             this.props.setTour(newList);
         }

@@ -70,7 +70,7 @@ export default class CoordinatesInput extends Component {
         const coordinates = this.state.coordinates;
         const validCoordinates = coordinates.latLng != null;
         const inputBoxEmpty = !coordinates.inputText;
-
+        
         return (
           
             <InputGroup>
@@ -90,15 +90,20 @@ export default class CoordinatesInput extends Component {
     }
 
     renderDropdown() {
-        return (
-            <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                <DropdownToggle color="primary" caret />
-                <DropdownMenu>
-                    <DropdownItem onClick={() => this.setState({ searchType: "Match", dropdownName: "Match" })}>Match</DropdownItem>
-                    <DropdownItem onClick={() => this.setState({ searchType: "Coordinates", dropdownName: "Coord." })}>Coordinates</DropdownItem>
-                    </DropdownMenu>
-            </InputGroupButtonDropdown>
-        )
+        const findIsSupported = this.props.checkForFeature("find");
+        if (findIsSupported) {() => {this.setState({searchType: "Coordinates"})}};
+        
+        if (findIsSupported) {
+            return (
+                <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+                    <DropdownToggle color="primary" caret />
+                    <DropdownMenu>
+                        <DropdownItem onClick={() => this.setState({ searchType: "Match", dropdownName: "Match" })}>Match</DropdownItem>
+                        <DropdownItem onClick={() => this.setState({ searchType: "Coordinates", dropdownName: "Coord." })}>Coordinates</DropdownItem>
+                        </DropdownMenu>
+                </InputGroupButtonDropdown>
+            )
+        }
     }
 
    

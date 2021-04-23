@@ -83,8 +83,8 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") &&  this.renderOrderTour()}</div>
-                            <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
+                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
+                            {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
                             {this.renderList()}
                         </Col>
                     </Row>
@@ -149,6 +149,7 @@ export default class Atlas extends Component {
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
+                checkForFeature = { this.checkForFeature }
             />
         );
     }
@@ -307,7 +308,7 @@ export default class Atlas extends Component {
     }
 
     async handleDistances() {
-        if(this.state.listOfClicks.length >= 2) {
+        if(this.state.listOfClicks.length >= 2 && this.checkForFeature('distances')) {
             const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
             await distanceRequest.sendDistancesRequest();
             const distances = distanceRequest.getDistances();
