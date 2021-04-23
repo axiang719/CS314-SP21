@@ -12,28 +12,30 @@ export default class TourRequest {
             places: places
         };
         this.betterTour = []
+
     }
 
     getPlaces() {
         return this.betterTour;
     }
 
-    sendRequest() {
-        return sendServerRequest(this.request)
+    sendRequest(serverPort) {
+        console.log(serverPort);
+        return sendServerRequest(this.request,serverPort)
 	    .then(response => { 
 		if (response) {
-		    this.processResponse(response);
+		    this.processResponse(response, serverPort);
 		} else {
 		    LOG.error("Request To The Server Failed.");
 		}
 	});
     }
 
-    processResponse(response) {
+    processResponse(response,serverPort) {
         if (!isJsonResponseValid(response, schema)) {
 	    LOG.error("Tour Response Not Valid. Check The Server.");
 	} else {
-	    LOG.info("Receiving tour response from:", getOriginalServerPort());
+	    LOG.info("Receiving tour response from:",serverPort);
 	    this.betterTour = response.places;
 	}
    }

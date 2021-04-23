@@ -132,6 +132,7 @@ export default class Atlas extends Component {
                 listOfClicks = {this.state.listOfClicks}
                 setTour = {this.setTour}
                 getPlaces = {this.getPlaces}
+                serverSettings={this.props.serverSettings}
             />
         )
     }
