@@ -11,6 +11,7 @@ export default class DistancesSearch {
             places: places,
             earthRadius: earthRadius,
         };
+        this.serverPort = ""
         this.distances = []
     }
 
@@ -23,6 +24,7 @@ export default class DistancesSearch {
     }
    
     sendDistancesRequest(port) {
+        this.serverPort = port;
 	    return sendServerRequest(this.request, port)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
@@ -42,7 +44,7 @@ export default class DistancesSearch {
 	}
 
    processDistancesSuccess(distancesResponse) {
-       LOG.info("Receiving distances response from:", getOriginalServerPort());
+       LOG.info("Receiving distances response from:", this.serverPort);
        this.distances = distancesResponse.distances;
 	}
 } 
