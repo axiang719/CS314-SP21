@@ -8,11 +8,16 @@ import CoordinatesInput from '../src/components/Atlas/CoordinatesInput';
 import { beforeEach, expect, it } from '@jest/globals';
 
 describe('CoordinatesInput', () => {
+    const serverSettings = {serverConfig: {features: ["find"]}};
+    const checkForFeature = () => {return true};
 
     let coordInWrapper;
 
     beforeEach(() => {
-        coordInWrapper = shallow(<CoordinatesInput/>);
+        coordInWrapper = shallow(<CoordinatesInput
+                                    serverSettings = {serverSettings}
+                                    checkForFeature = {checkForFeature}
+                                />);
     });
 
     it('initializes as expected', () => {
@@ -53,6 +58,13 @@ describe('CoordinatesInput', () => {
 
         simulateInput(coordInWrapper, "Bad Input");
         expect(coordInWrapper.state().coordinates.latLng).toEqual(null);
+    });
+
+    it('does not render dropdown if find is not supported', () => {
+        const alwaysFalse = () => {return false};
+        coordInWrapper.setProps({checkForFeature: alwaysFalse});
+        coordInWrapper.update();
+        expect(coordInWrapper.find('InputGroupButtonDropdown')).toHaveLength(0);
     });
 
     function simulateInput(wrapper, input) {
