@@ -30,30 +30,36 @@ export default class ListOfClicks extends Component {
                                 <Col className="text-center text-white ml-3">
                                     Places
                                 </Col>
-                                <Dropdown 
-                                    inNavbar
-                                    className="text-right text-white mr-2" 
-                                    isOpen={this.state.settingsToggle}
-                                    direction="left"
-                                    toggle={this.toggleSettings}>
-                                    <DropdownToggle tag="div">
-                                        <BsGearFill/>
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        {this.renderLoadTour()}
-                                        {this.renderSaveTour()}
-                                        {this.props.checkForFeature("tour") && this.renderOrderTour()}
-                                        <DropdownItem onClick={this.clearHandler}>
-                                            Clear List
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </Dropdown>
+                                {this.renderDropdown()}
                             </Row>
                         </th>
                     </tr>
                 </thead>
                 {this.getTableBody()}
             </Table>
+        );
+    }
+
+    renderDropdown() {
+        return (
+            <Dropdown 
+                inNavbar
+                className="text-right text-white mr-2" 
+                isOpen={this.state.settingsToggle}
+                direction="left"
+                toggle={this.toggleSettings}>
+                <DropdownToggle tag="div">
+                    <BsGearFill/>
+                </DropdownToggle>
+                <DropdownMenu>
+                    {this.renderLoadTour()}
+                    {this.renderSaveTour()}
+                    {this.props.checkForFeature("tour") && this.renderOrderTour()}
+                    <DropdownItem onClick={this.clearHandler}>
+                        Clear List
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
         );
     }
 
