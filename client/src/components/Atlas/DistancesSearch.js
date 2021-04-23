@@ -22,8 +22,8 @@ export default class DistancesSearch {
         return this.distances.reduce((accumulator, currentValue) =>{ accumulator + currentValue});
     }
    
-    sendDistancesRequest() {
-	    return sendServerRequest(this.request)
+    sendDistancesRequest(port) {
+	    return sendServerRequest(this.request, port)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
 				    this.processDistancesResponse(distancesResponse);

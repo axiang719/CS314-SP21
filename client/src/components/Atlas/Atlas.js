@@ -64,14 +64,16 @@ export default class Atlas extends Component {
     
     }
 
-    componentDidMount(previousProps, previousState, snapShot){
+    componentDidMount(){
        this.requestUserLocation();
     }
 
+    componentDidUpdate(){
+        {this.handleDistances()}
+    }
+
     render() {
-     
         return (
-            
             <div>
        
                 <Container>
@@ -117,7 +119,7 @@ export default class Atlas extends Component {
             setPlace = { this.setPlace }
             listOfClicks = { this.state.listOfClicks }
       
-           
+
             />
         )
     }
@@ -149,6 +151,7 @@ export default class Atlas extends Component {
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
+             
             />
         );
     }
@@ -309,7 +312,7 @@ export default class Atlas extends Component {
     async handleDistances() {
         if(this.state.listOfClicks.length >= 2 && this.checkForFeature('distances')) {
             const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
-            await distanceRequest.sendDistancesRequest();
+            await distanceRequest.sendDistancesRequest(this.props.serverSettings.serverPort);
             const distances = distanceRequest.getDistances();
             this.handleDistancesResponse(distances);
         }
