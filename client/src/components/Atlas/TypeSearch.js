@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, } from 'reactstrap';
-
+import styles from '../../static/styles/student-styles.scss'
 
 export default class TypeSearch extends Component {
     constructor(props) {
@@ -14,11 +14,9 @@ export default class TypeSearch extends Component {
     };
 
         render() {
-            const {serverSettings} = this.props;
-            const validTypes = serverSettings.serverConfig.type;
+            const validTypes = this.props.serverSettings.serverConfig.type;
 
-            return (
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+            return (<Dropdown className="typeSearch" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
                     <DropdownToggle color="primary" caret>Type</DropdownToggle>
                     <DropdownMenu>
                         {validTypes.map((type, index) => {

@@ -105,18 +105,19 @@ export default class Atlas extends Component {
     }
 
     renderCoordinatesInput() {
-        return <CoordinatesInput setMarker={this.setMarker} 
-                showMessage={this.props.showMessage}
-                serverSettings={this.props.serverSettings}
-                checkForFeature={this.checkForFeature}/>;
+       	return <CoordinatesInput setMarker={this.setMarker} 
+               	showMessage={this.props.showMessage}
+               	serverSettings={this.props.serverSettings}
+               	checkForFeature={this.checkForFeature}/>;
     }
 
     renderTourFilter(){
-      return(
-          <TypeSearch type={this.typeFilter}
-	      serverSettings={this.props.serverSettings}
-	      setType={(type) => {}}/>
-      )  
+	if(this.props.serverSettings.serverConfig != null) {
+		return <TypeSearch type={this.state.typeFilter}
+	        	serverSettings={this.props.serverSettings}
+	      		setType={(type) => {this.state.typeFilter = type}}/>
+			
+	}
     }
 
     renderLoadTour() {
