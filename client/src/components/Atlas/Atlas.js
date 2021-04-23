@@ -114,8 +114,6 @@ export default class Atlas extends Component {
             clearList = { this.clearList }
             setPlace = { this.setPlace }
             listOfClicks = { this.state.listOfClicks }
-      
-
             />
         )
     }
@@ -124,7 +122,6 @@ export default class Atlas extends Component {
       return(
           <SaveTour 
             getPlaces = {this.getPlaces}
-
           />
       )  
     }
@@ -147,7 +144,6 @@ export default class Atlas extends Component {
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
-             
             />
         );
     }
@@ -171,7 +167,6 @@ export default class Atlas extends Component {
                 <Control position="bottomright">
                     {this.renderFindMeButton()}
                 </Control>
-
             </Map>
         );
     }
