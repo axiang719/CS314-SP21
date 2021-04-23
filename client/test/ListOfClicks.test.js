@@ -16,12 +16,16 @@ describe('ListOfClicks', () => {
             "longitude" : 50.00   
         }];
 
+    const checkForFeature = function() {
+        return true;
+    }
 
     beforeEach(() => {
        ListWrapper = shallow(<ListOfClicks  clearList = {jest.fn()} 
                                             removePlace = {jest.fn()}
                                             listOfClicks = {list}
                                             centerMapToIndex = {jest.fn()}
+                                            checkForFeature = {checkForFeature}
                                             />); 
     });
 
