@@ -5,6 +5,7 @@ import TourRequest from '../src/components/Atlas/TourRequest.js';
 
 describe('Tour Request', () => {
     let tourRequest;
+    
     const request = { 
 	requestType: 'tour',
         earthRadius: 3959.0,
