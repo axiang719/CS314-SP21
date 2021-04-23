@@ -68,10 +68,6 @@ export default class Atlas extends Component {
        this.requestUserLocation();
     }
 
-    componentDidUpdate(){
-        {this.handleDistances()}
-    }
-
     render() {
         return (
             <div>
