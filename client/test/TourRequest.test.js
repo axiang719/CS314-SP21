@@ -18,12 +18,12 @@ describe('Tour Request', () => {
 
     it('Sends request to api', () => {
         mockTourResponse();
-	setTimeout( () => {
-	    const response = tourRequest.sendRequest();  
-	    expect(response).toEqual(request.requestType);
-	    expect(response.earthRadius).toEqual(request.earthRadius);
-	    expect(response.response).toEqual(request.response);
-	    expect(response.places).toEqual(request.places);
+	    setTimeout( () => {
+	        const response = tourRequest.sendRequest();  
+	        expect(response).toEqual(request.requestType);
+	        expect(response.earthRadius).toEqual(request.earthRadius);
+	        expect(response.response).toEqual(request.response);
+	        expect(response.places).toEqual(request.places);
     	});
     });
 

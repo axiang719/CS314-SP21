@@ -1,27 +1,24 @@
 import './jestConfig/enzyme.config.js';
 import {shallow} from 'enzyme';
 
-import React from 'react';
-
 import { beforeEach, expect, it } from '@jest/globals';
 import DistancesSearch from '../src/components/Atlas/DistancesSearch.js';
 
 describe('Distances Search', () => {
 
-    let distancesSearchWrapper;
-    
-    const showMessage = jest.fn();
+    let distancesRequest;
+
     const request = { requestType: 'distances', 
                     places: [], 
-                    earthRadius: 5000 };
-
+                    earthRadius: 5000 
+                };
 
     beforeEach(() => {
-        mockDistancesResponse();
-        distancesSearchWrapper = shallow(<DistancesSearch
-                                            showMessage = {showMessage}
-                                        />);
-        console.log(distancesSearchWrapper);
+        distancesRequest = new DistancesSearch(request.places, request.earthRadius);
+    });
+
+    it('tests get Distances', ()=>{
+        expect([]).toEqual(distancesRequest.getDistances());
     });
 
 });
