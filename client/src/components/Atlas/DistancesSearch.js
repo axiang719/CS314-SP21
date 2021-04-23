@@ -44,7 +44,7 @@ export default class DistancesSearch {
 	}
 
    processDistancesSuccess(distancesResponse) {
-       LOG.info("Receiving distances response from:");
+       LOG.info("Receiving distances response from:", this.serverPort);
        this.distances = distancesResponse.distances;
 	}
 } 
