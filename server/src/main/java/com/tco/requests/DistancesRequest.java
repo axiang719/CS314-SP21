@@ -16,7 +16,6 @@ public class DistancesRequest extends RequestHeader {
   @Override
   public void buildResponse() {
     log.trace("buildResponse -> {}", this);
-    System.out.println("asds");
     fillDistancesList();
   }
 
