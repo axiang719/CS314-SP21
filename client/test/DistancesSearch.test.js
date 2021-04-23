@@ -22,8 +22,12 @@ describe('Distances Search', () => {
         const mock = mockDistancesResponse();
         const response = distancesRequest.sendDistancesRequest("8000");
         expect([]).toEqual(distancesRequest.getDistances());
-        // expect(response.distances).toEqual(distancesRequest.getSumDistances());
+        //expect(response.distances).toEqual(distancesRequest.getSumDistances());
+    });
 
+    it('tests bad response', ()=>{
+        const mock = badMockDistancesResponse();
+        const response = distancesRequest.processDistancesResponse(mock);
     });
 
     function mockDistancesResponse() {
@@ -37,7 +41,9 @@ describe('Distances Search', () => {
     }
 
     function badMockDistancesResponse(){
-        
+        const badResponse = {
+            request: "Tokyo"
+        }
     }
 
 });
