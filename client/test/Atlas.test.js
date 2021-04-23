@@ -119,13 +119,6 @@ describe('Atlas', () => {
         expect(atlasWrapper.state().listOfClicks).toEqual(expectedJson);
     });
 
-    it('renders the save tour button', () => {
-        const expectedLength = 1;
-        const actualLength = atlasWrapper.find('SaveTour').length;
-
-        expect(expectedLength).toEqual(actualLength);
-    });
-
     it('tests checkForFeature null conditional', ()=>{
         serverSettings.serverConfig = null;
         expect(atlasWrapper.instance().checkForFeature('type')).toEqual(false);
