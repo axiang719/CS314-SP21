@@ -12,14 +12,16 @@ export default class TourRequest {
             places: places
         };
         this.betterTour = []
+
     }
 
     getPlaces() {
         return this.betterTour;
     }
 
-    sendRequest() {
-        return sendServerRequest(this.request)
+    sendRequest(severPort) {
+        console.log(severPort);
+        return sendServerRequest(this.request,severPort)
 	    .then(response => { 
 		if (response) {
 		    this.processResponse(response);

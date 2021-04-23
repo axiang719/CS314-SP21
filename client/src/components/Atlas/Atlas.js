@@ -83,7 +83,7 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
+                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") &&  this.renderOrderTour()}</div>
                             <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
                             {this.renderList()}
                         </Col>
@@ -137,6 +137,7 @@ export default class Atlas extends Component {
                 listOfClicks = {this.state.listOfClicks}
                 setTour = {this.setTour}
                 getPlaces = {this.getPlaces}
+                serverSettings={this.props.serverSettings}
             />
         )
     }
