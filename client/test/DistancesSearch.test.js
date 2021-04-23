@@ -22,13 +22,14 @@ describe('Distances Search', () => {
         const mock = mockDistancesResponse();
         const response = distancesRequest.sendDistancesRequest("8000");
         distancesRequest.setDistances();
-        expect([500,1000]).toEqual(distancesRequest.getDistances());
         distancesRequest.getSumDistances();
+        expect([500,1000]).toEqual(distancesRequest.getDistances());
     });
 
     it('tests bad response', ()=>{
         const mock = badMockDistancesResponse();
         const response = distancesRequest.processDistancesResponse(mock);
+        distancesRequest.sendDistancesRequest("8000");
     });
 
     function mockDistancesResponse() {
