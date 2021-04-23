@@ -64,14 +64,12 @@ export default class Atlas extends Component {
     
     }
 
-    componentDidMount(previousProps, previousState, snapShot){
+    componentDidMount(){
        this.requestUserLocation();
     }
 
     render() {
-     
         return (
-            
             <div>
        
                 <Container>
@@ -116,8 +114,6 @@ export default class Atlas extends Component {
             clearList = { this.clearList }
             setPlace = { this.setPlace }
             listOfClicks = { this.state.listOfClicks }
-      
-           
             />
         )
     }
@@ -126,7 +122,6 @@ export default class Atlas extends Component {
       return(
           <SaveTour 
             getPlaces = {this.getPlaces}
-
           />
       )  
     }
@@ -172,7 +167,6 @@ export default class Atlas extends Component {
                 <Control position="bottomright">
                     {this.renderFindMeButton()}
                 </Control>
-
             </Map>
         );
     }
@@ -309,7 +303,7 @@ export default class Atlas extends Component {
     async handleDistances() {
         if(this.state.listOfClicks.length >= 2 && this.checkForFeature('distances')) {
             const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
-            await distanceRequest.sendDistancesRequest();
+            await distanceRequest.sendDistancesRequest(this.props.serverSettings.serverPort);
             const distances = distanceRequest.getDistances();
             this.handleDistancesResponse(distances);
         }
