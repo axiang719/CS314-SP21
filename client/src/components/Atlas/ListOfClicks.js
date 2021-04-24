@@ -22,7 +22,7 @@ export default class ListOfClicks extends Component {
 
     render() {
         return (
-            <Table size="sm" className="overflow-auto">
+            <Table size="sm">
                 <thead className="text-center bg-primary">
                     <tr>
                         <th>
@@ -52,9 +52,7 @@ export default class ListOfClicks extends Component {
                     <BsGearFill/>
                 </DropdownToggle>
                 <DropdownMenu>
-                    {this.renderLoadTour()}
-                    {this.renderSaveTour()}
-                    {this.props.checkForFeature("tour") && this.renderOrderTour()}
+                    {this.renderListOptions()}
                     <DropdownItem onClick={this.clearHandler}>
                         Clear List
                     </DropdownItem>
@@ -63,34 +61,30 @@ export default class ListOfClicks extends Component {
         );
     }
 
-    renderLoadTour() {
+    renderListOptions() {
+        const {setTour, clearList, setPlace, listOfClicks, 
+            getPlaces, serverSettings, checkForFeature} = this.props;
         return (
-            <LoadTour
-                setTour = { this.props.setTour }
-                clearList = { this.props.clearList }
-                setPlace = { this.props.setPlace }
-                listOfClicks = { this.props.listOfClicks }
-            />
-        )
-    }
-
-    renderSaveTour(){
-        return(
-            <SaveTour 
-                getPlaces = {this.props.getPlaces}
-            />
-        )  
-    }
-
-    renderOrderTour(){
-        return (
-            <OrderTour
-                listOfClicks = {this.props.listOfClicks}
-                setTour = {this.props.setTour}
-                getPlaces = {this.props.getPlaces}
-                serverSettings={this.props.serverSettings}
-            />
-        )
+            <>
+                <LoadTour
+                    setTour = {setTour}
+                    clearList = {clearList}
+                    setPlace = {setPlace}
+                    listOfClicks = {listOfClicks}
+                />
+                <SaveTour 
+                    getPlaces = {getPlaces}
+                />
+                {checkForFeature('tour') &&
+                    <OrderTour
+                        listOfClicks = {listOfClicks}
+                        setTour = {setTour}
+                        getPlaces = {getPlaces}
+                        serverSettings={serverSettings}
+                    />
+                }
+            </>
+        );
     }
 
     toggleSettings() {
