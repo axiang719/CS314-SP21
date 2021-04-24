@@ -81,7 +81,6 @@ export default class Atlas extends Component {
                     {this.renderCoordinatesInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
                             {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
                             {this.renderList()}
                         </Col>
@@ -107,44 +106,18 @@ export default class Atlas extends Component {
                 checkForFeature={this.checkForFeature}/>;
     }
 
-    renderLoadTour() {
-        return (
-            <LoadTour
-            setTour = { this.setTour }
-            clearList = { this.clearList }
-            setPlace = { this.setPlace }
-            listOfClicks = { this.state.listOfClicks }
-            />
-        )
-    }
-
-    renderSaveTour(){
-      return(
-          <SaveTour 
-            getPlaces = {this.getPlaces}
-          />
-      )  
-    }
-
-    renderOrderTour(){
-        return (
-            <OrderTour
-                listOfClicks = {this.state.listOfClicks}
-                setTour = {this.setTour}
-                getPlaces = {this.getPlaces}
-                serverSettings={this.props.serverSettings}
-            />
-        )
-    }
-
     renderList() {
         return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
+                setTour = {this.setTour}
+                setPlace = { this.setPlace }
+                getPlaces = {this.getPlaces}
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
+                serverSettings = { this.props.serverSettings }
             />
         );
     }

@@ -19,7 +19,7 @@ describe('SaveTour', () => {
     });
 
     it('initializes as expected', () => {
-        expect(saveWrapper.find('Button').at(0).length).toEqual(1);
+        expect(saveWrapper.find('DropdownItem').at(0).length).toEqual(1);
     });
 
     it('toggles the modal', () => {
@@ -32,8 +32,8 @@ describe('SaveTour', () => {
     });
 
     it('checks the where button works', () => {
+        saveWrapper.find('Button').at(0).simulate('click');
         saveWrapper.find('Button').at(1).simulate('click');
-        saveWrapper.find('Button').at(2).simulate('click');
         saveWrapper.update();
     });
 });

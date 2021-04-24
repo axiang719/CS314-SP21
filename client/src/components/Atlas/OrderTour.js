@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button } from 'reactstrap';
+import { Button, DropdownItem } from 'reactstrap';
 
 import TourRequest from "./TourRequest"
 
@@ -18,7 +18,7 @@ export default class OrderTour extends Component {
     render() {
         return ( 
             <>
-                <Button onClick={this.handleShortTourClick} color="primary">Order</Button>  
+                <DropdownItem onClick={this.handleShortTourClick} color="primary">Optimize</DropdownItem>  
             </>
         );
     }

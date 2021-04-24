@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import {  Button, Table, Collapse, Container, Row, Col} from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsTrash } from "react-icons/bs"
+import {  Button, Table, Collapse, Container, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill } from "react-icons/bs"
+
+import LoadTour from "./LoadTour";
+import SaveTour from "./SaveTour";
+import OrderTour from './OrderTour';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -9,24 +13,83 @@ export default class ListOfClicks extends Component {
         this.getRowInfo = this.getRowInfo.bind(this)
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
+        this.toggleSettings = this.toggleSettings.bind(this)
         this.state = {
-            toggleRow: []
+            toggleRow: [],
+            settingsToggle: false
         }
     }
 
     render() {
         return (
             <Table size="sm">
-                <thead className="text-center">
+                <thead className="text-center bg-primary">
                     <tr>
-                        <th className="text=left">Places
-                            <Button close id="clear" onClick={this.clearHandler}><BsTrash/></Button>
+                        <th>
+                            <Row noGutters>
+                                <Col className="text-center text-white ml-3">
+                                    Places
+                                </Col>
+                                {this.renderDropdown()}
+                            </Row>
                         </th>
                     </tr>
                 </thead>
                 {this.getTableBody()}
             </Table>
         );
+    }
+
+    renderDropdown() {
+        return (
+            <Dropdown 
+                inNavbar
+                className="text-right text-white mr-2" 
+                isOpen={this.state.settingsToggle}
+                direction="left"
+                toggle={this.toggleSettings}>
+                <DropdownToggle tag="div">
+                    <BsGearFill/>
+                </DropdownToggle>
+                <DropdownMenu>
+                    {this.renderListOptions()}
+                    <DropdownItem onClick={this.clearHandler}>
+                        Clear List
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+        );
+    }
+
+    renderListOptions() {
+        const {setTour, clearList, setPlace, listOfClicks, 
+            getPlaces, serverSettings, checkForFeature} = this.props;
+        return (
+            <>
+                <LoadTour
+                    setTour = {setTour}
+                    clearList = {clearList}
+                    setPlace = {setPlace}
+                    listOfClicks = {listOfClicks}
+                />
+                <SaveTour 
+                    getPlaces = {getPlaces}
+                />
+                {checkForFeature('tour') &&
+                    <OrderTour
+                        listOfClicks = {listOfClicks}
+                        setTour = {setTour}
+                        getPlaces = {getPlaces}
+                        serverSettings={serverSettings}
+                    />
+                }
+            </>
+        );
+    }
+
+    toggleSettings() {
+        const {settingsToggle} = this.state;
+        this.setState({settingsToggle: !settingsToggle});
     }
 
     getTableBody() {
