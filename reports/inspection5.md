@@ -21,3 +21,4 @@
 | --- | --- | :---: | :---: | --- |
 | LoadTour: 185 | when csv is loaded, the csv file is added to the code | Low | Anthony Xiang | #745|
 | LoadTour: 129 | Code climate flags processFile for redundant code | Med | Ethan Seefried | #746 |
+| LoadTour: 64  | toggleModal is identical to a method in SaveTour | Med | Michael Young | #747 | 
