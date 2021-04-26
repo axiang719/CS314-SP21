@@ -11,7 +11,7 @@
 | Name | Preparation Time |
 | ---- | ---- |
 | Ethan Seefried | 1 Hour |
-|  |  |
+| Michael Young |  30 minutes |
 
 ### Problems found
 
