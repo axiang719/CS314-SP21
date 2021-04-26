@@ -13,7 +13,7 @@
 | Ethan Seefried | 1 Hour |
 | Michael Young |  30 minutes |
 | Chad Minning | 30 minutes |
-| Anthony Xing | 30 minutes |
+| Anthony Xiang | 30 minutes |
 
 ### Problems found
 
