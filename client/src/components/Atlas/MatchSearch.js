@@ -46,39 +46,37 @@ export default class MatchSearch extends Component {
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					{this.handleTypeAndWhere()}
+					{this.renderTypeAndWhere()}
 				</Container>
 			</>	
 		);
 	}
 
 
-	handleTypeAndWhere() {
+	renderTypeAndWhere() {
 		const { checkForFeature, serverSettings } = this.props;
+		const { findRequest } = this.state;
 		const typeIsSupported = checkForFeature('type');
 		const whereIsSupported = checkForFeature('where');
 
 		return (
 			<Row className="mt-1">
-				{ typeIsSupported && this.renderTypeSearch(serverSettings) }
-				{ whereIsSupported && this.renderWhereSearch(serverSettings) }
+				{ typeIsSupported && 
+					<TypeSearch 
+						type={findRequest.type}
+						setType={this.setType}
+						serverSettings={serverSettings}
+					/>
+				}
+
+				{ whereIsSupported && 
+					<WhereSearch 
+						where = {findRequest.where}
+						setWhere = {this.setWhere}
+						serverSettings={serverSettings}
+					/> 
+				}
 			</Row>
-		);
-	}
-
-	renderTypeSearch(serverSettings) {
-		return (
-			<TypeSearch type={this.state.findRequest.type}
-				setType={this.setType}
-				serverSettings={serverSettings}/>
-		);
-	}
-
-	renderWhereSearch(serverSettings) {
-		return (
-			<WhereSearch where = {this.state.findRequest.where}
-				setWhere = {this.setWhere}
-				serverSettings={serverSettings}/>
 		);
 	}
 
