@@ -11,14 +11,9 @@ import Control from 'react-leaflet-control';
 import { BsCursorFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
 
-
-import CoordinatesInput from "./CoordinatesInput";
+import SearchInput from "./SearchInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
-import LoadTour from "./LoadTour";
-import SaveTour from "./SaveTour";
-import OrderTour from './OrderTour';
-
 
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -78,7 +73,7 @@ export default class Atlas extends Component {
                             {this.renderLeafletMap()}
                         </Col>
                     </Row>
-                    {this.renderCoordinatesInput()}
+                    {this.renderSearchInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
                             {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
@@ -99,8 +94,8 @@ export default class Atlas extends Component {
         }
     }
 
-    renderCoordinatesInput() {
-        return <CoordinatesInput setMarker={this.setMarker} 
+    renderSearchInput() {
+        return <SearchInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}
                 checkForFeature={this.checkForFeature}/>;
