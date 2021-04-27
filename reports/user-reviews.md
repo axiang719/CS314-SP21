@@ -24,6 +24,6 @@ This file was made to compile the important insights gained from having someone 
 | When the selected place is removed from the list, the marker for it persists | Med | Andie Groeling | #767 | 
 | Can't click on tour places on the map to see details about the location due to the lack of markers | Low | Andie Groeling | NA | 
 | Map does not show entire trip when a trip is loaded from a file | Low | Andie Groeling | NA | 
-| drop down contents of the settings icon needs to be a little more clear | Low | NA
-| List that pops up after you search for something that pops up is not intutive to add that place to the list | Mid | NA |
-| Being able to zoom in with the mouse wheel was not know to the user | Low | NA
+| drop down contents of the settings icon needs to be a little more clear | Low | Anthony Xiang | NA
+| List that pops up after you search for something that pops up is not intutive to add that place to the list | Mid | Anthony Xiang | NA |
+| Being able to zoom in with the mouse wheel was not know to the user | Low | Anthony Xiang | NA
