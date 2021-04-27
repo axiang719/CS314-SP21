@@ -20,3 +20,7 @@ This file was made to compile the important insights gained from having someone 
 | Map zooms out everytime a click happens, user would prefer Zoom stay at same setting | Low | Ethan Seefried | NA |
 | Optimize button *added* mileage for the users trip | Low | Ethan Seefried | NA | 
 | Trip needed a ton of scrolling for user on his massive tour | High | Ethan Seefried | #743 |
+| Search bar should be set to match by default instead of coordinate search | Low | Andie Groeling | NA | 
+| When the selected place is removed from the list, the marker for it persists | Med | Andie Groeling | #767 | 
+| Can't click on tour places on the map to see details about the location due to the lack of markers | Low | Andie Groeling | NA | 
+| Map does not show entire trip when a trip is loaded from a file | Low | Andie Groeling | NA | 
