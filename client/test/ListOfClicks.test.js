@@ -35,15 +35,16 @@ describe('ListOfClicks', () => {
     })
 
     it("shows and closes row info as expected", ()=>{
+        const clickable = ListWrapper.find("Row").at(1).find("Col").at(0)
         expect(ListWrapper.find("Row")).toHaveLength(3);
-        ListWrapper.find("Row").at(1).simulate("click");
+        clickable.simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
-        ListWrapper.find("Row").at(1).simulate("click");
+        clickable.simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(false);
     })
 
     it("closes row info when clear is clicked", ()=>{
-        ListWrapper.find("Row").at(1).simulate("click");
+        ListWrapper.find("Row").at(1).find('Col').at(0).simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
         ListWrapper.setState({settingsToggle: true});
         ListWrapper.find("DropdownItem").at(0).simulate("click");
@@ -51,9 +52,9 @@ describe('ListOfClicks', () => {
     })
 
     it("changes toggle properly on remove row", ()=>{
-        ListWrapper.find("Row").at(1).simulate("click");
+        ListWrapper.find("Row").at(1).find('Col').at(0).simulate("click");
         expect(ListWrapper.state().toggleRow.length).toEqual(1);
-        ListWrapper.find("Row").at(2).find("Button").at(1).simulate("click")
+        ListWrapper.find("Row").at(1).find("BsTrash").simulate("click")
         expect(ListWrapper.state().toggleRow).toEqual([]);
     })
 
