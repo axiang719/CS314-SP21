@@ -17,6 +17,6 @@ This file was made to compile the important insights gained from having someone 
 | Search input and where input need to be more distinguishable from each other | Low | Chad Minning | #761 |
 | Places in list should have the delete button accessible without expanding | Low | Chad Minning | #762 |
 | 'Save' and 'Load' need a more obvious representation in the UI | Low | Chad Minning | #763 |
-| Map zooms out everytime a click happens, user would prefer Zoom stay at same setting | Low | NA |
-| Optimize button *added* mileage for the users trip | Low | NA | 
+| Map zooms out everytime a click happens, user would prefer Zoom stay at same setting | Low | Ethan Seefried | NA |
+| Optimize button *added* mileage for the users trip | Low | Ethan Seefried | NA | 
  
