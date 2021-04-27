@@ -19,4 +19,4 @@ This file was made to compile the important insights gained from having someone 
 | 'Save' and 'Load' need a more obvious representation in the UI | Low | Chad Minning | #763 |
 | Map zooms out everytime a click happens, user would prefer Zoom stay at same setting | Low | Ethan Seefried | NA |
 | Optimize button *added* mileage for the users trip | Low | Ethan Seefried | NA | 
- 
+| Trip needed a ton of scrolling for user on his massive tour | High | Ethan Seefried | #743 |
