@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 
 export default class PlacesList extends Component {
     constructor(props) {
         super(props);
 
         this.moreDetails = this.moreDetails.bind(this);
-        this.popoverButtonHandler = this.addButtonHandler.bind(this);
+        this.renderAddButton = this.renderAddButton.bind(this);
+        this.addButtonHandler = this.addButtonHandler.bind(this);
         this.renderTable = this.renderTable.bind(this);
     }
 
@@ -40,14 +41,24 @@ export default class PlacesList extends Component {
                                 <td>{place.name}</td>
                                 {place.country && <td>{place.country}</td>}
                                 {place.region && <td>{place.region}</td>}
-                                <Button onClick={() => this.addButtonHandler(place.latitude,place.longitude)}>Go</Button>
-                                {this.moreDetails(place, index)}
+                                {this.renderAddButton(place.latitude,place.longitude)}
                             </tr>
                         ))}
                     </tbody>
                 </Table>
             );
         };
+    }
+
+    renderAddButton(lat,lng) {
+        const latitude = lat;
+        const longitude = lng;
+
+        return (
+            <Container>
+                <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
+            </Container>
+        );
     }
 
     moreDetails(place, index) {  
