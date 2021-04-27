@@ -28,27 +28,29 @@ describe('MatchSearch', () => {
                                                 setType={["airport"]}
                                                 setWhere={["United States"]}
                                                 checkForFeature={checkForFeature}
-                                                renderDropdown={snacks} 
+                                                inputText ={""}
                                                 setMarker={snacks}
                                                 showMessage={snacks}
-                                                focus={"match"}
                                                 match={"dave"}
-                                                serverSettings={{'serverConfig': {'requestType': 'config', 
-                                                                                  'serverName': 't99',
-                                                                                  "features"  : ['config', 
-                                                                                                 'find', 
-                                                                                                 'distances', 
-                                                                                                 'tour', 
-                                                                                                 'type', 
-                                                                                                 'where']},
-                                                'serverPort': 'http://localhost:8000'}}
+                                                serverSettings={{
+                                                    'serverConfig': {
+                                                        'requestType': 'config', 
+                                                        'serverName': 't99',
+                                                        "features"  : ['config', 
+                                                                        'find', 
+                                                                        'distances', 
+                                                                        'tour', 
+                                                                        'type', 
+                                                                        'where']},
+                                                    'serverPort': 'http://localhost:8000'}}
                                                 />);
     });
     
         it('initializes as expected', () => {
-            const actualSearchType = matchSearchWrapper.state().focus;
-            const expectedSearchType = "match";
-            expect(actualSearchType).toEqual(expectedSearchType);
+            const actualList = matchSearchWrapper.state().listOfMatches;
+            const expectedList = [];
+            
+            expect(actualList).toEqual(expectedList);
         });
 
         it('toggles the Modal', () => {
@@ -56,12 +58,6 @@ describe('MatchSearch', () => {
             const expectedToggle = true;
             const actualToggle = matchSearchWrapper.state().modalOpen;
             expect(actualToggle).toEqual(expectedToggle);
-        });
-
-        it('updates input as expected', () => {
-            simulateInput(matchSearchWrapper, "dave");
-            expect(matchSearchWrapper.state().findRequest.match).toEqual("dave");
-         
         });
 
         it('set Where as expected', () => {
@@ -86,23 +82,12 @@ describe('MatchSearch', () => {
             matchSearchWrapper.find("Button").at(0).simulate("click");
         });
 
-        it('set focus', () =>{
-            simulateInputFocus(matchSearchWrapper, "match")
-            expect(matchSearchWrapper.state().focus).toEqual("match");
-           
-
-        });
-
         it('Sends request to api', () => {
-        matchSearchWrapper.instance().sendFindRequest(request);
-           matchSearchWrapper.instance().processFindRequestError("bad message");
-           simulateInput(matchSearchWrapper,"#badInputgang");
-           expect(matchSearchWrapper.state().findRequest.match).toEqual(null);
+            matchSearchWrapper.instance().processFindRequestError("bad message");
+            matchSearchWrapper.setProps({inputText: "dave"});
+            matchSearchWrapper.find("Button").at(0).simulate("click");
 
-            setTimeout( () => {
-                const actualFocus= matchSearchWrapper.state().focus;
-                expect(actualFocus).toEqual("match");}, 10);
-              
+            expect(matchSearchWrapper.state().findRequest.match).toEqual("dave");        
         });
 
         it('renders type and where conditionally', () => {
@@ -125,16 +110,6 @@ describe('MatchSearch', () => {
             expect(newWhereLen).toEqual(newExpLen);
         });
 
-        function simulateInput(wrapper, input) {
-            wrapper.find('Input').at(0).simulate('change', { target: { value: input } });
-            wrapper.update();
-        };
-
-        function simulateInputFocus(wrapper, match){
-            
-            wrapper.find('Input').at(0).simulate('focus',{target: {value: match}});
-        };
-        
         function mockFindResponse() {
             const responseData = {
                     match: "dave",
