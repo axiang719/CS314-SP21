@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {  Button, Table, Collapse, Container, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill } from "react-icons/bs"
+import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -27,10 +27,12 @@ export default class ListOfClicks extends Component {
                     <tr>
                         <th>
                             <Row noGutters>
-                                <Col className="text-center text-white ml-3">
+                                <Col className="text-center text-white" xs={{size:10, offset: 1}}>
                                     Places
                                 </Col>
-                                {this.renderDropdown()}
+                                <Col xs={1}>
+                                    {this.renderDropdown()}
+                                </Col>
                             </Row>
                         </th>
                     </tr>
@@ -44,7 +46,7 @@ export default class ListOfClicks extends Component {
         return (
             <Dropdown 
                 inNavbar
-                className="text-right text-white mr-2" 
+                className="text-white" 
                 isOpen={this.state.settingsToggle}
                 direction="left"
                 toggle={this.toggleSettings}>
@@ -99,22 +101,23 @@ export default class ListOfClicks extends Component {
                 {this.props.listOfClicks.map((place, index) => (
                     <tr key={index}>
                         <td>
-                            <Container className='text-center'>
-                                <Row onClick={()=>{this.toggleHandler(index)}}>
-                                    <Col sm={12} md={11}>
+                            <Row noGutters className="text-center">
+                                <Col xs={{size:10, offset: 1}} onClick={()=>{this.toggleHandler(index)}}>
+                                    <div className="mx-1">
                                         {place.name}
-                                    </Col>
-                                    <Col>
-                                        {toggleRow[index] ? <BsChevronDown/> : <BsChevronUp/>}
-                                    </Col>
-                                </Row>
-                                {this.getRowInfo(place, index)}
-                            </Container>        
+                                        <div>{toggleRow[index] ? <BsChevronUp/> : <BsChevronDown/>}</div>
+                                    </div>
+                                </Col>
+                                <Col xs={{size: 1}} className="text-center">
+                                    <BsTrash className="text-danger" onClick={()=>{this.deleteHandler(index)}}/>
+                                </Col>
+                            </Row>
+                            {this.getRowInfo(place, index)}    
                         </td>
                     </tr>
                 ))}
             </tbody>
-        )
+        );
     }
 
     getRowInfo(place, index) {
@@ -124,16 +127,15 @@ export default class ListOfClicks extends Component {
         const isDistancesSupported = this.props.checkForFeature('distances');
         return(
             <Collapse isOpen={toggleRow[index]}>
-                <Row className="mt-2" noGutters={true}>
-                    <Col xs="4" className="float-right">Latitude:  {place.latitude.toFixed(2)}<br/>Longitude: {place.longitude.toFixed(2)}</Col>
-                    {isDistancesSupported && <Col xs="4">{isLastPlace ? "Distance back to start: " : "Distance to next:"} {place.distance} mi.</Col>}
-                    <Col xs="2" className="text-right">
-                        <Button color="primary" size="md" onClick={this.props.centerMapToIndex.bind(this.props, index)}>
-                            <BsGeoAlt/>
-                        </Button>
+                <Row noGutters>
+                    <Col xs={{size:5, offset:1}}>Coordinates: <br/>{place.latitude.toFixed(2) + ', ' + place.longitude.toFixed(2)}</Col>
+                    <Col xs="5">
+                        {isDistancesSupported && 
+                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + 'mi.'
+                        }    
                     </Col>
-                    <Col xs="2">
-                        <Button close id="xButton" onClick={()=>{this.deleteHandler(index)}}/>
+                    <Col xs={{size:1}}>
+                        <BsGeoAlt className="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
                     </Col>
                 </Row>
             </Collapse>
@@ -142,12 +144,8 @@ export default class ListOfClicks extends Component {
 
     toggleHandler(index) {
         const { toggleRow } = this.state;
-        if (toggleRow[index] == true) {
-            toggleRow[index] = false;
-        }
-        else {
-            toggleRow[index] = true;
-        }
+        toggleRow[index] = !toggleRow[index];
+        
         this.setState({toggleRow});
     }
 
