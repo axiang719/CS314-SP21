@@ -6,7 +6,7 @@ export default class PlacesList extends Component {
         super(props);
 
         this.moreDetails = this.moreDetails.bind(this);
-        this.popoverButtonHandler = this.popoverButtonHandler.bind(this);
+        this.popoverButtonHandler = this.addButtonHandler.bind(this);
         this.renderTable = this.renderTable.bind(this);
     }
 
@@ -31,6 +31,7 @@ export default class PlacesList extends Component {
                             <th>Name</th>
                             {listOfMatches[0].country && <th>Country</th>}
                             {listOfMatches[0].region && <th>Region</th>}
+                            <th>Add To Tour</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,7 @@ export default class PlacesList extends Component {
                                 <td>{place.name}</td>
                                 {place.country && <td>{place.country}</td>}
                                 {place.region && <td>{place.region}</td>}
+                                <Button onClick={() => this.addButtonHandler(place.latitude,place.longitude)}>Go</Button>
                                 {this.moreDetails(place, index)}
                             </tr>
                         ))}
@@ -51,7 +53,7 @@ export default class PlacesList extends Component {
     moreDetails(place, index) {  
         const latitude = parseFloat(place.latitude);
         const longitude = parseFloat(place.longitude);
-        const latLng = {lat: latitude, lng: longitude};
+        
 
         return (
             <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
@@ -61,13 +63,13 @@ export default class PlacesList extends Component {
                     {place.type && <div>Type: {place.type}</div>}
                     <div>Latitude: {latitude.toFixed(6)}</div> 
                     <div>Longitude: {longitude.toFixed(6)}</div>
-                    <Button onClick={() => this.popoverButtonHandler(latLng)}>Go</Button>
                 </PopoverBody>
             </UncontrolledPopover>
         )
     }
 
-    popoverButtonHandler(latLng) {
+    addButtonHandler(lat,lng) {
+        const latLng = {lat: lat, lng: lng};
         this.props.setMarker(latLng);
         this.props.toggleModal();
     }
