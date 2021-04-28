@@ -30,8 +30,7 @@ export default class PlacesList extends Component {
                     <thead className="text-center">
                         <tr>
                             <th>Name</th>
-                            {listOfMatches[0].country && <th>Country</th>}
-                            {listOfMatches[0].region && <th>Region</th>}
+                            <th>More Info</th>
                             <th>Add To Tour</th>
                         </tr>
                     </thead>
@@ -39,8 +38,7 @@ export default class PlacesList extends Component {
                         {listOfMatches.map((place, index) => (
                             <tr key={index} id={"popover" + index}>
                                 <td>{place.name}</td>
-                                {place.country && <td>{place.country}</td>}
-                                {place.region && <td>{place.region}</td>}
+                                <td>{this.renderMoreDetailsButton(place,index)}</td>
                                 <td>{this.renderAddButton(place.latitude,place.longitude)}</td>
                                 {this.moreDetails(place, index)}
                             </tr>
@@ -51,13 +49,25 @@ export default class PlacesList extends Component {
         };
     }
 
-    renderAddButton(lat,lng) {
-        const latitude = parseFloat(lat);
-        const longitude = parseFloat(lng);
+    renderMoreDetailsButton(place,index) {
+        const p = place;
+        const i = index;
 
         return (
             <Container>
-                <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
+                <Button onClick={() => this.moreDetails(p,i)}>Info</Button>
+            </Container>
+        )
+    }
+
+    renderAddButton(lat,lng) {
+        const latitude = parseFloat(lat);
+        const longitude = parseFloat(lng);
+        const latlng = {lat: latitude, lng: longitude};
+
+        return (
+            <Container>
+                <Button onClick={() => this.addButtonHandler(latlng)}>Add</Button>
             </Container>
         );
     }
@@ -71,6 +81,8 @@ export default class PlacesList extends Component {
             <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
                 <PopoverBody>
+                    {place.country && <td>Country: {place.country}</td>}
+                    {place.region && <td>Region: {place.region}</td>}
                     {place.municipality && <div>Municipality: {place.municipality}</div>}
                     {place.type && <div>Type: {place.type}</div>}
                     <div>Latitude: {latitude.toFixed(6)}</div> 
@@ -80,9 +92,8 @@ export default class PlacesList extends Component {
         )
     }
 
-    addButtonHandler(lat,lng) {
-        const latLng = {lat: lat, lng: lng};
-        this.props.setMarker(latLng);
+    addButtonHandler(latlng) {
+        this.props.setMarker(latlng);
         this.props.toggleModal();
     }
 }
