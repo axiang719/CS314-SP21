@@ -294,11 +294,20 @@ export default class Atlas extends Component {
 
     removePlace(index) {
         let newList = [];
+	let latlng = {lat: 0, lng: 0}
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
+	    }
         }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
+	if(newList.length > 0){
+	    latlng = {lat: newList[0].latitude, 
+		      lng: newList[0].longitude}
+	}
+        this.setState({ listOfClicks: newList,
+			markerPosition: latLng, 
+                        mapCenter: latLng}, 
+			this.handleDistances);
     }
 
     getPlaces() {
