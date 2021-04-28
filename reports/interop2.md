@@ -25,3 +25,4 @@ You should discuss the issues found with the other team and create defects in Gi
 | :--- | :---: | :--- | --- |
 | t06 | N/A | No problems found. | N/A |
 | t10 | N/A | No problems found. | N/A |
+| t18 | S | 'where' domain doesn't update right away with new server | *#783* | 
