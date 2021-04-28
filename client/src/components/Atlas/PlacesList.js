@@ -94,6 +94,6 @@ export default class PlacesList extends Component {
 
     addButtonHandler(latlng) {
         this.props.setMarker(latlng);
-        this.props.toggleModal();
+        // this.props.toggleModal();
     }
 }
