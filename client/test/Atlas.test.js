@@ -134,6 +134,12 @@ describe('Atlas', () => {
 
         expect(actualDist).toEqual(expectedDist);
     });
+
+    it('toggles the search bar', () => {
+        expect(atlasWrapper.find("SearchInput")).toHaveLength(0);
+        atlasWrapper.instance().toggleSearch();
+        expect(atlasWrapper.find("SearchInput")).toHaveLength(1);
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {
