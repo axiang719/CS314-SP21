@@ -55,7 +55,7 @@ export default class PlacesList extends Component {
 
         return (
             <Container>
-                <Button onClick={() => this.moreDetails(p,i)}>Info</Button>
+                <Button color="primary" onClick={() => this.moreDetails(p,i)}>Info</Button>
             </Container>
         )
     }
@@ -67,7 +67,7 @@ export default class PlacesList extends Component {
 
         return (
             <Container>
-                <Button onClick={() => this.addButtonHandler(latlng)}>Add</Button>
+                <Button color="primary" onClick={() => this.addButtonHandler(latlng)}>Add</Button>
             </Container>
         );
     }
@@ -81,8 +81,8 @@ export default class PlacesList extends Component {
             <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
                 <PopoverBody>
-                    {place.country && <td>Country: {place.country}</td>}
-                    {place.region && <td>Region: {place.region}</td>}
+                    {place.country && <div>Country: {place.country}</div>}
+                    {place.region && <div>Region: {place.region}</div>}
                     {place.municipality && <div>Municipality: {place.municipality}</div>}
                     {place.type && <div>Type: {place.type}</div>}
                     <div>Latitude: {latitude.toFixed(6)}</div> 
