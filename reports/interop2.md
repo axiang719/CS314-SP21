@@ -13,6 +13,7 @@ This table lists each student in the team and the team they verified interoperab
 | Ethan Seefried | t06 |
 | Andie Groeling | t09 |
 | Michael Young | t10 |
+| Chad Minning | t18 |
 
 ### Problems found
 
