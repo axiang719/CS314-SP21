@@ -23,5 +23,5 @@ You should discuss the issues found with the other team and create defects in Gi
 
 | team | C/S | problem | github# |
 | :--- | :---: | :--- | --- |
-| t06 | NA | No problems found. | NA |
-|  |  |  |  |
+| t06 | N/A | No problems found. | N/A |
+| t10 | N/A | No problems found. | N/A |
