@@ -56,7 +56,9 @@ export default class PlacesList extends Component {
         const longitude = parseFloat(lng);
 
         return (
-            <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
+            <Container>
+                <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
+            </Container>
         );
     }
 
