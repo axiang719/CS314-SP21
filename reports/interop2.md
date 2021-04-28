@@ -10,7 +10,7 @@ This table lists each student in the team and the team they verified interoperab
 
 | Name | Team |
 | ---- | ---- |
-|  |  |
+| Ethan Seefried | t06 |
 |  |  |
 
 ### Problems found
