@@ -25,14 +25,14 @@ export default class SearchInput extends Component {
     render() {
         return (
             <div className="border rounded-bottom bg-white">
-                <Col className="text-right my-2" xs={12}>
+                <Col className="text-right mt-2" xs={12}>
                     <BsX className="h5" onClick={this.props.toggleSearch}/>
                 </Col>
                 <Col xs={12} md={{size: 10, offset: 1}}>
                     <Form onSubmit={e => { e.preventDefault(); }}>
-                            <FormGroup>
-                                {this.renderInput()}
-                            </FormGroup>
+                        <FormGroup>
+                            {this.renderInput()}
+                        </FormGroup>
                     </Form>
                 </Col>
             </div>
