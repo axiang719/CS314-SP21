@@ -26,7 +26,7 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-                <Table hover bordered size="sm">
+                <Table hover bordered responsive size="sm">
                     <thead className="text-center">
                         <tr>
                             <th>Name</th>
@@ -41,7 +41,7 @@ export default class PlacesList extends Component {
                                 <td>{place.name}</td>
                                 {place.country && <td>{place.country}</td>}
                                 {place.region && <td>{place.region}</td>}
-                                <div>{this.renderAddButton(place.latitude,place.longitude)}</div>
+                                <td>{this.renderAddButton(place.latitude,place.longitude)}</td>
                                 {this.moreDetails(place, index)}
                             </tr>
                         ))}
