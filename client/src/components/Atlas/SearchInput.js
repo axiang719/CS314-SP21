@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, InputGroupAddon, InputGroupText, Input, Form,FormGroup, FormFeedback } from 'reactstrap';
+import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback } from 'reactstrap';
 import MatchSearch from "./MatchSearch";
-import { BsGeoAlt } from "react-icons/bs";
+import { BsGeoAlt, BsX } from "react-icons/bs";
 
 import Coordinates from "coordinate-parser";
 
@@ -25,15 +25,16 @@ export default class SearchInput extends Component {
     render() {
         return (
             <div className="border rounded-bottom bg-white">
-                <Row className="mx-1 my-2">
-                    <Col sm="12" md={{ size: 10, offset: 1 }}>
-                        <Form onSubmit={e => { e.preventDefault(); }}>
-                            <FormGroup>
-                                {this.renderInput()}
-                            </FormGroup>
-                        </Form>
-                    </Col>
-                </Row>
+                <Col className="text-right mt-2" xs={12}>
+                    <BsX className="h5" onClick={this.props.toggleSearch}/>
+                </Col>
+                <Col xs={12} md={{size: 10, offset: 1}}>
+                    <Form onSubmit={e => { e.preventDefault(); }}>
+                        <FormGroup>
+                            {this.renderInput()}
+                        </FormGroup>
+                    </Form>
+                </Col>
             </div>
         );
     }
