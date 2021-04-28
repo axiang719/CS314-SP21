@@ -106,7 +106,8 @@ export default class Atlas extends Component {
     }
 
     renderList() {
-        return (
+        
+	    return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
                 setTour = {this.setTour}
@@ -306,11 +307,19 @@ export default class Atlas extends Component {
 
     removePlace(index) {
         let newList = [];
+	let latlng = this.state.markerPosition;
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
-        }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
+	}
+	if (latlng != null 
+	    && latlng.lat == this.state.listOfClicks[index].latitude
+	    && latlng.lng == this.state.listOfClicks[index].longitude) {
+		latlng = null;
+	}
+        this.setState({ listOfClicks: newList,
+			markerPosition: latlng}, 
+			this.handleDistances);
     }
 
     getPlaces() {
