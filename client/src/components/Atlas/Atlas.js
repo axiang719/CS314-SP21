@@ -298,9 +298,8 @@ export default class Atlas extends Component {
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
-	    }
-        }
-	if(newList.length > 0){
+	}
+	if(newList.length > 0) {
 	    latlng = {lat: newList[0].latitude, 
 		      lng: newList[0].longitude}
 	}
