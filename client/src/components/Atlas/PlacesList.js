@@ -41,7 +41,8 @@ export default class PlacesList extends Component {
                                 <td>{place.name}</td>
                                 {place.country && <td>{place.country}</td>}
                                 {place.region && <td>{place.region}</td>}
-                                {this.renderAddButton(place.latitude,place.longitude)}
+                                <div>{this.renderAddButton(place.latitude,place.longitude)}</div>
+                                {this.moreDetails(place, index)}
                             </tr>
                         ))}
                     </tbody>
@@ -51,13 +52,11 @@ export default class PlacesList extends Component {
     }
 
     renderAddButton(lat,lng) {
-        const latitude = lat;
-        const longitude = lng;
+        const latitude = parseFloat(lat);
+        const longitude = parseFloat(lng);
 
         return (
-            <Container>
-                <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
-            </Container>
+            <Button onClick={() => this.addButtonHandler(latitude,longitude)}>Go</Button>
         );
     }
 
