@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-
+import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody, ListGroup, ListGroupItem, Row, Col} from 'reactstrap';
+import { BsPlusCircle, BsInfoCircle}  from "react-icons/bs"
 export default class PlacesList extends Component {
     constructor(props) {
         super(props);
@@ -26,33 +26,27 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-                <ul class = "list-group">
-                    <thead className="mb-2">
-                        <tr>
-                            <th>Name</th>
-                            <th>More Info</th>
-                            <th>Add To Tour</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        //             <tbody>
+        //                 {listOfMatches.map((place, index) => (
+        //                     <tr key={index} id={"popover" + index}>
+        //                         <Row noGutters>
+        //                              <Col xs = {8}>{place.name}</Col>
+        //                              <Col xs = {{size: 1}}>{this.renderMoreDetailsButton(place,index)}</Col>
+        //                              <Col xs = {{size: 1, offset: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
+        //                         </Row>
+        //                     </tr>
+        //                 ))}
+        //             </tbody>
+                <Container>
                         {listOfMatches.map((place, index) => (
-                            <tr key={index} id={"popover" + index}>
-                                <td>{place.name}</td>
-                                <td>{this.renderMoreDetailsButton(place,index)}</td>
-                                <td>{this.renderAddButton(place.latitude,place.longitude)}</td>
-                            </tr>
+                                <Row noGutters className = "py-2">
+                                    <Col xs = {7}>{place.name}</Col>
+                                    <Col xs = {{size: 2}} className = "text-right">{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col xs = {{size: 2, offset: 1}} className = "text-right">{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                </Row>
                         ))}
-                    </tbody>
-                </ul>
-                // <ul class = "list-group">
-                //     <li class = "List group item">
-                //         {place.name}
-                //         {this.renderMoreDetailsButton(place,index)}
-                //         {this.renderAddButton(place.latitude,place.longitude)}
-                //     </li>
-                // </ul>
-            );
-        };
+                </Container>
+            )}
     }
 
     renderMoreDetailsButton(place,index) {
@@ -60,9 +54,7 @@ export default class PlacesList extends Component {
         const i = index;
 
         return (
-            <Container>
-                <Button color="primary" onClick={() => this.moreDetails(p,i)}>Info</Button>
-            </Container>
+                <Button color="primary" size = "small" onClick={() => this.moreDetails(p,i)}><BsInfoCircle/></Button>
         )
     }
 
@@ -72,9 +64,7 @@ export default class PlacesList extends Component {
         const latlng = {lat: latitude, lng: longitude};
 
         return (
-            <Container>
-                <Button color="primary" onClick={() => this.addButtonHandler(latlng)}>Add</Button>
-            </Container>
+                <Button color="primary" size = "small" onClick={() => this.addButtonHandler(latlng)}><BsPlusCircle/></Button>
         );
     }
 
