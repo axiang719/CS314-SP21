@@ -39,10 +39,11 @@ export default class PlacesList extends Component {
         //             </tbody>
                 <Container>
                         {listOfMatches.map((place, index) => (
-                                <Row noGutters className = "py-2">
-                                    <Col xs = {7}>{place.name}</Col>
-                                    <Col xs = {{size: 2}} className = "text-right">{this.renderMoreDetailsButton(place,index)}</Col>
-                                    <Col xs = {{size: 2, offset: 1}} className = "text-right">{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                <Row noGutters className = "py-2" key={index}>
+                                    <Col md = {9} xs = {7}>{place.name}</Col>
+                                    <Col md = {1} xs = {{size: 2}} className = "text-right">{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col md = {1} xs = {{size: 2, offset: 1}} className = "text-right">{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                    {this.moreDetails(place, index)}
                                 </Row>
                         ))}
                 </Container>
@@ -54,7 +55,7 @@ export default class PlacesList extends Component {
         const i = index;
 
         return (
-                <Button color="primary" size = "small" onClick={() => this.moreDetails(p,i)}><BsInfoCircle/></Button>
+                <Button color="primary" size = "small" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><BsInfoCircle/></Button>
         )
     }
 
