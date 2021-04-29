@@ -11,6 +11,7 @@ describe('SearchInput', () => {
     const checkForFeature = () => {return true};
     const toggleSearch = jest.fn();
 
+
     let searchWrapper;
 
     beforeEach(() => {
@@ -41,6 +42,12 @@ describe('SearchInput', () => {
         expect(searchWrapper.state().findSearch).toEqual(true);
         simulateInput(searchWrapper, "50, 50");
         expect(searchWrapper.state().findSearch).toEqual(false);
+    });
+
+    it('toggles type and where', () => {
+        expect(searchWrapper.state().filterToggle).toEqual(false);
+        searchWrapper.find('Button').at(0).simulate('click');
+        expect(searchWrapper.state().filterToggle).toEqual(true);
     });
 
     it("closes the search component when 'x' is clicked", () => {

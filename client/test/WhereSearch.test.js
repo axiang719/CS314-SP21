@@ -43,14 +43,6 @@ describe('WhereSearch', () => {
         expect(helper).toHaveBeenCalled()
     });
 
-    it('checks the where button works', () => {
-        whereSearchWrapper.find('Button').at(0).simulate('click');
-        whereSearchWrapper.update();
-
-        expect(whereSearchWrapper.state().show).toEqual(false);
-    });
-
-
     it ('test',()=>{
         whereSearchWrapper.find('Button').at(2).simulate('click');
         const expectedWhere = "tokyo";

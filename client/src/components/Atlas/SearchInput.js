@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback } from 'reactstrap';
+import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback, InputGroupAddon } from 'reactstrap';
 import MatchSearch from "./MatchSearch";
 import { BsGeoAlt, BsX } from "react-icons/bs";
+import { FaFilter } from "react-icons/fa";
+
 
 import Coordinates from "coordinate-parser";
-
 
 export default class SearchInput extends Component {
     constructor(props) {
         super(props);
         
         this.processInput = this.processInput.bind(this);
+        this.toggleFilter = this.toggleFilter.bind(this);
 
         this.state = {
             findSearch: true,
             inputText: "",
+            filterToggle: false,
 
             coordinates: {
                 latLng: null
@@ -25,16 +28,18 @@ export default class SearchInput extends Component {
     render() {
         return (
             <div className="border rounded-bottom bg-white">
-                <Col className="text-right mt-2" xs={12}>
-                    <BsX className="h5" onClick={this.props.toggleSearch}/>
-                </Col>
-                <Col xs={12} md={{size: 10, offset: 1}}>
-                    <Form onSubmit={e => { e.preventDefault(); }}>
-                        <FormGroup>
-                            {this.renderInput()}
-                        </FormGroup>
-                    </Form>
-                </Col>
+                <Row className="mx-1 mt-3">
+                    <Col className="text-right mt-2" xs={12}>
+                        <BsX className="h5" onClick={this.props.toggleSearch}/>
+                    </Col>
+                    <Col sm="12" md={{ size: 10, offset: 1 }}>
+                        <Form onSubmit={e => { e.preventDefault(); }}>
+                            <FormGroup>
+                                {this.renderInput()}
+                            </FormGroup>
+                        </Form>
+                    </Col>
+                </Row>
             </div>
         );
     }
@@ -46,17 +51,22 @@ export default class SearchInput extends Component {
         const invalidCoord = !isFindSearch && !coordinates.latLng && !inputIsEmpty;
 
         return (
-            <InputGroup>
-                <Input
-                    placeholder = "Search Location..."
-                    onChange={this.processInput}
-                    value={inputText}
-                    invalid={invalidCoord}
-                    className = "rounded-right"
-                />
-                { this.chooseInput(isFindSearch) }
-                <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
-            </InputGroup>
+            <>
+                <InputGroup>
+                    <Input
+                        placeholder = "Search Location..."
+                        onChange={this.processInput}
+                        value={inputText}
+                        invalid={invalidCoord}
+                        className = "rounded-right"
+                    />
+                    <InputGroupAddon addonType="append">
+                        { this.renderFilterButton(isFindSearch) }
+                    </InputGroupAddon>
+                    { this.chooseInput(isFindSearch) }
+                    <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
+                </InputGroup>
+            </>
         );
     }
 
@@ -85,7 +95,7 @@ export default class SearchInput extends Component {
     }
 
     renderFindSearch() {
-        const { inputText } = this.state;
+        const { inputText, filterToggle } = this.state;
         const { showMessage, setMarker, serverSettings, checkForFeature } = this.props;
         return (
             <MatchSearch 
@@ -94,9 +104,23 @@ export default class SearchInput extends Component {
                 setMarker={setMarker}
                 serverSettings={serverSettings}
                 checkForFeature={checkForFeature}
+                filterToggle={filterToggle}
             />
         );
     }
+
+    renderFilterButton(isFindSearch) {
+		return(
+			<Button 
+                disabled={!isFindSearch}
+                size="sm" 
+                color="primary"
+                onClick={this.toggleFilter}
+            >
+                <FaFilter/>
+            </Button>
+		);
+	}
 
     processInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
@@ -122,5 +146,10 @@ export default class SearchInput extends Component {
         } catch (error) {
             return null;
         }
+    }
+
+    toggleFilter() {
+        const { filterToggle } = this.state;
+        this.setState({ filterToggle: !filterToggle });
     }
 }
