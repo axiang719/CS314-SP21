@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback, InputGroupAddon } from 'reactstrap';
 import MatchSearch from "./MatchSearch";
-import { BsGeoAlt } from "react-icons/bs";
+import { BsGeoAlt, BsX } from "react-icons/bs";
 import { FaFilter } from "react-icons/fa";
+
 
 import Coordinates from "coordinate-parser";
 
@@ -28,6 +29,9 @@ export default class SearchInput extends Component {
         return (
             <div className="border rounded-bottom bg-white">
                 <Row className="mx-1 mt-3">
+                    <Col className="text-right mt-2" xs={12}>
+                        <BsX className="h5" onClick={this.props.toggleSearch}/>
+                    </Col>
                     <Col sm="12" md={{ size: 10, offset: 1 }}>
                         <Form onSubmit={e => { e.preventDefault(); }}>
                             <FormGroup>

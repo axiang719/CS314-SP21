@@ -9,6 +9,8 @@ import { beforeEach, expect, it, jest } from '@jest/globals';
 describe('SearchInput', () => {
     const serverSettings = {serverConfig: {features: ["find"]}};
     const checkForFeature = () => {return true};
+    const toggleSearch = jest.fn();
+
 
     let searchWrapper;
 
@@ -16,6 +18,7 @@ describe('SearchInput', () => {
         searchWrapper = shallow(<SearchInput
                                     serverSettings = {serverSettings}
                                     checkForFeature = {checkForFeature}
+                                    toggleSearch = {toggleSearch}
                                 />);
     });
 
@@ -45,6 +48,12 @@ describe('SearchInput', () => {
         expect(searchWrapper.state().filterToggle).toEqual(false);
         searchWrapper.find('Button').at(0).simulate('click');
         expect(searchWrapper.state().filterToggle).toEqual(true);
+    });
+
+    it("closes the search component when 'x' is clicked", () => {
+        expect(toggleSearch).toHaveBeenCalledTimes(0);
+        searchWrapper.find("BsX").simulate('click');
+        expect(toggleSearch).toHaveBeenCalled();
     });
 
     function simulateInput(wrapper, input) {

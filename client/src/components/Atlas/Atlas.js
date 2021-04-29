@@ -102,7 +102,9 @@ export default class Atlas extends Component {
         return <SearchInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}
-                checkForFeature={this.checkForFeature}/>;
+                checkForFeature={this.checkForFeature}
+                toggleSearch={this.toggleSearch}
+                />;
     }
 
     renderList() {
