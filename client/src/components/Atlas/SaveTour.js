@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import XLSX from "xlsx";
 import { Button, Modal, ModalHeader, ModalBody, DropdownItem } from 'reactstrap';
+import {BiSave } from "react-icons/bi"
 import { downloadFile } from '../../utils/restfulAPI';
 
 export default class SaveTour extends Component {
@@ -21,7 +22,7 @@ export default class SaveTour extends Component {
     render() {
         return (
             <>
-                <DropdownItem id="Save" color="primary" onClick={this.toggleModal}>Save</DropdownItem>
+                <DropdownItem id="Save" color="primary" onClick={this.toggleModal}><BiSave></BiSave></DropdownItem>
                 {this.renderModal()}
             </>
         );
