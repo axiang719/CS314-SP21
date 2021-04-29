@@ -60,7 +60,7 @@ export default class MatchSearch extends Component {
 		const whereIsSupported = checkForFeature('where');
 
 		return (
-			<Row className="mt-1">
+			<>
 				{ typeIsSupported && 
 					<TypeSearch 
 						type={findRequest.type}
@@ -76,7 +76,7 @@ export default class MatchSearch extends Component {
 						serverSettings={serverSettings}
 					/> 
 				}
-			</Row>
+			</>
 		);
 	}
 

@@ -6,7 +6,6 @@ import { FaFilter } from "react-icons/fa";
 
 import Coordinates from "coordinate-parser";
 
-
 export default class SearchInput extends Component {
     constructor(props) {
         super(props);
@@ -48,20 +47,22 @@ export default class SearchInput extends Component {
         const invalidCoord = !isFindSearch && !coordinates.latLng && !inputIsEmpty;
 
         return (
-            <InputGroup>
-                <Input
-                    placeholder = "Search Location..."
-                    onChange={this.processInput}
-                    value={inputText}
-                    invalid={invalidCoord}
-                    className = "rounded-right"
-                />
-                <InputGroupAddon addonType="append">
-                    { this.renderFilterButton(isFindSearch) }
-                </InputGroupAddon>
-                { this.chooseInput(isFindSearch) }
-                <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
-            </InputGroup>
+            <>
+                <InputGroup>
+                    <Input
+                        placeholder = "Search Location..."
+                        onChange={this.processInput}
+                        value={inputText}
+                        invalid={invalidCoord}
+                        className = "rounded-right"
+                    />
+                    <InputGroupAddon addonType="append">
+                        { this.renderFilterButton(isFindSearch) }
+                    </InputGroupAddon>
+                    { this.chooseInput(isFindSearch) }
+                    <FormFeedback>Format must be in latitude and Longitude</FormFeedback>
+                </InputGroup>
+            </>
         );
     }
 

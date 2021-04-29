@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, } from 'reactstrap';
+import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, Row} from 'reactstrap';
 
 
 export default class TypeSearch extends Component {
@@ -18,14 +18,16 @@ export default class TypeSearch extends Component {
             const validTypes = serverSettings.serverConfig.type;
 
             return (
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                    <DropdownToggle color="primary" caret>Type</DropdownToggle>
-                    <DropdownMenu>
-                        {validTypes.map((type, index) => {
-                            return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
-                        })}
-                    </DropdownMenu>
-                </Dropdown>
+                <Row className="mt-1">
+                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+                        <DropdownToggle color="primary" caret>Type</DropdownToggle>
+                        <DropdownMenu>
+                            {validTypes.map((type, index) => {
+                                return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
+                            })}
+                        </DropdownMenu>
+                    </Dropdown>
+                </Row>
             )
         }
 
