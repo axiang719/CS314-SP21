@@ -76,7 +76,6 @@ export default class PlacesList extends Component {
         const latitude = parseFloat(place.latitude);
         const longitude = parseFloat(place.longitude);
         
-
         return (
             <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
@@ -94,6 +93,5 @@ export default class PlacesList extends Component {
 
     addButtonHandler(latlng) {
         this.props.setMarker(latlng);
-        this.props.toggleModal();
     }
 }
