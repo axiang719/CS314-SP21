@@ -4,6 +4,8 @@ import { Button, DropdownItem } from 'reactstrap';
 
 import TourRequest from "./TourRequest"
 
+import {FaRoute } from "react-icons/fa" 
+
 
 
 
@@ -18,7 +20,7 @@ export default class OrderTour extends Component {
     render() {
         return ( 
             <>
-                <DropdownItem onClick={this.handleShortTourClick} color="primary">Optimize</DropdownItem>  
+                <span className="text-left"><DropdownItem onClick={this.handleShortTourClick} color="primary">Optimize <FaRoute/></DropdownItem></span>  
             </>
         );
     }
