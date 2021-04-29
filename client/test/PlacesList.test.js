@@ -33,14 +33,22 @@ describe('PlacesList', () => {
 
     });
 
-    // it('initializes as expected', () => {
-    //     expect(placesWrapper.find(ModalHeader)).toHaveLength(1);
-    //     expect(placesWrapper.find(ModalBody)).toHaveLength(1);
-    //     expect(placesWrapper.find('tr').at(1).text()).toMatch('Schadels Airport');
-    // });
+    it('initializes as expected', () => {
+        expect(placesWrapper.find(ModalHeader)).toHaveLength(1);
+        expect(placesWrapper.find(ModalBody)).toHaveLength(1);
+        expect(placesWrapper.find('Row')).toHaveLength(1);
+    });
 
-    // it('contains a popover and two buttons', () => {
-    //     expect(placesWrapper.find(UncontrolledPopover)).toHaveLength(1);
-    //     expect(placesWrapper.find(Button)).toHaveLength(2);
+    it('contains a popover and two buttons', () => {
+        expect(placesWrapper.find(UncontrolledPopover)).toHaveLength(1);
+        expect(placesWrapper.find(Button)).toHaveLength(2);
+    });
+
+    // it('renders a marker on click', () => {
+    //     const clickPosition = {lat: 0, lng: 0};
+    //     simulateOnClickEvent(atlasWrapper, {latlng: clickPosition});
+
+    //     expect(atlasWrapper.state().markerPosition).toEqual(clickPosition);
+    //     expect(atlasWrapper.find(Marker).length).toEqual(1);
     // });
 });

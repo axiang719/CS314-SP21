@@ -39,10 +39,10 @@ export default class PlacesList extends Component {
         //             </tbody>
                 <Container>
                         {listOfMatches.map((place, index) => (
-                                <Row noGutters className = "py-2" key={index}>
-                                    <Col md = {9} xs = {7}>{place.name}</Col>
-                                    <Col md = {1} xs = {{size: 2}} className = "text-right">{this.renderMoreDetailsButton(place,index)}</Col>
-                                    <Col md = {1} xs = {{size: 2, offset: 1}} className = "text-right">{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                <Row noGutters className = "py-2 border" key={index}>
+                                    <Col className= "pl-1" md = {{size: 10}} xs = {{size: 8}}>{place.name}</Col>
+                                    <Col md = {1} xs = {{size: 2}}>{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col md = {1} xs = {{size: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
                                     {this.moreDetails(place, index)}
                                 </Row>
                         ))}
@@ -55,7 +55,7 @@ export default class PlacesList extends Component {
         const i = index;
 
         return (
-                <Button color="primary" size = "small" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><BsInfoCircle/></Button>
+                <Button color="primary" size = "sm" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><BsInfoCircle/></Button>
         )
     }
 
@@ -65,7 +65,7 @@ export default class PlacesList extends Component {
         const latlng = {lat: latitude, lng: longitude};
 
         return (
-                <Button color="primary" size = "small" onClick={() => this.addButtonHandler(latlng)}><BsPlusCircle/></Button>
+                <Button color="primary" size = "sm" onClick={() => this.addButtonHandler(latlng)}><BsPlusCircle/></Button>
         );
     }
 
@@ -74,7 +74,7 @@ export default class PlacesList extends Component {
         const longitude = parseFloat(place.longitude);
         
         return (
-            <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
+            <UncontrolledPopover trigger="legacy" placement="left" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
                 <PopoverBody>
                     {place.country && <div>Country: {place.country}</div>}
