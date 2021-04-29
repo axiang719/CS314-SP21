@@ -4,6 +4,7 @@ import XLSX from "xlsx";
 
 import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col, DropdownItem } from 'reactstrap';
 import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
+import {BsUpload, BiSave } from "react-icons/bs"
 import * as tripSchema from "../../../schemas/TripFile";
 
 
@@ -40,10 +41,10 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <DropdownItem onClick={this.toggleModal}>
-                    Load
+                <span className="text-left"><DropdownItem  onClick={this.toggleModal}>
+                    Upload <BsUpload></BsUpload>
                     {this.renderModal()}
-                </DropdownItem>
+                </DropdownItem></span>
             </>
         );
     }

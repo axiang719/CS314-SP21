@@ -55,9 +55,9 @@ export default class ListOfClicks extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.renderListOptions()}
-                    <DropdownItem onClick={this.clearHandler}>
-                        Clear List
-                    </DropdownItem>
+                    <span className="text-left"><DropdownItem onClick={this.clearHandler}>
+                        Clear List <BsTrash/>
+                    </DropdownItem></span> 
                 </DropdownMenu>
             </Dropdown>
         );
