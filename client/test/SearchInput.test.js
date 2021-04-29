@@ -9,7 +9,6 @@ import { beforeEach, expect, it, jest } from '@jest/globals';
 describe('SearchInput', () => {
     const serverSettings = {serverConfig: {features: ["find"]}};
     const checkForFeature = () => {return true};
-    const setMarker = jest.fn();
 
     let searchWrapper;
 
@@ -40,6 +39,12 @@ describe('SearchInput', () => {
         expect(searchWrapper.state().findSearch).toEqual(true);
         simulateInput(searchWrapper, "50, 50");
         expect(searchWrapper.state().findSearch).toEqual(false);
+    });
+
+    it('toggles type and where', () => {
+        expect(searchWrapper.state().filterToggle).toEqual(false);
+        searchWrapper.find('Button').at(0).simulate('click');
+        expect(searchWrapper.state().filterToggle).toEqual(true);
     });
 
     function simulateInput(wrapper, input) {

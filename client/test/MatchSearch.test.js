@@ -5,7 +5,6 @@ import React from 'react';
 import MatchSearch from '../src/components/Atlas/MatchSearch';
 import TypeSearch from '../src/components/Atlas/TypeSearch';
 import WhereSearch from '../src/components/Atlas/WhereSearch';
-import { Button, InputGroup, Input, FormFeedback, Container, Row } from 'reactstrap';
 import { beforeEach, expect, it } from '@jest/globals';
 
 describe('MatchSearch', () => {
@@ -29,6 +28,7 @@ describe('MatchSearch', () => {
                                                 setWhere={["United States"]}
                                                 checkForFeature={checkForFeature}
                                                 inputText ={""}
+                                                filterToggle={true}
                                                 setMarker={snacks}
                                                 showMessage={snacks}
                                                 match={"dave"}

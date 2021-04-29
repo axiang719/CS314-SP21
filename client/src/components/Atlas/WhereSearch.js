@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select-virtualized'
-import { Button, Col, InputGroup, Input, InputGroupAddon} 
-    from 'reactstrap';
+import { Button, Col } from 'reactstrap';
 
 
 export default class WhereSearch extends Component {
