@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody, ListGroup, ListGroupItem, Row, Col} from 'reactstrap';
-import { BsPlusCircle, BsInfoCircle}  from "react-icons/bs"
+import { FaPlusCircle, FaInfoCircle}  from "react-icons/fa"
 export default class PlacesList extends Component {
     constructor(props) {
         super(props);
@@ -30,8 +30,8 @@ export default class PlacesList extends Component {
                         {listOfMatches.map((place, index) => (
                                 <Row noGutters className = "py-2 border" key={index}>
                                     <Col className= "pl-1" md = {{size: 10}} xs = {{size: 8}}>{place.name}</Col>
-                                    <Col md = {1} xs = {{size: 2}}>{this.renderMoreDetailsButton(place,index)}</Col>
-                                    <Col md = {1} xs = {{size: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
                                     {this.moreDetails(place, index)}
                                 </Row>
                         ))}
@@ -44,7 +44,7 @@ export default class PlacesList extends Component {
         const i = index;
 
         return (
-                <Button color="primary" size = "sm" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><BsInfoCircle/></Button>
+                <Button color="primary" size = "sm" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><FaInfoCircle className = "mb-1"/></Button>
         )
     }
 
@@ -54,7 +54,7 @@ export default class PlacesList extends Component {
         const latlng = {lat: latitude, lng: longitude};
 
         return (
-                <Button color="primary" size = "sm" onClick={() => this.addButtonHandler(latlng)}><BsPlusCircle/></Button>
+                <Button color="primary" size = "sm" onClick={() => this.addButtonHandler(latlng)}><FaPlusCircle className = "mb-1"/></Button>
         );
     }
 
