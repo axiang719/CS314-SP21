@@ -41,7 +41,7 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <DropdownItem onClick={this.toggleModal}>
+                <DropdownItem className="text-center" onClick={this.toggleModal}>
                     <BsUpload></BsUpload>
                     {this.renderModal()}
                 </DropdownItem>
