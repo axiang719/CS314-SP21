@@ -22,7 +22,7 @@ export default class SaveTour extends Component {
     render() {
         return (
             <>
-                <DropdownItem id="Save" color="primary" onClick={this.toggleModal}><BiSave></BiSave></DropdownItem>
+                <DropdownItem className="text-center" id="Save" color="primary" onClick={this.toggleModal}><BiSave></BiSave></DropdownItem>
                 {this.renderModal()}
             </>
         );
