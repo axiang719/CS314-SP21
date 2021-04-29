@@ -27,7 +27,7 @@ export default class SearchInput extends Component {
     render() {
         return (
             <div className="border rounded-bottom bg-white">
-                <Row className="mx-1 my-2">
+                <Row className="mx-1 mt-3">
                     <Col sm="12" md={{ size: 10, offset: 1 }}>
                         <Form onSubmit={e => { e.preventDefault(); }}>
                             <FormGroup>

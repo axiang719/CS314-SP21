@@ -40,7 +40,7 @@ export default class WhereSearch extends Component {
 
     renderWhereInput(){
         return(
-            <div className="mt-1">
+            <div className="mt-2">
                 <Select 
                     value={this.state.whereValue}
                     placeholder="Filter by territory..."
@@ -54,7 +54,7 @@ export default class WhereSearch extends Component {
 
     renderWhereButtons() {
         return (
-            <Row>
+            <Row className="mt-1">
                 {this.props.where.map((place, index) => (
                     <Button type="button" 
                             onClick={()=> this.processPlaceButtonClick(index)} 
