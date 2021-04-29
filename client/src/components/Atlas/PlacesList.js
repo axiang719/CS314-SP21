@@ -40,7 +40,6 @@ export default class PlacesList extends Component {
                                 <td>{place.name}</td>
                                 <td>{this.renderMoreDetailsButton(place,index)}</td>
                                 <td>{this.renderAddButton(place.latitude,place.longitude)}</td>
-                                {this.moreDetails(place, index)}
                             </tr>
                         ))}
                     </tbody>
