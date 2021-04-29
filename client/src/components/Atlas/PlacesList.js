@@ -26,8 +26,8 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-                <Table hover bordered responsive size="sm">
-                    <thead className="text-center">
+                <ul class = "list-group">
+                    <thead className="mb-2">
                         <tr>
                             <th>Name</th>
                             <th>More Info</th>
@@ -43,7 +43,14 @@ export default class PlacesList extends Component {
                             </tr>
                         ))}
                     </tbody>
-                </Table>
+                </ul>
+                // <ul class = "list-group">
+                //     <li class = "List group item">
+                //         {place.name}
+                //         {this.renderMoreDetailsButton(place,index)}
+                //         {this.renderAddButton(place.latitude,place.longitude)}
+                //     </li>
+                // </ul>
             );
         };
     }
