@@ -26,17 +26,6 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-        //             <tbody>
-        //                 {listOfMatches.map((place, index) => (
-        //                     <tr key={index} id={"popover" + index}>
-        //                         <Row noGutters>
-        //                              <Col xs = {8}>{place.name}</Col>
-        //                              <Col xs = {{size: 1}}>{this.renderMoreDetailsButton(place,index)}</Col>
-        //                              <Col xs = {{size: 1, offset: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
-        //                         </Row>
-        //                     </tr>
-        //                 ))}
-        //             </tbody>
                 <Container>
                         {listOfMatches.map((place, index) => (
                                 <Row noGutters className = "py-2 border" key={index}>
