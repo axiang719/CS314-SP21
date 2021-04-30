@@ -26,9 +26,9 @@ beforeEach(() => {
 it('shortens the tour on button click', () => {
     const shorterList = [{"name":"Fort Collins", "latitude": "40.55", "longitude": "-105.06", "notes":"Place 1"}];
     mockTourResponse();
-    orderTourWrapper.find('Button').simulate('click');
+    orderTourWrapper.find('DropdownItem').simulate('click');
     orderTourWrapper.setProps({ listOfClicks: shorterList }) 
-    orderTourWrapper.find('Button').simulate('click');
+    orderTourWrapper.find('DropdownItem').simulate('click');
     expect(setTour).toHaveBeenCalled();
     expect(getPlaces).toHaveBeenCalled();
 });

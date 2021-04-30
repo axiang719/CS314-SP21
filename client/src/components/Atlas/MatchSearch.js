@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, Input, FormFeedback, Container, Row } from 'reactstrap';
+import { Button, Container, Row } from 'reactstrap';
+import { BsSearch } from "react-icons/bs";
 
 import PlacesList from "./PlacesList";
 
@@ -14,19 +15,16 @@ export default class MatchSearch extends Component {
     constructor(props) {
 		super(props);
 
-		this.processKeywordInput = this.processKeywordInput.bind(this);
-		this.processKeywordButton = this.processKeywordButton.bind(this);
+		this.processFindSubmit = this.processFindSubmit.bind(this);
+		this.sanitizeInput = this.sanitizeInput.bind(this);
         this.sendFindRequest = this.sendFindRequest.bind(this);
         this.processFindResponse = this.processFindResponse.bind(this);
         this.processServerFindSuccess = this.processServerFindSuccess.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.setType = this.setType.bind(this);
 		this.setWhere = this.setWhere.bind(this);
-		this.processFocus = this.processFocus.bind(this);
 
         this.state = {
-			keyword: "",
-			focus: "match",
 			findRequest: {
                 requestType: "find",
                 match: "",
@@ -36,108 +34,75 @@ export default class MatchSearch extends Component {
             },
 			listOfMatches: [],
 			modalOpen: false
-
         };
     }
 
 	render() {
-		const keyword = this.state.keyword;
-		const validMatch = this.state.findRequest.match != null;
-		const inputBoxEmpty = !keyword;
-
 		return (
-			<div>
-				<InputGroup>
-					<Input
-						placeholder = "Match"
-						onFocus = {()=>{this.processFocus("match");}}
-						onChange={this.processKeywordInput}
-						value = {keyword}
-						valid = {validMatch}
-						invalid = {!inputBoxEmpty && !validMatch}
-						/>
-						{this.props.renderDropdown()} 
-						<Button type={this.state.focus==="match"?"submit":"button"} className="ml-1" color="primary" onClick={this.processKeywordButton}>Search</Button>
-						<FormFeedback>Match string must only contain letters and numbers.</FormFeedback>
-				</InputGroup>
+			<>
+				<Button type="submit" className="ml-1" color="primary" onClick={this.processFindSubmit}><BsSearch/></Button>
 				<PlacesList modalOpen={this.state.modalOpen} 
 							listOfMatches={this.state.listOfMatches}
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					{this.handleTypeAndWhere()}
-				</Container>	
-			</div>
+					{this.renderTypeAndWhere()}
+				</Container>
+			</>	
 		);
 	}
 
 
-	handleTypeAndWhere() {
-		const typeIsSupported = this.props.checkForFeature('type');
-		const whereIsSupported = this.props.checkForFeature('where');
+	renderTypeAndWhere() {
+		const { checkForFeature, serverSettings } = this.props;
+		const { findRequest } = this.state;
+		const typeIsSupported = checkForFeature('type');
+		const whereIsSupported = checkForFeature('where');
 
 		return (
 			<Row className="mt-1">
-				{ typeIsSupported && this.renderTypeSearch() }
-				{ whereIsSupported && this.renderWhereSearch() }
+				{ typeIsSupported && 
+					<TypeSearch 
+						type={findRequest.type}
+						setType={this.setType}
+						serverSettings={serverSettings}
+					/>
+				}
+
+				{ whereIsSupported && 
+					<WhereSearch 
+						where = {findRequest.where}
+						setWhere = {this.setWhere}
+						serverSettings={serverSettings}
+					/> 
+				}
 			</Row>
 		);
 	}
 
-	renderTypeSearch() {
-		return (
-			<TypeSearch type={this.state.findRequest.type}
-				setType={this.setType}
-				serverSettings={this.props.serverSettings}/>
-		);
-	}
+	processFindSubmit() {
+		const { inputText } = this.props;
+        const { findRequest } = this.state;
 
-	renderWhereSearch() {
-		return (
-			<WhereSearch where = {this.state.findRequest.where}
-				processFocus = {this.processFocus}
-				focus = {this.state.focus}
-				setWhere = {this.setWhere}
-				serverSettings={this.props.serverSettings}/>
-		);
-	}
-    
-    processKeywordInput(onChangeEvent) {
-        const inputText = onChangeEvent.target.value;
-        
-		this.getMatchOrNull(inputText);
-        this.setState({ keyword: inputText});
-    }
+		this.sanitizeInput(inputText, findRequest);
 
-	processFocus(focus) {
-		this.setState({focus});
-	}
-
-	getMatchOrNull(matchString) {
-		const findRequest = this.state.findRequest;
-		const regex = /^[a-zA-Z0-9_ ]*$/;
-		const matchIsValid = matchString.match(regex);
-		
-		if (matchIsValid) {
-			findRequest.match = matchString.trim();
-		} else {
-			findRequest.match = null;
-		}
-
-		this.setState({ findRequest: findRequest });
-
-	}
-
-	processKeywordButton() {
-        const findRequest = this.state.findRequest;
         if (findRequest.match != null) {
             this.sendFindRequest(findRequest);
 			this.toggleModal();
         } 
     }
+
+	sanitizeInput(inputText, findRequest) {
+		const regex = /[^a-zA-Z0-9_ ]/gi;
+
+		const sanitizedText = inputText.replace(regex, '_');
+		findRequest.match = sanitizedText.trim();
+
+		this.setState({ findRequest });
+	}
   	
 	sendFindRequest(request) {
-		sendServerRequest(request)
+		sendServerRequest(request, this.props.serverSettings.serverPort)
 			.then(findResponse => {
 				if (findResponse) {
 					this.processFindResponse(findResponse);

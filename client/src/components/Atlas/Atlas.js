@@ -11,15 +11,17 @@ import Control from 'react-leaflet-control';
 import { BsCursorFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
 
-
-import CoordinatesInput from "./CoordinatesInput";
+import SearchInput from "./SearchInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
+<<<<<<< HEAD
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
 import TypeSearch from './TypeSearch';
 
+=======
+>>>>>>> main
 
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -66,14 +68,12 @@ export default class Atlas extends Component {
     
     }
 
-    componentDidMount(previousProps, previousState, snapShot){
+    componentDidMount(){
        this.requestUserLocation();
     }
 
     render() {
-     
         return (
-            
             <div>
        
                 <Container>
@@ -82,11 +82,10 @@ export default class Atlas extends Component {
                             {this.renderLeafletMap()}
                         </Col>
                     </Row>
-                    {this.renderCoordinatesInput()}
+                    {this.renderSearchInput()}
                     <Row className="text-center">
                         <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            <div className="text-right">{this.renderTourFilter()} {this.renderSaveTour()}  {this.renderLoadTour()} {this.checkForFeature("tour") && this.renderOrderTour()}</div>
-                            <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>
+                            {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
                             {this.renderList()}
                         </Col>
                     </Row>
@@ -104,13 +103,6 @@ export default class Atlas extends Component {
         }
     }
 
-    renderCoordinatesInput() {
-       	return <CoordinatesInput setMarker={this.setMarker} 
-               	showMessage={this.props.showMessage}
-               	serverSettings={this.props.serverSettings}
-               	checkForFeature={this.checkForFeature}/>;
-    }
-
     renderTourFilter(){
 	if(this.props.serverSettings.serverConfig != null) {
 		return <TypeSearch type={this.state.typeFilter}
@@ -118,47 +110,26 @@ export default class Atlas extends Component {
 	      		setType={(type) => {this.setState({typeFilter: type})}}/>
 			
 	}
-    }
 
-    renderLoadTour() {
-        return (
-            <LoadTour
-            setTour = { this.setTour }
-            clearList = { this.clearList }
-            setPlace = { this.setPlace }
-            listOfClicks = { this.state.listOfClicks }
-      
-           
-            />
-        )
-    }
-
-    renderSaveTour(){
-      return(
-          <SaveTour 
-            getPlaces = {this.getPlaces}
-
-          />
-      )  
-    }
-
-    renderOrderTour(){
-        return (
-            <OrderTour
-                listOfClicks = {this.state.listOfClicks}
-                setTour = {this.setTour}
-                getPlaces = {this.getPlaces}
-            />
-        )
+    renderSearchInput() {
+        return <SearchInput setMarker={this.setMarker} 
+                showMessage={this.props.showMessage}
+                serverSettings={this.props.serverSettings}
+                checkForFeature={this.checkForFeature}/>;
     }
 
     renderList() {
         return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
+                setTour = {this.setTour}
+                setPlace = { this.setPlace }
+                getPlaces = {this.getPlaces}
                 clearList = { this.clearList }
                 removePlace = { this.removePlace }
                 centerMapToIndex = { this.centerMapToIndex }
+                checkForFeature = { this.checkForFeature }
+                serverSettings = { this.props.serverSettings }
             />
         );
     }
@@ -182,7 +153,6 @@ export default class Atlas extends Component {
                 <Control position="bottomright">
                     {this.renderFindMeButton()}
                 </Control>
-
             </Map>
         );
     }
@@ -317,9 +287,9 @@ export default class Atlas extends Component {
     }
 
     async handleDistances() {
-        if(this.state.listOfClicks.length >= 2) {
+        if(this.state.listOfClicks.length >= 2 && this.checkForFeature('distances')) {
             const distanceRequest = new DistancesSearch(this.getPlaces(), 3539); 
-            await distanceRequest.sendDistancesRequest();
+            await distanceRequest.sendDistancesRequest(this.props.serverSettings.serverPort);
             const distances = distanceRequest.getDistances();
             this.handleDistancesResponse(distances);
         }

@@ -16,12 +16,16 @@ describe('ListOfClicks', () => {
             "longitude" : 50.00   
         }];
 
+    const checkForFeature = function() {
+        return true;
+    }
 
     beforeEach(() => {
        ListWrapper = shallow(<ListOfClicks  clearList = {jest.fn()} 
                                             removePlace = {jest.fn()}
                                             listOfClicks = {list}
                                             centerMapToIndex = {jest.fn()}
+                                            checkForFeature = {checkForFeature}
                                             />); 
     });
 
@@ -31,24 +35,32 @@ describe('ListOfClicks', () => {
     })
 
     it("shows and closes row info as expected", ()=>{
-        expect(ListWrapper.find("Row")).toHaveLength(2);
-        ListWrapper.find("Row").at(0).simulate("click");
+        const clickable = ListWrapper.find("Row").at(1).find("Col").at(0)
+        expect(ListWrapper.find("Row")).toHaveLength(3);
+        clickable.simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
-        ListWrapper.find("Row").at(0).simulate("click");
+        clickable.simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(false);
     })
 
     it("closes row info when clear is clicked", ()=>{
-        ListWrapper.find("Row").at(0).simulate("click");
+        ListWrapper.find("Row").at(1).find('Col').at(0).simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
-        ListWrapper.find("Button").at(0).simulate("click");
+        ListWrapper.setState({settingsToggle: true});
+        ListWrapper.find("DropdownItem").at(0).simulate("click");
         expect(ListWrapper.state().toggleRow).toEqual([]);
     })
 
     it("changes toggle properly on remove row", ()=>{
-        ListWrapper.find("Row").at(0).simulate("click");
+        ListWrapper.find("Row").at(1).find('Col').at(0).simulate("click");
         expect(ListWrapper.state().toggleRow.length).toEqual(1);
-        ListWrapper.find("Row").at(1).find("Button").at(1).simulate("click")
+        ListWrapper.find("Row").at(1).find("BsTrash").simulate("click")
         expect(ListWrapper.state().toggleRow).toEqual([]);
     })
+
+    it('toggles the settings dropdown', () => {
+        expect(ListWrapper.state().settingsToggle).toBe(false);
+        ListWrapper.instance().toggleSettings();
+        expect(ListWrapper.state().settingsToggle).toBe(true);
+    });
 });

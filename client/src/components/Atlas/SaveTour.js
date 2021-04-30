@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import XLSX from "xlsx";
-import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, DropdownItem } from 'reactstrap';
 import { downloadFile } from '../../utils/restfulAPI';
 
 export default class SaveTour extends Component {
@@ -21,7 +21,7 @@ export default class SaveTour extends Component {
     render() {
         return (
             <>
-                <Button id="Save" color="primary" onClick={this.toggleModal}>Save</Button>
+                <DropdownItem id="Save" color="primary" onClick={this.toggleModal}>Save</DropdownItem>
                 {this.renderModal()}
             </>
         );

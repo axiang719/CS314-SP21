@@ -11,6 +11,7 @@ export default class DistancesSearch {
             places: places,
             earthRadius: earthRadius,
         };
+        this.serverPort = ""
         this.distances = []
     }
 
@@ -18,12 +19,17 @@ export default class DistancesSearch {
         return this.distances;
     }
 
+    setDistances(){
+        this.distances = [500,1000];
+    }
+
     getSumDistances() {
         return this.distances.reduce((accumulator, currentValue) =>{ accumulator + currentValue});
     }
    
-    sendDistancesRequest() {
-	    return sendServerRequest(this.request)
+    sendDistancesRequest(port) {
+        this.serverPort = port;
+	    return sendServerRequest(this.request, port)
 		    .then(distancesResponse => {
 			    if (distancesResponse) {
 				    this.processDistancesResponse(distancesResponse);
@@ -42,7 +48,7 @@ export default class DistancesSearch {
 	}
 
    processDistancesSuccess(distancesResponse) {
-       LOG.info("Receiving distances response from:", getOriginalServerPort());
+       LOG.info("Receiving distances response from:", this.serverPort);
        this.distances = distancesResponse.distances;
 	}
 } 

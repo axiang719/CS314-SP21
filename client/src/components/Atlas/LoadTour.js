@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import XLSX from "xlsx";
 
-import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, FormText, Row, Col, DropdownItem } from 'reactstrap';
 import { isJsonResponseValid as isJsonFileValid } from "../../utils/restfulAPI";
 import * as tripSchema from "../../../schemas/TripFile";
 
@@ -40,8 +40,10 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <Button color="primary" onClick={this.toggleModal}>Load</Button>
-                {this.renderModal()}
+                <DropdownItem onClick={this.toggleModal}>
+                    Load
+                    {this.renderModal()}
+                </DropdownItem>
             </>
         );
     }
