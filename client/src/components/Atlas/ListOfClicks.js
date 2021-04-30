@@ -14,9 +14,11 @@ export default class ListOfClicks extends Component {
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
+        this.toggleMeatballs = this.toggleMeatballs.bind(this)
         this.state = {
             toggleRow: [],
-            settingsToggle: false
+            settingsToggle: false,
+            meatballToggle: false
         }
     }
 
@@ -62,6 +64,24 @@ export default class ListOfClicks extends Component {
             </Dropdown>
         );
     }
+    
+    renderMeatballDropdown() {
+        return (
+            <Dropdown
+                inNavbar
+                className= "text-white" 
+                isOpen={this.state.meatballToggle}
+                direction="left"
+                toggle={this.toggleMeatballs}>
+                <DropdownToggle tag = "div">
+                    <BsThreeDots/>
+                </DropdownToggle>
+                <DropdownMenu>
+                   hello
+                </DropdownMenu>
+            </Dropdown> 
+        );
+    }
 
     renderListOptions() {
         const {setTour, clearList, setPlace, listOfClicks, 
@@ -92,6 +112,11 @@ export default class ListOfClicks extends Component {
     toggleSettings() {
         const {settingsToggle} = this.state;
         this.setState({settingsToggle: !settingsToggle});
+    }
+
+    toggleMeatballs() {
+        const {meatballToggle} = this.state;
+        this.setState({meatballToggle : !meatballToggle})
     }
 
     getTableBody() {
@@ -136,7 +161,7 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col xs={{size:1}}>
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
-                        <div><BsThreeDots className = "text-primary mt-1"/></div>
+                        <div>{this.renderMeatballDropdown()}</div>
                     </Col>
                 </Row>
             </Collapse>
