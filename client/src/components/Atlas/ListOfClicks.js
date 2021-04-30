@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, Input } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash } from "react-icons/bs"
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsArrowUpDown } from "react-icons/bs"
+
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -14,6 +15,7 @@ export default class ListOfClicks extends Component {
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
+      
         this.state = {
             toggleRow: [],
             settingsToggle: false
@@ -58,6 +60,9 @@ export default class ListOfClicks extends Component {
                     <span className="text-left"><DropdownItem onClick={this.clearHandler}>
                         Clear List <BsTrash/>
                     </DropdownItem></span> 
+                   <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
+                       reverse   <BsArrowUpDown className="text-right"/>
+                   </DropdownItem></span>
                 </DropdownMenu>
             </Dropdown>
         );
