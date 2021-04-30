@@ -5,6 +5,7 @@ import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash } from "react
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
+import TypeSearch from './TypeSearch';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -28,10 +29,10 @@ export default class ListOfClicks extends Component {
                     <tr>
                         <th>
                             <Row noGutters>
-                                <Col className="text-center text-white" xs={{size:10, offset: 1}}>
+                                <Col className="text-center text-white" xs={{size:8, offset: 2}}>
                                     Places
                                 </Col>
-                                <Col xs={1}>
+                                <Col xs={2}>
 					{this.renderTourFilter()} {this.renderDropdown()}
                                 </Col>
                             </Row>
@@ -44,7 +45,7 @@ export default class ListOfClicks extends Component {
     }
 
     renderTourFilter(){
-	if(this.props.serverSettings != null 
+	if(this.props.serverSettings != null
 	   && this.props.serverSettings.serverConfig != null) {
 		return <TypeSearch type={this.state.typeFilter}
 	        	serverSettings={this.props.serverSettings}
@@ -56,11 +57,11 @@ export default class ListOfClicks extends Component {
         return (
             <Dropdown 
                 inNavbar
-                className="text-white" 
+                className="typeSearch text-white" 
                 isOpen={this.state.settingsToggle}
                 direction="left"
                 toggle={this.toggleSettings}>
-                <DropdownToggle tag="div">
+                <DropdownToggle className="typeSearch" tag="div">
                     <BsGearFill/>
                 </DropdownToggle>
                 <DropdownMenu>
