@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-
+import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody, ListGroup, ListGroupItem, Row, Col} from 'reactstrap';
+import { FaPlusCircle, FaInfoCircle}  from "react-icons/fa"
 export default class PlacesList extends Component {
     constructor(props) {
         super(props);
 
         this.moreDetails = this.moreDetails.bind(this);
-        this.popoverButtonHandler = this.popoverButtonHandler.bind(this);
+        this.renderAddButton = this.renderAddButton.bind(this);
+        this.addButtonHandler = this.addButtonHandler.bind(this);
         this.renderTable = this.renderTable.bind(this);
     }
 
@@ -25,50 +26,58 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-                <Table hover bordered size="sm">
-                    <thead className="text-center">
-                        <tr>
-                            <th>Name</th>
-                            {listOfMatches[0].country && <th>Country</th>}
-                            {listOfMatches[0].region && <th>Region</th>}
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Container>
                         {listOfMatches.map((place, index) => (
-                            <tr key={index} id={"popover" + index}>
-                                <td>{place.name}</td>
-                                {place.country && <td>{place.country}</td>}
-                                {place.region && <td>{place.region}</td>}
-                                {this.moreDetails(place, index)}
-                            </tr>
+                                <Row noGutters className = "py-2 border" key={index}>
+                                    <Col className= "pl-1" md = {{size: 10}} xs = {{size: 8}}>{place.name}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                    {this.moreDetails(place, index)}
+                                </Row>
                         ))}
-                    </tbody>
-                </Table>
-            );
-        };
+                </Container>
+            )}
+    }
+
+    renderMoreDetailsButton(place,index) {
+        const p = place;
+        const i = index;
+
+        return (
+                <Button color="primary" size = "sm" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><FaInfoCircle className = "mb-1"/></Button>
+        )
+    }
+
+    renderAddButton(lat,lng) {
+        const latitude = parseFloat(lat);
+        const longitude = parseFloat(lng);
+        const latlng = {lat: latitude, lng: longitude};
+
+        return (
+                <Button color="primary" size = "sm" onClick={() => this.addButtonHandler(latlng)}><FaPlusCircle className = "mb-1"/></Button>
+        );
     }
 
     moreDetails(place, index) {  
         const latitude = parseFloat(place.latitude);
         const longitude = parseFloat(place.longitude);
-        const latLng = {lat: latitude, lng: longitude};
-
+        
         return (
-            <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
+            <UncontrolledPopover trigger="legacy" placement="left" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
                 <PopoverBody>
+                    {place.country && <div>Country: {place.country}</div>}
+                    {place.region && <div>Region: {place.region}</div>}
                     {place.municipality && <div>Municipality: {place.municipality}</div>}
                     {place.type && <div>Type: {place.type}</div>}
                     <div>Latitude: {latitude.toFixed(6)}</div> 
                     <div>Longitude: {longitude.toFixed(6)}</div>
-                    <Button onClick={() => this.popoverButtonHandler(latLng)}>Go</Button>
                 </PopoverBody>
             </UncontrolledPopover>
         )
     }
 
-    popoverButtonHandler(latLng) {
-        this.props.setMarker(latLng);
-        this.props.toggleModal();
+    addButtonHandler(latlng) {
+        this.props.setMarker(latlng);
     }
 }

@@ -8,7 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
-import { BsCursorFill } from "react-icons/bs"
+import { BsCursorFill, BsSearch } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
 
 import SearchInput from "./SearchInput";
@@ -45,7 +45,8 @@ export default class Atlas extends Component {
         this.centerMapToIndex = this.centerMapToIndex.bind(this);
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.checkForFeature = this.checkForFeature.bind(this);
-
+        this.toggleSearch = this.toggleSearch.bind(this);
+        this.reverseList = this.reverseList.bind(this);
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
@@ -53,7 +54,8 @@ export default class Atlas extends Component {
             address: "",
             totalDistance: 0,
             userLocation: null,
-            zoom: MAP_ZOOM_DEFAULT
+            zoom: MAP_ZOOM_DEFAULT,
+            searchToggle: false
         };
     
     }
@@ -63,24 +65,26 @@ export default class Atlas extends Component {
     }
 
     render() {
+        const { searchToggle } = this.state;
         return (
-            <div>
-       
-                <Container>
-                    <Row>
-                        <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            {this.renderLeafletMap()}
-                        </Col>
-                    </Row>
-                    {this.renderSearchInput()}
-                    <Row className="text-center">
-                        <Col sm={12} md={{ size: 10, offset: 1 }}>
-                            {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
-                            {this.renderList()}
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            <Container>
+                <Row>
+                    <Col sm={12} md={{ size: 10, offset: 1 }}>
+                        {this.renderLeafletMap()}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12} md={{ size: 10, offset: 1 }}>
+                        {searchToggle && this.renderSearchInput()}
+                    </Col>
+                </Row>
+                <Row className="text-center mt-2">
+                    <Col sm={12} md={{ size: 10, offset: 1 }}>
+                        {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
+                        {this.renderList()}
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 
@@ -97,11 +101,14 @@ export default class Atlas extends Component {
         return <SearchInput setMarker={this.setMarker} 
                 showMessage={this.props.showMessage}
                 serverSettings={this.props.serverSettings}
-                checkForFeature={this.checkForFeature}/>;
+                checkForFeature={this.checkForFeature}
+                toggleSearch={this.toggleSearch}
+                />;
     }
 
     renderList() {
-        return (
+        
+	    return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
                 setTour = {this.setTour}
@@ -112,6 +119,7 @@ export default class Atlas extends Component {
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
                 serverSettings = { this.props.serverSettings }
+                reverseList = {this.reverseList}
             />
         );
     }
@@ -133,16 +141,24 @@ export default class Atlas extends Component {
                 {this.getPolylines()}
 
                 <Control position="bottomright">
-                    {this.renderFindMeButton()}
+                    {this.renderMapButtons()}
                 </Control>
             </Map>
         );
     }
 
-    renderFindMeButton() {
+    renderMapButtons() {
         return (
-          <Button id="findMe" onClick={this.requestUserLocation} color="primary" block><BsCursorFill/></Button>
+            <>
+                <Button onClick={this.toggleSearch} size="sm" color="primary" className="mr-2"><BsSearch/></Button>
+                <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
+            </>
         );
+    }
+
+    toggleSearch() {
+        const { searchToggle } = this.state;
+        this.setState({searchToggle: !searchToggle});
     }
 
     showMarkerPopup(ref) {
@@ -290,14 +306,26 @@ export default class Atlas extends Component {
     clearList() {
         this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
     }
-
+    
+    reverseList(){
+       this.setState({listOfClicks: this.state.listOfClicks.reverse()});
+    }
+    
     removePlace(index) {
         let newList = [];
+	let latlng = this.state.markerPosition;
         for (let i = 0; i < this.state.listOfClicks.length; i++) {
             if (i != index)
                 newList.push(this.state.listOfClicks[i]);
-        }
-        this.setState({ listOfClicks: newList }, this.handleDistances);
+	}
+	if (latlng != null 
+	    && latlng.lat == this.state.listOfClicks[index].latitude
+	    && latlng.lng == this.state.listOfClicks[index].longitude) {
+		latlng = null;
+	}
+        this.setState({ listOfClicks: newList,
+			markerPosition: latlng}, 
+			this.handleDistances);
     }
 
     getPlaces() {

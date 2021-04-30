@@ -33,11 +33,11 @@ describe('PlacesList', () => {
     it('initializes as expected', () => {
         expect(placesWrapper.find(ModalHeader)).toHaveLength(1);
         expect(placesWrapper.find(ModalBody)).toHaveLength(1);
-        expect(placesWrapper.find('tr').at(1).text()).toMatch('Schadels Airport');
+        expect(placesWrapper.find('Row')).toHaveLength(1);
     });
 
-    it('contains a popover and a button', () => {
+    it('contains a popover and two buttons', () => {
         expect(placesWrapper.find(UncontrolledPopover)).toHaveLength(1);
-        placesWrapper.find(Button).simulate('click');
+        expect(placesWrapper.find(Button)).toHaveLength(2);
     });
 });

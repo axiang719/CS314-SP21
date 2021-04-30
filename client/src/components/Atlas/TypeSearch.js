@@ -1,34 +1,42 @@
 import React, { Component } from 'react';
-import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, } from 'reactstrap';
-import styles from '../../static/styles/student-styles.scss'
-import { BsFunnelFill } from "react-icons/bs"
+import {  Button, Row } from 'reactstrap';
 
 export default class TypeSearch extends Component {
     constructor(props) {
         super(props);
-        this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.FillTypeArray = this.FillTypeArray.bind(this);
-        this.checkIfSelected = this.checkIfSelected.bind(this);
-        this.state = {
-            dropdownOpen: false
-        }
+
+        this.fillTypeArray = this.fillTypeArray.bind(this);
+
+        this.state = {};
+
     };
 
         render() {
-            const validTypes = this.props.serverSettings.serverConfig.type;
+            const {serverSettings, type} = this.props;
+            const validTypes = serverSettings.serverConfig.type;
+            const typeArray = type;
 
-            return (<Dropdown className="typeSearch text-white" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                    <DropdownToggle color="primary" caret><BsFunnelFill/></DropdownToggle>
-                    <DropdownMenu>
-                        {validTypes.map((type, index) => {
-                            return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
-                        })}
-                    </DropdownMenu>
-                </Dropdown>
+            return (
+                <Row className="mt-1">
+                    {validTypes.map((type, index) => {
+                        return (
+                            <Button 
+                                outline = {!typeArray.includes(type)} 
+                                key={index}
+                                color="primary"
+                                className="mr-1 mt-1"
+                                size="sm"
+                                onClick={() => this.fillTypeArray(type)}
+                            >
+                                {type}
+                            </Button>
+                        );
+                    })}
+                </Row>
             )
         }
 
-        FillTypeArray(typeNames){
+        fillTypeArray(typeNames){
             const type = this.props.type;
             if(type.includes(typeNames)){
                const index = type.indexOf(typeNames);
@@ -37,18 +45,5 @@ export default class TypeSearch extends Component {
                type.push(typeNames);
             }
             this.props.setType(type);
-        }
-
-        checkIfSelected(typeName) {
-            if(this.props.type.includes(typeName)) {
-                return (
-                    <> &#10003; </>
-                )
-            }
-        }
-
-        toggleDropDown () {
-            const isOpen = this.state.dropdownOpen;
-            this.setState({ dropdownOpen: !isOpen });
         }
     }
