@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash } from "react-icons/bs"
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -135,7 +135,8 @@ export default class ListOfClicks extends Component {
                         }    
                     </Col>
                     <Col xs={{size:1}}>
-                        <BsGeoAlt className="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
+                        <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
+                        <div><BsThreeDots className = "text-primary mt-1"/></div>
                     </Col>
                 </Row>
             </Collapse>
