@@ -33,7 +33,7 @@ describe('PlacesList', () => {
     it('initializes as expected', () => {
         expect(placesWrapper.find(ModalHeader)).toHaveLength(1);
         expect(placesWrapper.find(ModalBody)).toHaveLength(1);
-        expect(placesWrapper.find('tr').at(1).text()).toMatch('Schadels Airport');
+        expect(placesWrapper.find('Row')).toHaveLength(1);
     });
 
     it('contains a popover and two buttons', () => {

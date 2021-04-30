@@ -38,6 +38,7 @@ export default class MatchSearch extends Component {
     }
 
 	render() {
+		const { filterToggle } = this.props;
 		return (
 			<>
 				<Button type="submit" className="ml-1" color="primary" onClick={this.processFindSubmit}><BsSearch/></Button>
@@ -46,12 +47,11 @@ export default class MatchSearch extends Component {
 							toggleModal={this.toggleModal}
 							setMarker={this.props.setMarker}/>
 				<Container>	
-					{this.renderTypeAndWhere()}
+					{filterToggle && this.renderTypeAndWhere()}
 				</Container>
 			</>	
 		);
 	}
-
 
 	renderTypeAndWhere() {
 		const { checkForFeature, serverSettings } = this.props;
@@ -60,7 +60,7 @@ export default class MatchSearch extends Component {
 		const whereIsSupported = checkForFeature('where');
 
 		return (
-			<Row className="mt-1">
+			<>
 				{ typeIsSupported && 
 					<TypeSearch 
 						type={findRequest.type}
@@ -76,7 +76,7 @@ export default class MatchSearch extends Component {
 						serverSettings={serverSettings}
 					/> 
 				}
-			</Row>
+			</>
 		);
 	}
 

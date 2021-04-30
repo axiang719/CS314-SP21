@@ -56,12 +56,12 @@ export default class ListOfClicks extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.renderListOptions()}
-                    <DropdownItem onClick={this.clearHandler}>
-                        Clear List
-                    </DropdownItem>
-                    <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
-                       reverse <BsReverseLayoutTextSidebarReverse className="text-right"/>
-                    </DropdownItem></span>
+                    <span className="text-left"><DropdownItem onClick={this.clearHandler}>
+                        Clear List <BsTrash/>
+                    </DropdownItem></span> 
+                   <DropdownItem onClick={this.props.reverseList}>
+                        reverse
+                   </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         );

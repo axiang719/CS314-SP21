@@ -47,6 +47,7 @@ export default class Atlas extends Component {
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.checkForFeature = this.checkForFeature.bind(this);
         this.toggleSearch = this.toggleSearch.bind(this);
+        this.reverseList = this.reverseList.bind(this);
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
@@ -308,7 +309,7 @@ export default class Atlas extends Component {
     }
     
     reverseList(){
-       this.setState({listOfClicks: listOfClicks.reverse()})
+       this.setState({listOfClicks: listOfClicks.reverse()});
     }
     
     removePlace(index) {

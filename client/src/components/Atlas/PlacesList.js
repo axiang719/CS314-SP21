@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-
+import { Button, Container, Modal, ModalHeader, ModalBody, Table, UncontrolledPopover, PopoverHeader, PopoverBody, ListGroup, ListGroupItem, Row, Col} from 'reactstrap';
+import { FaPlusCircle, FaInfoCircle}  from "react-icons/fa"
 export default class PlacesList extends Component {
     constructor(props) {
         super(props);
@@ -26,27 +26,17 @@ export default class PlacesList extends Component {
         const listOfMatches = this.props.listOfMatches;
         if (listOfMatches.length) {
             return (
-                <Table hover bordered responsive size="sm">
-                    <thead className="text-center">
-                        <tr>
-                            <th>Name</th>
-                            <th>More Info</th>
-                            <th>Add To Tour</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Container>
                         {listOfMatches.map((place, index) => (
-                            <tr key={index} id={"popover" + index}>
-                                <td>{place.name}</td>
-                                <td>{this.renderMoreDetailsButton(place,index)}</td>
-                                <td>{this.renderAddButton(place.latitude,place.longitude)}</td>
-                                {this.moreDetails(place, index)}
-                            </tr>
+                                <Row noGutters className = "py-2 border" key={index}>
+                                    <Col className= "pl-1" md = {{size: 10}} xs = {{size: 8}}>{place.name}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderMoreDetailsButton(place,index)}</Col>
+                                    <Col className = "px-1" md = {1} xs = {{size: 2}}>{this.renderAddButton(place.latitude,place.longitude)}</Col>
+                                    {this.moreDetails(place, index)}
+                                </Row>
                         ))}
-                    </tbody>
-                </Table>
-            );
-        };
+                </Container>
+            )}
     }
 
     renderMoreDetailsButton(place,index) {
@@ -54,9 +44,7 @@ export default class PlacesList extends Component {
         const i = index;
 
         return (
-            <Container>
-                <Button color="primary" onClick={() => this.moreDetails(p,i)}>Info</Button>
-            </Container>
+                <Button color="primary" size = "sm" id={"popover" + index} onClick={() => this.moreDetails(p,i) }><FaInfoCircle className = "mb-1"/></Button>
         )
     }
 
@@ -66,9 +54,7 @@ export default class PlacesList extends Component {
         const latlng = {lat: latitude, lng: longitude};
 
         return (
-            <Container>
-                <Button color="primary" onClick={() => this.addButtonHandler(latlng)}>Add</Button>
-            </Container>
+                <Button color="primary" size = "sm" onClick={() => this.addButtonHandler(latlng)}><FaPlusCircle className = "mb-1"/></Button>
         );
     }
 
@@ -77,7 +63,7 @@ export default class PlacesList extends Component {
         const longitude = parseFloat(place.longitude);
         
         return (
-            <UncontrolledPopover trigger="legacy" placement="bottom" target={"popover" + index}>
+            <UncontrolledPopover trigger="legacy" placement="left" target={"popover" + index}>
                 <PopoverHeader>{place.name}</PopoverHeader>
                 <PopoverBody>
                     {place.country && <div>Country: {place.country}</div>}

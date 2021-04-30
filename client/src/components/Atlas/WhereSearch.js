@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select-virtualized'
-import { Button, Col, InputGroup, Input, InputGroupAddon} 
-    from 'reactstrap';
+import { Button, Row } from 'reactstrap';
 
 
 export default class WhereSearch extends Component {
@@ -31,41 +30,40 @@ export default class WhereSearch extends Component {
     }
 
     render() {      
-        const {show} = this.state;
 		return (
 			<>
-                <Button type= "button" className="ml-1 mr-1 mb-1"  color="primary" onClick={()=>this.setState({show:!show})} > Where?</Button>
-                {show && this.renderWhereButtons()}
-                {show && this.renderWhereInput()}
+                {this.renderWhereButtons()}
+                {this.renderWhereInput()}
 			</>
 		);
 	}
 
     renderWhereInput(){
         return(
-            <Col sm={12}>
+            <div className="mt-2">
                 <Select 
                     value={this.state.whereValue}
-                    placeholder="location..."
+                    placeholder="Filter by territory..."
                     options={this.state.options}
                     onChange={this.processOnChangeWhere}
                 />
-            </Col>
+            </div>
         );
 
     }
 
     renderWhereButtons() {
         return (
-            <>
+            <Row className="mt-1">
                 {this.props.where.map((place, index) => (
                     <Button type="button" 
                             onClick={()=> this.processPlaceButtonClick(index)} 
-                            className="mr-1 mb-1 " 
+                            className="mr-1 mt-1"
+                            size="sm"
                             key={index}>{place + " [x]"}
                     </Button>
                 ))}
-            </>
+            </Row>
         )
     }
 
