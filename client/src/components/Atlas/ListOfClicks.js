@@ -16,6 +16,7 @@ export default class ListOfClicks extends Component {
         this.toggleSettings = this.toggleSettings.bind(this)
         this.state = {
             toggleRow: [],
+            toggleNotes: [],
             settingsToggle: false
         }
     }
@@ -96,6 +97,7 @@ export default class ListOfClicks extends Component {
 
     getTableBody() {
         const {toggleRow} = this.state
+        const {toggleNotes} = this.state
         return (
             <tbody className="text-center">
                 {this.props.listOfClicks.map((place, index) => (
@@ -122,6 +124,7 @@ export default class ListOfClicks extends Component {
 
     getRowInfo(place, index) {
         let {toggleRow} = this.state
+        let {toggleNotes} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
         const isDistancesSupported = this.props.checkForFeature('distances');
@@ -129,6 +132,9 @@ export default class ListOfClicks extends Component {
             <Collapse isOpen={toggleRow[index]}>
                 <Row noGutters>
                     <Col xs={{size:5, offset:1}}>Coordinates: <br/>{place.latitude.toFixed(2) + ', ' + place.longitude.toFixed(2)}</Col>
+                    <Col xs="2">
+                        <Button color="primary" onClick={() => {this.notesHandler(index)}}>Notes</Button>
+                    </Col>
                     <Col xs="5">
                         {isDistancesSupported && 
                             (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + 'mi.'
@@ -138,15 +144,21 @@ export default class ListOfClicks extends Component {
                         <BsGeoAlt className="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
                     </Col>
                 </Row>
-                <Row noGutters>
-                    <Col>
-                        <InputGroup>
-                            <Input placeholder='Notes'/>
-                        </InputGroup>
-                    </Col>
-                </Row>
+                {toggleNotes[index] && this.renderNotes()}
             </Collapse>
         )
+    }
+
+    renderNotes() {
+        return(
+            <Row noGutters>
+                <Col>
+                    <InputGroup>
+                        <Input placeholder='Notes'/>
+                    </InputGroup>
+                </Col>
+            </Row>
+        );
     }
 
     toggleHandler(index) {
@@ -156,10 +168,20 @@ export default class ListOfClicks extends Component {
         this.setState({toggleRow});
     }
 
+    notesHandler(index) {
+        const { toggleNotes } = this.state;
+        toggleNotes[index] = !toggleNotes[index];
+
+        this.setState({toggleNotes});
+    }
+
     deleteHandler(index) {
         const { toggleRow } = this.state;
+        const { toggleNotes} = this.state;
         toggleRow.splice(index, 1);
+        toggleNotes.splice(index, 1);
         this.setState({toggleRow});
+        this.setState({toggleNotes});
         this.props.removePlace(index);
     }
 
