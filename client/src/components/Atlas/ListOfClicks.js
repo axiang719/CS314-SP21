@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash } from "react-icons/bs"
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsReverseLayoutTextSidebarReverse } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -14,7 +14,7 @@ export default class ListOfClicks extends Component {
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
-        this.toggleReverseHandler = this. toggleReverseHandler.bind(this)
+      
         this.state = {
             toggleRow: [],
             settingsToggle: false
@@ -59,9 +59,9 @@ export default class ListOfClicks extends Component {
                     <DropdownItem onClick={this.clearHandler}>
                         Clear List
                     </DropdownItem>
-                    <DropdownItem onClick={this.props.reverseList}>
-                        reverse
-                    </DropdownItem>
+                    <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
+                       reverse <BsReverseLayoutTextSidebarReverse className="text-right"/>
+                    </DropdownItem></span>
                 </DropdownMenu>
             </Dropdown>
         );
@@ -164,8 +164,5 @@ export default class ListOfClicks extends Component {
     clearHandler() {
         this.setState({toggleRow: []})
         this.props.clearList();
-    }
-    toggleReverseHandler(){
-        this.props.listOfClicks.reverse(); 
     }
 }
