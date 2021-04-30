@@ -67,7 +67,7 @@ export default class ListOfClicks extends Component {
         );
     }
     
-    renderMeatballDropdown() {
+    renderMeatballDropdown(index) {
         return (
             <Dropdown
                 inNavbar
@@ -83,6 +83,8 @@ export default class ListOfClicks extends Component {
             </Dropdown> 
         );
     }
+        
+    
 
     renderListOptions() {
         const {setTour, clearList, setPlace, listOfClicks, 
@@ -164,7 +166,7 @@ export default class ListOfClicks extends Component {
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
                         <div><BsThreeDots className = "text-primary" onClick={this.toggleMeatballs}></BsThreeDots></div>
                     </Col>
-                    <Col>{this.renderMeatballDropdown()}</Col>
+                    <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
             </Collapse>
         )

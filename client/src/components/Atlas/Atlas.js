@@ -338,7 +338,8 @@ export default class Atlas extends Component {
     selectNewStartingLocation(index){
         const {listOfClicks} = this.state;
         let tempArray = listOfClicks.slice(index);
-        this.setState({listOfClicks: tempArray.concat(temp2)});
+        let list = tempArray.concat(listOfClicks.slice(0,index));
+        this.setState({listOfClicks: list});
         console.log(listOfClicks);
     }
     
