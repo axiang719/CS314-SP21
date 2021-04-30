@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsReverseLayoutTextSidebarReverse } from "react-icons/bs"
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsArrowUpDown} from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -59,9 +59,9 @@ export default class ListOfClicks extends Component {
                     <span className="text-left"><DropdownItem onClick={this.clearHandler}>
                         Clear List <BsTrash/>
                     </DropdownItem></span> 
-                   <DropdownItem onClick={this.props.reverseList}>
-                        reverse
-                   </DropdownItem>
+                   <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
+                       reverse   <BsArrowUpDown className="text-right"/>
+                   </DropdownItem></span>
                 </DropdownMenu>
             </Dropdown>
         );
@@ -69,7 +69,7 @@ export default class ListOfClicks extends Component {
 
     renderListOptions() {
         const {setTour, clearList, setPlace, listOfClicks, 
-            getPlaces, serverSettings, checkForFeature, reverseList} = this.props;
+            getPlaces, serverSettings, checkForFeature} = this.props;
         return (
             <>
                 <LoadTour
@@ -77,7 +77,6 @@ export default class ListOfClicks extends Component {
                     clearList = {clearList}
                     setPlace = {setPlace}
                     listOfClicks = {listOfClicks}
-                    reverseList = {reverseList}
                 />
                 <SaveTour 
                     getPlaces = {getPlaces}

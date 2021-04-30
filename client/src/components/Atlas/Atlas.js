@@ -309,7 +309,7 @@ export default class Atlas extends Component {
     }
     
     reverseList(){
-       this.setState({listOfClicks: listOfClicks.reverse()});
+       this.setState({listOfClicks: this.state.listOfClicks.reverse()});
     }
     
     removePlace(index) {
