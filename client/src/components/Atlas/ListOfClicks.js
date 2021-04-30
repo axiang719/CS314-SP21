@@ -15,6 +15,7 @@ export default class ListOfClicks extends Component {
         this.clearHandler = this.clearHandler.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
         this.toggleMeatballs = this.toggleMeatballs.bind(this)
+        this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this);
         this.state = {
             toggleRow: [],
             settingsToggle: false,
@@ -73,9 +74,6 @@ export default class ListOfClicks extends Component {
                 isOpen={this.state.meatballToggle}
                 direction="left"
                 toggle={this.toggleMeatballs}>
-                <DropdownToggle tag = "div">
-                    <BsThreeDots/>
-                </DropdownToggle>
                 <DropdownMenu>
                    hello
                 </DropdownMenu>
@@ -161,8 +159,9 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col xs={{size:1}}>
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
-                        <div>{this.renderMeatballDropdown()}</div>
+                        <div><BsThreeDots className = "text-primary" onClick={this.toggleMeatballs}></BsThreeDots></div>
                     </Col>
+                    <Col>{this.renderMeatballDropdown()}</Col>
                 </Row>
             </Collapse>
         )

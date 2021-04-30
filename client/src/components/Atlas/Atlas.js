@@ -47,6 +47,7 @@ export default class Atlas extends Component {
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.checkForFeature = this.checkForFeature.bind(this);
         this.toggleSearch = this.toggleSearch.bind(this);
+        this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -331,6 +332,12 @@ export default class Atlas extends Component {
             places.push(place);
         }
         return places;
+    }
+
+    selectNewStartingLocation(index, list){
+        const {listOfClicks} = this.props;
+        let tempArray = listOfClicks.slice(index);
+        this.state.listOfClicks = tempArrayRight.concat(listOfClicks.slice(0, index));
     }
     
     getStringMarkerPosition() {
