@@ -141,7 +141,7 @@ export default class ListOfClicks extends Component {
                 <Row noGutters>
                     <Col>
                         <InputGroup>
-                            <Input placeholder='notes'/>
+                            <Input placeholder='Notes'/>
                         </InputGroup>
                     </Col>
                 </Row>
