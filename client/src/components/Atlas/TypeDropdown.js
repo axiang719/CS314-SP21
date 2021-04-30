@@ -8,9 +8,11 @@ export default class TypeDropdown extends Component {
         super(props);
 
         this.fillTypeArray = this.fillTypeArray.bind(this);
-
-        this.state = {};
-
+	this.toggleDropDown = this.toggleDropDown.bind(this);
+	this.checkIfSelected = this.checkIfSelected.bind(this);
+	this.state = {
+            dropdownOpen: false
+        }
     };
 
         render() {
@@ -20,7 +22,7 @@ export default class TypeDropdown extends Component {
                     <DropdownToggle color="primary" caret><BsFunnelFill/></DropdownToggle>
                     <DropdownMenu>
                         {validTypes.map((type, index) => {
-                            return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
+                            return <DropdownItem key={index} toggle={false} onClick={() => this.fillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
                         })}
                     </DropdownMenu>
                 </Dropdown>

@@ -5,7 +5,7 @@ import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsArrowUpDown
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
-import TypeSearch from './TypeDropdown';
+import TypeDropdown from './TypeDropdown';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
