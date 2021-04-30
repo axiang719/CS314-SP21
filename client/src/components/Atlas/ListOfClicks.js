@@ -131,7 +131,7 @@ export default class ListOfClicks extends Component {
                     <Col xs={{size:5, offset:1}}>Coordinates: <br/>{place.latitude.toFixed(2) + ', ' + place.longitude.toFixed(2)}</Col>
                     <Col xs="5">
                         {isDistancesSupported && 
-                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + 'mi.'
+                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + ' mi.'
                         }    
                     </Col>
                     <Col xs={{size:1}}>
