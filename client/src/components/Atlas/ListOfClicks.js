@@ -5,7 +5,7 @@ import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsArrowUpDown
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
-import TypeSearch from './TypeSearch';
+import TypeSearch from './TypeDropdown';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -48,7 +48,7 @@ export default class ListOfClicks extends Component {
     renderTourFilter(){
 	if(this.props.serverSettings != null
 	   && this.props.serverSettings.serverConfig != null) {
-		return <TypeSearch type={this.state.typeFilter}
+		return <TypeDropdown type={this.state.typeFilter}
 	        	serverSettings={this.props.serverSettings}
 	      		setType={(type) => {this.setState({typeFilter: type})}}/>
 	}
