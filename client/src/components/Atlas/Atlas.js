@@ -121,6 +121,7 @@ export default class Atlas extends Component {
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
                 serverSettings = { this.props.serverSettings }
+                selectNewStartingLocation = { this.selectNewStartingLocation}
             />
         );
     }
@@ -334,10 +335,11 @@ export default class Atlas extends Component {
         return places;
     }
 
-    selectNewStartingLocation(index, list){
-        const {listOfClicks} = this.props;
+    selectNewStartingLocation(index){
+        const {listOfClicks} = this.state;
         let tempArray = listOfClicks.slice(index);
-        this.state.listOfClicks = tempArrayRight.concat(listOfClicks.slice(0, index));
+        this.setState({listOfClicks: tempArray.concat(temp2)});
+        console.log(listOfClicks);
     }
     
     getStringMarkerPosition() {

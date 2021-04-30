@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots } from "react-icons/bs"
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
+import Atlas from './Atlas';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -75,7 +76,9 @@ export default class ListOfClicks extends Component {
                 direction="left"
                 toggle={this.toggleMeatballs}>
                 <DropdownMenu>
-                   hello
+                    <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
+                        Start Here! <BsHouseFill/>
+                    </DropdownItem></span> 
                 </DropdownMenu>
             </Dropdown> 
         );
@@ -165,12 +168,6 @@ export default class ListOfClicks extends Component {
                 </Row>
             </Collapse>
         )
-    }
-
-    selectNewStartingLocation(index, list){
-        const {listOfClicks} = this.props;
-        let tempArray = listOfClicks.slice(index);
-        listOfClicks = tempArrayRight.concat(listOfClicks.slice(0, index));
     }
 
     toggleHandler(index) {
