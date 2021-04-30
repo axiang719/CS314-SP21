@@ -16,6 +16,7 @@ export default class ListOfClicks extends Component {
         this.toggleSettings = this.toggleSettings.bind(this)
         this.state = {
             toggleRow: [],
+	    typeFilter: [],
             settingsToggle: false
         }
     }
@@ -31,7 +32,7 @@ export default class ListOfClicks extends Component {
                                     Places
                                 </Col>
                                 <Col xs={1}>
-                                    {this.renderDropdown()}
+					{this.renderTourFilter()} {this.renderDropdown()}
                                 </Col>
                             </Row>
                         </th>
@@ -40,6 +41,15 @@ export default class ListOfClicks extends Component {
                 {this.getTableBody()}
             </Table>
         );
+    }
+
+    renderTourFilter(){
+	if(this.props.serverSettings != null 
+	   && this.props.serverSettings.serverConfig != null) {
+		return <TypeSearch type={this.state.typeFilter}
+	        	serverSettings={this.props.serverSettings}
+	      		setType={(type) => {this.setState({typeFilter: type})}}/>
+	}
     }
 
     renderDropdown() {

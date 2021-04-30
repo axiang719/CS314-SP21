@@ -63,4 +63,12 @@ describe('ListOfClicks', () => {
         ListWrapper.instance().toggleSettings();
         expect(ListWrapper.state().settingsToggle).toBe(true);
     });
+
+
+    it('renders the filter tour button', () => {
+        const expectedLength = 1;
+        const actualLength = ListWrapper.find('TypeSearch').length;
+
+        expect(expectedLength).toEqual(actualLength);
+    });
 });
