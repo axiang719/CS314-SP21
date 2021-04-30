@@ -14,15 +14,6 @@ import { isSupportedFeature } from "../../utils/restfulAPI";
 import SearchInput from "./SearchInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
-<<<<<<< HEAD
-import LoadTour from "./LoadTour";
-import SaveTour from "./SaveTour";
-import OrderTour from './OrderTour';
-import TypeSearch from './TypeSearch';
-
-=======
->>>>>>> main
-
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
 const MAP_CENTER_DEFAULT = L.latLng(40.5734, -105.0865);
