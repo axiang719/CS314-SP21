@@ -20,7 +20,7 @@ export default class ListOfClicks extends Component {
         this.state = {
             toggleRow: [],
             settingsToggle: false,
-            meatballToggle: false
+            meatballToggle: -1
         }
     }
 
@@ -68,20 +68,20 @@ export default class ListOfClicks extends Component {
     }
     
     renderMeatballDropdown(index) {
-        return (
-            <Dropdown
-                inNavbar
-                className= "text-white" 
-                isOpen={this.state.meatballToggle}
-                direction="left"
-                toggle={this.toggleMeatballs}>
-                <DropdownMenu>
-                    <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
-                        Start Here! <BsHouseFill/>
-                    </DropdownItem></span> 
-                </DropdownMenu>
-            </Dropdown> 
-        );
+            return (
+                <Dropdown
+                    inNavbar
+                    className= "text-white" 
+                    isOpen={this.state.meatballToggle===index}
+                    direction="left"
+                    toggle={this.toggleMeatballs}>
+                    <DropdownMenu>
+                        <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
+                            Start Here! <BsHouseFill/>
+                        </DropdownItem></span> 
+                    </DropdownMenu>
+                </Dropdown> 
+            );
     }
         
     
@@ -117,9 +117,8 @@ export default class ListOfClicks extends Component {
         this.setState({settingsToggle: !settingsToggle});
     }
 
-    toggleMeatballs() {
-        const {meatballToggle} = this.state;
-        this.setState({meatballToggle : !meatballToggle})
+    toggleMeatballs(index) {
+        this.setState({meatballToggle : index})
     }
 
     getTableBody() {
@@ -164,7 +163,7 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col xs={{size:1}}>
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
-                        <div><BsThreeDots className = "text-primary" onClick={this.toggleMeatballs}></BsThreeDots></div>
+                        <div><BsThreeDots className = "text-primary" onClick={()=> this.toggleMeatballs(index)}></BsThreeDots></div>
                     </Col>
                     <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
