@@ -120,6 +120,7 @@ export default class Atlas extends Component {
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
                 serverSettings = { this.props.serverSettings }
+                reverseList = {this.reverseList}
             />
         );
     }
@@ -307,7 +308,7 @@ export default class Atlas extends Component {
         this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
     }
     reverseList(){
-        this.setState({listOfClicks: listOfClicks.reverse()});
+       this.setState({listOfClicks: listOfClicks.reverse()})
     }
     removePlace(index) {
         let newList = [];
