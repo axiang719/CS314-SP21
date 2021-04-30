@@ -142,6 +142,12 @@ export default class ListOfClicks extends Component {
         )
     }
 
+    selectNewStartingLocation(index, list){
+        const {listOfClicks} = this.props;
+        let tempArray = listOfClicks.slice(index);
+        return tempArrayRight.concat(listOfClicks.slice(0, index));
+    }
+
     toggleHandler(index) {
         const { toggleRow } = this.state;
         toggleRow[index] = !toggleRow[index];
