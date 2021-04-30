@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DropdownToggle, DropdownMenu, Dropdown,DropdownItem, } from 'reactstrap';
 import styles from '../../static/styles/student-styles.scss'
+import { BsFunnelFill } from "react-icons/bs"
 
 export default class TypeSearch extends Component {
     constructor(props) {
@@ -16,8 +17,8 @@ export default class TypeSearch extends Component {
         render() {
             const validTypes = this.props.serverSettings.serverConfig.type;
 
-            return (<Dropdown className="typeSearch" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-                    <DropdownToggle color="primary" caret>Type</DropdownToggle>
+            return (<Dropdown className="typeSearch text-white" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+                    <DropdownToggle color="primary" caret><BsFunnelFill/></DropdownToggle>
                     <DropdownMenu>
                         {validTypes.map((type, index) => {
                             return <DropdownItem key={index} toggle={false} onClick={() => this.FillTypeArray(type)}>{type} {this.checkIfSelected(type)}</DropdownItem>
