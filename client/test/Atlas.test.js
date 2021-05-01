@@ -143,8 +143,7 @@ describe('Atlas', () => {
 
     it('tests newStartingPlace', () =>{
         atlasWrapper.instance().selectNewStartingLocation(1);
-        
-    })
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {
