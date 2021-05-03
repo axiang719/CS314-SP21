@@ -73,7 +73,7 @@ export default class MapSettings extends Component {
         return(
             <>
                 <FormGroup>
-                    <Label for="exampleRange">Line Width</Label>
+                    <Label for="Range">Line Width ({this.state.lineWidth})</Label>
                     <Input type="range" 
                             name="range" 
                             id="exampleRange" 
@@ -97,8 +97,8 @@ export default class MapSettings extends Component {
 
     toggleModal() {
         const { modalOpen } = this.state;
-        this.props.rgbCallback(this.state.color);  
-        this.props.setLineWidth(this.state.lineWidth);
+        this.props.rgbCallback(this.state.color); 
+        this.props.setLineWidth(this.state.lineWidth); 
         this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 

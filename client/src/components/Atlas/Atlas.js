@@ -153,8 +153,8 @@ export default class Atlas extends Component {
                 </Control>
                 <Control position="topleft">
                     <MapSettings
-                        rgbCallback = {this.rgbCallback}
                         setLineWidth = {this.setLineWidth}
+                        rgbCallback = {this.rgbCallback}
                     />
                 </Control>
             </Map>

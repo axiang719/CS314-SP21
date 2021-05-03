@@ -12,6 +12,7 @@ describe('MapSettings', () => {
 
     beforeEach(() => {
         mapWrapper = shallow(<MapSettings rgbCallback = {snacks}
+                                            setLineWidth= {snacks}
                                             value = {snacks}/>)
     });
 
