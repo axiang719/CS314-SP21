@@ -149,6 +149,11 @@ describe('Atlas', () => {
         atlasWrapper.instance().rgbCallback('#11a1e8');
         expect(atlasWrapper.state().rgb).toEqual('#11a1e8');
     });
+
+    it('tests setLineWidth', () =>{
+        atlasWrapper.instance().setLineWidth(5);
+        expect(atlasWrapper.state().lineWidth).toEqual(5);
+    })
     
     function mockGeoLocateResponse() {
         const geoResponseData = {
