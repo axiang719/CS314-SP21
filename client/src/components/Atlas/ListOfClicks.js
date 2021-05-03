@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill, BsArrowUpDown } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
-import Atlas from './Atlas';
+import FilterTour from './FilterTour';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -32,8 +32,13 @@ export default class ListOfClicks extends Component {
                     <tr>
                         <th>
                             <Row noGutters>
-                                <Col className="text-center text-white" xs={{size:10, offset: 1}}>
+                                <Col className="text-center text-white" xs={{size:8, offset: 2}}>
                                     Places
+                                </Col>
+                                <Col xs={1} className="text-right">
+                                    <FilterTour
+                                        listOfClicks = {this.props.listOfClicks}
+                                    />
                                 </Col>
                                 <Col xs={1}>
                                     {this.renderDropdown()}
@@ -56,7 +61,7 @@ export default class ListOfClicks extends Component {
                 direction="left"
                 toggle={this.toggleSettings}>
                 <DropdownToggle tag="div">
-                    <BsGearFill/>
+                    <BsGearFill className="mb-1"/>
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.renderListOptions()}
