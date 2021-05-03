@@ -61,7 +61,7 @@ export default class Atlas extends Component {
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
-            rgb: 'blue'
+            rgb: '#11a1e8'
         };
     
     }
