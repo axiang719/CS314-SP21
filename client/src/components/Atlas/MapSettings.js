@@ -13,7 +13,7 @@ export default class MapSettings extends Component {
 
         this.state = {
             modalOpen: false,
-            color: ""
+            color: '#11a1e8'
         };
     }
 
@@ -31,12 +31,12 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     <FormGroup>
-                        <Label for="exampleColor">Color</Label>
+                        <Label for= {this.state.color}>Color</Label>
                             <Input
-                                type="color"
-                                name="color"
-                                id="exampleColor"
-                                placeholder="color placeholder"
+                                type= 'color'
+                                name= {this.state.color}
+                                id= {this.state.color}
+                                placeholder= {this.state.color}
                                 onChange = {this.handleChange}
                             />
                     </FormGroup>        
