@@ -57,7 +57,6 @@ export default class MapSettings extends Component {
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
-        console.log(value);
     }
 
     toggleModal() {
