@@ -10,10 +10,14 @@ export default class MapSettings extends Component {
         this.renderModal = this.renderModal.bind(this);
         this.renderMapSettingButton = this.renderMapSettingButton.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeBar = this.handleChangeBar.bind(this);
+        this.renderLineWidthForm = this.renderLineWidthForm.bind(this);
+        this.renderLineColor = this.renderLineColor.bind(this);
 
         this.state = {
             modalOpen: false,
-            color: '#11a1e8'
+            color: '#11a1e8',
+            lineWidth: 3
         };
     }
 
@@ -30,18 +34,8 @@ export default class MapSettings extends Component {
                     <div className="text-center">Map Settings</div>
                 </ModalHeader>
                 <ModalBody>
-                    <FormGroup>
-                        <Label for= {this.state.color}>Color</Label>
-                            <Input
-                                type = 'color'
-                                name = {this.state.color}
-                                id = 'name'
-                                placeholder = {this.state.color}
-                                value = {this.state.color}
-                                background-color = {this.state.color}
-                                onChange = {this.handleChange}
-                            />
-                    </FormGroup>        
+                    {this.renderLineColor()}
+                    {this.renderLineWidthForm()}      
                 </ModalBody>
             </Modal>
         );
@@ -56,14 +50,55 @@ export default class MapSettings extends Component {
         );
     }
 
+    renderLineColor(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for= {this.state.color}>Color</Label>
+                        <Input
+                            type = 'color'
+                            name = {this.state.color}
+                            id = 'name'
+                            placeholder = {this.state.color}
+                            value = {this.state.color}
+                            background-color = {this.state.color}
+                            onChange = {this.handleChange}
+                        />
+                </FormGroup>  
+            </>
+        );
+    }
+
+    renderLineWidthForm(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="Range">Line Width ({this.state.lineWidth})</Label>
+                    <Input type="range" 
+                            name="range" 
+                            id="exampleRange" 
+                            min= "1" max= "20"
+                            value = {this.state.lineWidth}
+                            onChange = {this.handleChangeBar}/>
+                </FormGroup>    
+            </>
+        );
+    }
+
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
     }
 
+    handleChangeBar(event){
+        const value = event.target.value;
+        this.setState({lineWidth: value});
+    }
+
     toggleModal() {
         const { modalOpen } = this.state;
-        this.props.rgbCallback(this.state.color);  
+        this.props.rgbCallback(this.state.color); 
+        this.props.setLineWidth(this.state.lineWidth); 
         this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 

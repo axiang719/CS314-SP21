@@ -51,6 +51,7 @@ export default class Atlas extends Component {
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
         this.rgbCallback = this.rgbCallback.bind(this);
+        this.setLineWidth = this.setLineWidth.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -61,7 +62,8 @@ export default class Atlas extends Component {
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
-            rgb: '#11a1e8'
+            rgb: '#11a1e8',
+            lineWidth: "3"
         };
     
     }
@@ -144,13 +146,14 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPolylines(this.state.rgb)}
+                {this.getPolylines(this.state.rgb, this.state.lineWidth)}
 
                 <Control position="bottomright">
                     {this.renderMapButtons()}
                 </Control>
                 <Control position="topleft">
                     <MapSettings
+                        setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
                     />
                 </Control>
@@ -169,6 +172,10 @@ export default class Atlas extends Component {
 
     rgbCallback(color){
         this.setState({rgb: color});
+    }
+
+    setLineWidth(width){
+        this.setState({lineWidth: width})
     }
 
     toggleSearch() {
@@ -262,11 +269,11 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines(rgb) {
+    getPolylines(rgb, width) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray} color= {rgb}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb}/> //color= 'red'/>
         }
     }
 
