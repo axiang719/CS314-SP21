@@ -25,4 +25,13 @@ describe('FilterTour', () => {
         expect(FilterWrapper.state().modalToggle).toEqual(true);
     });
 
+    it('generates the right search options', () => {
+        const expectedOptions = [{value: "place", label: "place"}];
+        const searchArray = [{name: 'place,'}];
+        const actualOptions = FilterWrapper.instance().getSearchOptions(searchArray);
+        expect(actualOptions).toEqual(expectedOptions)
+        const noOptions = FilterWrapper.instance().getSearchOptions();
+        expect(noOptions).toEqual([]);
+    });
+
 });

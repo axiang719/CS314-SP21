@@ -67,7 +67,6 @@ export default class FilterTour extends Component {
                 searchOptions.push({value: name, label: name});   
             });
         }
-        console.log(searchOptions);
         return searchOptions;
     }
 
