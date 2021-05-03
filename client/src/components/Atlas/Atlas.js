@@ -50,6 +50,7 @@ export default class Atlas extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
+        this.rgbCallback = this.rgbCallback.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -60,6 +61,7 @@ export default class Atlas extends Component {
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
+            rgb: 'blue'
         };
     
     }
@@ -142,14 +144,15 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPolylines()}
+                {this.getPolylines(this.state.rgb)}
 
                 <Control position="bottomright">
                     {this.renderMapButtons()}
                 </Control>
-                <MapSettings>{ renderMapSettingButton = this.props.renderMapSettingButton }</MapSettings>
                 <Control position="topleft">
-                    {renderMapSettingButton}
+                    <MapSettings
+                        rgbCallback = {this.rgbCallback}
+                    />
                 </Control>
             </Map>
         );
@@ -162,6 +165,10 @@ export default class Atlas extends Component {
                 <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
             </>
         );
+    }
+
+    rgbCallback(color){
+        this.setState({rgb: color});
     }
 
     toggleSearch() {
@@ -255,11 +262,11 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines() {
+    getPolylines(rgb) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} color= {rgb}/> //color= 'red'/>
         }
     }
 
