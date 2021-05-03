@@ -14,6 +14,7 @@ import { isSupportedFeature } from "../../utils/restfulAPI";
 import SearchInput from "./SearchInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
+import MapSettings from "./MapSettings";
 
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -49,8 +50,6 @@ export default class Atlas extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
-        this.toggleModal= this.toggleModal.bind(this);
-        this.renderModal = this.renderModal.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -61,7 +60,6 @@ export default class Atlas extends Component {
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
-            modalOpen: false
         };
     
     }
@@ -149,8 +147,9 @@ export default class Atlas extends Component {
                 <Control position="bottomright">
                     {this.renderMapButtons()}
                 </Control>
+                <MapSettings>{ renderMapSettingButton = this.props.renderMapSettingButton }</MapSettings>
                 <Control position="topleft">
-                    {this.renderMapSettingButton()}
+                    {renderMapSettingButton}
                 </Control>
             </Map>
         );
@@ -163,33 +162,6 @@ export default class Atlas extends Component {
                 <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
             </>
         );
-    }
-
-    renderMapSettingButton(){
-        return(
-            <>
-                <Button onClick = {this.toggleModal} id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
-                <Col>{this.renderModal()}</Col>
-            </>
-        );
-    }
-
-    renderModal() {
-        return (
-            <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
-                <ModalHeader toggle={this.toggleModal}>
-                    <div className="text-center">Map Settings</div>
-                </ModalHeader>
-                <ModalBody>
-                	<Button id="LinesOptions" color="primary" className = 'mr-1'>Lines</Button>  
-                </ModalBody>
-            </Modal>
-        );
-    }
-
-    toggleModal() {
-        const { modalOpen } = this.state;
-        this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 
     toggleSearch() {
