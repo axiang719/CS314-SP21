@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, Input } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill,BsArrowUpDown } from "react-icons/bs"
+import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill,BsArrowUpDown,BsCardText,BsXCircle } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -66,7 +66,7 @@ export default class ListOfClicks extends Component {
                         Clear List <BsTrash/>
                     </DropdownItem></span> 
                    <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
-                       reverse   <BsArrowUpDown className="text-right"/>
+                        Reverse   <BsArrowUpDown className="text-right"/>
                    </DropdownItem></span>
                 </DropdownMenu>
             </Dropdown>
@@ -86,7 +86,7 @@ export default class ListOfClicks extends Component {
                             Start Here! <BsHouseFill/>
                         </DropdownItem>
                         <DropdownItem onClick={() => this.setNotes(index)}>
-                            Add Notes
+                            Add Notes <BsCardText/>
                         </DropdownItem>
                             </span> 
                     </DropdownMenu>
@@ -193,6 +193,9 @@ export default class ListOfClicks extends Component {
             <Row noGutters>
                 <Col>
                     <InputGroup>
+                        <InputGroupAddon addonType='append'>
+                            <Button color='primary' onClick={() => this.setNotes(-1)}><BsXCircle/></Button>
+                        </InputGroupAddon>
                         <Input placeholder='Notes'/>
                     </InputGroup>
                 </Col>
