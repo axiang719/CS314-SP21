@@ -123,7 +123,6 @@ export default class ListOfClicks extends Component {
     }
 
     setNotes(index) {
-        const {notesToggle} = this.state;
         this.setState({notesToggle: index})
     }
 

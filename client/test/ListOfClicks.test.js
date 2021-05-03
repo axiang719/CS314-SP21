@@ -69,4 +69,12 @@ describe('ListOfClicks', () => {
         ListWrapper.instance().toggleMeatballs(1);
         expect(1).toEqual(ListWrapper.state().index);
     })
+
+    it('renders notes', () => {
+        expect(ListWrapper.state().notesToggle).toEqual(-1);
+
+        ListWrapper.setState({notesToggle: 1});
+        ListWrapper.instance().setNotes(1);
+        expect(ListWrapper.state().notesToggle).toEqual(1);
+    })
 });
