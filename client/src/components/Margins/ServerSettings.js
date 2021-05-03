@@ -181,7 +181,6 @@ export default class ServerSettings extends Component {
     }
 
     toggleDomain(toggleValue) {
-        console.log(toggleValue)
         let { domainToggle } = this.state;
         domainToggle === toggleValue ? domainToggle = "" : domainToggle = toggleValue;
         this.setState({ domainToggle });
