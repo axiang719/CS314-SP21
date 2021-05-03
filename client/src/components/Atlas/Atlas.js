@@ -8,7 +8,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
-import { BsCursorFill, BsSearch } from "react-icons/bs"
+import { BsCursorFill, BsSearch, BsGearFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
 
 import SearchInput from "./SearchInput";
@@ -145,8 +145,11 @@ export default class Atlas extends Component {
                 {this.getMarker()}
                 {this.getPolylines()}
 
-                <Control position="botright">
+                <Control position="bottomright">
                     {this.renderMapButtons()}
+                </Control>
+                <Control position="topleft">
+                    {this.renderMapSettingButton()}
                 </Control>
             </Map>
         );
@@ -164,7 +167,7 @@ export default class Atlas extends Component {
     renderMapSettingButton(){
         return(
             <>
-            
+                <Button id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
             </>
         );
     }
