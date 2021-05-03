@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table, Dropdown, DropdownItem, DropdownToggle, DropdownMenu} from 'reactstrap';
+import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 
@@ -49,8 +49,8 @@ export default class Atlas extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
-        this.toggleDropdown= this.toggleDropdown.bind(this);
-        this.renderDropdown = this.renderDropdown.bind(this);
+        this.toggleModal= this.toggleModal.bind(this);
+        this.renderModal = this.renderModal.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -61,7 +61,7 @@ export default class Atlas extends Component {
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
-            settingsToggle: false
+            modalOpen: false
         };
     
     }
@@ -113,7 +113,6 @@ export default class Atlas extends Component {
     }
 
     renderList() {
-        
 	    return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
@@ -127,7 +126,6 @@ export default class Atlas extends Component {
                 serverSettings = { this.props.serverSettings }
                 selectNewStartingLocation = { this.selectNewStartingLocation}
                 reverseList = {this.reverseList}
-
             />
         );
     }
@@ -170,33 +168,33 @@ export default class Atlas extends Component {
     renderMapSettingButton(){
         return(
             <>
-                <Button onClick = {this.renderDropdown} id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
+                <Button onClick = {this.toggleModal} id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
+                <Col>{this.renderModal()}</Col>
             </>
         );
     }
 
-    renderDropdown() {
+    renderModal() {
         return (
-            <Dropdown 
-                inNavbar
-                className="text-white" 
-                isOpen={this.state.settingsToggle}
-                direction="right"
-                toggle={this.toggleDropdown}>
-                <DropdownMenu>
-                </DropdownMenu>
-            </Dropdown>
+            <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
+                <ModalHeader toggle={this.toggleModal}>
+                    <div className="text-center">Map Settings</div>
+                </ModalHeader>
+                <ModalBody>
+                	<Button id="LinesOptions" color="primary" className = 'mr-1'>Lines</Button>  
+                </ModalBody>
+            </Modal>
         );
+    }
+
+    toggleModal() {
+        const { modalOpen } = this.state;
+        this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 
     toggleSearch() {
         const { searchToggle } = this.state;
         this.setState({searchToggle: !searchToggle});
-    }
-
-    toggleDropdown(){
-        const { settingsToggle} = this.state;
-        this.setState({settingsToggle: !settingsToggle});
     }
 
     showMarkerPopup(ref) {
