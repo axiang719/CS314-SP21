@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table } from 'reactstrap';
+import { Col, Container, Row, Button, Table, Dropdown, DropdownItem, DropdownToggle, DropdownMenu} from 'reactstrap';
 
 import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 
@@ -49,6 +49,8 @@ export default class Atlas extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
+        this.toggleDropdown= this.toggleDropdown.bind(this);
+        this.renderDropdown = this.renderDropdown.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -58,7 +60,8 @@ export default class Atlas extends Component {
             totalDistance: 0,
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
-            searchToggle: false
+            searchToggle: false,
+            settingsToggle: false
         };
     
     }
@@ -167,14 +170,33 @@ export default class Atlas extends Component {
     renderMapSettingButton(){
         return(
             <>
-                <Button id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
+                <Button onClick = {this.renderDropdown} id = "lines" size = "sm" color = "primary"><BsGearFill/></Button>
             </>
+        );
+    }
+
+    renderDropdown() {
+        return (
+            <Dropdown 
+                inNavbar
+                className="text-white" 
+                isOpen={this.state.settingsToggle}
+                direction="right"
+                toggle={this.toggleDropdown}>
+                <DropdownMenu>
+                </DropdownMenu>
+            </Dropdown>
         );
     }
 
     toggleSearch() {
         const { searchToggle } = this.state;
         this.setState({searchToggle: !searchToggle});
+    }
+
+    toggleDropdown(){
+        const { settingsToggle} = this.state;
+        this.setState({settingsToggle: !settingsToggle});
     }
 
     showMarkerPopup(ref) {
