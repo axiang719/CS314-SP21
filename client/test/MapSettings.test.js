@@ -31,4 +31,14 @@ describe('MapSettings', () => {
         mapWrapper.instance().handleChange(mockEvent);
         expect(mapWrapper.state().modalOpen).toEqual(false);
     });
+
+    it('tests the modal toggle',()=>{
+        const mockEvent = {
+            target: jest.fn(),
+            value: '5'
+        };
+        mapWrapper.instance().toggleModal();
+        mapWrapper.instance().handleChangeBar(mockEvent);
+        expect(mapWrapper.state().modalOpen).toEqual(true);
+    });
 });
