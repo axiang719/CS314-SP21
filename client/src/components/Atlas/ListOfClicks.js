@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill, BsArrowUpDown } from "react-icons/bs"
+import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill,BsArrowUpDown,BsCardText,BsXCircle } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
@@ -14,14 +14,16 @@ export default class ListOfClicks extends Component {
         this.getRowInfo = this.getRowInfo.bind(this)
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
+        this.setNotes = this.setNotes.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
         this.toggleMeatballs = this.toggleMeatballs.bind(this)
-        this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this);
+        this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this)
       
         this.state = {
             toggleRow: [],
             settingsToggle: false,
-            meatballToggle: -1
+            meatballToggle: -1,
+            notesToggle: -1
         }
     }
 
@@ -64,7 +66,7 @@ export default class ListOfClicks extends Component {
                         Clear List <BsTrash/>
                     </DropdownItem></span> 
                    <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
-                       reverse   <BsArrowUpDown className="text-right"/>
+                        Reverse   <BsArrowUpDown className="text-right"/>
                    </DropdownItem></span>
                 </DropdownMenu>
             </Dropdown>
@@ -82,7 +84,11 @@ export default class ListOfClicks extends Component {
                     <DropdownMenu>
                         <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
                             Start Here! <BsHouseFill/>
-                        </DropdownItem></span> 
+                        </DropdownItem>
+                        <DropdownItem onClick={() => this.setNotes(index)}>
+                            Add Notes <BsCardText/>
+                        </DropdownItem>
+                            </span> 
                     </DropdownMenu>
                 </Dropdown> 
             );
@@ -114,6 +120,10 @@ export default class ListOfClicks extends Component {
                 }
             </>
         );
+    }
+
+    setNotes(index) {
+        this.setState({notesToggle: index})
     }
 
     toggleSettings() {
@@ -153,6 +163,7 @@ export default class ListOfClicks extends Component {
 
     getRowInfo(place, index) {
         let {toggleRow} = this.state
+        let {notesToggle} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
         const isDistancesSupported = this.props.checkForFeature('distances');
@@ -171,8 +182,24 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
+                {notesToggle===index && this.renderNotes()}
             </Collapse>
         )
+    }
+
+    renderNotes() {
+        return (
+            <Row noGutters>
+                <Col>
+                    <InputGroup>
+                        <InputGroupAddon addonType='append'>
+                            <Button color='primary' onClick={() => this.setNotes(-1)}><BsXCircle/></Button>
+                        </InputGroupAddon>
+                        <Input placeholder='Notes'/>
+                    </InputGroup>
+                </Col>
+            </Row>
+        );
     }
 
     toggleHandler(index) {
