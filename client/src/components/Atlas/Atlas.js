@@ -6,7 +6,6 @@ import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
 import { BsCursorFill, BsSearch, BsGearFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
@@ -52,6 +51,8 @@ export default class Atlas extends Component {
         this.reverseList = this.reverseList.bind(this);
         this.rgbCallback = this.rgbCallback.bind(this);
         this.setLineWidth = this.setLineWidth.bind(this);
+
+        this.mapRef = React.createRef();
 
         this.state = {
             markerPosition: null,
@@ -135,6 +136,7 @@ export default class Atlas extends Component {
     renderLeafletMap() {
         return (
             <Map
+                ref={this.mapRef}
                 className={'mapStyle'}
                 boxZoom={false}
                 zoom={this.state.zoom}
@@ -227,8 +229,11 @@ export default class Atlas extends Component {
     setMarker(latLng) {
         if (latLng != null) {
             this.setPlace(latLng);
-            this.setState({markerPosition: latLng, 
-                           mapCenter: latLng});
+            this.setState({
+                markerPosition: latLng, 
+                mapCenter: latLng,
+                zoom: this.mapRef.current.leafletElement.getZoom()
+            });
         }
     }
 
