@@ -140,6 +140,10 @@ describe('Atlas', () => {
         atlasWrapper.instance().toggleSearch();
         expect(atlasWrapper.find("SearchInput")).toHaveLength(1);
     });
+
+    it('tests newStartingPlace', () =>{
+        atlasWrapper.instance().selectNewStartingLocation(1);
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {

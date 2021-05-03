@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, Input } from 'reactstrap';
-import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash,BsArrowUpDown } from "react-icons/bs"
-
+import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill,BsArrowUpDown } from "react-icons/bs"
 
 import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
+import Atlas from './Atlas';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -15,10 +15,13 @@ export default class ListOfClicks extends Component {
         this.deleteHandler = this.deleteHandler.bind(this)
         this.clearHandler = this.clearHandler.bind(this)
         this.toggleSettings = this.toggleSettings.bind(this)
+        this.toggleMeatballs = this.toggleMeatballs.bind(this)
+        this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this);
       
         this.state = {
             toggleRow: [],
-            settingsToggle: false
+            settingsToggle: false,
+            meatballToggle: -1
         }
     }
 
@@ -67,6 +70,25 @@ export default class ListOfClicks extends Component {
             </Dropdown>
         );
     }
+    
+    renderMeatballDropdown(index) {
+            return (
+                <Dropdown
+                    inNavbar
+                    className= "text-white" 
+                    isOpen={this.state.meatballToggle===index}
+                    direction="left"
+                    toggle={this.toggleMeatballs}>
+                    <DropdownMenu>
+                        <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
+                            Start Here! <BsHouseFill/>
+                        </DropdownItem></span> 
+                    </DropdownMenu>
+                </Dropdown> 
+            );
+    }
+        
+    
 
     renderListOptions() {
         const {setTour, clearList, setPlace, listOfClicks, 
@@ -97,6 +119,10 @@ export default class ListOfClicks extends Component {
     toggleSettings() {
         const {settingsToggle} = this.state;
         this.setState({settingsToggle: !settingsToggle});
+    }
+
+    toggleMeatballs(index) {
+        this.setState({meatballToggle : index})
     }
 
     getTableBody() {
@@ -136,12 +162,14 @@ export default class ListOfClicks extends Component {
                     <Col xs={{size:5, offset:1}}>Coordinates: <br/>{place.latitude.toFixed(2) + ', ' + place.longitude.toFixed(2)}</Col>
                     <Col xs="5">
                         {isDistancesSupported && 
-                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + 'mi.'
+                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + ' mi.'
                         }    
                     </Col>
                     <Col xs={{size:1}}>
-                        <BsGeoAlt className="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
+                        <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
+                        <div><BsThreeDots className = "text-primary" onClick={()=> this.toggleMeatballs(index)}></BsThreeDots></div>
                     </Col>
+                    <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
                 {this.renderNotes()}
             </Collapse>

@@ -66,5 +66,11 @@ describe('ListOfClicks', () => {
 
     it('has an input fielt for notes', () => {
         expect(ListWrapper.find("Input")).toHaveLength(1);
+    });
+
+    it('toggles meatballs', ()=> {
+        ListWrapper.setState({index: 1});
+        ListWrapper.instance().toggleMeatballs(1);
+        expect(1).toEqual(ListWrapper.state().index);
     })
 });

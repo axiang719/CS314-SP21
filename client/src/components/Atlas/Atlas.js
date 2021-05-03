@@ -47,7 +47,9 @@ export default class Atlas extends Component {
         this.requestUserLocation = this.requestUserLocation.bind(this);
         this.checkForFeature = this.checkForFeature.bind(this);
         this.toggleSearch = this.toggleSearch.bind(this);
+        this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
+
         this.state = {
             markerPosition: null,
             mapCenter: MAP_CENTER_DEFAULT,
@@ -120,7 +122,9 @@ export default class Atlas extends Component {
                 centerMapToIndex = { this.centerMapToIndex }
                 checkForFeature = { this.checkForFeature }
                 serverSettings = { this.props.serverSettings }
+                selectNewStartingLocation = { this.selectNewStartingLocation}
                 reverseList = {this.reverseList}
+
             />
         );
     }
@@ -314,19 +318,15 @@ export default class Atlas extends Component {
     
     removePlace(index) {
         let newList = [];
-	let latlng = this.state.markerPosition;
-        for (let i = 0; i < this.state.listOfClicks.length; i++) {
-            if (i != index)
-                newList.push(this.state.listOfClicks[i]);
-	}
-	if (latlng != null 
-	    && latlng.lat == this.state.listOfClicks[index].latitude
-	    && latlng.lng == this.state.listOfClicks[index].longitude) {
-		latlng = null;
-	}
-        this.setState({ listOfClicks: newList,
-			markerPosition: latlng}, 
-			this.handleDistances);
+	    let latlng = this.state.markerPosition;
+            for (let i = 0; i < this.state.listOfClicks.length; i++) {
+                if (i != index)
+                    newList.push(this.state.listOfClicks[i]);
+	        }
+	    if (latlng != null && latlng.lat == this.state.listOfClicks[index].latitude && latlng.lng == this.state.listOfClicks[index].longitude) {
+		    latlng = null;
+	    }
+        this.setState({ listOfClicks: newList, markerPosition: latlng}, this.handleDistances);
     }
 
     getPlaces() {
@@ -340,6 +340,14 @@ export default class Atlas extends Component {
             places.push(place);
         }
         return places;
+    }
+
+    selectNewStartingLocation(index){
+        const {listOfClicks} = this.state;
+        let tempArray = listOfClicks.slice(index);
+        let list = tempArray.concat(listOfClicks.slice(0,index));
+        this.setState({listOfClicks: list});
+        console.log(listOfClicks);
     }
     
     getStringMarkerPosition() {
