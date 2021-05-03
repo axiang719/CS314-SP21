@@ -36,7 +36,7 @@ describe('ListOfClicks', () => {
 
     it("shows and closes row info as expected", ()=>{
         const clickable = ListWrapper.find("Row").at(1).find("Col").at(0)
-        expect(ListWrapper.find("Row")).toHaveLength(4);
+        expect(ListWrapper.find("Row")).toHaveLength(3);
         clickable.simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
         clickable.simulate("click");
@@ -62,10 +62,6 @@ describe('ListOfClicks', () => {
         expect(ListWrapper.state().settingsToggle).toBe(false);
         ListWrapper.instance().toggleSettings();
         expect(ListWrapper.state().settingsToggle).toBe(true);
-    });
-
-    it('has an input fielt for notes', () => {
-        expect(ListWrapper.find("Input")).toHaveLength(1);
     });
 
     it('toggles meatballs', ()=> {
