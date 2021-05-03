@@ -65,7 +65,7 @@ export default class Page extends Component {
 				<Atlas 
 					showMessage={this.props.showMessage} 
 					serverSettings={this.state.serverSettings} 
-					supportedFeatures = {this.state.supportedFeatures}  
+					supportedFeatures = {this.state.supportedFeatures} 
 				/>
 			</Collapse>
 		);

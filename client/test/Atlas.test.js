@@ -144,6 +144,11 @@ describe('Atlas', () => {
     it('tests newStartingPlace', () =>{
         atlasWrapper.instance().selectNewStartingLocation(1);
     });
+
+    it('tests rgbCallback', () =>{
+        atlasWrapper.instance().rgbCallback('#11a1e8');
+        expect(atlasWrapper.state().rgb).toEqual('#11a1e8');
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {

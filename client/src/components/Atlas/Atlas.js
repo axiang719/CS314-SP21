@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table } from 'reactstrap';
+import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 
@@ -8,12 +8,13 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
-import { BsCursorFill, BsSearch } from "react-icons/bs"
+import { BsCursorFill, BsSearch, BsGearFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
 
 import SearchInput from "./SearchInput";
 import ListOfClicks from "./ListOfClicks";
 import DistancesSearch from "./DistancesSearch";
+import MapSettings from "./MapSettings";
 
 
 const MAP_BOUNDS = [[-90, -180], [90, 180]];
@@ -49,6 +50,7 @@ export default class Atlas extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
         this.selectNewStartingLocation = this.selectNewStartingLocation.bind(this);
         this.reverseList = this.reverseList.bind(this);
+        this.rgbCallback = this.rgbCallback.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -58,7 +60,8 @@ export default class Atlas extends Component {
             totalDistance: 0,
             userLocation: null,
             zoom: MAP_ZOOM_DEFAULT,
-            searchToggle: false
+            searchToggle: false,
+            rgb: '#11a1e8'
         };
     
     }
@@ -110,7 +113,6 @@ export default class Atlas extends Component {
     }
 
     renderList() {
-        
 	    return (
             <ListOfClicks
                 listOfClicks = { this.state.listOfClicks }
@@ -124,7 +126,6 @@ export default class Atlas extends Component {
                 serverSettings = { this.props.serverSettings }
                 selectNewStartingLocation = { this.selectNewStartingLocation}
                 reverseList = {this.reverseList}
-
             />
         );
     }
@@ -143,10 +144,15 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPolylines()}
+                {this.getPolylines(this.state.rgb)}
 
                 <Control position="bottomright">
                     {this.renderMapButtons()}
+                </Control>
+                <Control position="topleft">
+                    <MapSettings
+                        rgbCallback = {this.rgbCallback}
+                    />
                 </Control>
             </Map>
         );
@@ -159,6 +165,10 @@ export default class Atlas extends Component {
                 <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
             </>
         );
+    }
+
+    rgbCallback(color){
+        this.setState({rgb: color});
     }
 
     toggleSearch() {
@@ -252,11 +262,11 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines() {
+    getPolylines(rgb) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray}/>
+            return <Polyline positions={polylineArray} color= {rgb}/> //color= 'red'/>
         }
     }
 
