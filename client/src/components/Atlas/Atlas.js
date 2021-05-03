@@ -63,7 +63,7 @@ export default class Atlas extends Component {
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
             rgb: '#11a1e8',
-            lineWidth: 3
+            lineWidth: "3"
         };
     
     }
@@ -273,7 +273,7 @@ export default class Atlas extends Component {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray} weight = {3} color= {rgb}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb}/> //color= 'red'/>
         }
     }
 
