@@ -10,10 +10,13 @@ export default class MapSettings extends Component {
         this.renderModal = this.renderModal.bind(this);
         this.renderMapSettingButton = this.renderMapSettingButton.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeBar = this.handleChangeBar.bind(this);
+        this.renderLineWidthForm = this.renderLineWidthForm.bind(this);
 
         this.state = {
             modalOpen: false,
-            color: '#11a1e8'
+            color: '#11a1e8',
+            lineWidth: 10
         };
     }
 
@@ -41,7 +44,8 @@ export default class MapSettings extends Component {
                                 background-color = {this.state.color}
                                 onChange = {this.handleChange}
                             />
-                    </FormGroup>        
+                    </FormGroup>  
+                    {this.renderLineWidthForm()}      
                 </ModalBody>
             </Modal>
         );
@@ -56,9 +60,28 @@ export default class MapSettings extends Component {
         );
     }
 
+    renderLineWidthForm(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="exampleRange">Line Width</Label>
+                    <Input type="range" 
+                            name="range" 
+                            id="exampleRange" 
+                            onChange = {this.handleChangeBar}/>
+                </FormGroup>    
+            </>
+        );
+    }
+
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
+    }
+
+    handleChangeBar(event){
+        const value = event.target.value;
+        this.setState({lineWidth: value});
     }
 
     toggleModal() {
