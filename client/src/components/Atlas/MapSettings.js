@@ -34,18 +34,6 @@ export default class MapSettings extends Component {
                     <div className="text-center">Map Settings</div>
                 </ModalHeader>
                 <ModalBody>
-                    <FormGroup>
-                        <Label for= {this.state.color}>Color</Label>
-                            <Input
-                                type = 'color'
-                                name = {this.state.color}
-                                id = 'name'
-                                placeholder = {this.state.color}
-                                value = {this.state.color}
-                                background-color = {this.state.color}
-                                onChange = {this.handleChange}
-                            />
-                    </FormGroup>  
                     {this.renderLineColor()}
                     {this.renderLineWidthForm()}      
                 </ModalBody>
