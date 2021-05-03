@@ -145,7 +145,7 @@ export default class Atlas extends Component {
                 {this.getMarker()}
                 {this.getPolylines()}
 
-                <Control position="bottomright">
+                <Control position="botright">
                     {this.renderMapButtons()}
                 </Control>
             </Map>
@@ -157,6 +157,14 @@ export default class Atlas extends Component {
             <>
                 <Button onClick={this.toggleSearch} size="sm" color="primary" className="mr-2"><BsSearch/></Button>
                 <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
+            </>
+        );
+    }
+
+    renderMapSettingButton(){
+        return(
+            <>
+            
             </>
         );
     }
@@ -256,7 +264,7 @@ export default class Atlas extends Component {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray}/>
+            return <Polyline positions={polylineArray}/> //color= 'red'/>
         }
     }
 
