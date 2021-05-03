@@ -19,4 +19,10 @@ describe('FilterTour', () => {
     it('initializes correctly', () => {
         expect(FilterWrapper.state().modalToggle).toEqual(false);
     });
+
+    it('toggles the modal when clicked', () => {
+        FilterWrapper.find("BsFilter").at(0).simulate("click");
+        expect(FilterWrapper.state().modalToggle).toEqual(true);
+    });
+
 });
