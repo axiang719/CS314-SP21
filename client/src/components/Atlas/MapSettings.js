@@ -33,10 +33,10 @@ export default class MapSettings extends Component {
                     <FormGroup>
                         <Label for= {this.state.color}>Color</Label>
                             <Input
-                                type= 'color'
-                                name= {this.state.color}
-                                id= {this.state.color}
-                                placeholder= {this.state.color}
+                                type = 'color'
+                                name = {this.state.color}
+                                id = {this.state.color}
+                                placeholder = {this.state.color}
                                 onChange = {this.handleChange}
                             />
                     </FormGroup>        
