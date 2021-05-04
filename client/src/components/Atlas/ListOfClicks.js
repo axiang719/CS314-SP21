@@ -68,12 +68,12 @@ export default class ListOfClicks extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.renderListOptions()}
-                    <span className="text-left"><DropdownItem onClick={this.clearHandler}>
-                        Clear List <BsTrash/>
-                    </DropdownItem></span> 
-                   <span className="text-left"><DropdownItem onClick={this.props.reverseList}>
-                        Reverse   <BsArrowUpDown className="text-right"/>
-                   </DropdownItem></span>
+                    <DropdownItem onClick={this.clearHandler}>
+                        Clear List <BsTrash className="float-right"/>
+                    </DropdownItem>
+                  <DropdownItem onClick={this.props.reverseList}>
+                        Reverse   <BsArrowUpDown className="float-right"/>
+                   </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         );
@@ -88,13 +88,13 @@ export default class ListOfClicks extends Component {
                     direction="left"
                     toggle={this.toggleMeatballs}>
                     <DropdownMenu>
-                        <span className="text-left"><DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
+                        <DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
                             Start Here! <BsHouseFill/>
                         </DropdownItem>
                         <DropdownItem onClick={() => this.setNotes(index)}>
                             Add Notes <BsCardText/>
                         </DropdownItem>
-                            </span> 
+                           
                     </DropdownMenu>
                 </Dropdown> 
             );
