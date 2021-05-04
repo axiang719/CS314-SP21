@@ -175,7 +175,11 @@ export default class Atlas extends Component {
     }
 
     setLineWidth(width){
-        this.setState({lineWidth: width})
+        this.setState({lineWidth: width});
+    }
+
+    setLineStyle(check){
+        this.setState({style: check});
     }
 
     toggleSearch() {
@@ -273,7 +277,7 @@ export default class Atlas extends Component {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray} weight = {width} color= {rgb}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {style}/> //color= 'red'/>
         }
     }
 
