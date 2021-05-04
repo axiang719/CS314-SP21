@@ -16,12 +16,14 @@ export default class MapSettings extends Component {
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
         this.handleSwitch = this.handleSwitch.bind(this);
         this.renderLineOnOff= this.renderLineOnOff.bind(this);
+        this. handleOnOff= this.handleOnOff.bind(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
             lineWidth: 3,
-            lineStyle: false
+            lineStyle: false,
+            linesOn: true
         };
     }
 
@@ -127,11 +129,16 @@ export default class MapSettings extends Component {
         this.setState({lineStyle: !this.state.lineStyle});
     }
 
+    handleOnOff(){
+        this.setState({linesOn: !this.state.linesOn})
+    }
+
     toggleModal() {
         const { modalOpen } = this.state;
         this.props.rgbCallback(this.state.color); 
         this.props.setLineWidth(this.state.lineWidth); 
         this.props.setLineStyle(this.state.lineStyle);
+        this.props.linesOn(this.state.linesOn);
         this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 
