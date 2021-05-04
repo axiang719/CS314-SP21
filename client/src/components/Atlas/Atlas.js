@@ -51,6 +51,8 @@ export default class Atlas extends Component {
         this.reverseList = this.reverseList.bind(this);
         this.rgbCallback = this.rgbCallback.bind(this);
         this.setLineWidth = this.setLineWidth.bind(this);
+        this.setLineStyle = this.setLineStyle.bind(this);
+        this.getPolyStyle = this.getPolyStyle.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -64,7 +66,8 @@ export default class Atlas extends Component {
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
             rgb: '#11a1e8',
-            lineWidth: "3"
+            lineWidth: "3",
+            lineStyle: false,
         };
     
     }
@@ -157,15 +160,17 @@ export default class Atlas extends Component {
                     {this.renderMapSettings()}
                 </Control>
             </Map>
+
         );
     }
 
     renderMapSettings() {
         return(
-            <MapSettings
-                setLineWidth = {this.setLineWidth}
-                rgbCallback = {this.rgbCallback}
-            />
+             <MapSettings
+                        setLineWidth = {this.setLineWidth}
+                        rgbCallback = {this.rgbCallback}
+                        setLineStyle = {this.setLineStyle}
+             />
         );
     }
 
@@ -183,7 +188,11 @@ export default class Atlas extends Component {
     }
 
     setLineWidth(width){
-        this.setState({lineWidth: width})
+        this.setState({lineWidth: width});
+    }
+
+    setLineStyle(check){
+        this.setState({lineStyle: check});
     }
 
     toggleSearch() {
@@ -282,11 +291,21 @@ export default class Atlas extends Component {
         }
     }
 
+    getPolyStyle(){
+        if(this.state.lineStyle){
+            return '10,20';
+        }
+        else {
+            return '0,0';
+        }
+    }
+
     getPolylines(rgb, width) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
-            let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray} weight = {width} color= {rgb}/> //color= 'red'/>
+            let polyStyle = this.getPolyStyle();
+            let polylineArray = this.extractLines(listOfClicks);        
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle}/> //color= 'red'/>
         }
     }
 

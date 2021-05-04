@@ -155,7 +155,13 @@ describe('Atlas', () => {
     it('tests setLineWidth', () =>{
         atlasWrapper.instance().setLineWidth(5);
         expect(atlasWrapper.state().lineWidth).toEqual(5);
-    })
+    });
+
+    it('tests polyStyle', ()=>{
+        atlasWrapper.instance().setLineStyle(true);
+        let value = atlasWrapper.instance().getPolyStyle();
+        expect('10,20').toEqual(value);
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {

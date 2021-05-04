@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label} from 'reactstrap';
+import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, Form, CustomInput} from 'reactstrap';
 import { BsGearFill } from "react-icons/bs"
 
 export default class MapSettings extends Component {
@@ -13,11 +13,14 @@ export default class MapSettings extends Component {
         this.handleChangeBar = this.handleChangeBar.bind(this);
         this.renderLineWidthForm = this.renderLineWidthForm.bind(this);
         this.renderLineColor = this.renderLineColor.bind(this);
+        this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
+        this.handleSwitch = this.handleSwitch.bind(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
-            lineWidth: 3
+            lineWidth: 3,
+            lineStyle: false
         };
     }
 
@@ -35,7 +38,8 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
-                    {this.renderLineWidthForm()}      
+                    {this.renderLineWidthForm()}     
+                    {this.renderLineStyleForm()} 
                 </ModalBody>
             </Modal>
         );
@@ -85,6 +89,17 @@ export default class MapSettings extends Component {
         );
     }
 
+    renderLineStyleForm(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="Checkbox">Line Style</Label>
+                        <CustomInput type="switch" id="Switch" name="Switch" checked = {this.state.lineStyle} label= "Dashed Lines" onChange = {this.handleSwitch} />
+                </FormGroup>
+            </>
+        )
+    }
+
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
@@ -95,10 +110,15 @@ export default class MapSettings extends Component {
         this.setState({lineWidth: value});
     }
 
+    handleSwitch(){
+        this.setState({lineStyle: !this.state.lineStyle});
+    }
+
     toggleModal() {
         const { modalOpen } = this.state;
         this.props.rgbCallback(this.state.color); 
         this.props.setLineWidth(this.state.lineWidth); 
+        this.props.setLineStyle(this.state.lineStyle);
         this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 

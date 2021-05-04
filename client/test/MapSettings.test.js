@@ -13,7 +13,9 @@ describe('MapSettings', () => {
     beforeEach(() => {
         mapWrapper = shallow(<MapSettings rgbCallback = {snacks}
                                             setLineWidth= {snacks}
-                                            value = {snacks}/>)
+                                            value = {snacks}
+                                            setLineStyle = {snacks}/>)
+        mapWrapper.setState({lineStyle: false});
     });
 
     it('tests state', ()=>{
@@ -40,5 +42,10 @@ describe('MapSettings', () => {
         mapWrapper.instance().toggleModal();
         mapWrapper.instance().handleChangeBar(mockEvent);
         expect(mapWrapper.state().modalOpen).toEqual(true);
+    });
+
+    it('tests handleSwitch', ()=>{
+        mapWrapper.instance().handleSwitch();
+        expect(mapWrapper.state().lineStyle).toEqual(true);
     });
 });
