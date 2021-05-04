@@ -314,12 +314,12 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines(rgb, width) {
+    getPolylines(rgb, width, lineOpacity) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1 && this.state.linesOn) {
             let polyStyle = this.getPolyStyle();
             let polylineArray = this.extractLines(listOfClicks);        
-            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle} opacity= {lineOpacity}/> //color= 'red'/>
         }
     }
 

@@ -23,10 +23,10 @@ export default class MapSettings extends Component {
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
+            lineOpacity: 3,
             lineWidth: 3,
             lineStyle: false,
-            linesOn: true,
-            lineOpacity: 3
+            linesOn: true
         };
     }
 
@@ -44,6 +44,7 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
+                    {this.renderLineOpacity()}
                     {this.renderLineWidthForm()}   
                     {this.renderLineOnOff()}  
                     {this.renderLineStyleForm()} 
@@ -87,10 +88,10 @@ export default class MapSettings extends Component {
                     <Label for="Range">Opacity ({this.state.lineOpacity})</Label>
                     <Input type="range" 
                             name="range" 
-                            id="exampleRange" 
+                            id="exampleRange2" 
                             min= "1" max= "20"
-                            value = {this.state.lineOpacity}
-                            onChange = {this.handleChangeOpacity}/>
+                            // value = {this.state.lineOpacity}
+                            onChange = {this.handleChangeBar}/>
                 </FormGroup>    
             </>
         );
@@ -160,6 +161,7 @@ export default class MapSettings extends Component {
     toggleModal() {
         const { modalOpen } = this.state;
         this.props.rgbCallback(this.state.color); 
+        this.props.opacityCallBack(this.state.lineOpacity)
         this.props.setLineWidth(this.state.lineWidth); 
         this.props.setLineStyle(this.state.lineStyle);
         this.props.turnLinesOff(this.state.linesOn);
