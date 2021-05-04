@@ -110,9 +110,8 @@ export default class MapSettings extends Component {
         this.setState({lineWidth: value});
     }
 
-    handleSwitch(event){
-        const checked= event.target.checked;
-        this.setState({lineStyle: checked});
+    handleSwitch(){
+        this.setState({lineStyle: !this.state.lineStyle});
     }
 
     toggleModal() {
