@@ -16,8 +16,6 @@ export default class LoadTour extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
-        this.csvOnload = this.csvOnload.bind(this);
-        this.jsonOnload = this.jsonOnload.bind(this);
        
         this.state = {
             modalOpen: false,
