@@ -15,6 +15,7 @@ export default class MapSettings extends Component {
         this.renderLineColor = this.renderLineColor.bind(this);
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
         this.handleSwitch = this.handleSwitch.bind(this);
+        this.renderLineOnOff= this.renderLineOnOff.bind(this);
 
         this.state = {
             modalOpen: false,
@@ -38,7 +39,8 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
-                    {this.renderLineWidthForm()}     
+                    {this.renderLineWidthForm()}   
+                    {this.renderLineOnOff()}  
                     {this.renderLineStyleForm()} 
                 </ModalBody>
             </Modal>
@@ -95,6 +97,17 @@ export default class MapSettings extends Component {
                 <FormGroup>
                     <Label for="Checkbox">Line Style</Label>
                         <CustomInput type="switch" id="Switch" name="Switch" label= "Dashed Lines" onChange = {this.handleSwitch} />
+                </FormGroup>
+            </>
+        )
+    }
+
+    renderLineOnOff(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="Checkbox">Lines Off</Label>
+                        <CustomInput type="switch" id="Switch2" name="Switch2" label= "Turn Lines Off" onChange = {this.handleSwitch} />
                 </FormGroup>
             </>
         )
