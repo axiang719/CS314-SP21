@@ -15,12 +15,15 @@ export default class MapSettings extends Component {
         this.renderLineColor = this.renderLineColor.bind(this);
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
         this.handleSwitch = this.handleSwitch.bind(this);
+        this.renderLineOnOff= this.renderLineOnOff.bind(this);
+        this.handleOnOff= this.handleOnOff.bind(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
             lineWidth: 3,
-            lineStyle: false
+            lineStyle: false,
+            linesOn: true
         };
     }
 
@@ -38,7 +41,8 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
-                    {this.renderLineWidthForm()}     
+                    {this.renderLineWidthForm()}   
+                    {this.renderLineOnOff()}  
                     {this.renderLineStyleForm()} 
                 </ModalBody>
             </Modal>
@@ -100,6 +104,17 @@ export default class MapSettings extends Component {
         )
     }
 
+    renderLineOnOff(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="Checkbox">Lines On/Off</Label>
+                        <CustomInput type="switch" id="Switch2" name="Switch2" checked = {this.state.linesOn} onChange = {this.handleOnOff} />
+                </FormGroup>
+            </>
+        )
+    }
+
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
@@ -114,12 +129,17 @@ export default class MapSettings extends Component {
         this.setState({lineStyle: !this.state.lineStyle});
     }
 
+    handleOnOff(){
+        this.setState({linesOn: !this.state.linesOn})
+    }
+
     toggleModal() {
         const { modalOpen } = this.state;
         this.props.rgbCallback(this.state.color); 
         this.props.setLineWidth(this.state.lineWidth); 
         this.props.setLineStyle(this.state.lineStyle);
-        this.setState({ modalOpen: !modalOpen, validTour: null });
+        this.props.turnLinesOff(this.state.linesOn);
+        this.setState({ modalOpen: !modalOpen});
     }
 
 }

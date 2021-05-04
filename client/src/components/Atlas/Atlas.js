@@ -53,6 +53,7 @@ export default class Atlas extends Component {
         this.setLineWidth = this.setLineWidth.bind(this);
         this.setLineStyle = this.setLineStyle.bind(this);
         this.getPolyStyle = this.getPolyStyle.bind(this);
+        this.turnLinesOff = this.turnLinesOff.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -68,6 +69,7 @@ export default class Atlas extends Component {
             rgb: '#11a1e8',
             lineWidth: "3",
             lineStyle: false,
+            linesOn: true
         };
     
     }
@@ -170,7 +172,7 @@ export default class Atlas extends Component {
                         setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
                         setLineStyle = {this.setLineStyle}
-             />
+                        turnLinesOff = {this.turnLinesOff}/>
         );
     }
 
@@ -193,6 +195,10 @@ export default class Atlas extends Component {
 
     setLineStyle(check){
         this.setState({lineStyle: check});
+    }
+
+    turnLinesOff(check){
+        this.setState({linesOn: check});
     }
 
     toggleSearch() {
@@ -302,7 +308,7 @@ export default class Atlas extends Component {
 
     getPolylines(rgb, width) {
         const {listOfClicks} = this.state;
-        if (listOfClicks.length > 1) {
+        if (listOfClicks.length > 1 && this.state.linesOn) {
             let polyStyle = this.getPolyStyle();
             let polylineArray = this.extractLines(listOfClicks);        
             return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle}/> //color= 'red'/>

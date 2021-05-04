@@ -162,6 +162,11 @@ describe('Atlas', () => {
         let value = atlasWrapper.instance().getPolyStyle();
         expect('10,20').toEqual(value);
     });
+
+    it('tests turn lines off', ()=>{
+        atlasWrapper.setState({linesOn: true});
+        atlasWrapper.instance().turnLinesOff();
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {
