@@ -42,6 +42,7 @@ describe('MapSettings', () => {
         };
         mapWrapper.instance().toggleModal();
         mapWrapper.instance().handleChangeBar(mockEvent);
+        mapWrapper.instance().handleChangeOpacity(mockEvent);
         expect(mapWrapper.state().modalOpen).toEqual(true);
     });
 

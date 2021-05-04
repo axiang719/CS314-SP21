@@ -54,6 +54,7 @@ export default class Atlas extends Component {
         this.setLineStyle = this.setLineStyle.bind(this);
         this.getPolyStyle = this.getPolyStyle.bind(this);
         this.turnLinesOff = this.turnLinesOff.bind(this);
+        this.opacityCallBack = this.opacityCallBack.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -68,6 +69,7 @@ export default class Atlas extends Component {
             searchToggle: false,
             rgb: '#11a1e8',
             lineWidth: "3",
+            lineOpacity: "3",
             lineStyle: false,
             linesOn: true
         };
@@ -171,6 +173,7 @@ export default class Atlas extends Component {
              <MapSettings
                         setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
+                        opacityCallBack = {this.opacityCallBack}
                         setLineStyle = {this.setLineStyle}
                         turnLinesOff = {this.turnLinesOff}/>
         );
@@ -189,6 +192,10 @@ export default class Atlas extends Component {
         this.setState({rgb: color});
     }
 
+    opacityCallBack(opacity){
+        this.setState({lineOpacity: opacity});
+    }
+
     setLineWidth(width){
         this.setState({lineWidth: width});
     }
@@ -200,6 +207,7 @@ export default class Atlas extends Component {
     turnLinesOff(check){
         this.setState({linesOn: check});
     }
+
 
     toggleSearch() {
         const { searchToggle } = this.state;

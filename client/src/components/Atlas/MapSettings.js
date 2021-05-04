@@ -16,14 +16,17 @@ export default class MapSettings extends Component {
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
         this.handleSwitch = this.handleSwitch.bind(this);
         this.renderLineOnOff= this.renderLineOnOff.bind(this);
+        this.renderLineOpacity = this.renderLineOpacity.bind(this);
         this.handleOnOff= this.handleOnOff.bind(this);
+        this.handleChangeOpacity = this.handleChangeOpacity(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
             lineWidth: 3,
             lineStyle: false,
-            linesOn: true
+            linesOn: true,
+            lineOpacity: 3
         };
     }
 
@@ -81,7 +84,7 @@ export default class MapSettings extends Component {
         return(
             <>
                 <FormGroup>
-                    <Label for="Range">Opacity ({this.state.lineWidth})</Label>
+                    <Label for="Range">Opacity ({this.state.lineOpacity})</Label>
                     <Input type="range" 
                             name="range" 
                             id="exampleRange" 
@@ -139,6 +142,11 @@ export default class MapSettings extends Component {
     handleChangeBar(event){
         const value = event.target.value;
         this.setState({lineWidth: value});
+    }
+
+    handleChangeOpacity(event){
+        const value = event.target.value;
+        this.setState({lineOpacity: value});
     }
 
     handleSwitch(){
