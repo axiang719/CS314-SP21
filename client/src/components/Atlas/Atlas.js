@@ -52,6 +52,7 @@ export default class Atlas extends Component {
         this.reverseList = this.reverseList.bind(this);
         this.rgbCallback = this.rgbCallback.bind(this);
         this.setLineWidth = this.setLineWidth.bind(this);
+        this.setLineStyle = this.setLineStyle.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -63,7 +64,8 @@ export default class Atlas extends Component {
             zoom: MAP_ZOOM_DEFAULT,
             searchToggle: false,
             rgb: '#11a1e8',
-            lineWidth: "3"
+            lineWidth: "3",
+            lineStyle: false
         };
     
     }
@@ -155,6 +157,7 @@ export default class Atlas extends Component {
                     <MapSettings
                         setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
+                        setLineStyle = {this.setLineStyle}
                     />
                 </Control>
             </Map>
@@ -179,7 +182,7 @@ export default class Atlas extends Component {
     }
 
     setLineStyle(check){
-        this.setState({style: check});
+        this.setState({lineStyle: check});
     }
 
     toggleSearch() {
