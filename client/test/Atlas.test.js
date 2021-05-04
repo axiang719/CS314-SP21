@@ -8,6 +8,7 @@ import { afterEach, expect, it, jest, toEqual } from '@jest/globals';
 
 describe('Atlas', () => {
     const createSnackBar = jest.fn();
+    const fakeZoom = jest.fn();
     let atlasWrapper;
     let serverSettings = {serverConfig: {features: ['config','find','type','where','distances','tour']}};
     
@@ -18,6 +19,7 @@ describe('Atlas', () => {
                                       getCurrentPosition = {createSnackBar}
                                       serverSettings = {serverSettings}/>);
         atlasWrapper.setState({listOfClicks: ["osaka","tokyo"]});
+        atlasWrapper.instance().mapRef = {current: {leafletElement: {getZoom: fakeZoom}}}
     });
 
     it('initializes as expected', () => {
