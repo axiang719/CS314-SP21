@@ -154,12 +154,18 @@ export default class Atlas extends Component {
                     {this.renderMapButtons()}
                 </Control>
                 <Control position="topleft">
-                    <MapSettings
-                        setLineWidth = {this.setLineWidth}
-                        rgbCallback = {this.rgbCallback}
-                    />
+                    {this.renderMapSettings()}
                 </Control>
             </Map>
+        );
+    }
+
+    renderMapSettings() {
+        return(
+            <MapSettings
+                setLineWidth = {this.setLineWidth}
+                rgbCallback = {this.rgbCallback}
+            />
         );
     }
 
