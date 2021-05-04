@@ -177,11 +177,11 @@ export default class ServerSettings extends Component {
         const optionValues = config[feature];
         let options = [];
         optionValues.forEach(value => options.push({value: value, label: value}))
+        options.sort((first, second) => {return first.value >= second.value})
         return options;
     }
 
     toggleDomain(toggleValue) {
-        console.log(toggleValue)
         let { domainToggle } = this.state;
         domainToggle === toggleValue ? domainToggle = "" : domainToggle = toggleValue;
         this.setState({ domainToggle });

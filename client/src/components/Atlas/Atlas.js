@@ -6,7 +6,6 @@ import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { control, latLng } from 'leaflet';
 import Control from 'react-leaflet-control';
 import { BsCursorFill, BsSearch, BsGearFill } from "react-icons/bs"
 import { isSupportedFeature } from "../../utils/restfulAPI";
@@ -54,6 +53,8 @@ export default class Atlas extends Component {
         this.setLineWidth = this.setLineWidth.bind(this);
         this.setLineStyle = this.setLineStyle.bind(this);
         this.getPolyStyle = this.getPolyStyle.bind(this);
+
+        this.mapRef = React.createRef();
 
         this.state = {
             markerPosition: null,
@@ -138,6 +139,7 @@ export default class Atlas extends Component {
     renderLeafletMap() {
         return (
             <Map
+                ref={this.mapRef}
                 className={'mapStyle'}
                 boxZoom={false}
                 zoom={this.state.zoom}
@@ -155,13 +157,20 @@ export default class Atlas extends Component {
                     {this.renderMapButtons()}
                 </Control>
                 <Control position="topleft">
-                    <MapSettings
+                    {this.renderMapSettings()}
+                </Control>
+            </Map>
+
+        );
+    }
+
+    renderMapSettings() {
+        return(
+             <MapSettings
                         setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
                         setLineStyle = {this.setLineStyle}
-                    />
-                </Control>
-            </Map>
+             />
         );
     }
 
@@ -188,7 +197,9 @@ export default class Atlas extends Component {
 
     toggleSearch() {
         const { searchToggle } = this.state;
-        this.setState({searchToggle: !searchToggle});
+        this.setState({
+            searchToggle: !searchToggle, 
+            zoom: this.mapRef.current.leafletElement.getZoom()});
     }
 
     showMarkerPopup(ref) {
@@ -235,8 +246,11 @@ export default class Atlas extends Component {
     setMarker(latLng) {
         if (latLng != null) {
             this.setPlace(latLng);
-            this.setState({markerPosition: latLng, 
-                           mapCenter: latLng});
+            this.setState({
+                markerPosition: latLng, 
+                mapCenter: latLng,
+                zoom: this.mapRef.current.leafletElement.getZoom()
+            });
         }
     }
 
@@ -344,7 +358,9 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
+        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null,
+            zoom: this.mapRef.current.leafletElement.getZoom()
+        });
     }
     
     reverseList(){

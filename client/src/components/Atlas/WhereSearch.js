@@ -26,6 +26,7 @@ export default class WhereSearch extends Component {
         for(let i = 0; i < where.length; i++) {
             options.push({value: where[i], label: where[i]})
         }
+        options = options.sort((current,next) => {return current.value >= next.value});
         return options;
     }
 
