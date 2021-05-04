@@ -19,6 +19,7 @@ export default class MapSettings extends Component {
         this.renderLineOpacity = this.renderLineOpacity.bind(this);
         this.handleOnOff= this.handleOnOff.bind(this);
         this.handleChangeOpacity = this.handleChangeOpacity.bind(this);
+        this.applySettings = this.applySettings.bind(this);
 
         this.state = {
             modalOpen: false,
@@ -47,7 +48,8 @@ export default class MapSettings extends Component {
                     {this.renderLineWidthForm()}   
                     {this.renderLineOpacity()}
                     {this.renderLineOnOff()}  
-                    {this.renderLineStyleForm()} 
+                    {this.renderLineStyleForm()}
+                    {this.renderApplyButton()} 
                 </ModalBody>
             </Modal>
         );
@@ -137,6 +139,23 @@ export default class MapSettings extends Component {
         )
     }
 
+    renderApplyButton(){
+        return(
+            <Button className="float-right" color="primary" onClick={this.applySettings}>
+                Apply
+            </Button>
+        )
+    }
+
+    applySettings(){
+        this.props.rgbCallback(this.state.color); 
+        this.props.opacityCallBack(this.state.lineOpacity)
+        this.props.setLineWidth(this.state.lineWidth); 
+        this.props.setLineStyle(this.state.lineStyle);
+        this.props.turnLinesOff(this.state.linesOn);
+        this.toggleModal();
+    }
+
     handleChange(event){
         const value = event.target.value;
         this.setState({color: value});
@@ -162,11 +181,6 @@ export default class MapSettings extends Component {
 
     toggleModal() {
         const { modalOpen } = this.state;
-        this.props.rgbCallback(this.state.color); 
-        this.props.opacityCallBack(this.state.lineOpacity)
-        this.props.setLineWidth(this.state.lineWidth); 
-        this.props.setLineStyle(this.state.lineStyle);
-        this.props.turnLinesOff(this.state.linesOn);
         this.setState({ modalOpen: !modalOpen});
     }
 
