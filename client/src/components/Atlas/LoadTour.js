@@ -41,10 +41,10 @@ export default class LoadTour extends Component {
     render() {
         return ( 
             <>
-                <span className="text-left"><DropdownItem  onClick={this.toggleModal}>
-                    Upload <BsUpload></BsUpload>
+                <DropdownItem  onClick={this.toggleModal}>
+                    Upload <BsUpload className="float-right"/>
                     {this.renderModal()}
-                </DropdownItem></span>
+                </DropdownItem>
             </>
         );
     }

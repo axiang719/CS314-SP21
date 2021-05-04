@@ -20,7 +20,9 @@ export default class OrderTour extends Component {
     render() {
         return ( 
             <>
-                <span className="text-left"><DropdownItem onClick={this.handleShortTourClick} color="primary">Optimize <FaRoute/></DropdownItem></span>  
+                <DropdownItem onClick={this.handleShortTourClick} color="primary">
+                    Optimize <FaRoute className="float-right"/>
+                </DropdownItem>
             </>
         );
     }
