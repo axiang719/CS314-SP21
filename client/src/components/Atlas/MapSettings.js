@@ -94,7 +94,7 @@ export default class MapSettings extends Component {
             <>
                 <FormGroup>
                     <Label for="Checkbox">Line Style</Label>
-                        <CustomInput type="switch" id="Switch" name="Switch" label= "Dashed Lines" onChange = {this.handleSwitch} />
+                        <CustomInput type="switch" id="Switch" name="Switch" checked = {this.state.lineStyle} label= "Dashed Lines" onChange = {this.handleSwitch} />
                 </FormGroup>
             </>
         )
