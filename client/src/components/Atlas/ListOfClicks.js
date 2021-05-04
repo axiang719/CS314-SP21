@@ -71,9 +71,9 @@ export default class ListOfClicks extends Component {
                     <DropdownItem onClick={this.clearHandler}>
                         Clear List <BsTrash className="float-right"/>
                     </DropdownItem>
-                  <DropdownItem onClick={this.props.reverseList}>
+                    <DropdownItem onClick={this.props.reverseList}>
                         Reverse   <BsArrowUpDown className="float-right"/>
-                   </DropdownItem>
+                    </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         );
@@ -94,7 +94,6 @@ export default class ListOfClicks extends Component {
                         <DropdownItem onClick={() => this.setNotes(index)}>
                             Add Notes <BsCardText/>
                         </DropdownItem>
-                           
                     </DropdownMenu>
                 </Dropdown> 
             );
