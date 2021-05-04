@@ -77,6 +77,22 @@ export default class MapSettings extends Component {
         );
     }
 
+    renderLineOpacity(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="Range">Opacity ({this.state.lineWidth})</Label>
+                    <Input type="range" 
+                            name="range" 
+                            id="exampleRange" 
+                            min= "1" max= "20"
+                            value = {this.state.lineOpacity}
+                            onChange = {this.handleChangeOpacity}/>
+                </FormGroup>    
+            </>
+        );
+    }
+
     renderLineWidthForm(){
         return(
             <>
