@@ -46,7 +46,7 @@ describe('MapSettings', () => {
         mapWrapper.instance().handleChangeOpacity(mockEvent);
         expect(mapWrapper.state().modalOpen).toEqual(true);
     });
-
+    
     it('tests handleSwitch', ()=>{
         mapWrapper.instance().handleSwitch();
         expect(mapWrapper.state().lineStyle).toEqual(true);
@@ -55,4 +55,10 @@ describe('MapSettings', () => {
     it('tests onoff handle',()=>{
         mapWrapper.instance().handleOnOff();
     });
+
+    it('tests apply settings',()=>{
+       mapWrapper.instance().applySettings();
+       expect(snacks).toHaveBeenCalledTimes(5);
+    });
+
 });
