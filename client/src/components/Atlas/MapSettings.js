@@ -18,12 +18,12 @@ export default class MapSettings extends Component {
         this.renderLineOnOff= this.renderLineOnOff.bind(this);
         this.renderLineOpacity = this.renderLineOpacity.bind(this);
         this.handleOnOff= this.handleOnOff.bind(this);
-        this.handleChangeOpacity = this.handleChangeOpacity(this);
+        this.handleChangeOpacity = this.handleChangeOpacity.bind(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
-            lineOpacity: 3,
+            lineOpacity: 1,
             lineWidth: 3,
             lineStyle: false,
             linesOn: true
@@ -44,8 +44,8 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
-                    {this.renderLineOpacity()}
                     {this.renderLineWidthForm()}   
+                    {this.renderLineOpacity()}
                     {this.renderLineOnOff()}  
                     {this.renderLineStyleForm()} 
                 </ModalBody>
@@ -89,9 +89,11 @@ export default class MapSettings extends Component {
                     <Input type="range" 
                             name="range" 
                             id="exampleRange2" 
-                            min= "1" max= "20"
-                            // value = {this.state.lineOpacity}
-                            onChange = {this.handleChangeBar}/>
+                            min= "0" max= "1"
+                            step = ".1"
+                            value = {this.state.lineOpacity}
+                            onChange = {this.handleChangeOpacity}
+                            />
                 </FormGroup>    
             </>
         );
@@ -140,14 +142,14 @@ export default class MapSettings extends Component {
         this.setState({color: value});
     }
 
-    handleChangeBar(event){
-        const value = event.target.value;
-        this.setState({lineWidth: value});
-    }
-
     handleChangeOpacity(event){
         const value = event.target.value;
         this.setState({lineOpacity: value});
+    }
+
+    handleChangeBar(event){
+        const value = event.target.value;
+        this.setState({lineWidth: value});
     }
 
     handleSwitch(){
