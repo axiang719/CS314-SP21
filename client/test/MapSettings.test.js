@@ -49,4 +49,8 @@ describe('MapSettings', () => {
         mapWrapper.instance().handleSwitch();
         expect(mapWrapper.state().lineStyle).toEqual(true);
     });
+
+    it('tests onoff handle',()=>{
+        mapWrapper.instance().handleOnOff();
+    });
 });
