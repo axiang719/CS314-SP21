@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label} from 'reactstrap';
+import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, Form} from 'reactstrap';
 import { BsGearFill } from "react-icons/bs"
 
 export default class MapSettings extends Component {
@@ -13,6 +13,7 @@ export default class MapSettings extends Component {
         this.handleChangeBar = this.handleChangeBar.bind(this);
         this.renderLineWidthForm = this.renderLineWidthForm.bind(this);
         this.renderLineColor = this.renderLineColor.bind(this);
+        this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
 
         this.state = {
             modalOpen: false,
@@ -35,7 +36,8 @@ export default class MapSettings extends Component {
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}
-                    {this.renderLineWidthForm()}      
+                    {this.renderLineWidthForm()}     
+                    {this.renderLineStyleForm()} 
                 </ModalBody>
             </Modal>
         );
@@ -83,6 +85,19 @@ export default class MapSettings extends Component {
                 </FormGroup>    
             </>
         );
+    }
+
+    renderLineStyleForm(){
+        return(
+            <>
+                <FormGroup>
+                    <Label for="exampleCheckbox">Switches</Label>
+                        <div>
+                            <CustomInput type="switch" id="exampleCustomSwitch" name="customSwitch" label= "Dashed Lines" />
+                        </div>
+                </FormGroup>
+            </>
+        )
     }
 
     handleChange(event){
