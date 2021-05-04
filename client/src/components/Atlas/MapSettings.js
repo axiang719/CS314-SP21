@@ -16,7 +16,7 @@ export default class MapSettings extends Component {
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
         this.handleSwitch = this.handleSwitch.bind(this);
         this.renderLineOnOff= this.renderLineOnOff.bind(this);
-        this. handleOnOff= this.handleOnOff.bind(this);
+        this.handleOnOff= this.handleOnOff.bind(this);
 
         this.state = {
             modalOpen: false,
@@ -98,7 +98,7 @@ export default class MapSettings extends Component {
             <>
                 <FormGroup>
                     <Label for="Checkbox">Line Style</Label>
-                        <CustomInput type="switch" id="Switch" name="Switch" label= "Dashed Lines" onChange = {this.handleSwitch} />
+                        <CustomInput type="switch" id="Switch" name="Switch" value = {this.state.lineStyle} label= "Dashed Lines" onChange = {this.handleSwitch} />
                 </FormGroup>
             </>
         )
@@ -109,7 +109,7 @@ export default class MapSettings extends Component {
             <>
                 <FormGroup>
                     <Label for="Checkbox">Lines Off</Label>
-                        <CustomInput type="switch" id="Switch2" name="Switch2" label= "Turn Lines Off" onChange = {this.handleSwitch} />
+                        <CustomInput type="switch" id="Switch2" name="Switch2" label= "Turn Lines Off" onChange = {this.handleOnOff} />
                 </FormGroup>
             </>
         )
@@ -138,8 +138,8 @@ export default class MapSettings extends Component {
         this.props.rgbCallback(this.state.color); 
         this.props.setLineWidth(this.state.lineWidth); 
         this.props.setLineStyle(this.state.lineStyle);
-        this.props.linesOn(this.state.linesOn);
-        this.setState({ modalOpen: !modalOpen, validTour: null });
+        this.props.turnLinesOff(this.state.linesOn);
+        this.setState({ modalOpen: !modalOpen});
     }
 
 }

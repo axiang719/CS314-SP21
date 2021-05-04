@@ -14,7 +14,8 @@ describe('MapSettings', () => {
         mapWrapper = shallow(<MapSettings rgbCallback = {snacks}
                                             setLineWidth= {snacks}
                                             value = {snacks}
-                                            setLineStyle = {snacks}/>)
+                                            setLineStyle = {snacks}
+                                            turnLinesOff = {snacks}/>)
         mapWrapper.setState({lineStyle: false});
     });
 
