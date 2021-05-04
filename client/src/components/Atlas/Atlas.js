@@ -53,6 +53,7 @@ export default class Atlas extends Component {
         this.rgbCallback = this.rgbCallback.bind(this);
         this.setLineWidth = this.setLineWidth.bind(this);
         this.setLineStyle = this.setLineStyle.bind(this);
+        this.getPolyStyle = this.getPolyStyle.bind(this);
 
         this.state = {
             markerPosition: null,
@@ -65,7 +66,8 @@ export default class Atlas extends Component {
             searchToggle: false,
             rgb: '#11a1e8',
             lineWidth: "3",
-            lineStyle: false
+            lineStyle: false,
+            dash: []
         };
     
     }
@@ -148,7 +150,7 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPolylines(this.state.rgb, this.state.lineWidth)}
+                {this.getPolylines(this.state.rgb, this.state.lineWidth, this.state.lineStyle)}
 
                 <Control position="bottomright">
                     {this.renderMapButtons()}
@@ -276,12 +278,19 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines(rgb, width) {
+    getPolylines(rgb, width, style) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1) {
             let polylineArray = this.extractLines(listOfClicks);          
-            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {style}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {this.state.dash}/> //color= 'red'/>
         }
+    }
+
+    getPolyStyle(){
+        if(this.state.lineStyle){
+            this.setState({dash: [10,20]})
+        }
+        else (this.setState({dash: [0,0]}))
     }
 
     extractLines(listOfPlaces) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, Form} from 'reactstrap';
+import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, Form, CustomInput} from 'reactstrap';
 import { BsGearFill } from "react-icons/bs"
 
 export default class MapSettings extends Component {
@@ -14,11 +14,13 @@ export default class MapSettings extends Component {
         this.renderLineWidthForm = this.renderLineWidthForm.bind(this);
         this.renderLineColor = this.renderLineColor.bind(this);
         this.renderLineStyleForm = this.renderLineStyleForm.bind(this);
+        this.handleSwitch = this.handleSwitch.bind(this);
 
         this.state = {
             modalOpen: false,
             color: '#11a1e8',
-            lineWidth: 3
+            lineWidth: 3,
+            lineStyle: false
         };
     }
 
@@ -91,10 +93,8 @@ export default class MapSettings extends Component {
         return(
             <>
                 <FormGroup>
-                    <Label for="exampleCheckbox">Switches</Label>
-                        <div>
-                            <CustomInput type="switch" id="exampleCustomSwitch" name="customSwitch" label= "Dashed Lines" />
-                        </div>
+                    <Label for="Checkbox">Line Style</Label>
+                        <CustomInput type="switch" id="Switch" name="Switch" label= "Dashed Lines" onChange = {this.handleSwitch} />
                 </FormGroup>
             </>
         )
@@ -110,10 +110,16 @@ export default class MapSettings extends Component {
         this.setState({lineWidth: value});
     }
 
+    handleSwitch(event){
+        const checked= event.target.checked;
+        this.setState({lineStyle: checked});
+    }
+
     toggleModal() {
         const { modalOpen } = this.state;
         this.props.rgbCallback(this.state.color); 
         this.props.setLineWidth(this.state.lineWidth); 
+        this.props.setLineStyle(this.state.lineStyle);
         this.setState({ modalOpen: !modalOpen, validTour: null });
     }
 
