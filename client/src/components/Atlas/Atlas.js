@@ -182,7 +182,9 @@ export default class Atlas extends Component {
 
     toggleSearch() {
         const { searchToggle } = this.state;
-        this.setState({searchToggle: !searchToggle});
+        this.setState({
+            searchToggle: !searchToggle, 
+            zoom: this.mapRef.current.leafletElement.getZoom()});
     }
 
     showMarkerPopup(ref) {
@@ -331,7 +333,9 @@ export default class Atlas extends Component {
     }
 
     clearList() {
-        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null});
+        this.setState({listOfClicks: [], totalDistance: 0, markerPosition: null,
+            zoom: this.mapRef.current.leafletElement.getZoom()
+        });
     }
     
     reverseList(){
