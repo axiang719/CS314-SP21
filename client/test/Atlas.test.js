@@ -167,6 +167,11 @@ describe('Atlas', () => {
         atlasWrapper.setState({linesOn: true});
         atlasWrapper.instance().turnLinesOff();
     });
+
+    it('tests opacity callback',()=>{
+        atlasWrapper.instance().opacityCallBack(.1);
+        expect(atlasWrapper.state().lineOpacity).toEqual(.1);
+    });
     
     function mockGeoLocateResponse() {
         const geoResponseData = {

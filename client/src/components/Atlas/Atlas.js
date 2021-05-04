@@ -54,6 +54,7 @@ export default class Atlas extends Component {
         this.setLineStyle = this.setLineStyle.bind(this);
         this.getPolyStyle = this.getPolyStyle.bind(this);
         this.turnLinesOff = this.turnLinesOff.bind(this);
+        this.opacityCallBack = this.opacityCallBack.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -68,6 +69,7 @@ export default class Atlas extends Component {
             searchToggle: false,
             rgb: '#11a1e8',
             lineWidth: "3",
+            lineOpacity: "1",
             lineStyle: false,
             linesOn: true
         };
@@ -153,7 +155,7 @@ export default class Atlas extends Component {
             >    
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
-                {this.getPolylines(this.state.rgb, this.state.lineWidth)}
+                {this.getPolylines(this.state.rgb, this.state.lineWidth, this.state.lineOpacity)}
 
                 <Control position="bottomright">
                     {this.renderMapButtons()}
@@ -171,6 +173,7 @@ export default class Atlas extends Component {
              <MapSettings
                         setLineWidth = {this.setLineWidth}
                         rgbCallback = {this.rgbCallback}
+                        opacityCallBack = {this.opacityCallBack}
                         setLineStyle = {this.setLineStyle}
                         turnLinesOff = {this.turnLinesOff}/>
         );
@@ -189,6 +192,10 @@ export default class Atlas extends Component {
         this.setState({rgb: color});
     }
 
+    opacityCallBack(opacity){
+        this.setState({lineOpacity: opacity});
+    }
+
     setLineWidth(width){
         this.setState({lineWidth: width});
     }
@@ -200,6 +207,7 @@ export default class Atlas extends Component {
     turnLinesOff(check){
         this.setState({linesOn: check});
     }
+
 
     toggleSearch() {
         const { searchToggle } = this.state;
@@ -306,12 +314,12 @@ export default class Atlas extends Component {
         }
     }
 
-    getPolylines(rgb, width) {
+    getPolylines(rgb, width, lineOpac) {
         const {listOfClicks} = this.state;
         if (listOfClicks.length > 1 && this.state.linesOn) {
             let polyStyle = this.getPolyStyle();
             let polylineArray = this.extractLines(listOfClicks);        
-            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle}/> //color= 'red'/>
+            return <Polyline positions={polylineArray} weight = {width} color= {rgb} dashArray = {polyStyle} opacity= {lineOpac}/> //color= 'red'/>
         }
     }
 
