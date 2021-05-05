@@ -197,10 +197,13 @@ export default class ListOfClicks extends Component {
             <Row noGutters>
                 <Col>
                     <InputGroup>
-                        <InputGroupAddon addonType='append'>
+                        <InputGroupAddon addonType='prepend'>
                             <Button color='primary' onClick={() => this.setNotes(-1)}><BsXCircle/></Button>
                         </InputGroupAddon>
                         <Input placeholder='Notes'/>
+                        <InputGroupAddon addonType='append'>
+                            <Button color='primary'>Add</Button>
+                        </InputGroupAddon>
                     </InputGroup>
                 </Col>
             </Row>
