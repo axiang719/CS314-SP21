@@ -13,11 +13,7 @@ export default class LoadTour extends Component {
     constructor(props) {
 		super(props);
 
-        this.renderModal = this.renderModal.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.renderUploadForm =this.renderUploadForm.bind(this);
-        this.renderFormInput = this.renderFormInput.bind(this);
-        this.renderFormButton = this.renderFormButton.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
@@ -29,6 +25,7 @@ export default class LoadTour extends Component {
         this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
         this.parsePlace = this.parsePlace.bind(this);
         this.setFileState = this.setFileState.bind(this);
+
        
         this.state = {
             modalOpen: false,
