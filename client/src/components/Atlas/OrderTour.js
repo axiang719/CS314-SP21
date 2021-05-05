@@ -21,7 +21,7 @@ export default class OrderTour extends Component {
         return ( 
             <>
                 <DropdownItem onClick={this.handleShortTourClick} color="primary">
-                    Optimize <FaRoute className="float-right"/>
+                    Optimize <FaRoute className="float-right mt-1"/>
                 </DropdownItem>
             </>
         );

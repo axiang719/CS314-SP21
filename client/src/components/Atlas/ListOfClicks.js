@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { BsFilter } from 'react-icons/bs';
+
 import {  Button, Table, Collapse, Row, Col, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { BsGeoAlt, BsChevronUp, BsChevronDown, BsGearFill, BsTrash, BsThreeDots, BsHouseFill,BsArrowUpDown, BsCardText, BsXCircle } from "react-icons/bs"
 
@@ -22,6 +24,8 @@ export default class ListOfClicks extends Component {
         this.processInput = this.processInput.bind(this)
         this.renderNotesOutput = this.renderNotesOutput.bind(this)
         this.saveNotes = this.saveNotes.bind(this)
+        this.toggleFilter = this.toggleFilter.bind(this)
+        this.updateFilterInput = this.updateFilterInput.bind(this)
       
         this.state = {
             toggleRow: [],
@@ -31,34 +35,52 @@ export default class ListOfClicks extends Component {
             notesInput: [],
             notesOutput: [],
             hasNotes: []
+            filterToggle: false,
+            filterInput: "" 
         }
     }
 
     render() {
         return (
-            <Table size="sm">
-                <thead className="text-center bg-primary">
-                    <tr>
-                        <th>
-                            <Row noGutters>
-                                <Col className="text-center text-white" xs={{size:8, offset: 2}}>
-                                    Places
-                                </Col>
-                                <Col xs={1} className="text-right">
-                                    <FilterTour
-                                        listOfClicks = {this.props.listOfClicks}
-                                    />
-                                </Col>
-                                <Col xs={1}>
-                                    {this.renderDropdown()}
-                                </Col>
-                            </Row>
-                        </th>
-                    </tr>
-                </thead>
-                {this.getTableBody()}
-            </Table>
+            <>
+                <FilterTour
+                    listOfClicks = {this.props.listOfClicks}
+                    filterToggle = {this.state.filterToggle}
+                    toggleFilter = {this.toggleFilter}
+                    filterInput = {this.state.filterInput}
+                    updateFilterInput = {this.updateFilterInput}
+                />
+                <Table size="sm">
+                    <thead className="text-center bg-primary">
+                        <tr>
+                            {this.renderTableHeader()}
+                        </tr>
+                    </thead>
+                    {this.getTableBody()}
+                </Table>
+            </>
         );
+    }
+
+    renderTableHeader() {
+        return(
+            <th>
+                <Row noGutters>
+                    <Col className="text-center text-white" xs={{size:8, offset: 2}}>
+                        Places
+                    </Col>
+                    <Col xs={1} className="text-right">
+                        <BsFilter 
+                            className="mr-2 mb-1 text-white"
+                            onClick={ this.toggleFilter }
+                        />
+                    </Col>
+                    <Col xs={1}>
+                        {this.renderDropdown()}
+                    </Col>
+                </Row>
+            </th>
+        ); 
     }
 
     renderDropdown() {
@@ -75,38 +97,13 @@ export default class ListOfClicks extends Component {
                 <DropdownMenu>
                     {this.renderListOptions()}
                     <DropdownItem onClick={this.clearHandler}>
-                        Clear List <BsTrash className="float-right"/>
-                    </DropdownItem>
-                    <DropdownItem onClick={this.props.reverseList}>
-                        Reverse   <BsArrowUpDown className="float-right"/>
+                        Clear List <BsTrash className="float-right mt-1"/>
                     </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         );
-    }
+    }   
     
-    renderMeatballDropdown(index) {
-            return (
-                <Dropdown
-                    inNavbar
-                    className= "text-white" 
-                    isOpen={this.state.meatballToggle===index}
-                    direction="left"
-                    toggle={this.toggleMeatballs}>
-                    <DropdownMenu>
-                        <DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
-                            Start Here! <BsHouseFill/>
-                        </DropdownItem>
-                        <DropdownItem onClick={() => this.setNotes(index)}>
-                            Add Notes <BsCardText/>
-                        </DropdownItem>
-                    </DropdownMenu>
-                </Dropdown> 
-            );
-    }
-        
-    
-
     renderListOptions() {
         const {setTour, clearList, setPlace, listOfClicks, 
             getPlaces, serverSettings, checkForFeature} = this.props;
@@ -118,9 +115,7 @@ export default class ListOfClicks extends Component {
                     setPlace = {setPlace}
                     listOfClicks = {listOfClicks}
                 />
-                <SaveTour 
-                    getPlaces = {getPlaces}
-                />
+                <SaveTour getPlaces = {getPlaces}/>
                 {checkForFeature('tour') &&
                     <OrderTour
                         listOfClicks = {listOfClicks}
@@ -129,6 +124,9 @@ export default class ListOfClicks extends Component {
                         serverSettings={serverSettings}
                     />
                 }
+                <DropdownItem onClick={this.props.reverseList}>
+                    Reverse <BsArrowUpDown className="float-right mt-1"/>
+                </DropdownItem>
             </>
         );
     }
@@ -144,6 +142,16 @@ export default class ListOfClicks extends Component {
 
     toggleMeatballs(index) {
         this.setState({meatballToggle : index})
+    }
+
+    toggleFilter(){
+        const { filterToggle } = this.state; 
+        this.setState({filterToggle: !filterToggle});
+        this.updateFilterInput('');
+    }
+
+    updateFilterInput(filterInput) {
+        this.setState({filterInput});
     }
 
     getTableBody() {
@@ -190,14 +198,36 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col xs={{size:1}}>
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
-                        <div><BsThreeDots className = "text-primary" onClick={()=> this.toggleMeatballs(index)}></BsThreeDots></div>
+                        <div>
+                            {this.renderMeatballDropdown(index)}
+                            <BsThreeDots className = "text-primary mt-3" onClick={()=> this.toggleMeatballs(index)}/>
+                        </div>
                     </Col>
-                    <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
                 {notesToggle===index && this.renderNotesInput(index)}
                 {hasNotes[index] && notesToggle!==index && this.renderNotesOutput(index)}
             </Collapse>
         )
+    }
+
+    renderMeatballDropdown(index) {
+        return (
+            <Dropdown
+                inNavbar
+                className= "text-white" 
+                isOpen={this.state.meatballToggle===index}
+                direction="left"
+                toggle={this.toggleMeatballs}>
+                <DropdownMenu>
+                    <DropdownItem onClick={()=> this.props.selectNewStartingLocation(index)}>
+                        Start Here! <BsHouseFill className="float-right mt-1"/>
+                    </DropdownItem>
+                    <DropdownItem onClick={() => this.setNotes(index)}>
+                        Add Notes <BsCardText className="float-right mt-1"/>
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown> 
+        );
     }
 
     renderNotesInput(index) {

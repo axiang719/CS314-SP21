@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback, InputGroupAddon } from 'reactstrap';
+import { Col, Row, Button, InputGroup, Input, Form,FormGroup, FormFeedback, InputGroupAddon, Container } from 'reactstrap';
 import MatchSearch from "./MatchSearch";
 import { BsGeoAlt, BsX } from "react-icons/bs";
 import { FaFilter } from "react-icons/fa";
@@ -27,19 +27,22 @@ export default class SearchInput extends Component {
 
     render() {
         return (
-            <div className="border rounded-bottom bg-white">
-                <Row className="mx-1 mt-3">
-                    <Col className="text-right mt-2" xs={12}>
-                        <BsX className="h5" onClick={this.props.toggleSearch}/>
-                    </Col>
-                    <Col sm="12" md={{ size: 10, offset: 1 }}>
-                        <Form onSubmit={e => { e.preventDefault(); }}>
-                            <FormGroup>
-                                {this.renderInput()}
-                            </FormGroup>
-                        </Form>
-                    </Col>
-                </Row>
+            <div className="border rounded-bottom bg-white mb-2">
+                <Container>
+                    <Row className="mt-2">
+                        <Col className="text-left mt-1" xs={12} md={{ size: 10, offset: 1 }}>
+                            Search by location:
+                            <BsX className="h5 float-right" onClick={this.props.toggleSearch}/>
+                        </Col>
+                        <Col xs={12} md={{ size: 10, offset: 1 }}>
+                            <Form onSubmit={e => { e.preventDefault(); }}>
+                                <FormGroup>
+                                    {this.renderInput()}
+                                </FormGroup>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
@@ -54,7 +57,7 @@ export default class SearchInput extends Component {
             <>
                 <InputGroup>
                     <Input
-                        placeholder = "Search Location..."
+                        placeholder = "Name/Coordinates..."
                         onChange={this.processInput}
                         value={inputText}
                         invalid={invalidCoord}

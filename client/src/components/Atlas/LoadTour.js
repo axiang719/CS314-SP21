@@ -13,11 +13,7 @@ export default class LoadTour extends Component {
     constructor(props) {
 		super(props);
 
-        this.renderModal = this.renderModal.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.renderUploadForm =this.renderUploadForm.bind(this);
-        this.renderFormInput = this.renderFormInput.bind(this);
-        this.renderFormButton = this.renderFormButton.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
         this.uploadJsonFile = this.uploadJsonFile.bind(this);
@@ -26,8 +22,10 @@ export default class LoadTour extends Component {
         this.uploadCsvFile = this.uploadCsvFile.bind(this);
         this.csvOnload = this.csvOnload.bind(this);
         this.jsonOnload = this.jsonOnload.bind(this);
-        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
+        this.convertToJsonObj = this.convertToJsonObj.bind(this);
         this.parsePlace = this.parsePlace.bind(this);
+        this.setFileState = this.setFileState.bind(this);
+
        
         this.state = {
             modalOpen: false,
@@ -42,7 +40,7 @@ export default class LoadTour extends Component {
         return ( 
             <>
                 <DropdownItem  onClick={this.toggleModal}>
-                    Upload <BsUpload className="float-right"/>
+                    Upload <BsUpload className="float-right mt-1"/>
                     {this.renderModal()}
                 </DropdownItem>
             </>
@@ -130,17 +128,21 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
         if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"});
+            this.setFileState(true, ".json");
             this.uploadJsonFile(e);
         }
         else if (fileType.includes(".csv") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".csv"});
+            this.setFileState(true, ".csv");
             this.uploadCsvFile(e);
         }
        
         else {
-            this.setState({validFile: false, fileType: ""});
+            this.setFileState(false, "");
         }
+    }
+
+    setFileState(isValid, fileType){
+        this.setState({validFile: isValid, fileType: fileType});
     }
 
     uploadJsonFile(e){
@@ -179,11 +181,11 @@ export default class LoadTour extends Component {
         let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
             defval: "",
         });
-        let jsonObj = this.csvToJsonFormat(json); 
+        let jsonObj = this.convertToJsonObj(json); 
         this.checkTour(jsonObj);
     }
 
-    csvToJsonFormat(jsonArr){
+    convertToJsonObj(jsonArr){
         let jsonObj ={};
         jsonObj["places"] = [];
         let distances = [];
