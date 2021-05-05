@@ -257,9 +257,12 @@ export default class ListOfClicks extends Component {
     }
 
     saveNotes(index) {
+        const newNote = this.state.notes[index]
         const newHasNotes = this.state.hasNotes
         newHasNotes[index] = 1;
         this.setState({hasNotes: newHasNotes})
+
+        this.props.addNoteToPlace(index,newNote)
 
         this.setNotes(-1);
     }

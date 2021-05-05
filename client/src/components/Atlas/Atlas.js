@@ -55,6 +55,7 @@ export default class Atlas extends Component {
         this.getPolyStyle = this.getPolyStyle.bind(this);
         this.turnLinesOff = this.turnLinesOff.bind(this);
         this.opacityCallBack = this.opacityCallBack.bind(this);
+        this.addNoteToPlace = this.addNoteToPlace.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -136,6 +137,7 @@ export default class Atlas extends Component {
                 serverSettings = { this.props.serverSettings }
                 selectNewStartingLocation = { this.selectNewStartingLocation}
                 reverseList = {this.reverseList}
+                addNoteToPlace = {this.addNoteToPlace}
             />
         );
     }
@@ -271,7 +273,7 @@ export default class Atlas extends Component {
     setPlace(latLng) {
         const { listOfClicks } = this.state;
         this.reverseGeoCoding(latLng).then((name) => {
-            const place = { latitude: latLng.lat, longitude: latLng.lng, name };
+            const place = { latitude: latLng.lat, longitude: latLng.lng, name};
             listOfClicks.push(place);
             this.setState({ listOfClicks, address: name }, this.handleDistances);
         });
@@ -397,10 +399,14 @@ export default class Atlas extends Component {
     getPlaces() {
         var places = [];
         for(var i = 0; i < this.state.listOfClicks.length; i++) {
+        
             const place = {
                 name: this.state.listOfClicks[i].name,
                 latitude: this.state.listOfClicks[i].latitude.toString(),
-                longitude: this.state.listOfClicks[i].longitude.toString()
+                longitude: this.state.listOfClicks[i].longitude.toString(),
+            }
+            if (this.state.listOfClicks[i].notes) {
+                place.notes = this.state.listOfClicks[i].notes
             }
             places.push(place);
         }
@@ -423,5 +429,15 @@ export default class Atlas extends Component {
             {"Long: " + this.state.markerPosition.lng.toFixed(2)}
           </div>
         );
+    }
+
+    addNoteToPlace(index,notes) {
+        const newListOfClicks = this.state.listOfClicks
+        newListOfClicks[index].notes = notes
+
+        this.setState({listOfClicks: newListOfClicks})
+
+        console.log(this.state.listOfClicks[index].notes)
+        console.log(notes)
     }
 }
