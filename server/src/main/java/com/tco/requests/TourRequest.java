@@ -46,7 +46,7 @@ public class TourRequest extends RequestHeader {
         int i = 0;
         HashMap<String,String> startPlace = places.get(0);
         while(sort) {
-          T.sortTourByDistance(i,15);
+          T.sortTourByDistance(i,100);
           i += 1;
           if (i >= places.size()) break;
         }
