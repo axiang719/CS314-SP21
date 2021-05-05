@@ -10,7 +10,7 @@ describe('ListOfClicks', () => {
     let ListWrapper;
     const list = [
         {
-            "address" : "Place",
+            "name" : "Place",
             "distance" : 0,
             "latitude" : 50.00,
             "longitude" : 50.00   
