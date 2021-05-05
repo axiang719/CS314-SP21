@@ -221,7 +221,7 @@ export default class ListOfClicks extends Component {
         let {notes} = this.state
         return (
             <Row noGutters>
-                <Col>
+                <Col xs={{offset:1}}>
                     Notes: {notes[index]}
                 </Col>
             </Row>
