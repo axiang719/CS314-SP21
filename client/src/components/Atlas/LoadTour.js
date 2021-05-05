@@ -167,11 +167,11 @@ export default class LoadTour extends Component {
         let json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {
             defval: "",
         });
-        let jsonObj = this.csvToJsonFormat(json); 
+        let jsonObj = this.convertToJsonObj(json); 
         this.checkTour(jsonObj);
     }
 
-    csvToJsonFormat(jsonArr){
+    convertToJsonObj(jsonArr){
         let jsonObj ={};
         jsonObj["places"] = [];
         let distances = [];

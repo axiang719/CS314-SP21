@@ -98,13 +98,13 @@ describe('LoadTour', () => {
         loadTourWrapper.instance().jsonOnload(event);
     });
     
-    it('test coverage for csvToJsonFormat', () => {
+    it('test coverage for convertToJsonObj', () => {
         const validJson = {places: [{"latitude" : "50.00", "longitude" : "50.00"}]};
         const distance = [{distances :["1034","785"]}];
         const validJson2 = {places: [{"latitude" : "50.00", "longitude" : "50.00"}]};
         loadTourWrapper.instance().parsePlace(validJson,distance,validJson2 );
-        loadTourWrapper.instance().csvToJsonFormat(validJson);
-        loadTourWrapper.instance().csvToJsonFormat(distance);
+        loadTourWrapper.instance().convertToJsonObj(validJson);
+        loadTourWrapper.instance().convertToJsonObj(distance);
 
     });
     
