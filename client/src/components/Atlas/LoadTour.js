@@ -40,7 +40,7 @@ export default class LoadTour extends Component {
         return ( 
             <>
                 <DropdownItem  onClick={this.toggleModal}>
-                    Upload <BsUpload className="float-right"/>
+                    Upload <BsUpload className="float-right mt-1"/>
                     {this.renderModal()}
                 </DropdownItem>
             </>
