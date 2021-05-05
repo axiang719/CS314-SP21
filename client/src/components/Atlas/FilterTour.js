@@ -27,14 +27,8 @@ export default class FilterTour extends Component {
                     <Container className="mb-3">
                         <Row className="mt-2">
                             <Col className="text-left" xs={12} md={{ size: 10, offset: 1 }}>
-                                Filter by name:
-                                <BsX 
-                                    className="h5 float-right"
-                                    onClick={toggleFilter}    
-                                />
+                                Filter by name: <BsX className="h5 float-right" onClick={toggleFilter}/>
                             </Col>
-                        </Row>
-                        <Row>
                             <Col xs={12} md={{ size: 10, offset: 1 }}>
                                 <Input 
                                     placeholder="Name..."
