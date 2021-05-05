@@ -77,4 +77,16 @@ describe('ListOfClicks', () => {
         ListWrapper.instance().setNotes(1);
         expect(ListWrapper.state().notesToggle).toEqual(1);
     })
+
+    it('toggles the filter component', () => {
+        expect(ListWrapper.state().filterToggle).toEqual(false);
+        ListWrapper.instance().toggleFilter();
+        expect(ListWrapper.state().filterToggle).toEqual(true);
+    });
+
+    it('updates filter input when called', () => {
+        expect(ListWrapper.state().filterInput).toEqual("");
+        ListWrapper.instance().updateFilterInput("Blah");
+        expect(ListWrapper.state().filterInput).toEqual("Blah");
+    });
 });
