@@ -34,7 +34,7 @@ export default class ListOfClicks extends Component {
             notesToggle: -1,
             notesInput: [],
             notesOutput: [],
-            hasNotes: []
+            hasNotes: [],
             filterToggle: false,
             filterInput: "" 
         }
