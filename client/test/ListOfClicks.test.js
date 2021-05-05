@@ -47,7 +47,7 @@ describe('ListOfClicks', () => {
         ListWrapper.find("Row").at(1).find('Col').at(0).simulate("click");
         expect(ListWrapper.state().toggleRow[0]).toEqual(true);
         ListWrapper.setState({settingsToggle: true});
-        ListWrapper.find("DropdownItem").at(0).simulate("click");
+        ListWrapper.find("DropdownItem").at(1).simulate("click");
         expect(ListWrapper.state().toggleRow).toEqual([]);
     })
 
