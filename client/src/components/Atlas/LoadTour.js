@@ -130,12 +130,10 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
         if (fileType.includes(".json") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".json"});
-            this.uploadJsonFile(e);
+            this.setFileState(".json");
         }
         else if (fileType.includes(".csv") && fileIsValid) {
-            this.setState({validFile: true, fileType: ".csv"});
-            this.uploadCsvFile(e);
+            this.setFileState(".csv");
         }
        
         else {
