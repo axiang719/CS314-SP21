@@ -28,7 +28,8 @@ export default class ListOfClicks extends Component {
             settingsToggle: false,
             meatballToggle: -1,
             notesToggle: -1,
-            notes: [],
+            notesInput: [],
+            notesOutput: [],
             hasNotes: []
         }
     }
@@ -194,7 +195,7 @@ export default class ListOfClicks extends Component {
                     <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
                 {notesToggle===index && this.renderNotesInput(index)}
-                {hasNotes[index] && this.renderNotesOutput(index)}
+                {hasNotes[index] && notesToggle!==index && this.renderNotesOutput(index)}
             </Collapse>
         )
     }
@@ -218,11 +219,11 @@ export default class ListOfClicks extends Component {
     }
 
     renderNotesOutput(index) {
-        let {notes} = this.state
+        let {notesOutput} = this.state
         return (
             <Row noGutters>
                 <Col xs={{offset:1}}>
-                    Notes: {notes[index]}
+                    Notes: {notesOutput[index]}
                 </Col>
             </Row>
         );
@@ -249,18 +250,20 @@ export default class ListOfClicks extends Component {
 
     processInput(onChangeEvent) {
         const inputText = onChangeEvent.target.value;
-        const newNotes = this.state.notes;
+        const newNotes = this.state.notesInput;
         const target = this.state.notesToggle;
 
         newNotes[target] = inputText;
-        this.setState({notes: newNotes})
+        this.setState({notesInput: newNotes})
     }
 
     saveNotes(index) {
-        const newNote = this.state.notes[index]
+        const newNote = this.state.notesInput[index]
         const newHasNotes = this.state.hasNotes
+        const newNotesOutput = this.state.notesOutput
         newHasNotes[index] = 1;
-        this.setState({hasNotes: newHasNotes})
+        newNotesOutput[index] = newNote
+        this.setState({hasNotes: newHasNotes,notesOutput: newNotesOutput})
 
         this.props.addNoteToPlace(index,newNote)
 
