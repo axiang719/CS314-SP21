@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Container, Row, Button, Table, Modal, ModalHeader, ModalBody} from 'reactstrap';
 
-import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, Polyline, LayersControl} from 'react-leaflet';
+
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -25,6 +26,7 @@ const MAP_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const GEOCODE_URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=";
 const MAP_MIN_ZOOM = 1;
 const MAP_MAX_ZOOM = 19;
+const MAP_LAYERSCONTROL_POSITION = "topright";
 
 export default class Atlas extends Component {
 
@@ -55,6 +57,7 @@ export default class Atlas extends Component {
         this.getPolyStyle = this.getPolyStyle.bind(this);
         this.turnLinesOff = this.turnLinesOff.bind(this);
         this.opacityCallBack = this.opacityCallBack.bind(this);
+        this.renderMapLayers = this.renderMapLayers.bind(this);
 
         this.mapRef = React.createRef();
 
@@ -152,7 +155,9 @@ export default class Atlas extends Component {
                 maxBounds={MAP_BOUNDS}
                 viewport={{center: this.state.mapCenter}}
                 onClick={this.handleMapClick}
+            
             >    
+                 {this.renderLayersControl()}
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
                 {this.getPolylines(this.state.rgb, this.state.lineWidth, this.state.lineOpacity)}
@@ -187,6 +192,47 @@ export default class Atlas extends Component {
             </>
         );
     }
+
+    renderLayersControl() {
+        return (
+          <LayersControl position={MAP_LAYERSCONTROL_POSITION}>
+              {this.renderMapLayers(
+                true, 
+                "OpenStreetMap.Mapnik", 
+                "&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
+                "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+              )}
+              {this.renderMapLayers(
+                false, 
+                "OpenStreetMap.BlackAndWhite", 
+                "&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
+                "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+              )}
+              {this.renderMapLayers(
+                false, 
+                "USGS.USImageryTopo", 
+                "Tiles courtesy of the <a href=&quot;https://usgs.gov/&quot;>U.S. Geological Survey</a>",
+                "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}"
+              )}
+              {this.renderMapLayers(
+                false, 
+                "Carto Dark", 
+                "",
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+              )}
+            </LayersControl>
+        )
+      }
+      
+      renderMapLayers(checked, name, attribution, url) {
+        /*LayersControl.BaseLayer with checked option is the map which is loaded on start*/
+        return (
+          <LayersControl.BaseLayer checked={checked} name={name}>
+            <TileLayer attribution={attribution} url={url}/>
+          </LayersControl.BaseLayer>
+        )
+      }
+
 
     rgbCallback(color){
         this.setState({rgb: color});
