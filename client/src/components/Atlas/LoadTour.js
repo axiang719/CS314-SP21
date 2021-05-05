@@ -143,6 +143,11 @@ export default class LoadTour extends Component {
         }
     }
 
+    setFileState(fileType){
+        this.setState({validFile: true, fileType: fileType});
+        this.uploadCsvFile(e);
+    }
+
     uploadJsonFile(e){
             try{
                 const files = e.target.files, file = files[0];
