@@ -19,12 +19,17 @@ export default class ListOfClicks extends Component {
         this.toggleSettings = this.toggleSettings.bind(this)
         this.toggleMeatballs = this.toggleMeatballs.bind(this)
         this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this)
+        this.processInput = this.processInput.bind(this)
+        this.renderNotesOutput = this.renderNotesOutput.bind(this)
+        this.saveNotes = this.saveNotes.bind(this)
       
         this.state = {
             toggleRow: [],
             settingsToggle: false,
             meatballToggle: -1,
-            notesToggle: -1
+            notesToggle: -1,
+            notes: [],
+            hasNotes: []
         }
     }
 
@@ -169,6 +174,7 @@ export default class ListOfClicks extends Component {
     getRowInfo(place, index) {
         let {toggleRow} = this.state
         let {notesToggle} = this.state
+        let {hasNotes} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
         const isDistancesSupported = this.props.checkForFeature('distances');
@@ -187,12 +193,13 @@ export default class ListOfClicks extends Component {
                     </Col>
                     <Col>{this.renderMeatballDropdown(index)}</Col>
                 </Row>
-                {notesToggle===index && this.renderNotes()}
+                {notesToggle===index && this.renderNotesInput(index)}
+                {hasNotes[index] && this.renderNotesOutput(index)}
             </Collapse>
         )
     }
 
-    renderNotes() {
+    renderNotesInput(index) {
         return (
             <Row noGutters>
                 <Col>
@@ -200,11 +207,22 @@ export default class ListOfClicks extends Component {
                         <InputGroupAddon addonType='prepend'>
                             <Button color='primary' onClick={() => this.setNotes(-1)}><BsXCircle/></Button>
                         </InputGroupAddon>
-                        <Input placeholder='Notes'/>
+                        <Input placeholder='Notes' onChange={this.processInput}/>
                         <InputGroupAddon addonType='append'>
-                            <Button color='primary'>Add</Button>
+                            <Button color='primary' onClick={() => this.saveNotes(index)}>Add</Button>
                         </InputGroupAddon>
                     </InputGroup>
+                </Col>
+            </Row>
+        );
+    }
+
+    renderNotesOutput(index) {
+        let {notes} = this.state
+        return (
+            <Row noGutters>
+                <Col>
+                    Notes: {notes[index]}
                 </Col>
             </Row>
         );
@@ -227,5 +245,22 @@ export default class ListOfClicks extends Component {
     clearHandler() {
         this.setState({toggleRow: []})
         this.props.clearList();
+    }
+
+    processInput(onChangeEvent) {
+        const inputText = onChangeEvent.target.value;
+        const newNotes = this.state.notes;
+        const target = this.state.notesToggle;
+
+        newNotes[target] = inputText;
+        this.setState({notes: newNotes})
+    }
+
+    saveNotes(index) {
+        const newHasNotes = this.state.hasNotes
+        newHasNotes[index] = 1;
+        this.setState({hasNotes: newHasNotes})
+
+        this.setNotes(-1);
     }
 }
