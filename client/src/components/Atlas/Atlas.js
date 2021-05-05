@@ -196,26 +196,22 @@ export default class Atlas extends Component {
     renderLayersControl() {
         return (
           <LayersControl position={MAP_LAYERSCONTROL_POSITION}>
-              {this.renderMapLayers(
-                true, 
+              {this.renderMapLayers(true, 
                 "OpenStreetMap.Mapnik", 
                 "&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
               )}
-              {this.renderMapLayers(
-                false, 
+              {this.renderMapLayers(false, 
                 "OpenStreetMap.BlackAndWhite", 
                 "&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
                 "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
               )}
-              {this.renderMapLayers(
-                false, 
+              {this.renderMapLayers(false, 
                 "USGS.USImageryTopo", 
                 "Tiles courtesy of the <a href=&quot;https://usgs.gov/&quot;>U.S. Geological Survey</a>",
                 "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}"
               )}
-              {this.renderMapLayers(
-                false, 
+              {this.renderMapLayers(false, 
                 "Carto Dark", 
                 "",
                 "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
