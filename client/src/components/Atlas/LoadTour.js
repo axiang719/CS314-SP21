@@ -16,16 +16,6 @@ export default class LoadTour extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.addTourToMap = this.addTourToMap.bind(this);
         this.processFile = this.processFile.bind(this);
-        this.uploadJsonFile = this.uploadJsonFile.bind(this);
-        this.checkTour = this.checkTour.bind(this);
-        this.isTourValid = this.isTourValid.bind(this);
-        this.uploadCsvFile = this.uploadCsvFile.bind(this);
-        this.csvOnload = this.csvOnload.bind(this);
-        this.jsonOnload = this.jsonOnload.bind(this);
-        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
-        this.parsePlace = this.parsePlace.bind(this);
-        this.setFileState = this.setFileState.bind(this);
-
        
         this.state = {
             modalOpen: false,
@@ -128,21 +118,17 @@ export default class LoadTour extends Component {
         const regex = /^.*\.json|csv$/
         const fileIsValid = fileType.match(regex);
         if (fileType.includes(".json") && fileIsValid) {
-            this.setFileState(true, ".json");
+            this.setState({validFile: true, fileType: ".json"});
             this.uploadJsonFile(e);
         }
         else if (fileType.includes(".csv") && fileIsValid) {
-            this.setFileState(true, ".csv");
+            this.setState({validFile: true, fileType: ".csv"});
             this.uploadCsvFile(e);
         }
        
         else {
-            this.setFileState(false, "");
+            this.setState({validFile: false, fileType: ""});
         }
-    }
-
-    setFileState(isValid, fileType){
-        this.setState({validFile: isValid, fileType: fileType});
     }
 
     uploadJsonFile(e){
