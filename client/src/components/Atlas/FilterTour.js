@@ -37,7 +37,7 @@ export default class FilterTour extends Component {
                         <Row>
                             <Col xs={12} md={{ size: 10, offset: 1 }}>
                                 <Input 
-                                    placeholder="Place Name"
+                                    placeholder="Name..."
                                     value={filterInput}
                                     onChange={this.filterOnChange} 
                                 />
