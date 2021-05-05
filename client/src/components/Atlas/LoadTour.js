@@ -22,7 +22,7 @@ export default class LoadTour extends Component {
         this.uploadCsvFile = this.uploadCsvFile.bind(this);
         this.csvOnload = this.csvOnload.bind(this);
         this.jsonOnload = this.jsonOnload.bind(this);
-        this.csvToJsonFormat = this.csvToJsonFormat.bind(this);
+        this.convertToJsonObj = this.convertToJsonObj.bind(this);
         this.parsePlace = this.parsePlace.bind(this);
         this.setFileState = this.setFileState.bind(this);
 
