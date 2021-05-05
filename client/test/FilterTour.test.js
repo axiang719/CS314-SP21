@@ -5,6 +5,7 @@ import {shallow} from 'enzyme';
 
 import FilterTour from "../src/components/Atlas/FilterTour";
 import {beforeEach, describe, expect, it, jest} from "@jest/globals";
+import { BsJustifyLeft } from 'react-icons/bs';
 
 
 describe('FilterTour', () => {
@@ -13,25 +14,13 @@ describe('FilterTour', () => {
     beforeEach(() => {
         FilterWrapper = shallow(<FilterTour
                                     listOfClicks = {[]}
+                                    filterToggle = {true}
+                                    toggleFilter = {jest.fn()}
                                 />);
     });
 
     it('initializes correctly', () => {
-        expect(FilterWrapper.state().modalToggle).toEqual(false);
-    });
-
-    it('toggles the modal when clicked', () => {
-        FilterWrapper.find("BsFilter").at(0).simulate("click");
-        expect(FilterWrapper.state().modalToggle).toEqual(true);
-    });
-
-    it('generates the right search options', () => {
-        const expectedOptions = [{value: "place", label: "place"}];
-        const searchArray = [{name: 'place,'}];
-        const actualOptions = FilterWrapper.instance().getSearchOptions(searchArray);
-        expect(actualOptions).toEqual(expectedOptions)
-        const noOptions = FilterWrapper.instance().getSearchOptions();
-        expect(noOptions).toEqual([]);
+        expect(FilterWrapper.find("Container")).toHaveLength(1);
     });
 
 });

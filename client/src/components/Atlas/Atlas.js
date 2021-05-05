@@ -88,8 +88,6 @@ export default class Atlas extends Component {
                     <Col sm={12} md={{ size: 10, offset: 1 }}>
                         {this.renderLeafletMap()}
                     </Col>
-                </Row>
-                <Row>
                     <Col sm={12} md={{ size: 10, offset: 1 }}>
                         {searchToggle && this.renderSearchInput()}
                     </Col>

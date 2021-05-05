@@ -1,74 +1,57 @@
 import React, { Component } from 'react';
-import { BsFilter } from 'react-icons/bs';
-import { Select } from "react-select-virtualized"
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-
+import { Modal, ModalBody, ModalHeader, Input, Container, Row, Col } from 'reactstrap';
+import { BsX } from "react-icons/bs";
 
 export default class FilterTour extends Component {
     constructor(props) {
         super(props);
 
-        this.getSearchOptions = this.getSearchOptions.bind(this);
-        this.renderModal = this.renderModal.bind(this);
-        this.filterOnClick = this.filterOnClick.bind(this);
+        this.renderFilter = this.renderFilter.bind(this);
+        this.filterOnChange = this.filterOnChange.bind(this);
 
-        this.state = {
-            searchOptions: [],
-            modalToggle: false,
-        }
     };
 
     render() {
         return(
             <>
-                <BsFilter 
-                    className="mr-2 mb-1 text-white"
-                    onClick={ this.filterOnClick }
-                    />
-                {this.renderModal()}
+                {this.renderFilter()}
             </>
         );
     }
 
-    filterOnClick(){
-        const { modalToggle } = this.state; 
-        const { listOfClicks } = this.props;
-        const searchOptions = this.getSearchOptions(listOfClicks);
-        this.setState({modalToggle: !modalToggle, searchOptions});
+    renderFilter(){
+        const { filterToggle, toggleFilter, filterInput } = this.props;
+        if (filterToggle) {
+            return (
+                <div className="border rounded-top bg-white">
+                    <Container className="mb-3">
+                        <Row className="mt-2">
+                            <Col className="text-left" xs={12} md={{ size: 10, offset: 1 }}>
+                                Filter by name:
+                                <BsX 
+                                    className="h5 float-right"
+                                    onClick={toggleFilter}    
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12} md={{ size: 10, offset: 1 }}>
+                                <Input 
+                                    placeholder="Place Name"
+                                    value={filterInput}
+                                    onChange={this.filterOnChange} 
+                                />
+                            </Col>
+                        </Row> 
+                    </Container>
+                </div>
+            );
+        };
     }
 
-    renderModal(){
-        const { searchOptions, modalToggle } = this.state;
-        const toggle = () => {this.setState({modalToggle: !modalToggle})};
-        
-        return (
-            <Modal
-                isOpen={modalToggle}
-                toggle={toggle}
-            >
-                <ModalHeader toggle={toggle}>
-                    Filter Tour
-                </ModalHeader>
-                <ModalBody>
-                    Search:
-                    <Select
-                        options={searchOptions}
-                    />
-                </ModalBody>
-            </Modal>
-        );
+    filterOnChange(e) {
+        const filterInput = e.target.value;
+        this.props.updateFilterInput(filterInput);
     }
-
-    getSearchOptions(searchArray) {
-        const searchOptions = [];
-        if (searchArray) {
-            searchArray.forEach(item => {
-                const name = item.name.substring(0, item.name.indexOf(","));
-                searchOptions.push({value: name, label: name});   
-            });
-        }
-        return searchOptions;
-    }
-
 
 }
