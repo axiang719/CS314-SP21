@@ -97,6 +97,13 @@ Epic two allowed users to connect to a seperate server using our client without 
 ### Epic Three
 Epic three reduced clutter on the UI, by reducing the amount of buttons on the client. The UI was reformatted so users can select options through a dropdown rather than multiple buttons. The trip list was also reformatted to allow progressive disclosure, making the list easily readable for users.
 
+### Epic Four
+The fourth epic allows users to modify thier existing tour. New features were added that allow users to select a new starting location, reverse the tour order or delete individual places from the trip. Users can also now add and save notes to specific destinations that they may like.
+
+### Epic Five
+Epic five allows users to filter thier tour, specifically searching within thier existing trip. Users can search for either an address or lat/long when they are filtering thier tour.
+
+
 
 ### Epics not completed 
 
