@@ -26,6 +26,7 @@ export default class ListOfClicks extends Component {
         this.saveNotes = this.saveNotes.bind(this)
         this.toggleFilter = this.toggleFilter.bind(this)
         this.updateFilterInput = this.updateFilterInput.bind(this)
+        this.getTableRow = this.getTableRow.bind(this)
       
         this.state = {
             toggleRow: [],
@@ -41,6 +42,7 @@ export default class ListOfClicks extends Component {
     }
 
     render() {
+        const {listOfClicks} = this.props;
         return (
             <>
                 <FilterTour
@@ -56,7 +58,11 @@ export default class ListOfClicks extends Component {
                             {this.renderTableHeader()}
                         </tr>
                     </thead>
-                    {this.getTableBody()}
+                    <tbody className="text-center">
+                        {listOfClicks.length ? 
+                            listOfClicks.map((place, index) => this.getTableRow(place, index)) 
+                            : <tr/>}
+                    </tbody>
                 </Table>
             </>
         );
@@ -154,29 +160,26 @@ export default class ListOfClicks extends Component {
         this.setState({filterInput});
     }
 
-    getTableBody() {
-        const {toggleRow} = this.state
+    getTableRow(place, index) {
+        const {toggleRow, filterInput} = this.state;
+        if (!filterInput || place.name.includes(filterInput))
         return (
-            <tbody className="text-center">
-                {this.props.listOfClicks.map((place, index) => (
-                    <tr key={index}>
-                        <td>
-                            <Row noGutters className="text-center">
-                                <Col xs={{size:10, offset: 1}} onClick={()=>{this.toggleHandler(index)}}>
-                                    <div className="mx-1">
-                                        {place.name}
-                                        <div>{toggleRow[index] ? <BsChevronUp/> : <BsChevronDown/>}</div>
-                                    </div>
-                                </Col>
-                                <Col xs={{size: 1}} className="text-center">
-                                    <BsTrash className="text-danger" onClick={()=>{this.deleteHandler(index)}}/>
-                                </Col>
-                            </Row>
-                            {this.getRowInfo(place, index)}    
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
+            <tr key={index}>
+                <td>
+                    <Row noGutters className="text-center">
+                        <Col xs={{size:10, offset: 1}} onClick={()=>{this.toggleHandler(index)}}>
+                            <div className="mx-1">
+                                {place.name}
+                                <div>{toggleRow[index] ? <BsChevronUp/> : <BsChevronDown/>}</div>
+                            </div>
+                        </Col>
+                        <Col xs={{size: 1}} className="text-center">
+                            <BsTrash className="text-danger" onClick={()=>{this.deleteHandler(index)}}/>
+                        </Col>
+                    </Row>
+                    {this.getRowInfo(place, index)}    
+                </td>
+            </tr>
         );
     }
 
