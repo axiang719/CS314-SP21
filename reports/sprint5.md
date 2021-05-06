@@ -94,6 +94,10 @@ The first epic allows users to properly see what server they are connected to wh
 ### Epic Two
 Epic two allowed users to connect to a seperate server using our client without breaking when a non supported feature was rendered. If a seperate server doesn't allow features, the client will no longer render the tools for those features. When users use another client and connect to our server, they will now be allowed to use any of our supported features.
 
+### Epic Three
+Epic three reduced clutter on the UI, by reducing the amount of buttons on the client. The UI was reformatted so users can select options through a dropdown rather than multiple buttons. The trip list was also reformatted to allow progressive disclosure, making the list easily readable for users.
+
+
 ### Epics not completed 
 
 ## Retrospective
