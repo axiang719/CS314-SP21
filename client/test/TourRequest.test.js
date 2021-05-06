@@ -28,14 +28,8 @@ describe('Tour Request', () => {
     	}, 10);
     });
 
-    async handleShortTourClick() {
-        const length = this.props.listOfClicks.length
-        if (length >= 2) {
-            const oldList = this.props.getPlaces();
-            const i = new TourRequest(oldList,3539);
-            await i.sendRequest(this.props.serverSettings.serverPort);
-            const newList = i.getPlaces();
-            this.props.setTour(newList);
+    async testReponse() {
+            await tourRequest.sendRequest("31413");
     }
 
     it('Appropriately handles missing response', () => {
