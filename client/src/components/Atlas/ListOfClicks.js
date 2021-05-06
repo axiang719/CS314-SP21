@@ -71,7 +71,7 @@ export default class ListOfClicks extends Component {
     renderTableHeader() {
         return(
             <tr>
-                <th className="text-center bg-primary sticky-top">
+                <th className="text-center bg-primary sticky">
                     <Row noGutters>
                         <Col className="text-center text-white" xs={{size:8, offset: 2}}>
                             Places

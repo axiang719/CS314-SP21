@@ -6,6 +6,16 @@
 
 @media (max-width: 768px) {
 
+    .top-layer {
+        z-index: 2;
+    }
+
+    .sticky {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
     .table-height {
         height: 35vh;
     }
