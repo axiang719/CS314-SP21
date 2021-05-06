@@ -9,6 +9,7 @@ import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
 import FilterTour from './FilterTour';
+import PlacesList from './PlacesList';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -21,6 +22,10 @@ export default class ListOfClicks extends Component {
         this.toggleSettings = this.toggleSettings.bind(this)
         this.toggleMeatballs = this.toggleMeatballs.bind(this)
         this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this)
+        this.processInput = this.processInput.bind(this)
+        this.renderNotesInput = this.renderNotesInput.bind(this)
+        this.renderNotesOutput = this.renderNotesOutput.bind(this)
+        this.saveNotes = this.saveNotes.bind(this)
         this.toggleFilter = this.toggleFilter.bind(this)
         this.updateFilterInput = this.updateFilterInput.bind(this)
         this.getTableRow = this.getTableRow.bind(this)
@@ -30,8 +35,9 @@ export default class ListOfClicks extends Component {
             settingsToggle: false,
             meatballToggle: -1,
             notesToggle: -1,
+            notesInput: [],
             filterToggle: false,
-            filterInput: ""
+            filterInput: "" 
         }
     }
 
@@ -178,8 +184,7 @@ export default class ListOfClicks extends Component {
     }
 
     getRowInfo(place, index) {
-        let {toggleRow} = this.state
-        let {notesToggle} = this.state
+        let {toggleRow, notesToggle} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
         const isDistancesSupported = this.props.checkForFeature('distances');
@@ -200,7 +205,8 @@ export default class ListOfClicks extends Component {
                         </div>
                     </Col>
                 </Row>
-                {notesToggle===index && this.renderNotes()}
+                {notesToggle===index && this.renderNotesInput(index)}
+                {place.notes!=="" && notesToggle!==index && this.renderNotesOutput(place)}
             </Collapse>
         )
     }
@@ -225,16 +231,29 @@ export default class ListOfClicks extends Component {
         );
     }
 
-    renderNotes() {
+    renderNotesInput(index) {
         return (
             <Row noGutters>
                 <Col>
                     <InputGroup>
-                        <InputGroupAddon addonType='append'>
+                        <InputGroupAddon addonType='prepend'>
                             <Button color='primary' onClick={() => this.setNotes(-1)}><BsXCircle/></Button>
                         </InputGroupAddon>
-                        <Input placeholder='Notes'/>
+                        <Input placeholder='Notes' onChange={this.processInput}/>
+                        <InputGroupAddon addonType='append'>
+                            <Button color='primary' onClick={() => this.saveNotes(index)}>Add</Button>
+                        </InputGroupAddon>
                     </InputGroup>
+                </Col>
+            </Row>
+        );
+    }
+
+    renderNotesOutput(place) {
+        return (
+            <Row noGutters>
+                <Col xs={{offset:1}}>
+                    Notes: {place.notes}
                 </Col>
             </Row>
         );
@@ -257,5 +276,21 @@ export default class ListOfClicks extends Component {
     clearHandler() {
         this.setState({toggleRow: []})
         this.props.clearList();
+    }
+
+    processInput(onChangeEvent) {
+        const inputText = onChangeEvent.target.value;
+        const newNotes = this.state.notesInput;
+        const target = this.state.notesToggle;
+
+        newNotes[target] = inputText;
+        this.setState({notesInput: newNotes})
+    }
+
+    saveNotes(index) {
+        const newNote = this.state.notesInput[index]
+        this.props.addNoteToPlace(index,newNote)
+
+        this.setNotes(-1);
     }
 }
