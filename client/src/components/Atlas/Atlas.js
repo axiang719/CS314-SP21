@@ -96,7 +96,7 @@ export default class Atlas extends Component {
                         {searchToggle && this.renderSearchInput()}
                     </Col>
                 </Row>
-                <Row className="text-center mt-2">
+                <Row className="text-center mt-3">
                     <Col sm={12} md={{ size: 10, offset: 1 }}>
                         {this.checkForFeature('distances') && <div className="text-right"> Total Distance: {this.state.totalDistance} mi.</div>}
                         {this.renderList()}

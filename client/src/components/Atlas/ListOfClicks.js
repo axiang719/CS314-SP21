@@ -52,40 +52,42 @@ export default class ListOfClicks extends Component {
                     filterInput = {this.state.filterInput}
                     updateFilterInput = {this.updateFilterInput}
                 />
-                <Table size="sm">
-                    <thead className="text-center bg-primary">
-                        <tr>
+                <div className="table-height overflow-auto">
+                    <Table size="sm">
+                        <thead>     
                             {this.renderTableHeader()}
-                        </tr>
-                    </thead>
-                    <tbody className="text-center">
-                        {listOfClicks.length ? 
-                            listOfClicks.map((place, index) => this.getTableRow(place, index)) 
-                            : <tr/>}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody className="text-center">
+                            {listOfClicks.length ? 
+                                listOfClicks.map((place, index) => this.getTableRow(place, index)) 
+                                : <tr/>}
+                        </tbody>
+                    </Table>
+                </div>
             </>
         );
     }
 
     renderTableHeader() {
         return(
-            <th>
-                <Row noGutters>
-                    <Col className="text-center text-white" xs={{size:8, offset: 2}}>
-                        Places
-                    </Col>
-                    <Col xs={1} className="text-right">
-                        <BsFilter 
-                            className="mr-2 mb-1 text-white"
-                            onClick={ this.toggleFilter }
-                        />
-                    </Col>
-                    <Col xs={1}>
-                        {this.renderDropdown()}
-                    </Col>
-                </Row>
-            </th>
+            <tr>
+                <th className="text-center bg-primary sticky-top">
+                    <Row noGutters>
+                        <Col className="text-center text-white" xs={{size:8, offset: 2}}>
+                            Places
+                        </Col>
+                        <Col xs={1} className="text-right">
+                            <BsFilter 
+                                className="mr-2 mb-1 text-white"
+                                onClick={ this.toggleFilter }
+                            />
+                        </Col>
+                        <Col xs={1}>
+                            {this.renderDropdown()}
+                        </Col>
+                    </Row>
+                </th>
+            </tr>
         ); 
     }
 
