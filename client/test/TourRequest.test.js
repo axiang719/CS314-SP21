@@ -10,36 +10,34 @@ describe('Tour Request', () => {
 	requestType: 'tour',
         earthRadius: 3959.0,
 	response: 1.0,
-        places: []
+        places: [{
+		    "name": "initial",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]
     };
 
     beforeEach(() => {
+	mockTourResponse();
 	tourRequest = new TourRequest(request.places, request.earthRadius);
     });
 
     it('Sends request to api', () => {
-        mockTourResponse();
-	setTimeout( () => {
-		this.testResponse();
-	        expect(response.requestType).toEqual(request.requestType);
-	        expect(response.earthRadius).toEqual(request.earthRadius);
-	        expect(response.response).toEqual(request.response);
-	        expect(response.places).toEqual(request.places);
-    	}, 10);
+        tourRequest.sendRequest();
+        expect(tourRequest.getPlaces()).toEqual([{
+		    "name": "final",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]);
+
     });
 
-    async testReponse() {
-            await tourRequest.sendRequest("31413");
-    }
-
-    it('Appropriately handles missing response', () => {
-	setTimeout( () => {
-	    this.testResponse();
-    	}, 10);
-    });
-
-    it('getPlaces works', () => {
-        expect(tourRequest.getPlaces()).toEqual([]);
+    it('getRequestPlaces works', () => {
+        expect(tourRequest.getRequestPlaces()).toEqual([{
+		    "name": "initial",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]);
     });
 	
     function mockTourResponse() {
@@ -47,7 +45,11 @@ describe('Tour Request', () => {
             requestType: "tour",
             earthRadius: 3959.0,
 	    response: 1,
-            places: []
+            places: [{
+		    "name": "final",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]
         };
         fetch.mockResponse(JSON.stringify(responseData));
     }
