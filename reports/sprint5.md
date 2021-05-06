@@ -117,7 +117,7 @@ All epics were completed this sprint, minus a few small parts. Because of the wa
 ## Retrospective
 The epic gamers planned for 7 epics but were able to complete 8. During the sprint we never fell behind and were right on time due to previous implementations. Because a lot of changes were already completed before reaching the epics, the team was able to surge through and complete more than planned.
 ### Things that went well
-
+The team was able to keep a consistant work schedule, never falling behind on the sprint. Teammwork was much better this sprint leading to a better team-environment which allowed the team to thrive. 
 ### Things we need to improve
 
 ### One thing we will change next time
