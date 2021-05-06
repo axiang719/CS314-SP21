@@ -195,9 +195,8 @@ export default class ListOfClicks extends Component {
                 <Row noGutters>
                     <Col xs={{size:5, offset:1}}>Coordinates: <br/>{place.latitude.toFixed(2) + ', ' + place.longitude.toFixed(2)}</Col>
                     <Col xs="5">
-                        {isDistancesSupported && 
-                            (isLastPlace ? "Distance back to start: " : "Distance to next: ") + place.distance + ' mi.'
-                        }    
+                        {isDistancesSupported && (isLastPlace ? "Distance back to start: " : "Distance to next: ")}   
+                        <br/>{place.distance} mi. 
                     </Col>
                     <Col xs={{size:1}}>
                         <BsGeoAlt className ="text-primary" onClick={this.props.centerMapToIndex.bind(this.props, index)}/>
