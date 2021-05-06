@@ -109,10 +109,11 @@ Epic six allows users to search for a completely random location. When the users
 ### Epic Seven
 Epic seven allowed users more flexibility with the UI design, by enabling differnet lines on the map. Users can now select thier own line color, width,  opacity and style by clicking the settings cogwheel on the map. On top of this, users can opt to turn the lines completely off if they no longer wish to see them.
 
-
+### Epic Eight
+The final epic was done to allow users to choose different map backrounds. Users start with the default map but now have four seperate options such as a realistic map, or dark mode map.
 
 ### Epics not completed 
-
+All epics were completed this sprint, minus a few small parts. Because of the way we implemented our list of clicks, we were only able to filter the tour by either address or latitude and longitude values. 
 ## Retrospective
 
 ### Things that went well
