@@ -43,6 +43,7 @@ export default class WhereSearch extends Component {
         return(
             <div className="mt-2">
                 <Select 
+                    className="top-layer"
                     value={this.state.whereValue}
                     placeholder="Filter by territory..."
                     options={options}

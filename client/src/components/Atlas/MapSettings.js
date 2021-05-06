@@ -41,7 +41,7 @@ export default class MapSettings extends Component {
         return (
             <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
                 <ModalHeader toggle={this.toggleModal}>
-                    <div className="text-center">Map Settings</div>
+                    <div className="text-center">Line Settings</div>
                 </ModalHeader>
                 <ModalBody>
                     {this.renderLineColor()}

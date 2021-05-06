@@ -57,7 +57,7 @@ export default class SearchInput extends Component {
             <>
                 <InputGroup>
                     <Input
-                        placeholder = "Name/Coordinates..."
+                        placeholder = "Location..."
                         onChange={this.processInput}
                         value={inputText}
                         invalid={invalidCoord}

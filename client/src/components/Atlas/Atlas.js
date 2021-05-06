@@ -161,34 +161,30 @@ export default class Atlas extends Component {
                 <TileLayer url={MAP_LAYER_URL} attribution={MAP_LAYER_ATTRIBUTION} />
                 {this.getMarker()}
                 {this.getPolylines(this.state.rgb, this.state.lineWidth, this.state.lineOpacity)}
-
                 <Control position="bottomright">
                     {this.renderMapButtons()}
-                </Control>
-                <Control position="topleft">
-                    {this.renderMapSettings()}
                 </Control>
             </Map>
 
         );
     }
 
-    renderMapSettings() {
-        return(
-             <MapSettings
-                        setLineWidth = {this.setLineWidth}
-                        rgbCallback = {this.rgbCallback}
-                        opacityCallBack = {this.opacityCallBack}
-                        setLineStyle = {this.setLineStyle}
-                        turnLinesOff = {this.turnLinesOff}/>
-        );
-    }
-
     renderMapButtons() {
         return (
             <>
-                <Button onClick={this.toggleSearch} size="sm" color="primary" className="mr-2"><BsSearch/></Button>
-                <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary"><BsCursorFill/></Button>
+                <Button onClick={this.toggleSearch} size="sm" color="primary" className="mr-2">
+                    <BsSearch/>
+                </Button>
+                <Button id="findMe" onClick={this.requestUserLocation} size="sm" color="primary" className="mr-2">
+                    <BsCursorFill/>
+                </Button>
+                <MapSettings
+                    setLineWidth = {this.setLineWidth}
+                    rgbCallback = {this.rgbCallback}
+                    opacityCallBack = {this.opacityCallBack}
+                    setLineStyle = {this.setLineStyle}
+                    turnLinesOff = {this.turnLinesOff}
+                />
             </>
         );
     }
@@ -332,7 +328,11 @@ export default class Atlas extends Component {
             place["longitude"] = parseFloat(place["longitude"]);
             places[i] = place;
         };
-        this.setState({listOfClicks: places}, this.handleDistances);
+        this.setState({
+            listOfClicks: places, 
+            zoom: this.mapRef.current.leafletElement.getZoom()}, 
+            this.handleDistances
+        );
     }
 
     getMarker() {
@@ -420,7 +420,10 @@ export default class Atlas extends Component {
     }
     
     reverseList(){
-       this.setState({listOfClicks: this.state.listOfClicks.reverse()});
+        this.setState({
+            listOfClicks: this.state.listOfClicks.reverse(),
+            zoom: this.mapRef.current.leafletElement.getZoom()
+        });
     }
     
     removePlace(index) {
@@ -433,7 +436,7 @@ export default class Atlas extends Component {
 	    if (latlng != null && latlng.lat == this.state.listOfClicks[index].latitude && latlng.lng == this.state.listOfClicks[index].longitude) {
 		    latlng = null;
 	    }
-        this.setState({ listOfClicks: newList, markerPosition: latlng}, this.handleDistances);
+        this.setState({ listOfClicks: newList, markerPosition: latlng , zoom: this.mapRef.current.leafletElement.getZoom()}, this.handleDistances);
     }
 
     getPlaces() {
