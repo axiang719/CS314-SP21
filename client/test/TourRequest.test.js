@@ -22,14 +22,13 @@ describe('Tour Request', () => {
 	tourRequest = new TourRequest(request.places, request.earthRadius);
     });
 
-    it('Sends request to api', () => {
-        tourRequest.sendRequest();
+    it('Sends request to api', async () => {
+        await tourRequest.sendRequest();
         expect(tourRequest.getPlaces()).toEqual([{
-		    "name": "final",
-		    "latitude": "0.0",
-		    "longitude": "0.0"
-	    }]);
-
+	    "name": "final",
+	    "latitude": "0.0",
+	    "longitude": "0.0"
+	}]);
     });
 
     it('getRequestPlaces works', () => {
