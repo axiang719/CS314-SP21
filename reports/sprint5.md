@@ -119,6 +119,6 @@ The epic gamers planned for 7 epics but were able to complete 8. During the spri
 ### Things that went well
 The team was able to keep a consistant work schedule, never falling behind on the sprint. Teammwork was much better this sprint leading to a better team-environment which allowed the team to thrive. 
 ### Things we need to improve
-Communication is still a problem for the team, with members often not being on the same page. While the team was always on time and not falling behind, work was often spuratic, with no tasks being done one day and a plethora getting done another.
+Communication is still a problem for the team, with members often not being on the same page. While the team was always on time and not falling behind, work was often sporatic, with no tasks being done one day and a plethora getting done another.
 ### One thing we will change next time
-Communication will be pushed even harder. Using resources such as slack to commmunicate will allow the team to be open with each other and keep each other up to date.
+Communication will be pushed even harder. Using resources such as slack to commmunicate will allow the team to be open with each other and keep each other up to date. The whole team would benefit from a more even distribution of work.
