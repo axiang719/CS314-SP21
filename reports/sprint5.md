@@ -115,7 +115,7 @@ The final epic was done to allow users to choose different map backrounds. Users
 ### Epics not completed 
 All epics were completed this sprint, minus a few small parts. Because of the way we implemented our list of clicks, we were only able to filter the tour by either address or latitude and longitude values. 
 ## Retrospective
-
+The epic gamers planned for 7 epics but were able to complete 8. During the sprint we never fell behind and were right on time due to previous implementations. Because a lot of changes were already completed before reaching the epics, the team was able to surge through and complete more than planned.
 ### Things that went well
 
 ### Things we need to improve
