@@ -14,8 +14,7 @@ export default class WhereSearch extends Component {
 
         this.state = {
             whereValue: "",
-            show: false,
-            options: this.getOptions()
+            show: false
         };
     };
 
@@ -30,7 +29,7 @@ export default class WhereSearch extends Component {
         return options;
     }
 
-    render() {      
+    render() { 
 		return (
 			<>
                 {this.renderWhereButtons()}
@@ -40,12 +39,13 @@ export default class WhereSearch extends Component {
 	}
 
     renderWhereInput(){
+        const options = this.getOptions();
         return(
             <div className="mt-2">
                 <Select 
                     value={this.state.whereValue}
                     placeholder="Filter by territory..."
-                    options={this.state.options}
+                    options={options}
                     onChange={this.processOnChangeWhere}
                 />
             </div>
