@@ -313,7 +313,7 @@ export default class Atlas extends Component {
     setPlace(latLng) {
         const { listOfClicks } = this.state;
         this.reverseGeoCoding(latLng).then((name) => {
-            const place = { latitude: latLng.lat, longitude: latLng.lng, name};
+            const place = {  notes: "", latitude: latLng.lat, longitude: latLng.lng, name};
             listOfClicks.push(place);
             this.setState({ listOfClicks, address: name }, this.handleDistances);
         });
@@ -444,9 +444,7 @@ export default class Atlas extends Component {
                 name: this.state.listOfClicks[i].name,
                 latitude: this.state.listOfClicks[i].latitude.toString(),
                 longitude: this.state.listOfClicks[i].longitude.toString(),
-            }
-            if (this.state.listOfClicks[i].notes) {
-                place.notes = this.state.listOfClicks[i].notes
+                notes: this.state.listOfClicks[i].notes
             }
             places.push(place);
         }
@@ -475,8 +473,5 @@ export default class Atlas extends Component {
         newListOfClicks[index].notes = notes
 
         this.setState({listOfClicks: newListOfClicks})
-
-        console.log(this.state.listOfClicks[index].notes)
-        console.log(notes)
     }
 }

@@ -34,8 +34,6 @@ export default class ListOfClicks extends Component {
             meatballToggle: -1,
             notesToggle: -1,
             notesInput: [],
-            notesOutput: [],
-            hasNotes: [],
             filterToggle: false,
             filterInput: "" 
         }
@@ -184,9 +182,7 @@ export default class ListOfClicks extends Component {
     }
 
     getRowInfo(place, index) {
-        let {toggleRow} = this.state
-        let {notesToggle} = this.state
-        let {hasNotes} = this.state
+        let {toggleRow, notesToggle} = this.state
         const listSize = this.props.listOfClicks.length;
         const isLastPlace = index == listSize - 1 && index != 0; 
         const isDistancesSupported = this.props.checkForFeature('distances');
@@ -208,7 +204,7 @@ export default class ListOfClicks extends Component {
                     </Col>
                 </Row>
                 {notesToggle===index && this.renderNotesInput(index)}
-                {hasNotes[index] && notesToggle!==index && this.renderNotesOutput(index)}
+                {notesToggle!==index && this.renderNotesOutput(place)}
             </Collapse>
         )
     }
@@ -251,12 +247,11 @@ export default class ListOfClicks extends Component {
         );
     }
 
-    renderNotesOutput(index) {
-        let {notesOutput} = this.state
+    renderNotesOutput(place) {
         return (
             <Row noGutters>
                 <Col xs={{offset:1}}>
-                    Notes: {notesOutput[index]}
+                    Notes: {place.notes}
                 </Col>
             </Row>
         );
@@ -292,12 +287,6 @@ export default class ListOfClicks extends Component {
 
     saveNotes(index) {
         const newNote = this.state.notesInput[index]
-        const newHasNotes = this.state.hasNotes
-        const newNotesOutput = this.state.notesOutput
-        newHasNotes[index] = 1;
-        newNotesOutput[index] = newNote
-        this.setState({hasNotes: newHasNotes,notesOutput: newNotesOutput})
-
         this.props.addNoteToPlace(index,newNote)
 
         this.setNotes(-1);
