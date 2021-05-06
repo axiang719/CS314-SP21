@@ -52,7 +52,7 @@ export default class ListOfClicks extends Component {
                     filterInput = {this.state.filterInput}
                     updateFilterInput = {this.updateFilterInput}
                 />
-                <div className="table-height overflow-auto">
+                <div className="table-height">
                     <Table size="sm">
                         <thead>     
                             {this.renderTableHeader()}
