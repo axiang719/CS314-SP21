@@ -35,6 +35,11 @@ describe('Tour Request', () => {
     	});
     });
 
+   it('getPlaces works', () => {
+        expect(tourRequest.getPlaces()).toEqual([]);
+    });
+
+
     function mockTourResponse() {
         const responseData = {
             requestType: "tour",
