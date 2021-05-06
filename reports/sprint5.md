@@ -103,6 +103,12 @@ The fourth epic allows users to modify thier existing tour. New features were ad
 ### Epic Five
 Epic five allows users to filter thier tour, specifically searching within thier existing trip. Users can search for either an address or lat/long when they are filtering thier tour.
 
+### Epic Six
+Epic six allows users to search for a completely random location. When the users search with an empy search bar, a list of potential destinations with random type and where values pop up for the users to view or add.
+
+### Epic Seven
+Epic seven allowed users more flexibility with the UI design, by enabling differnet lines on the map. Users can now select thier own line color, width,  opacity and style by clicking the settings cogwheel on the map. On top of this, users can opt to turn the lines completely off if they no longer wish to see them.
+
 
 
 ### Epics not completed 
