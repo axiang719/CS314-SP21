@@ -410,7 +410,6 @@ export default class Atlas extends Component {
         let tempArray = listOfClicks.slice(index);
         let list = tempArray.concat(listOfClicks.slice(0,index));
         this.setState({listOfClicks: list});
-        console.log(listOfClicks);
     }
     
     getStringMarkerPosition() {
