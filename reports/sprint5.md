@@ -92,7 +92,7 @@ Epic seven will allow users to customize the lines that connect the places in a 
 The first epic allows users to properly see what server they are connected to when using our client and also the list of features that the server allows. The details are visible as a popup when users click on the server link.
 
 ### Epic Two
-
+Epic two allowed users to connect to a seperate server using our client without breaking when a non supported feature was rendered. If a seperate server doesn't allow features, the client will no longer render the tools for those features. When users use another client and connect to our server, they will now be allowed to use any of our supported features.
 
 ### Epics not completed 
 
