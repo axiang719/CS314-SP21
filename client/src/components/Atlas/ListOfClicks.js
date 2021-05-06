@@ -9,6 +9,7 @@ import LoadTour from "./LoadTour";
 import SaveTour from "./SaveTour";
 import OrderTour from './OrderTour';
 import FilterTour from './FilterTour';
+import PlacesList from './PlacesList';
 
 export default class ListOfClicks extends Component { 
     constructor(props) {
@@ -22,6 +23,7 @@ export default class ListOfClicks extends Component {
         this.toggleMeatballs = this.toggleMeatballs.bind(this)
         this.renderMeatballDropdown = this.renderMeatballDropdown.bind(this)
         this.processInput = this.processInput.bind(this)
+        this.renderNotesInput = this.renderNotesInput.bind(this)
         this.renderNotesOutput = this.renderNotesOutput.bind(this)
         this.saveNotes = this.saveNotes.bind(this)
         this.toggleFilter = this.toggleFilter.bind(this)
@@ -204,7 +206,7 @@ export default class ListOfClicks extends Component {
                     </Col>
                 </Row>
                 {notesToggle===index && this.renderNotesInput(index)}
-                {notesToggle!==index && this.renderNotesOutput(place)}
+                {place.notes!=="" && notesToggle!==index && this.renderNotesOutput(place)}
             </Collapse>
         )
     }
