@@ -19,6 +19,10 @@ export default class TourRequest {
         return this.betterTour;
     }
 
+    getRequestPlaces() {
+	return this.request.places;
+    }
+
     sendRequest(serverPort) {
         console.log(serverPort);
         return sendServerRequest(this.request,serverPort)

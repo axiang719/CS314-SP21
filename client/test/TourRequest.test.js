@@ -10,37 +10,45 @@ describe('Tour Request', () => {
 	requestType: 'tour',
         earthRadius: 3959.0,
 	response: 1.0,
-        places: []
+        places: [{
+		    "name": "initial",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]
     };
 
     beforeEach(() => {
+	mockTourResponse();
 	tourRequest = new TourRequest(request.places, request.earthRadius);
     });
 
-    it('Sends request to api', () => {
-        mockTourResponse();
-	    setTimeout( () => {
-	        const response = tourRequest.sendRequest();  
-	        expect(response).toEqual(request.requestType);
-	        expect(response.earthRadius).toEqual(request.earthRadius);
-	        expect(response.response).toEqual(request.response);
-	        expect(response.places).toEqual(request.places);
-    	});
+    it('Sends request to api', async () => {
+        await tourRequest.sendRequest();
+        expect(tourRequest.getPlaces()).toEqual([{
+	    "name": "final",
+	    "latitude": "0.0",
+	    "longitude": "0.0"
+	}]);
     });
 
-    it('Appropriately handles missing response', () => {
-	setTimeout( () => {
-	    const response = tourRequest.sendRequest();
-            expect(response).toEqual({});
-    	});
+    it('getRequestPlaces works', () => {
+        expect(tourRequest.getRequestPlaces()).toEqual([{
+		    "name": "initial",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]);
     });
-
+	
     function mockTourResponse() {
         const responseData = {
             requestType: "tour",
             earthRadius: 3959.0,
 	    response: 1,
-            places: []
+            places: [{
+		    "name": "final",
+		    "latitude": "0.0",
+		    "longitude": "0.0"
+	    }]
         };
         fetch.mockResponse(JSON.stringify(responseData));
     }
