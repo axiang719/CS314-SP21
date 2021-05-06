@@ -20,7 +20,7 @@ describe('Tour Request', () => {
     it('Sends request to api', () => {
         mockTourResponse();
 	setTimeout( () => {
-	        const response = tourRequest.sendRequest("31413");  
+		this.testResponse();
 	        expect(response.requestType).toEqual(request.requestType);
 	        expect(response.earthRadius).toEqual(request.earthRadius);
 	        expect(response.response).toEqual(request.response);
@@ -34,8 +34,7 @@ describe('Tour Request', () => {
 
     it('Appropriately handles missing response', () => {
 	setTimeout( () => {
-	    const response = tourRequest.sendRequest("31413");
-            expect(response).toEqual({});
+	    this.testResponse();
     	}, 10);
     });
 
