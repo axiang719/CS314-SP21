@@ -54,10 +54,8 @@ export default class ListOfClicks extends Component {
                 />
                 <div className="table-height overflow-auto">
                     <Table size="sm">
-                        <thead>
-                            <tr>
-                                {this.renderTableHeader()}
-                            </tr>
+                        <thead>     
+                            {this.renderTableHeader()}
                         </thead>
                         <tbody className="text-center">
                             {listOfClicks.length ? 
@@ -72,22 +70,24 @@ export default class ListOfClicks extends Component {
 
     renderTableHeader() {
         return(
-            <th className="text-center bg-primary sticky-top">
-                <Row noGutters>
-                    <Col className="text-center text-white" xs={{size:8, offset: 2}}>
-                        Places
-                    </Col>
-                    <Col xs={1} className="text-right">
-                        <BsFilter 
-                            className="mr-2 mb-1 text-white"
-                            onClick={ this.toggleFilter }
-                        />
-                    </Col>
-                    <Col xs={1}>
-                        {this.renderDropdown()}
-                    </Col>
-                </Row>
-            </th>
+            <tr>
+                <th className="text-center bg-primary sticky-top">
+                    <Row noGutters>
+                        <Col className="text-center text-white" xs={{size:8, offset: 2}}>
+                            Places
+                        </Col>
+                        <Col xs={1} className="text-right">
+                            <BsFilter 
+                                className="mr-2 mb-1 text-white"
+                                onClick={ this.toggleFilter }
+                            />
+                        </Col>
+                        <Col xs={1}>
+                            {this.renderDropdown()}
+                        </Col>
+                    </Row>
+                </th>
+            </tr>
         ); 
     }
 
