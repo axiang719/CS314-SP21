@@ -87,7 +87,12 @@ Epic seven will allow users to customize the lines that connect the places in a 
 
 ## Review
 
-### Epics completed  
+### Epics completed 
+### Epic One 
+The first epic allows users to properly see what server they are connected to when using our client and also the list of features that the server allows. The details are visible as a popup when users click on the server link.
+
+### Epic Two
+
 
 ### Epics not completed 
 
