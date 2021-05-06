@@ -52,25 +52,27 @@ export default class ListOfClicks extends Component {
                     filterInput = {this.state.filterInput}
                     updateFilterInput = {this.updateFilterInput}
                 />
-                <Table size="sm">
-                    <thead className="text-center bg-primary">
-                        <tr>
-                            {this.renderTableHeader()}
-                        </tr>
-                    </thead>
-                    <tbody className="text-center">
-                        {listOfClicks.length ? 
-                            listOfClicks.map((place, index) => this.getTableRow(place, index)) 
-                            : <tr/>}
-                    </tbody>
-                </Table>
+                <div className="table-height overflow-auto">
+                    <Table size="sm">
+                        <thead>
+                            <tr>
+                                {this.renderTableHeader()}
+                            </tr>
+                        </thead>
+                        <tbody className="text-center">
+                            {listOfClicks.length ? 
+                                listOfClicks.map((place, index) => this.getTableRow(place, index)) 
+                                : <tr/>}
+                        </tbody>
+                    </Table>
+                </div>
             </>
         );
     }
 
     renderTableHeader() {
         return(
-            <th>
+            <th className="text-center bg-primary sticky-top">
                 <Row noGutters>
                     <Col className="text-center text-white" xs={{size:8, offset: 2}}>
                         Places

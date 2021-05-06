@@ -5,8 +5,24 @@
  */
 
 @media (max-width: 768px) {
+
+    .table-height {
+        height: 35vh;
+    }
+
     .mapStyle {
         height: 47vh;
         width: 100%;
     }
+
+    .header {
+        height: 14vh;
+        margin-bottom: 20px;
+    }
+
+    .footer {
+        height: 8vh;
+        margin-top: 20px;
+    }
+    
 }
