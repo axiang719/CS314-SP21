@@ -62,9 +62,9 @@ Epic seven will allow users to customize the lines that connect the places in a 
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *7* | *count* |
-| Tasks |  *34*  | *count* | 
-| Story Points |  *37*  | *sum* | 
+| Epics | *7* | *8* |
+| Tasks |  *34*  | *65* | 
+| Story Points |  *37*  | *69* | 
 
 
 ## Scrums
@@ -87,14 +87,38 @@ Epic seven will allow users to customize the lines that connect the places in a 
 
 ## Review
 
-### Epics completed  
+### Epics completed 
+### Epic One 
+The first epic allows users to properly see what server they are connected to when using our client and also the list of features that the server allows. The details are visible as a popup when users click on the server link.
+
+### Epic Two
+Epic two allowed users to connect to a seperate server using our client without breaking when a non supported feature was rendered. If a seperate server doesn't allow features, the client will no longer render the tools for those features. When users use another client and connect to our server, they will now be allowed to use any of our supported features.
+
+### Epic Three
+Epic three reduced clutter on the UI, by reducing the amount of buttons on the client. The UI was reformatted so users can select options through a dropdown rather than multiple buttons. The trip list was also reformatted to allow progressive disclosure, making the list easily readable for users.
+
+### Epic Four
+The fourth epic allows users to modify thier existing tour. New features were added that allow users to select a new starting location, reverse the tour order or delete individual places from the trip. Users can also now add and save notes to specific destinations that they may like.
+
+### Epic Five
+Epic five allows users to filter thier tour, specifically searching within thier existing trip. Users can search for either an address or lat/long when they are filtering thier tour.
+
+### Epic Six
+Epic six allows users to search for a completely random location. When the users search with an empy search bar, a list of potential destinations with random type and where values pop up for the users to view or add.
+
+### Epic Seven
+Epic seven allowed users more flexibility with the UI design, by enabling differnet lines on the map. Users can now select thier own line color, width,  opacity and style by clicking the settings cogwheel on the map. On top of this, users can opt to turn the lines completely off if they no longer wish to see them.
+
+### Epic Eight
+The final epic was done to allow users to choose different map backrounds. Users start with the default map but now have four seperate options such as a realistic map, or dark mode map.
 
 ### Epics not completed 
-
+All epics were completed this sprint, minus a few small parts. Because of the way we implemented our list of clicks, we were only able to filter the tour by either address or latitude and longitude values. 
 ## Retrospective
-
+The epic gamers planned for 7 epics but were able to complete 8. During the sprint we never fell behind and were right on time due to previous implementations. Because a lot of changes were already completed before reaching the epics, the team was able to surge through and complete more than planned.
 ### Things that went well
-
+The team was able to keep a consistant work schedule, never falling behind on the sprint. Teammwork was much better this sprint leading to a better team-environment which allowed the team to thrive. 
 ### Things we need to improve
-
+Communication is still a problem for the team, with members often not being on the same page. While the team was always on time and not falling behind, work was often sporatic, with no tasks being done one day and a plethora getting done another.
 ### One thing we will change next time
+Communication will be pushed even harder. Using resources such as slack to commmunicate will allow the team to be open with each other and keep each other up to date. The whole team would benefit from a more even distribution of work.
